@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>遊戲規章 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    /* ── 頁面專用樣式 ── */
+    .page-hero {
+      background: linear-gradient(180deg, #130608 0%, #090405 100%);
+      border-bottom: 1px solid var(--gold-dim);
+      padding: 72px 0 48px;
+      text-align: center;
+    }
+    .page-hero__eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.35em;
+      color: var(--gold-dim);
+      margin-bottom: 14px;
+    }
+    .page-hero__title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      color: var(--text-bright);
+      letter-spacing: 0.15em;
+      margin-bottom: 10px;
+    }
+    .page-hero__title span {
+      color: var(--gold);
+    }
+    .page-hero__sub {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── 規章主體 ── */
+    .rules-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    /* 重要聲明橫幅 */
+    .rules-notice {
+      background: linear-gradient(135deg, #1a0505 0%, #140608 100%);
+      border: 1px solid var(--red-dim);
+      border-left: 4px solid var(--red);
+      padding: 18px 22px;
+      margin-bottom: 48px;
+      border-radius: 2px;
+    }
+    .rules-notice p {
+      color: #e08080;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .rules-notice strong {
+      color: #ff8080;
+    }
+
+    /* 章節 */
+    .rules-chapter {
+      margin-bottom: 44px;
+    }
+    .rules-chapter__header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #2a1f0a;
+    }
+    .rules-chapter__icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .rules-chapter__title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+    }
+    .rules-chapter__num {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      color: var(--gold-dim);
+      letter-spacing: 0.2em;
+    }
+
+    /* 條款列表 */
+    .rules-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .rules-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: #17090b;
+      border: 1px solid #2f171b;
+      padding: 13px 16px;
+      border-radius: 2px;
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.65;
+      transition: border-color 0.2s;
+    }
+    .rules-list li:hover {
+      border-color: #52282f;
+    }
+    .rules-list li .rule-mark {
+      color: var(--gold-dim);
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+      min-width: 22px;
+    }
+    .rules-list li .rule-text {
+      flex: 1;
+    }
+    .rules-list li .rule-text strong {
+      color: var(--text-bright);
+      font-weight: 600;
+    }
+
+    /* 懲處標籤 */
+    .penalty {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 2px 8px;
+      border-radius: 2px;
+      margin-left: 6px;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    .penalty--warn  { background: #2a1a00; color: #e8a020; border: 1px solid #7a5010; }
+    .penalty--ban3  { background: #1a0a00; color: #ff8040; border: 1px solid #8a4010; }
+    .penalty--ban7  { background: #1a0808; color: #ff6060; border: 1px solid #8a2020; }
+    .penalty--perm  { background: #1a0010; color: #ff40c0; border: 1px solid #8a0060; }
+    .penalty--ip    { background: #140406; color: #ff607b; border: 1px solid #cc0022; }
+
+    /* 懲處表 */
+    .penalty-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin-bottom: 10px;
+    }
+    .penalty-table th {
+      background: #261014;
+      color: var(--gold-dim);
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      padding: 10px 12px;
+      text-align: left;
+      border: 1px solid #401f24;
+      font-weight: 600;
+    }
+    .penalty-table td {
+      background: #17090b;
+      color: var(--text);
+      padding: 10px 12px;
+      border: 1px solid #2f171b;
+      vertical-align: top;
+      line-height: 1.55;
+    }
+    .penalty-table tr:hover td {
+      background: #1f0f12;
+    }
+    .penalty-table td:first-child {
+      color: var(--text-bright);
+      font-weight: 500;
+    }
+    .t-warn  { color: #e8a020 !important; }
+    .t-ban   { color: #ff6060 !important; }
+    .t-perm  { color: #ff40c0 !important; }
+    .t-ip    { color: #ff607b !important; }
+
+    /* 分隔線 */
+    .rules-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #52282f, transparent);
+      margin: 48px 0;
+    }
+
+    /* 裝備補救費率表 */
+    .recover-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+    .recover-table th {
+      background: #261014;
+      color: var(--gold-dim);
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      padding: 10px 12px;
+      text-align: center;
+      border: 1px solid #401f24;
+    }
+    .recover-table td {
+      background: #17090b;
+      color: var(--text);
+      padding: 10px 14px;
+      border: 1px solid #2f171b;
+      text-align: center;
+      line-height: 1.5;
+    }
+    .recover-table td:first-child { text-align: left; color: var(--text-bright); }
+    .recover-table .note-row td {
+      background: #0e0607;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      font-style: italic;
+      text-align: left;
+    }
+
+    /* 最終聲明 */
+    .rules-final {
+      background: linear-gradient(135deg, #130608 0%, #0d0405 100%);
+      border: 1px solid #401f24;
+      border-top: 3px solid var(--gold-dim);
+      padding: 24px 26px;
+      margin-top: 48px;
+      border-radius: 2px;
+    }
+    .rules-final p {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.75;
+      margin: 0;
+    }
+    .rules-final strong {
+      color: var(--gold);
+    }
+
+    /* RWD */
+    @media (max-width: 600px) {
+      .penalty-table, .recover-table { font-size: 0.76rem; }
+      .penalty-table th, .penalty-table td,
+      .recover-table th, .recover-table td { padding: 8px 8px; }
+    }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <!-- ═══════════════════════ PAGE HERO ═══════════════════════ -->
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — REGULATIONS</p>
+    <h1 class="page-hero__title">遊戲<span>規章</span></h1>
+    <p class="page-hero__sub">違規者依規處置，申訴請聯絡管理團隊</p>
+  </div>
+
+  <!-- ═══════════════════════ RULES BODY ═══════════════════════ -->
+  <main class="rules-wrap">
+
+    <!-- 重要聲明 -->
+    <div class="rules-notice">
+      <p>
+        加入金耀天堂即代表您已<strong>完整閱讀並同意</strong>以下規章。
+        管理團隊保有最終裁決權，所有判決均依現行規章執行，無法以「不知情」為由申訴。
+        規章如有異動，將於公告欄發布，請定期確認。
+      </p>
+    </div>
+
+    <!-- ── 第一章：言論與行為 ── -->
+    <div id="ch-01" class="rules-chapter">
+      <div class="rules-chapter__header">
+        <span class="rules-chapter__icon">🗣</span>
+        <div>
+          <div class="rules-chapter__num">CHAPTER 01</div>
+          <div class="rules-chapter__title">言論與行為規範</div>
+        </div>
+      </div>
+      <ul class="rules-list">
+        <li>
+          <span class="rule-mark">§1</span>
+          <span class="rule-text">
+            <strong>禁止辱罵、騷擾任何玩家或管理人員</strong>，包含公開頻道、密語及血盟頻道。
+            <span class="penalty penalty--warn">警告</span>
+            <span class="penalty penalty--ban3">封號3天</span>
+            <span class="penalty penalty--perm">三犯永封</span>
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§2</span>
+          <span class="rule-text">
+            <strong>禁止冒充 GM 或管理人員</strong>，以任何方式混淆身份。
+            <span class="penalty penalty--perm">永久封號</span>
+            <span class="penalty penalty--ip">封 IP</span>
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§3</span>
+          <span class="rule-text">
+            <strong>禁止在任何公開頻道宣傳其他私服</strong>，一經發現立即處理。
+            <span class="penalty penalty--perm">永久封號</span>
+            <span class="penalty penalty--ip">封 IP</span>
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§4</span>
+          <span class="rule-text">
+            <strong>禁止公開頻道洗版（重複傳送相同訊息）</strong>，視情況給予警告或禁言。
+            <span class="penalty penalty--warn">警告</span>
+            <span class="penalty penalty--ban3">禁言3天</span>
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§5</span>
+          <span class="rule-text">
+            <strong>禁止使用含有歧視、色情、政治或不雅意涵的角色名稱</strong>，GM 有權強制改名。
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§6</span>
+          <span class="rule-text">
+            <strong>玩家紛爭 GM 不介入</strong>，合乎規定的遊戲行為（PK、競爭、搶怪）均屬正常遊玩範疇。
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ── 第二章：外掛與漏洞 ── -->
+    <div id="ch-02" class="rules-chapter">
+      <div class="rules-chapter__header">
+        <span class="rules-chapter__icon">⛔</span>
+        <div>
+          <div class="rules-chapter__num">CHAPTER 02</div>
+          <div class="rules-chapter__title">外掛程式與系統漏洞</div>
+        </div>
+      </div>
+      <ul class="rules-list">
+        <li>
+          <span class="rule-mark">§1</span>
+          <span class="rule-text">
+            <strong>禁止使用任何未經官方授權的第三方程式</strong>（含加速器、自動釣魚、連打軟體等）。
+            <span class="penalty penalty--perm">永久封號</span>
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§2</span>
+          <span class="rule-text">
+            <strong>發現系統漏洞（Bug）必須立即回報 GM</strong>，禁止重複利用或告知他人。
+            隱匿並利用者視同外掛使用。
+            <span class="penalty penalty--perm">永久封號</span>
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§3</span>
+          <span class="rule-text">
+            <strong>接收並使用因漏洞產生的異常物品或金幣</strong>，即使非主動取得，亦連帶受罰。
+            <span class="penalty penalty--ban7">封號7天</span>
+            <span class="penalty penalty--perm">二犯永封</span>
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§4</span>
+          <span class="rule-text">
+            <strong>禁止使用任何方式入侵、修改遊戲封包或資料庫</strong>，此行為視為駭客攻擊。
+            <span class="penalty penalty--perm">永久封號</span>
+            <span class="penalty penalty--ip">封 IP</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ── 第三章：詐欺與交易 ── -->
+    <div id="ch-03" class="rules-chapter">
+      <div class="rules-chapter__header">
+        <span class="rules-chapter__icon">💰</span>
+        <div>
+          <div class="rules-chapter__num">CHAPTER 03</div>
+          <div class="rules-chapter__title">詐欺行為與現金交易</div>
+        </div>
+      </div>
+      <ul class="rules-list">
+        <li>
+          <span class="rule-mark">§1</span>
+          <span class="rule-text">
+            <strong>禁止以任何方式詐欺其他玩家</strong>，包含虛假交易、欺騙轉帳、冒充人員索取裝備。
+            <span class="penalty penalty--perm">永久封號</span>
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§2</span>
+          <span class="rule-text">
+            <strong>現金買賣帳號、虛擬物品或遊戲幣</strong>（私人交易風險自負，官方不協助調查）。
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§3</span>
+          <span class="rule-text">
+            <strong>盜竊帳號者，及接收贓物的共犯</strong>，一併受到處置，所有涉案物品由 GM 無償回收。
+            <span class="penalty penalty--perm">永久封號</span>
+            <span class="penalty penalty--ip">封 IP</span>
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§4</span>
+          <span class="rule-text">
+            <strong>玩家交易風險自負</strong>，GM 不提供交易調解或物品找回服務。建議交易時使用遊戲內交易窗口。
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ── 第四章：公平性 ── -->
+    <div id="ch-04" class="rules-chapter">
+      <div class="rules-chapter__header">
+        <span class="rules-chapter__icon">⚖</span>
+        <div>
+          <div class="rules-chapter__num">CHAPTER 04</div>
+          <div class="rules-chapter__title">破壞遊戲公平性</div>
+        </div>
+      </div>
+      <ul class="rules-list">
+        <li>
+          <span class="rule-mark">§1</span>
+          <span class="rule-text">
+            <strong>禁止惡意阻擋玩家移動、傳送、或佔用刷怪點</strong>，視情節輕重給予處置。
+            <span class="penalty penalty--warn">警告</span>
+            <span class="penalty penalty--ban7">封號7天</span>
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§2</span>
+          <span class="rule-text">
+            <strong>禁止公開散播其他玩家的個人資訊</strong>（真實姓名、聯絡方式、照片等）。
+            <span class="penalty penalty--ban7">封號7天</span>
+            <span class="penalty penalty--perm">二犯永封</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 懲處速查表 -->
+    <div class="rules-divider"></div>
+    <div id="ch-sum" class="rules-chapter">
+      <div class="rules-chapter__header">
+        <span class="rules-chapter__icon">📋</span>
+        <div>
+          <div class="rules-chapter__num">SUMMARY</div>
+          <div class="rules-chapter__title">違規懲處速查表</div>
+        </div>
+      </div>
+      <table class="penalty-table">
+        <thead>
+          <tr>
+            <th>違規行為</th>
+            <th>初犯</th>
+            <th>二犯</th>
+            <th>三犯以上</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>辱罵玩家 / 洗版</td>
+            <td class="t-warn">警告</td>
+            <td class="t-ban">封號 3 天</td>
+            <td class="t-perm">永久封號</td>
+          </tr>
+          <tr>
+            <td>冒充 GM / 宣傳他服</td>
+            <td class="t-perm">永久封號</td>
+            <td class="t-ip">封 IP</td>
+            <td class="t-ip">封 IP</td>
+          </tr>
+          <tr>
+            <td>使用外掛程式</td>
+            <td class="t-perm">永久封號</td>
+            <td class="t-ip">封 IP</td>
+            <td class="t-ip">封 IP</td>
+          </tr>
+          <tr>
+            <td>利用遊戲漏洞</td>
+            <td class="t-ban">封號 7 天</td>
+            <td class="t-perm">永久封號</td>
+            <td class="t-ip">封 IP</td>
+          </tr>
+          <tr>
+            <td>詐欺 / 盜號</td>
+            <td class="t-perm">永久封號</td>
+            <td class="t-ip">封 IP</td>
+            <td class="t-ip">封 IP</td>
+          </tr>
+          <tr>
+            <td>現金買賣帳號 / 物品</td>
+            <td class="t-ban">封號 3 天</td>
+            <td class="t-perm">永久封號</td>
+            <td class="t-perm">永久封號</td>
+          </tr>
+          <tr>
+            <td>惡意阻擋玩家</td>
+            <td class="t-warn">警告</td>
+            <td class="t-ban">封號 7 天</td>
+            <td class="t-perm">永久封號</td>
+          </tr>
+          <tr>
+            <td>散播個人資料</td>
+            <td class="t-ban">封號 7 天</td>
+            <td class="t-perm">永久封號</td>
+            <td class="t-ip">封 IP</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── 第五章：補救機制 ── -->
+    <div id="ch-05" class="rules-chapter">
+      <div class="rules-chapter__header">
+        <span class="rules-chapter__icon">🔧</span>
+        <div>
+          <div class="rules-chapter__num">CHAPTER 05</div>
+          <div class="rules-chapter__title">裝備誤刪補救機制</div>
+        </div>
+      </div>
+      <ul class="rules-list" style="margin-bottom: 16px;">
+        <li>
+          <span class="rule-mark">！</span>
+          <span class="rule-text">
+            補救服務<strong>僅限誤刪</strong>，主動銷毀、交易後悔、賭輸不算。每帳號每月申請上限 <strong>2 次</strong>。
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">！</span>
+          <span class="rule-text">
+            所有補救裝備一律還原為 <strong>+0 無附魔</strong> 狀態，強化值、附魔效果不予補回。
+          </span>
+        </li>
+      </ul>
+      <!-- 誤刪補救表 -->
+      <p style="font-size:0.78rem;color:var(--gold-dim);letter-spacing:0.1em;margin-bottom:8px;">◆ 誤刪補救費用（藍鑽）</p>
+      <table class="recover-table" style="margin-bottom:24px;">
+        <thead>
+          <tr>
+            <th>裝備等級</th>
+            <th>補救費用</th>
+            <th>還原狀態</th>
+            <th>申請方式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>英雄級裝備</td>
+            <td>1,000 藍鑽</td>
+            <td>+0 無附魔</td>
+            <td>聯絡 GM</td>
+          </tr>
+          <tr>
+            <td>傳說級裝備</td>
+            <td>3,000 藍鑽</td>
+            <td>+0 無附魔</td>
+            <td>聯絡 GM</td>
+          </tr>
+          <tr>
+            <td>神話級裝備</td>
+            <td>5,000 藍鑽</td>
+            <td>+0 無附魔</td>
+            <td>聯絡 GM</td>
+          </tr>
+          <tr class="note-row">
+            <td colspan="4">※ 費用可能因版本調整，以 GM 公告為準。提交申請前請先備妥藍鑽，GM 確認後即時處理。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 衝爆贖回表 -->
+      <p style="font-size:0.78rem;color:var(--gold-dim);letter-spacing:0.1em;margin-bottom:8px;">◆ 衝爆贖回費用（新台幣）</p>
+      <table class="recover-table">
+        <thead>
+          <tr>
+            <th>裝備等級</th>
+            <th>贖回費用</th>
+            <th>還原狀態</th>
+            <th>申請方式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>英雄級裝備</td>
+            <td>NT$ 1,000</td>
+            <td>+0 無附魔</td>
+            <td>聯絡 GM</td>
+          </tr>
+          <tr>
+            <td>傳說級裝備</td>
+            <td>NT$ 3,000</td>
+            <td>+0 無附魔</td>
+            <td>聯絡 GM</td>
+          </tr>
+          <tr>
+            <td>神話級裝備</td>
+            <td>NT$ 5,000</td>
+            <td>+0 無附魔</td>
+            <td>聯絡 GM</td>
+          </tr>
+          <tr class="note-row">
+            <td colspan="4">※ 衝爆贖回僅受理強化失敗爆裂情形，主動銷毀或其他情況不在此列。付款方式請洽 GM 確認。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── 第六章：申訴與帳號管理 ── -->
+    <div id="ch-06" class="rules-chapter">
+      <div class="rules-chapter__header">
+        <span class="rules-chapter__icon">📢</span>
+        <div>
+          <div class="rules-chapter__num">CHAPTER 06</div>
+          <div class="rules-chapter__title">申訴與帳號管理</div>
+        </div>
+      </div>
+      <ul class="rules-list">
+        <li>
+          <span class="rule-mark">§1</span>
+          <span class="rule-text">
+            若認為判決有誤，請透過<strong>官方 LINE 社群或聯絡我們頁面</strong>提交申訴，需附上截圖或錄影佐證。
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§2</span>
+          <span class="rule-text">
+            申訴期限為<strong>封號起 7 天內</strong>，逾期不予受理。永久封號且 IP 封鎖者不得申訴。
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§3</span>
+          <span class="rule-text">
+            帳號超過 <strong>30 天未登入</strong>者，系統將自動刪除。
+          </span>
+        </li>
+        <li>
+          <span class="rule-mark">§4</span>
+          <span class="rule-text">
+            <strong>帳號由本人負責保管</strong>，帳號外借、共用所產生的一切後果由帳號持有者承擔。
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 最終聲明 -->
+    <div class="rules-final">
+      <p>
+        <strong>金耀天堂管理團隊保有對所有規章的最終解釋權與裁量權。</strong><br>
+        本規章旨在維護公平健康的遊戲環境，管理團隊由 GM 志願組成，非職業性質。
+        如對規章有疑問，歡迎至官方社群提問；凡惡意挑戰規章底線、試圖鑽空子者，
+        管理團隊將以破壞遊戲環境論處。<br><br>
+        感謝每位玩家對金耀天堂的支持，願你在黑暗帝國中奮力向前，名留天堂史冊。
+      </p>
+    </div>
+
+  </main>
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

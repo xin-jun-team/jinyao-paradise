@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>活動資訊 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    .ev-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; margin-bottom:32px; }
+    .ev-link {
+      background:linear-gradient(160deg,#281216,#17090b 50%,#1c0a0d);
+      border:1px solid #401f24; border-radius:2px; overflow:hidden;
+      text-decoration:none; display:block;
+      transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;
+    }
+    .ev-link:hover { border-color:var(--gold-dim); transform:translateY(-4px); box-shadow:0 8px 24px rgba(204,0,34,0.12); }
+    .ev-link__head {
+      padding:16px 20px; border-bottom:1px solid #2f171b;
+      display:flex; align-items:center; gap:12px;
+    }
+    .ev-link__tag {
+      font-size:0.65rem; font-weight:700; padding:3px 10px; border-radius:2px; flex-shrink:0;
+      font-family:'Cinzel',serif;
+    }
+    .ev-link__tag--active { background:rgba(0,200,100,0.15); border:1px solid rgba(0,200,100,0.3); color:#80cbc4; }
+    .ev-link__tag--permanent { background:rgba(212,168,32,0.12); border:1px solid rgba(212,168,32,0.3); color:#ffe060; }
+    .ev-link__tag--coming { background:rgba(100,180,255,0.1); border:1px solid rgba(100,180,255,0.25); color:#90caf9; }
+    .ev-link__title { font-family:'Noto Serif TC',serif; font-size:1rem; font-weight:700; color:var(--text-bright); letter-spacing:0.08em; }
+    .ev-link__body { padding:14px 20px; }
+    .ev-link__desc { font-size:0.82rem; color:var(--text-dim); line-height:1.7; margin-bottom:10px; }
+    .ev-link__arrow { font-family:'Cinzel',serif; font-size:0.72rem; color:var(--gold-dim); display:flex; align-items:center; gap:6px; }
+    .ev-link__arrow::after { content:'→'; color:var(--gold); }
+    .ev-link:hover .ev-link__arrow { color:var(--gold); }
+    .ev-link:hover .ev-link__arrow::after { color:var(--gold-bright); }
+    .ev-link__date { font-size:0.7rem; color:var(--gold-dim); font-family:'Cinzel',serif; margin-top:4px; }
+    /* 活動結束：卡片框變暗 */
+    .ev-link--ended { opacity:0.5; filter:grayscale(0.6); border-color:rgba(255,255,255,0.06) !important; background:rgba(16,8,9,0.9); }
+    .ev-link--ended:hover { transform:none; box-shadow:none; border-color:rgba(255,255,255,0.06) !important; }
+    .ev-link__tag--ended { background:rgba(120,120,120,0.18); border:1px solid rgba(150,150,150,0.35); color:#9a9a9a; }
+
+    .ev-cat-title {
+      font-family:'Noto Serif TC',serif; font-size:1rem; font-weight:700;
+      color:var(--gold); letter-spacing:0.15em; margin-bottom:16px;
+      display:flex; align-items:center; gap:10px;
+      padding:10px 16px;
+      background:linear-gradient(90deg,rgba(212,168,32,0.09) 0%,transparent 100%);
+      border-left:3px solid var(--gold-dim);
+    }
+    .ev-cat-title::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,var(--gold-dim),transparent); }
+
+    /* ── 可展開活動詳情 ── */
+    .ev-detail { display:none; padding:16px 20px 20px; border-top:1px solid #2f171b; background:#0f0708; }
+    .ev-detail.is-open { display:block; }
+    .ev-detail__items { display:flex; gap:20px; align-items:center; flex-wrap:wrap; margin-bottom:14px; }
+    .ev-detail__item { display:flex; align-items:center; gap:10px; background:#221013; border:1px solid #2f171b; padding:12px 16px; border-radius:2px; flex:1; min-width:180px; }
+    .ev-detail__item img { width:40px; height:40px; image-rendering:pixelated; flex-shrink:0; }
+    .ev-detail__item-info { }
+    .ev-detail__item-name { font-family:'Noto Serif TC',serif; font-size:0.88rem; font-weight:700; color:var(--text-bright); }
+    .ev-detail__item-desc { font-size:0.75rem; color:var(--text-dim); margin-top:2px; }
+    .ev-detail__text { font-size:0.82rem; color:var(--text-dim); line-height:1.8; }
+    .ev-detail__text strong { color:var(--text-bright); }
+    .ev-detail__text em { color:#ff8a80; font-style:normal; font-weight:700; }
+    .ev-detail__slogan { text-align:center; margin:16px 0 8px; padding:16px; background:linear-gradient(135deg,rgba(204,0,34,0.08),rgba(212,168,32,0.08)); border:1px solid #2f171b; }
+    .ev-detail__slogan-main { font-family:'Noto Serif TC',serif; font-size:1.1rem; font-weight:900; color:var(--gold); letter-spacing:0.15em; margin-bottom:6px; }
+    .ev-detail__slogan-sub { font-size:0.82rem; color:#e8d090; line-height:1.7; }
+    .ev-toggle { font-size:0.75rem; color:var(--soul-bright,#ff4060); cursor:pointer; display:flex; align-items:center; gap:4px; margin-top:6px; }
+    .ev-toggle:hover { color:var(--gold); }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — EVENTS</p>
+    <h1 class="page-hero__title">活動<span>資訊</span></h1>
+    <p class="page-hero__sub">參與活動獲取豐厚獎勵</p>
+  </div>
+
+  <main class="fp-wrap">
+
+    <!-- 進行中活動（JSON 驅動） -->
+    <p class="ev-cat-title">◆ 進行中活動</p>
+    <div class="ev-grid" id="evActive"></div>
+
+    <!-- 即將推出 -->
+    <p class="ev-cat-title">◈ 即將推出</p>
+    <div class="ev-grid" id="evUpcoming"></div>
+
+  </main>
+
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script><script>
+    (async function() {
+      try {
+        var res = await fetch('../data/events.json');
+        var data = await res.json();
+
+        // 進行中活動
+        var activeEl = document.getElementById('evActive');
+        var activeItems = data.active || [];
+        if (activeItems.length) {
+          activeEl.innerHTML = activeItems.map(function(ev) {
+            var tag = ev.tag || '長期活動';
+            var style = ev.tag_style || 'permanent';
+            var linkText = ev.link_text || '查看詳情';
+            var cardCls = ev.ended ? 'ev-link ev-link--ended' : 'ev-link';
+            var inner =
+              '<div class="ev-link__head">' +
+                '<span class="ev-link__tag ev-link__tag--' + style + '">' + tag + '</span>' +
+                '<div class="ev-link__title">' + ev.title + '</div>' +
+              '</div>' +
+              '<div class="ev-link__body">' +
+                '<div class="ev-link__desc">' + ev.desc + '</div>' +
+                '<div class="ev-link__date">' + (ev.date_label || '') + '</div>' +
+                (ev.link ? '<div class="ev-link__arrow">' + linkText + '</div>' : '') +
+              '</div>';
+            if (ev.link) {
+              return '<a href="' + ev.link + '" class="' + cardCls + '">' + inner + '</a>';
+            } else {
+              return '<div class="' + cardCls + '" style="cursor:default;">' + inner + '</div>';
+            }
+          }).join('');
+        }
+
+        // 即將推出
+        var upEl = document.getElementById('evUpcoming');
+        var upItems = data.upcoming || [];
+        if (upItems.length) {
+          upEl.innerHTML = upItems.map(function(ev) {
+            return '<div class="ev-link" style="opacity:0.6;cursor:default;">' +
+              '<div class="ev-link__head">' +
+                '<span class="ev-link__tag ev-link__tag--coming">敬請期待</span>' +
+                '<div class="ev-link__title">' + ev.title + '</div>' +
+              '</div>' +
+              '<div class="ev-link__body">' +
+                '<div class="ev-link__desc">' + (ev.desc || '') + '</div>' +
+              '</div>' +
+            '</div>';
+          }).join('');
+        }
+      } catch(e) {
+        document.getElementById('evActive').innerHTML = '<p style="color:#6a6080;padding:20px;">活動載入失敗，請重新整理頁面。</p>';
+      }
+    })();
+  </script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

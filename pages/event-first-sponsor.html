@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>首儲贈送 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    .fs-section { max-width: 860px; margin: 0 auto 48px; }
+    .fs-intro {
+      background: #210f12;
+      border: 1px solid rgba(212,168,32,0.2);
+      border-radius: 2px;
+      padding: 28px 32px;
+      color: #e0d8c8;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 48px;
+    }
+    .fs-intro strong { color: #ffe060; }
+
+    .fs-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .fs-item {
+      display: flex; align-items: center; gap: 14px;
+      background: linear-gradient(160deg, #281216 0%, #1b0b0e 100%);
+      border: 1px solid #401f24; border-radius: 4px;
+      padding: 16px 20px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .fs-item:hover { border-color: rgba(212,168,32,0.5); transform: translateY(-2px); }
+    .fs-item img { width: 44px; height: 44px; image-rendering: pixelated; flex-shrink: 0; }
+    .fs-item__name { font-family: 'Noto Serif TC', serif; font-size: 0.9rem; font-weight: 700; color: var(--text-bright); }
+    .fs-item__qty { font-size: 0.82rem; color: #ffe060; margin-top: 2px; }
+    .fs-item__id { font-size: 0.7rem; color: #6a6080; margin-top: 1px; font-family: 'Cinzel', serif; }
+
+    .fs-notes {
+      background: #210f12;
+      border: 1px solid rgba(212,168,32,0.15);
+      border-radius: 2px;
+      padding: 24px 32px;
+      margin-top: 48px;
+    }
+    .fs-notes__title { font-family: 'Cinzel', serif; color: #ffe060; font-size: 0.8rem; letter-spacing: 0.1em; margin-bottom: 12px; }
+    .fs-notes ul { list-style: none; padding: 0; margin: 0; }
+    .fs-notes li { color: #b0a890; font-size: 0.85rem; padding: 4px 0; line-height: 1.6; }
+    .fs-notes li::before { content: "· "; color: #7a6030; }
+
+    .fs-line-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-top: 24px; padding: 14px 32px;
+      background: #06C755; color: #fff;
+      font-size: 0.95rem; font-weight: 700;
+      border-radius: 4px; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .fs-line-btn:hover { background: #05b34c; transform: translateY(-2px); }
+
+    .fs-back {
+      display: block; text-align: center; margin-top: 40px; padding: 14px;
+      color: #ffe060; font-size: 0.9rem; text-decoration: none;
+      border: 1px solid rgba(212,168,32,0.2); border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .fs-back:hover { background: rgba(212,168,32,0.08); }
+
+    @media (max-width: 720px) {
+      .fs-items { grid-template-columns: 1fr; }
+      .fs-intro, .fs-notes { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — FIRST SPONSOR</p>
+    <h1 class="page-hero__title">首儲<span>贈送</span></h1>
+    <p class="page-hero__sub">首次贊助即贈送豐厚好禮</p>
+  </div>
+
+  <main class="fp-wrap">
+
+    <p class="fp-heading">◆ 活動說明</p>
+    <div class="fs-intro">
+      首次贊助即可獲得以下道具，助你快速踏上強化之路！<br>
+      <strong>每人限領一次</strong>，首次贊助後透過官方 LINE 申請，經確認後直接發放至遊戲信箱。
+    </div>
+
+    <p class="fp-heading">◈ 首儲贈送內容</p>
+
+    <div class="fs-items">
+      <div class="fs-item">
+        <img src="../assets/images/item-20516.png" alt="稀有變身卡寶箱" loading="lazy">
+        <div>
+          <div class="fs-item__name">稀有變身卡寶箱</div>
+          <div class="fs-item__qty">x2</div>
+        </div>
+      </div>
+      <div class="fs-item">
+        <img src="../assets/images/item-20521.png" alt="稀有娃娃卡寶箱" loading="lazy">
+        <div>
+          <div class="fs-item__name">稀有娃娃卡寶箱</div>
+          <div class="fs-item__qty">x2</div>
+        </div>
+      </div>
+      <div class="fs-item">
+        <img src="../assets/images/item-2700.png" alt="噬魂魔核" loading="lazy">
+        <div>
+          <div class="fs-item__name">噬魂魔核</div>
+          <div class="fs-item__qty">x1</div>
+        </div>
+      </div>
+      <div class="fs-item">
+        <img src="../assets/images/item-16016.png" alt="神奇扭蛋" loading="lazy">
+        <div>
+          <div class="fs-item__name">神奇扭蛋</div>
+          <div class="fs-item__qty">x3</div>
+        </div>
+      </div>
+      <div class="fs-item">
+        <img src="../assets/images/item-1480.png" alt="名譽貨幣" loading="lazy">
+        <div>
+          <div class="fs-item__name">名譽貨幣</div>
+          <div class="fs-item__qty">x20</div>
+        </div>
+      </div>
+      <div class="fs-item">
+        <img src="../assets/images/item-2901.png" alt="巧克力蛋糕" loading="lazy">
+        <div>
+          <div class="fs-item__name">巧克力蛋糕</div>
+          <div class="fs-item__qty">x20</div>
+        </div>
+      </div>
+      <div class="fs-item">
+        <img src="../assets/images/item-7255.png" alt="防爆卷箱子" loading="lazy">
+        <div>
+          <div class="fs-item__name">防爆卷箱子</div>
+          <div class="fs-item__qty">x1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fs-notes">
+      <p class="fs-notes__title">NOTICE</p>
+      <ul>
+        <li style="color:#ffd35a;font-weight:800">※ 推文包月不列入首儲</li>
+        <li>每人限領一次，禁止使用其他 LINE 帳號試探官方，違者取消資格</li>
+        <li>首次贊助後請聯繫 LINE 客服申請領取</li>
+        <li>經確認後直接發放至遊戲信箱</li>
+      </ul>
+      <span class="fs-line-btn" aria-disabled="true" title="開服前公布" style="opacity:.62;cursor:not-allowed;pointer-events:none">
+        <span>LINE</span> 聯繫客服領取
+      <small style="font-size:.72em;opacity:.9;margin-left:6px">（開服前公布）</small></span>
+    </div>
+
+    <a href="events.html" class="fs-back">&#9650; 返回活動列表</a>
+
+  </main>
+
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

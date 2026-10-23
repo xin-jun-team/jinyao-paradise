@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>武器介紹 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    /* ── Tab System ── */
+    .page-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; position:sticky; top:60px; z-index:100; background:var(--bg-base,#090405); padding:12px 0; border-bottom:1px solid #2f171b; }
+    .page-tab {
+      padding:10px 20px; cursor:pointer; color:var(--text-dim,#a07840); border:1px solid #401f24; border-radius:2px;
+      font-size:0.85rem; font-family:'Cinzel',serif; letter-spacing:0.08em; background:#17090b;
+      transition:all 0.3s; white-space:nowrap; position:relative; overflow:hidden;
+    }
+    .page-tab::before {
+      content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
+      background:conic-gradient(from 0deg, transparent 0%, rgba(212,168,32,0.3) 10%, transparent 20%, transparent 50%, rgba(212,168,32,0.2) 60%, transparent 70%);
+      animation:wpn-tab-sweep 3s linear infinite; opacity:0; transition:opacity 0.3s;
+    }
+    .page-tab:hover::before { opacity:1; }
+    .page-tab:hover { color:var(--gold,#d4a820); border-color:var(--gold,#d4a820); box-shadow:0 0 12px rgba(212,168,32,0.15), inset 0 0 12px rgba(212,168,32,0.05); text-shadow:0 0 8px rgba(212,168,32,0.3); }
+    .page-tab.active {
+      color:#ffe060; background:linear-gradient(135deg,#3c141a,#261014); border-color:var(--gold,#d4a820); font-weight:700;
+      box-shadow:0 0 18px rgba(212,168,32,0.25), 0 0 40px rgba(212,168,32,0.08), inset 0 1px 0 rgba(255,224,96,0.15);
+      text-shadow:0 0 10px rgba(255,224,96,0.4);
+      animation:wpn-tab-glow 2s ease-in-out infinite;
+    }
+    .page-tab.active::after {
+      content:''; position:absolute; bottom:-1px; left:20%; right:20%; height:2px;
+      background:linear-gradient(90deg, transparent, #ffe060, transparent);
+      box-shadow:0 0 8px rgba(255,224,96,0.5);
+    }
+    @keyframes wpn-tab-sweep {
+      0% { transform:rotate(0deg); }
+      100% { transform:rotate(360deg); }
+    }
+    @keyframes wpn-tab-glow {
+      0%, 100% { box-shadow:0 0 18px rgba(212,168,32,0.2), 0 0 40px rgba(212,168,32,0.06); }
+      50% { box-shadow:0 0 24px rgba(212,168,32,0.35), 0 0 50px rgba(212,168,32,0.12), 0 2px 20px rgba(255,224,96,0.1); }
+    }
+    /* 金色光粒子裝飾 */
+    .page-tabs::after {
+      content:''; position:absolute; top:0; left:0; right:0; bottom:0; pointer-events:none;
+      background:
+        radial-gradient(circle 2px at 15% 30%, rgba(255,224,96,0.4) 0%, transparent 100%),
+        radial-gradient(circle 1.5px at 35% 70%, rgba(212,168,32,0.3) 0%, transparent 100%),
+        radial-gradient(circle 2px at 55% 20%, rgba(255,224,96,0.35) 0%, transparent 100%),
+        radial-gradient(circle 1px at 75% 60%, rgba(212,168,32,0.4) 0%, transparent 100%),
+        radial-gradient(circle 2px at 90% 35%, rgba(255,224,96,0.3) 0%, transparent 100%);
+      animation:wpn-sparkle 4s ease-in-out infinite alternate;
+    }
+    @keyframes wpn-sparkle {
+      0% { opacity:0.3; }
+      50% { opacity:0.8; }
+      100% { opacity:0.4; }
+    }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
+
+    /* ── Weapon Tables ── */
+    .wtable { width:100%; border-collapse:collapse; font-size:0.82rem; min-width:700px; }
+    .wtable th { background:linear-gradient(90deg,rgba(212,168,32,0.15),rgba(212,168,32,0.05)); color:var(--gold-dim); font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.12em; padding:10px 14px; border:1px solid #401f24; text-align:left; }
+    .wtable td { padding:10px 14px; border:1px solid #2f171b; color:var(--text-dim); }
+    .wtable tr:nth-child(odd) td { background:#1b0b0e; }
+    .wtable tr:nth-child(even) td { background:#1d0d10; }
+    .wtable tr:hover td { background:#281216; }
+    .wtable td:first-child { color:var(--text-bright); }
+    .w-icon { width:24px;height:24px;image-rendering:pixelated;vertical-align:middle;margin-right:8px; }
+    .rarity-common { color:#8a8a8a; }
+    .rarity-high   { color:#4caf50; font-weight:700; }
+    .rarity-rare   { color:#64b5f6; font-weight:700; }
+    .rarity-hero   { color:#ef5350; font-weight:700; }
+    .rarity-legend { color:#ce93d8; font-weight:700; }
+    .rarity-myth   { color:#ffb74d; font-weight:700; }
+    .section-bar { font-family:'Noto Serif TC',serif; font-size:1rem; font-weight:700; color:var(--gold); letter-spacing:0.12em; margin:28px 0 14px; display:flex; align-items:center; gap:10px; }
+    .section-bar::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,var(--gold-dim),transparent); }
+
+    /* ── Info Box ── */
+    .info-box { background:#1e0b0e; border:1px solid #401f24; border-left:4px solid var(--gold-dim,#7a6018); border-radius:2px; padding:18px 22px; margin-bottom:24px; }
+    .info-box p { margin:6px 0; color:var(--text-dim,#a07840); font-size:0.88rem; line-height:1.7; }
+    .info-box strong { color:var(--text-bright,#e8d8b0); }
+
+    /* ── Magic Type Cards ── */
+    .magic-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin:16px 0 24px; }
+    .magic-card { background:#17090b; border:1px solid #401f24; border-radius:2px; padding:14px 16px; }
+    .magic-card__label { font-size:0.7rem; font-family:'Cinzel',serif; letter-spacing:0.1em; margin-bottom:6px; }
+    .magic-card__name { font-size:0.9rem; font-weight:700; font-family:'Noto Serif TC',serif; }
+    .magic-card__desc { font-size:0.78rem; color:var(--text-dim,#a07840); margin-top:4px; }
+    .mc-rare { border-top:2px solid #64b5f6; }
+    .mc-rare .magic-card__label { color:#64b5f6; }
+    .mc-rare .magic-card__name { color:#90caf9; }
+    .mc-hero { border-top:2px solid #ef5350; }
+    .mc-hero .magic-card__label { color:#ef5350; }
+    .mc-hero .magic-card__name { color:#ef9a9a; }
+    .mc-legend { border-top:2px solid #ce93d8; }
+    .mc-legend .magic-card__label { color:#ce93d8; }
+    .mc-legend .magic-card__name { color:#e1bee7; }
+    .mc-myth { border-top:2px solid #ffb74d; }
+    .mc-myth .magic-card__label { color:#ffb74d; }
+    .mc-myth .magic-card__name { color:#ffe082; }
+
+    /* ── Table overflow wrapper ── */
+    .table-wrap { overflow-x:auto; margin-bottom:24px; }
+
+    /* ── Craft Tables ── */
+    .craft-table { width:100%; border-collapse:collapse; font-size:0.82rem; min-width:600px; }
+    .craft-table th { background:linear-gradient(90deg,rgba(212,168,32,0.15),rgba(212,168,32,0.05)); color:var(--gold-dim,#a07840); font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.12em; padding:10px 14px; border:1px solid #401f24; text-align:left; }
+    .craft-table td { padding:10px 14px; border:1px solid #2f171b; color:var(--text-dim,#a07840); line-height:1.6; }
+    .craft-table tr:nth-child(odd) td { background:#1b0b0e; }
+    .craft-table tr:nth-child(even) td { background:#1d0d10; }
+    .craft-table tr:hover td { background:#281216; }
+    .craft-table td:first-child { font-weight:700; white-space:nowrap; }
+
+    /* ── Disassemble Box ── */
+    .disassemble-box { background:#1e0b0e; border:1px solid #401f24; border-radius:2px; padding:22px; margin-top:8px; }
+    .disassemble-box h3 { color:var(--gold,#d4a820); font-family:'Noto Serif TC',serif; font-size:1rem; margin:0 0 12px; padding-bottom:10px; border-bottom:1px solid #401f24; }
+    .disassemble-box p { color:var(--text-dim,#a07840); font-size:0.88rem; margin:0 0 16px; }
+    .disassemble-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    @media(max-width:600px){ .disassemble-grid { grid-template-columns:1fr 1fr; } }
+    .dis-item { background:#17090b; border:1px solid #401f24; border-radius:2px; padding:10px 14px; text-align:center; }
+    .dis-item__rank { font-size:0.72rem; font-family:'Cinzel',serif; letter-spacing:0.08em; margin-bottom:4px; }
+    .dis-item__val { font-size:1.1rem; font-weight:700; font-family:'Cinzel',serif; }
+
+    /* ── Scroll Table ── */
+    .scroll-table { width:100%; border-collapse:collapse; font-size:0.82rem; min-width:600px; }
+    .scroll-table th { background:linear-gradient(90deg,rgba(212,168,32,0.15),rgba(212,168,32,0.05)); color:var(--gold-dim,#a07840); font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.12em; padding:10px 14px; border:1px solid #401f24; text-align:left; }
+    .scroll-table td { padding:10px 14px; border:1px solid #2f171b; color:var(--text-dim,#a07840); }
+    .scroll-table tr:nth-child(odd) td { background:#1b0b0e; }
+    .scroll-table tr:nth-child(even) td { background:#1d0d10; }
+    .scroll-table tr:hover td { background:#281216; }
+    .scroll-table td:first-child { font-weight:700; }
+    .elem-fire td:first-child { border-left:3px solid #ef5350; }
+    .elem-wind td:first-child { border-left:3px solid #4caf50; }
+    .elem-water td:first-child { border-left:3px solid #64b5f6; }
+    .elem-earth td:first-child { border-left:3px solid #a1887f; }
+
+    /* ── Enhance Section ── */
+    .warning-box { background:#1a0a0a; border:1px solid #5a1f1f; border-left:4px solid #ef5350; border-radius:2px; padding:14px 18px; margin-bottom:20px; }
+    .warning-box p { color:#ef9a9a; font-size:0.88rem; margin:4px 0; }
+    .warning-box strong { color:#ef5350; }
+    .scroll-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; margin:16px 0 24px; }
+    .scroll-card { background:#17090b; border:1px solid #401f24; border-radius:2px; padding:16px 18px; }
+    .scroll-card__icon { font-size:1.4rem; margin-bottom:8px; }
+    .scroll-card__name { font-size:0.9rem; font-weight:700; font-family:'Noto Serif TC',serif; margin-bottom:6px; }
+    .scroll-card__effect { font-size:0.8rem; color:var(--text-dim,#a07840); }
+    .sc-purple { border-top:2px solid #ce93d8; }
+    .sc-purple .scroll-card__name { color:#ce93d8; }
+    .sc-blue { border-top:2px solid #64b5f6; }
+    .sc-blue .scroll-card__name { color:#64b5f6; }
+    .sc-gold { border-top:2px solid #ffe060; }
+    .sc-gold .scroll-card__name { color:#ffe060; }
+    .jump-table { width:100%; border-collapse:collapse; font-size:0.82rem; }
+    .jump-table th { background:linear-gradient(90deg,rgba(212,168,32,0.15),rgba(212,168,32,0.05)); color:var(--gold-dim,#a07840); font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.1em; padding:10px 14px; border:1px solid #401f24; text-align:left; }
+    .jump-table td { padding:10px 14px; border:1px solid #2f171b; color:var(--text-dim,#a07840); }
+    .jump-table tr:nth-child(odd) td { background:#1b0b0e; }
+    .jump-table tr:nth-child(even) td { background:#1d0d10; }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — WEAPONS</p>
+    <h1 class="page-hero__title">武器<span>介紹</span></h1>
+    <p class="page-hero__sub">強力武器一覽，找到最適合你的武器</p>
+  </div>
+
+  <main class="fp-wrap">
+
+    <!-- ══ TABS ══ -->
+    <div class="page-tabs">
+      <button class="page-tab active" data-tab="overview" onclick="switchTab('overview')">🗡 武器總覽</button>
+      <button class="page-tab" data-tab="craft" onclick="switchTab('craft')">⚒ 製作系統</button>
+      <button class="page-tab" data-tab="scroll" onclick="switchTab('scroll')">✨ 武器屬性強化珠</button>
+      <button class="page-tab" data-tab="enhance" onclick="switchTab('enhance')">⬆ 裝備強化說明</button>
+    </div>
+
+    <!-- ══ TAB 1: 武器總覽 ══ -->
+    <div id="tab-overview" class="tab-content active">
+
+      <div class="info-box">
+        <p>📜 <strong>基礎規則：</strong>武器可透過<strong>怪物掉落</strong>及<strong>合成製作</strong>獲取，耐用度系統已停用，裝備<strong>不會損壞</strong>，可安心使用。</p>
+        <p>🔮 <strong>魔武發動機制：</strong>發動率 = 基本 <strong>1%</strong> + (強化等級 × <strong>1%</strong>)，傷害會受智力屬性影響。</p>
+      </div>
+
+      <p class="fp-heading">🔮 魔武屬性類型</p>
+      <div class="magic-cards">
+        <div class="magic-card mc-rare">
+          <div class="magic-card__label">稀有 RARE</div>
+          <div class="magic-card__name">寒冰氣息</div>
+          <div class="magic-card__desc">觸發時對敵人施加寒冰效果，降低移動速度</div>
+        </div>
+        <div class="magic-card mc-hero">
+          <div class="magic-card__label">英雄 HERO</div>
+          <div class="magic-card__name">煉獄火</div>
+          <div class="magic-card__desc">觸發時對敵人造成持續火焰灼燒傷害</div>
+        </div>
+        <div class="magic-card mc-legend">
+          <div class="magic-card__label">傳說 LEGEND</div>
+          <div class="magic-card__name">地爆</div>
+          <div class="magic-card__desc">觸發時引發地面爆裂，對敵人造成大量傷害</div>
+        </div>
+        <div class="magic-card mc-myth">
+          <div class="magic-card__label">神話 MYTH</div>
+          <div class="magic-card__name">黑閃</div>
+          <div class="magic-card__desc">觸發時釋放暗黑閃光，造成超強穿透傷害</div>
+        </div>
+      </div>
+
+      <!-- 單手劍 -->
+      <div class="section-bar">🗡 單手劍&nbsp;<small style="font-size:0.75rem;font-weight:400;color:var(--text-dim)">王族 / 騎士 / 妖精</small></div>
+      <div class="table-wrap">
+        <table class="wtable">
+          <thead><tr><th>武器名稱</th><th>稀有度</th><th>可用職業</th><th>攻擊力</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-5740.png" class="w-icon" loading="lazy">修練者單手劍</td><td><span class="rarity-common">一般</span></td><td>王, 騎, 妖</td><td>8 / 9</td><td>近距離命中+1</td></tr>
+            <tr><td><img src="../assets/images/item-3530.png" class="w-icon" loading="lazy">超特製單手劍</td><td><span class="rarity-high">高級</span></td><td>王, 騎, 妖</td><td>11 / 12</td><td>近距離命中+1, 額外攻擊+2</td></tr>
+            <tr><td><img src="../assets/images/item-6229.png" class="w-icon" loading="lazy">戰神單手劍</td><td><span class="rarity-rare">稀有</span></td><td>王, 騎, 妖</td><td>15 / 16</td><td>力量+1, 攻擊成功+2, 額外攻擊+3</td></tr>
+            <tr><td><img src="../assets/images/item-12362.png" class="w-icon" loading="lazy">英雄單手劍</td><td><span class="rarity-hero">英雄</span></td><td>王, 騎, 妖</td><td>20 / 21</td><td>力量+1, 攻擊成功+4, 額外攻擊+5</td></tr>
+            <tr><td><img src="../assets/images/item-12320.png" class="w-icon" loading="lazy">死亡騎士之劍</td><td><span class="rarity-legend">傳說</span></td><td>王, 騎, 妖</td><td>25 / 26</td><td>力量+1, 攻擊成功+8, 額外攻擊+10</td></tr>
+            <tr><td><img src="../assets/images/item-1947.png" class="w-icon" loading="lazy">風刃之劍</td><td><span class="rarity-myth">神話</span></td><td>王, 騎, 妖</td><td>30 / 31</td><td>力量+1, 攻擊成功+10, 額外攻擊+15</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 雙手劍 -->
+      <div class="section-bar">⚔ 雙手劍&nbsp;<small style="font-size:0.75rem;font-weight:400;color:var(--text-dim)">王族 / 騎士</small></div>
+      <div class="table-wrap">
+        <table class="wtable">
+          <thead><tr><th>武器名稱</th><th>稀有度</th><th>可用職業</th><th>攻擊力</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-5744.png" class="w-icon" loading="lazy">修練者雙手劍</td><td><span class="rarity-common">一般</span></td><td>王族, 騎士</td><td>14 / 15</td><td>近距離命中+2</td></tr>
+            <tr><td><img src="../assets/images/item-3524.png" class="w-icon" loading="lazy">超特製雙手劍</td><td><span class="rarity-high">高級</span></td><td>王族, 騎士</td><td>17 / 18</td><td>近距離命中+2, 額外攻擊+2</td></tr>
+            <tr><td><img src="../assets/images/item-6233.png" class="w-icon" loading="lazy">戰神雙手劍</td><td><span class="rarity-rare">稀有</span></td><td>王族, 騎士</td><td>21 / 22</td><td>力量+1, 攻擊成功+3, 額外攻擊+4</td></tr>
+            <tr><td><img src="../assets/images/item-12359.png" class="w-icon" loading="lazy">英雄雙手劍</td><td><span class="rarity-hero">英雄</span></td><td>王族, 騎士</td><td>26 / 27</td><td>力量+1, 攻擊成功+4, 額外攻擊+5, 昏迷命中+5</td></tr>
+            <tr><td><img src="../assets/images/item-12324.png" class="w-icon" loading="lazy">騎士范德之劍</td><td><span class="rarity-legend">傳說</span></td><td>王族, 騎士</td><td>31 / 32</td><td>力量+1, 攻擊成功+9, 額外攻擊+10, 昏迷命中+7</td></tr>
+            <tr><td><img src="../assets/images/item-1945.png" class="w-icon" loading="lazy">真‧冥皇執行劍</td><td><span class="rarity-myth">神話</span></td><td>王族, 騎士</td><td>36 / 37</td><td>力量+1, 攻擊成功+10, 額外攻擊+15, 昏迷命中+10</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 矛 -->
+      <div class="section-bar">🔱 矛&nbsp;<small style="font-size:0.75rem;font-weight:400;color:var(--text-dim)">全職業</small></div>
+      <div class="table-wrap">
+        <table class="wtable">
+          <thead><tr><th>武器名稱</th><th>稀有度</th><th>可用職業</th><th>攻擊力</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-98.png" class="w-icon" loading="lazy">修練者長矛</td><td><span class="rarity-common">一般</span></td><td>全職業</td><td>8 / 9</td><td>近距離命中+1</td></tr>
+            <tr><td><img src="../assets/images/item-99.png" class="w-icon" loading="lazy">超特製長矛</td><td><span class="rarity-high">高級</span></td><td>全職業</td><td>11 / 12</td><td>近距離命中+1, 額外攻擊+2</td></tr>
+            <tr><td><img src="../assets/images/item-3528.png" class="w-icon" loading="lazy">戰神之矛</td><td><span class="rarity-rare">稀有</span></td><td>全職業</td><td>14 / 16</td><td>力量+1, 攻擊成功+2, 額外攻擊+3</td></tr>
+            <tr><td><img src="../assets/images/item-38.png" class="w-icon" loading="lazy">英雄之矛</td><td><span class="rarity-hero">英雄</span></td><td>全職業</td><td>19 / 21</td><td>力量+1, 攻擊成功+4, 額外攻擊+5, 昏迷命中+5</td></tr>
+            <tr><td><img src="../assets/images/item-2200.png" class="w-icon" loading="lazy">守護者之矛</td><td><span class="rarity-legend">傳說</span></td><td>全職業</td><td>24 / 26</td><td>力量+1, 攻擊成功+8, 額外攻擊+10, 昏迷命中+7</td></tr>
+            <tr><td><img src="../assets/images/item-2226.png" class="w-icon" loading="lazy">海神三叉戟</td><td><span class="rarity-myth">神話</span></td><td>全職業</td><td>29 / 31</td><td>力量+1, 攻擊成功+10, 額外攻擊+15, 昏迷命中+10</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 弓 -->
+      <div class="section-bar">🏹 弓&nbsp;<small style="font-size:0.75rem;font-weight:400;color:var(--text-dim)">全職業</small></div>
+      <div class="table-wrap">
+        <table class="wtable">
+          <thead><tr><th>武器名稱</th><th>稀有度</th><th>可用職業</th><th>攻擊力</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-5754.png" class="w-icon" loading="lazy">修練者之弓</td><td><span class="rarity-common">一般</span></td><td>全職業</td><td>2 / 2</td><td>—</td></tr>
+            <tr><td><img src="../assets/images/item-3532.png" class="w-icon" loading="lazy">超特製弩弓</td><td><span class="rarity-high">高級</span></td><td>全職業</td><td>3 / 3</td><td>遠距離命中+1, 額外攻擊+1</td></tr>
+            <tr><td><img src="../assets/images/item-6231.png" class="w-icon" loading="lazy">戰神之弓</td><td><span class="rarity-rare">稀有</span></td><td>全職業</td><td>4 / 4</td><td>遠距離命中+2, 額外攻擊+3</td></tr>
+            <tr><td><img src="../assets/images/item-12360.png" class="w-icon" loading="lazy">英雄神弓</td><td><span class="rarity-hero">英雄</span></td><td>全職業</td><td>5 / 5</td><td>遠距離命中+5, 額外攻擊+6</td></tr>
+            <tr><td><img src="../assets/images/item-6115.png" class="w-icon" loading="lazy">惡夢的長弓</td><td><span class="rarity-legend">傳說</span></td><td>全職業</td><td>6 / 6</td><td>遠距離命中+8, 額外攻擊+11</td></tr>
+            <tr><td><img src="../assets/images/item-7326.png" class="w-icon" loading="lazy">大地女神的激怒</td><td><span class="rarity-myth">神話</span></td><td>全職業</td><td>7 / 7</td><td>遠距離命中+10, 額外攻擊+15</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 法杖 -->
+      <div class="section-bar">🪄 法杖&nbsp;<small style="font-size:0.75rem;font-weight:400;color:var(--text-dim)">法師</small></div>
+      <div class="table-wrap">
+        <table class="wtable">
+          <thead><tr><th>武器名稱</th><th>稀有度</th><th>可用職業</th><th>攻擊力</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-5748.png" class="w-icon" loading="lazy">修練者魔杖</td><td><span class="rarity-common">一般</span></td><td>法師</td><td>5 / 5</td><td>吸取魔力1, 隨機吸取魔力3</td></tr>
+            <tr><td><img src="../assets/images/item-3534.png" class="w-icon" loading="lazy">超特製魔杖</td><td><span class="rarity-high">高級</span></td><td>法師</td><td>8 / 8</td><td>吸取魔力2, 隨機吸取魔力4, 近距離命中+3, 額外攻擊+5, 魔攻+1</td></tr>
+            <tr><td><img src="../assets/images/item-6237.png" class="w-icon" loading="lazy">戰神魔杖</td><td><span class="rarity-rare">稀有</span></td><td>法師</td><td>12 / 12</td><td>吸取魔力3, 隨機吸取魔力6, 近距離命中+6, 額外攻擊+8, 魔攻+2</td></tr>
+            <tr><td><img src="../assets/images/item-12361.png" class="w-icon" loading="lazy">英雄魔杖</td><td><span class="rarity-hero">英雄</span></td><td>法師</td><td>17 / 17</td><td>吸取魔力3, 隨機吸取魔力8, 近距離命中+8, 額外攻擊+11, 魔攻+3, 魔法命中+1</td></tr>
+            <tr><td><img src="../assets/images/item-6132.png" class="w-icon" loading="lazy">傑羅斯的魔杖</td><td><span class="rarity-legend">傳說</span></td><td>法師</td><td>23 / 23</td><td>吸取魔力4, 隨機吸取魔力10, 近距離命中+11, 額外攻擊+15, 魔攻+5, 魔法命中+2</td></tr>
+            <tr><td><img src="../assets/images/item-1953.png" class="w-icon" loading="lazy">聖晶魔杖</td><td><span class="rarity-myth">神話</span></td><td>法師</td><td>28 / 28</td><td>吸取魔力5, 隨機吸取魔力15, 近距離命中+13, 額外攻擊+18, 魔攻+8, 魔法命中+3</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 雙刀 -->
+      <div class="section-bar">🌑 雙刀&nbsp;<small style="font-size:0.75rem;font-weight:400;color:var(--text-dim)">黑暗妖精</small></div>
+      <div class="table-wrap">
+        <table class="wtable">
+          <thead><tr><th>武器名稱</th><th>稀有度</th><th>可用職業</th><th>攻擊力</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-5746.png" class="w-icon" loading="lazy">修練者雙刀</td><td><span class="rarity-common">一般</span></td><td>黑暗妖精</td><td>8 / 7</td><td>—</td></tr>
+            <tr><td><img src="../assets/images/item-3526.png" class="w-icon" loading="lazy">超特製雙刀</td><td><span class="rarity-high">高級</span></td><td>黑暗妖精</td><td>11 / 10</td><td>近距離命中+1, 額外攻擊+2</td></tr>
+            <tr><td><img src="../assets/images/item-6235.png" class="w-icon" loading="lazy">戰神雙刀</td><td><span class="rarity-rare">稀有</span></td><td>黑暗妖精</td><td>15 / 14</td><td>攻擊成功+2, 額外攻擊+3</td></tr>
+            <tr><td><img src="../assets/images/item-12363.png" class="w-icon" loading="lazy">英雄雙刀</td><td><span class="rarity-hero">英雄</span></td><td>黑暗妖精</td><td>20 / 19</td><td>攻擊成功+4, 額外攻擊+5</td></tr>
+            <tr><td><img src="../assets/images/item-6734.png" class="w-icon" loading="lazy">咆哮雙刀</td><td><span class="rarity-legend">傳說</span></td><td>黑暗妖精</td><td>25 / 24</td><td>攻擊成功+8, 額外攻擊+10</td></tr>
+            <tr><td><img src="../assets/images/item-1949.png" class="w-icon" loading="lazy">紅影雙刀</td><td><span class="rarity-myth">神話</span></td><td>黑暗妖精</td><td>30 / 29</td><td>攻擊成功+10, 額外攻擊+15</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div><!-- end tab-overview -->
+
+    <!-- ══ TAB 2: 製作系統 ══ -->
+    <div id="tab-craft" class="tab-content">
+
+      <div class="section-bar">⚔ 武器製作</div>
+      <div class="table-wrap">
+        <table class="craft-table">
+          <thead><tr><th style="width:14%">種類</th><th>所需材料</th></tr></thead>
+          <tbody>
+            <tr><td style="color:#4caf50">高級武器</td><td>高級秘笈×2 ＋ <span style="color:#ef5350">100萬天幣</span> ＋ 武器粉末×20 ＋ <span style="background:#17090b;padding:2px 8px;border-radius:2px;border:1px solid #401f24">+7 一般武器</span></td></tr>
+            <tr><td style="color:#64b5f6">稀有武器</td><td>稀有秘笈×2 ＋ 高級秘笈×4 ＋ <span style="color:#ef5350">600萬天幣</span> ＋ 武器粉末×300 ＋ <span style="color:#4caf50;background:rgba(76,175,80,.1);padding:2px 8px;border-radius:2px;border:1px solid rgba(76,175,80,.3)">+8 高級武器</span></td></tr>
+            <tr><td style="color:#ef5350">英雄武器</td><td>英雄秘笈×2 ＋ 稀有秘笈×4 ＋ 高級秘笈×8 ＋ <span style="color:#ef5350">3000萬天幣</span> ＋ 武器粉末×2000 ＋ <span style="color:#ce93d8;font-weight:700;">噬魂魔核×5</span> ＋ <span style="color:#64b5f6;background:rgba(100,181,246,.1);padding:2px 8px;border-radius:2px;border:1px solid rgba(100,181,246,.3)">+8 稀有武器</span></td></tr>
+            <tr><td style="color:#ce93d8">傳說武器</td><td>傳說秘笈×2 ＋ 英雄秘笈×4 ＋ 稀有秘笈×8 ＋ <span style="color:#ef5350">1億天幣</span> ＋ 武器粉末×8000 ＋ <span style="color:#ce93d8;font-weight:700;">噬魂魔核×20</span> ＋ <span style="color:#ef5350;background:rgba(239,83,80,.1);padding:2px 8px;border-radius:2px;border:1px solid rgba(239,83,80,.3)">+9 英雄武器</span></td></tr>
+            <tr><td style="color:#ffb74d">神話武器</td><td>神話秘笈×2 ＋ 傳說秘笈×4 ＋ 英雄秘笈×8 ＋ <span style="color:#ef5350">3億天幣</span> ＋ 武器粉末×25000 ＋ <span style="color:#ffb74d;font-weight:700;">噬魂魔核×50</span> ＋ <span style="color:#ce93d8;background:rgba(206,147,216,.1);padding:2px 8px;border-radius:2px;border:1px solid rgba(206,147,216,.3)">+9 傳說武器</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-bar">🛡 防具製作</div>
+      <div class="table-wrap">
+        <table class="craft-table">
+          <thead><tr><th style="width:14%">種類</th><th>所需材料</th></tr></thead>
+          <tbody>
+            <tr><td style="color:#4caf50">高級防具</td><td>高級秘笈×2 ＋ <span style="color:#ef5350">10萬天幣</span> ＋ 防具粉末×10 ＋ <span style="background:#17090b;padding:2px 8px;border-radius:2px;border:1px solid #401f24">+5 一般防具</span></td></tr>
+            <tr><td style="color:#64b5f6">稀有防具</td><td>稀有秘笈×1 ＋ 高級秘笈×2 ＋ <span style="color:#ef5350">60萬天幣</span> ＋ 防具粉末×100 ＋ <span style="color:#4caf50;background:rgba(76,175,80,.1);padding:2px 8px;border-radius:2px;border:1px solid rgba(76,175,80,.3)">+5 高級防具</span></td></tr>
+            <tr><td style="color:#ef5350">英雄防具</td><td>英雄秘笈×1 ＋ 稀有秘笈×2 ＋ 高級秘笈×4 ＋ <span style="color:#ef5350">300萬天幣</span> ＋ 防具粉末×500 ＋ <span style="color:#ce93d8;font-weight:700;">噬魂魔核×3</span> ＋ <span style="color:#64b5f6;background:rgba(100,181,246,.1);padding:2px 8px;border-radius:2px;border:1px solid rgba(100,181,246,.3)">+5 稀有防具</span></td></tr>
+            <tr><td style="color:#ce93d8">傳說防具</td><td>傳說秘笈×1 ＋ 英雄秘笈×2 ＋ 稀有秘笈×4 ＋ <span style="color:#ef5350">1000萬天幣</span> ＋ 防具粉末×2500 ＋ <span style="color:#ce93d8;font-weight:700;">噬魂魔核×10</span> ＋ <span style="color:#ef5350;background:rgba(239,83,80,.1);padding:2px 8px;border-radius:2px;border:1px solid rgba(239,83,80,.3)">+6 英雄防具</span></td></tr>
+            <tr><td style="color:#ffb74d">神話防具</td><td>神話秘笈×1 ＋ 傳說秘笈×2 ＋ 英雄秘笈×4 ＋ <span style="color:#ef5350">3000萬天幣</span> ＋ 防具粉末×7500 ＋ <span style="color:#ffb74d;font-weight:700;">噬魂魔核×20</span> ＋ <span style="color:#ce93d8;background:rgba(206,147,216,.1);padding:2px 8px;border-radius:2px;border:1px solid rgba(206,147,216,.3)">+7 傳說防具</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-bar">💍 飾品製作</div>
+      <div class="table-wrap">
+        <table class="craft-table">
+          <thead><tr><th style="width:14%">種類</th><th>所需材料</th></tr></thead>
+          <tbody>
+            <tr><td style="color:#4caf50">高級飾品</td><td>高級秘笈×2 ＋ <span style="color:#ef5350">10萬天幣</span> ＋ 飾品粉末×20 ＋ <span style="background:#17090b;padding:2px 8px;border-radius:2px;border:1px solid #401f24">一般飾品</span></td></tr>
+            <tr><td style="color:#64b5f6">稀有飾品</td><td>稀有秘笈×1 ＋ 高級飾品×2 ＋ <span style="color:#ef5350">60萬天幣</span> ＋ 飾品粉末×200 ＋ <span style="color:#4caf50;background:rgba(76,175,80,.1);padding:2px 8px;border-radius:2px;border:1px solid rgba(76,175,80,.3)">高級飾品</span></td></tr>
+            <tr><td style="color:#ef5350">英雄飾品</td><td>英雄秘笈×1 ＋ 稀有秘笈×2 ＋ 高級秘笈×4 ＋ <span style="color:#ef5350">300萬天幣</span> ＋ 飾品粉末×1000 ＋ <span style="color:#ce93d8;font-weight:700;">噬魂魔核×3</span> ＋ <span style="color:#64b5f6;background:rgba(100,181,246,.1);padding:2px 8px;border-radius:2px;border:1px solid rgba(100,181,246,.3)">稀有飾品</span></td></tr>
+            <tr><td style="color:#ce93d8">傳說飾品</td><td>傳說秘笈×1 ＋ 英雄秘笈×2 ＋ 稀有秘笈×4 ＋ <span style="color:#ef5350">1000萬天幣</span> ＋ 飾品粉末×5000 ＋ <span style="color:#ce93d8;font-weight:700;">噬魂魔核×10</span> ＋ <span style="color:#ef5350;background:rgba(239,83,80,.1);padding:2px 8px;border-radius:2px;border:1px solid rgba(239,83,80,.3)">英雄飾品</span></td></tr>
+            <tr><td style="color:#ffb74d">神話飾品</td><td>神話秘笈×1 ＋ 傳說秘笈×2 ＋ 英雄飾品×4 ＋ <span style="color:#ef5350">3000萬天幣</span> ＋ 飾品粉末×15000 ＋ <span style="color:#ffb74d;font-weight:700;">噬魂魔核×20</span> ＋ <span style="color:#ce93d8;background:rgba(206,147,216,.1);padding:2px 8px;border-radius:2px;border:1px solid rgba(206,147,216,.3)">傳說飾品</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="disassemble-box">
+        <h3>♻ 裝備分解系統</h3>
+        <p>📍 請尋找主城 NPC <strong style="color:var(--text-bright,#e8d8b0)">「裝備分解師」</strong>，可分解所有武器、裝備、飾品並獲取對應的各類粉末材料。</p>
+        <div class="disassemble-grid">
+          <div class="dis-item"><div class="dis-item__rank" style="color:#8a8a8a">一般</div><div class="dis-item__val" style="color:#8a8a8a">5 個</div></div>
+          <div class="dis-item"><div class="dis-item__rank" style="color:#4caf50">高級</div><div class="dis-item__val" style="color:#4caf50">20 個</div></div>
+          <div class="dis-item"><div class="dis-item__rank" style="color:#64b5f6">稀有</div><div class="dis-item__val" style="color:#64b5f6">100 個</div></div>
+          <div class="dis-item"><div class="dis-item__rank" style="color:#ef5350">英雄</div><div class="dis-item__val" style="color:#ef5350">500 個</div></div>
+          <div class="dis-item"><div class="dis-item__rank" style="color:#ce93d8">傳說</div><div class="dis-item__val" style="color:#ce93d8">2,500 個</div></div>
+          <div class="dis-item"><div class="dis-item__rank" style="color:#ffb74d">神話</div><div class="dis-item__val" style="color:#ffb74d">7,500 個</div></div>
+        </div>
+        <p style="font-size:0.78rem;text-align:center;margin:12px 0 0;color:var(--text-dim)">※ 武器、防具、飾品分解所得粉末數量皆相同</p>
+      </div>
+
+    </div><!-- end tab-craft -->
+
+    <!-- ══ TAB 3: 武器屬性強化珠 ══ -->
+    <div id="tab-scroll" class="tab-content">
+
+      <div class="info-box">
+        <p>✨ <strong>成功機率：</strong>全階級均為 <strong>5%</strong>，請謹慎使用。</p>
+        <p>🛒 <strong>獲取管道：</strong>可透過<strong>藍鑽商店</strong>或<strong>推文商店</strong>購買。</p>
+      </div>
+
+      <div class="section-bar">🌟 四大元素屬性強化珠</div>
+      <div class="table-wrap">
+        <table class="scroll-table">
+          <thead><tr><th>元素類型</th><th>強化珠名稱（由低至高）</th><th>觸發機率</th><th>效果說明</th></tr></thead>
+          <tbody>
+            <tr class="elem-fire">
+              <td style="color:#ef5350">🔥 火之武器</td>
+              <td>火之 → 烈焰 → 火靈 → 赤炎 → 帕格里奧</td>
+              <td>1% ~ 5%（每階 +1%）</td>
+              <td>觸發額外火焰傷害 2% / 4% / 6% / 8% / 10%</td>
+            </tr>
+            <tr class="elem-wind">
+              <td style="color:#4caf50">🍃 風之武器</td>
+              <td>風之 → 暴風 → 風靈 → 蒼蘭 → 沙哈</td>
+              <td>1% ~ 5%（每階 +1%）</td>
+              <td>遠距離額外傷害 +30</td>
+            </tr>
+            <tr class="elem-water">
+              <td style="color:#64b5f6">💧 水之武器</td>
+              <td>水之 → 海嘯 → 水靈 → 霜凍 → 伊娃</td>
+              <td>1% / 2% / 4% / 5% / 10%</td>
+              <td>吸取敵方 15 點魔力</td>
+            </tr>
+            <tr class="elem-earth">
+              <td style="color:#a1887f">🪨 地之武器</td>
+              <td>地之 → 崩裂 → 地靈 → 輝岩 → 馬普勒</td>
+              <td>1% ~ 5%（每階 +1%）</td>
+              <td>束縛敵人 1 秒（定身，無法瞬移）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div><!-- end tab-scroll -->
+
+    <!-- ══ TAB 4: 裝備強化說明 ══ -->
+    <div id="tab-enhance" class="tab-content">
+
+      <div class="section-bar">🛡 防爆卷軸機制</div>
+
+      <div class="warning-box">
+        <p><strong>⚠ 重要操作順序：</strong>防爆狀態使用後<strong>無法覆蓋</strong>，請務必先使用防爆卷軸，再使用強化卷軸，順序顛倒將導致防爆失效。</p>
+      </div>
+
+      <div class="scroll-cards">
+        <div class="scroll-card sc-purple">
+          <div class="scroll-card__icon">🟪</div>
+          <div class="scroll-card__name">詛咒的防爆卷軸</div>
+          <div class="scroll-card__effect">強化失敗時：裝備等級歸零（重置回 +0）</div>
+        </div>
+        <div class="scroll-card sc-blue">
+          <div class="scroll-card__icon">🟦</div>
+          <div class="scroll-card__name">一般的防爆卷軸</div>
+          <div class="scroll-card__effect">強化失敗時：等級退一階（-1 降級）</div>
+        </div>
+        <div class="scroll-card sc-gold">
+          <div class="scroll-card__icon">🟨</div>
+          <div class="scroll-card__name">祝福的防爆卷軸</div>
+          <div class="scroll-card__effect">強化失敗時：維持不變，等級無損失</div>
+        </div>
+      </div>
+
+      <div class="section-bar">✨ 祝福捲軸強化跳階說明</div>
+      <div class="info-box" style="margin-bottom:16px;">
+        <p>💡 使用<strong>祝福的強化卷軸</strong>時，成功後可能一次跳升多個等級。各區間跳升範圍如下：</p>
+      </div>
+      <div class="table-wrap">
+        <table class="jump-table">
+          <thead><tr><th>目前強化區間</th><th>可能跳升結果</th></tr></thead>
+          <tbody>
+            <tr><td>-2 ~ +4</td><td style="color:#ffe060">+0 / +1 / +2 / +3</td></tr>
+            <tr><td>+5</td><td style="color:#ffe060">+0 / +1 / +2</td></tr>
+            <tr><td>+6 以上</td><td style="color:#ffe060">+0 / +1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.78rem;color:var(--text-dim);text-align:right;margin-top:8px;">※ 強化數值以遊戲內實際顯示為準</p>
+
+    </div><!-- end tab-enhance -->
+
+    <!-- ══ PAGER ══ -->
+    <div class="fp-pager">
+      <a href="items-overview.html" class="fp-pager__btn">
+        <span class="fp-pager__arrow">←</span>
+        <div><span class="fp-pager__dir">PREV</span><span class="fp-pager__name">裝備道具總覽</span></div>
+      </a>
+      <div class="fp-pager__center"><a href="items-overview.html" class="fp-pager__back">▲ 返回裝備道具列表</a></div>
+      <a href="items-armor.html" class="fp-pager__btn fp-pager__btn--next">
+        <div><span class="fp-pager__dir">NEXT</span><span class="fp-pager__name">防具介紹</span></div>
+        <span class="fp-pager__arrow">→</span>
+      </a>
+    </div>
+
+  </main>
+
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script><script>
+  function switchTab(name){
+    document.querySelectorAll('.page-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    document.querySelector('[data-tab="'+name+'"]').classList.add('active');
+    document.getElementById('tab-'+name).classList.add('active');
+  }
+  </script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOSS 介紹 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    /* === BOSS 頁面專屬樣式 (boss- prefix) === */
+    .boss-anchor-nav{position:sticky;top:56px;z-index:100;background:#1b0b0e;border-bottom:1px solid #401f24;padding:0 16px;display:flex;gap:4px;overflow-x:auto;white-space:nowrap}
+    .boss-anchor-btn{display:inline-block;padding:10px 16px;font-size:.82em;font-weight:700;letter-spacing:.5px;color:#8a7a60;text-decoration:none;border-bottom:2px solid transparent;transition:all .2s}
+    .boss-anchor-btn:hover,.boss-anchor-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+    .boss-card{background:#1b0b0e;border-radius:12px;margin-bottom:24px;overflow:hidden;border:1px solid #401f24}
+    .boss-card-header{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+    .boss-card-header.boss-red{background:#1c0a0a;border-left:4px solid #ff5252}
+    .boss-card-header.boss-green{background:#0a1c10;border-left:4px solid #69f0ae}
+    .boss-card-header.boss-purple{background:#1e0c0f;border-left:4px solid #ce93d8}
+    .boss-card-header.boss-orange{background:#1c1408;border-left:4px solid #ff9800}
+
+    .boss-name-text{font-size:1.2em;font-weight:900;letter-spacing:1px}
+    .boss-loc{font-size:.88em;margin-top:4px;color:#a09080}
+    .boss-time-badge{background:#2e1217;color:#ffe060;padding:8px 16px;border-radius:6px;font-weight:900;font-size:.95em;border:1px solid rgba(212,168,32,0.3);white-space:nowrap}
+    .boss-spawn-badge{background:#2a0a0a;color:#ff8a80;padding:2px 10px;border-radius:4px;font-size:.82em;margin-left:8px;border:1px solid rgba(255,82,82,0.3)}
+
+    .boss-drop-title{font-size:.85em;font-weight:700;color:#a09080;padding:12px 20px 8px;border-top:1px solid #401f24;letter-spacing:1px}
+    .boss-drop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;padding:8px 20px 20px}
+    .boss-drop-item{font-size:.88em;font-weight:700;display:flex;align-items:center;line-height:1.4}
+    .boss-drop-item::before{content:"◆";margin-right:8px;font-size:.7em;opacity:.5}
+
+    .boss-c-legendary{color:#ce93d8}
+    .boss-c-hero{color:#ff5252}
+    .boss-c-rare{color:#64b5f6}
+    .boss-c-skill{color:#ce93d8}
+    .boss-c-scroll{color:#ffb74d}
+    .boss-c-gold{color:#ffe060}
+    .boss-c-trash{color:#8a7a60}
+    .boss-c-wanted{color:#ff4fa3;text-shadow:0 0 8px rgba(255,79,163,0.3)}
+
+    .boss-tier-table{width:100%;border-collapse:collapse;font-size:.85em}
+    .boss-tier-table th{padding:10px;font-weight:800;font-size:.9em}
+    .boss-tier-table td{padding:8px 10px;text-align:center;border-bottom:1px solid #401f24;color:#ffe060;background:#1b0b0e}
+    .boss-tier-table tr:nth-child(even) td{background:#221013}
+    .boss-tier-table tr:hover td{background:#2e1217}
+
+    .boss-col-table{width:100%;border-collapse:collapse;font-size:.86em}
+    .boss-col-table thead tr{background:#221013}
+    .boss-col-table thead th{padding:10px 14px;text-align:left;font-weight:700;font-size:.85em;letter-spacing:.5px}
+    .boss-col-table tbody td{padding:9px 14px;border-bottom:1px solid #401f24;color:#a09080;vertical-align:middle}
+    .boss-col-table tbody tr:nth-child(odd){background:#221013}
+    .boss-col-table tbody tr:hover td{background:#2e1217;color:#fff}
+    .boss-col-table td:first-child{color:#fff;font-weight:600}
+    .boss-col-table td:last-child{color:#6fffe9;font-size:.83em}
+
+    .boss-divider{border:none;border-top:2px solid #401f24;margin:56px 0;position:relative}
+    .boss-divider::after{content:attr(data-label);position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#1b0b0e;border:1px solid #401f24;border-radius:4px;padding:2px 18px;color:#ffe060;font-size:.78em;font-weight:700;letter-spacing:3px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.8)}
+
+    .boss-info-box{color:#a09080;font-size:.88em;margin-bottom:28px;text-align:center;background:#221013;border:1px solid rgba(212,168,32,0.15);border-radius:8px;padding:10px 16px;display:inline-block;width:100%}
+    .boss-info-box strong{color:#ffe060}
+
+    .boss-warning-box{background:#1c1408;padding:10px 20px;font-size:.88em;font-weight:700;color:#ffcc80;border-top:1px solid rgba(255,152,0,0.2)}
+
+    .boss-notice-box{text-align:center;color:#ffe060;background:#221013;border:1px solid rgba(212,168,32,0.3);padding:16px;border-radius:8px;font-size:.9em;font-weight:700;letter-spacing:1px;margin-bottom:48px}
+
+    .boss-tier-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+    .boss-tier-tag{background:#1b0b0e;padding:4px 12px;border-radius:15px;font-size:.82em;font-weight:700}
+
+    /* 世界 BOSS 出生一覽表 */
+    .boss-spawn-wrap{overflow-x:auto;border:1px solid #401f24;border-radius:8px;background:#1b0b0e;margin-bottom:12px}
+    .boss-spawn-table{width:100%;border-collapse:collapse;font-size:.9em;min-width:420px}
+    .boss-spawn-table thead th{background:linear-gradient(90deg,rgba(212,168,32,0.22),rgba(212,168,32,0.06));color:#ffe060;font-family:'Noto Serif TC',serif;font-weight:700;letter-spacing:1px;padding:12px 18px;text-align:left;border-bottom:1px solid rgba(212,168,32,0.3)}
+    .boss-spawn-table tbody td{padding:11px 18px;border-bottom:1px solid #401f24;vertical-align:middle}
+    .boss-spawn-table tbody tr:nth-child(even) td{background:#221013}
+    .boss-spawn-table tbody tr:hover td{background:#2e1217}
+    .boss-spawn-table .bs-time{font-family:'Cinzel',serif;font-weight:700;color:#ffe060;white-space:nowrap}
+    .boss-spawn-table .bs-name{color:#fff4b8;font-weight:700;font-size:1.02em}
+    .boss-spawn-table .bs-loc{color:#a09080}
+    .boss-spawn-table .bs-loc--special{color:#69f0ae}
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — BOSS GUIDE</p>
+    <h1 class="page-hero__title">BOSS<span>介紹</span></h1>
+    <p class="page-hero__sub">強大的敵人，豐厚的掉落獎勵</p>
+  </div>
+
+  <!-- 固定錨點選單 -->
+  <div class="boss-anchor-nav" id="bossAnchorNav">
+    <a href="#section-worldboss" class="boss-anchor-btn">◈ 世界BOSS出生</a>
+    <a href="#section-collection" class="boss-anchor-btn">◆ BOSS 收藏</a>
+    <!-- <a href="#section-schedule" class="boss-anchor-btn">◈ 登場時刻表</a> -->
+    <a href="#section-drops" class="boss-anchor-btn">⚔ 各等級掉落物</a>
+  </div>
+
+  <main class="fp-wrap" style="padding-top:40px;padding-bottom:80px">
+
+    <!-- ══ SECTION: 世界 BOSS 出生一覽表 ══ -->
+    <div id="section-worldboss" style="scroll-margin-top:100px">
+      <p class="fp-heading">◈ 世界 BOSS 出生一覽表</p>
+      <div class="fp-intro">
+        各大世界 BOSS 於<strong>固定時間</strong>準時降臨指定地點，把握時機集結挑戰、掠奪豐厚獎勵！
+      </div>
+      <div class="boss-spawn-wrap">
+        <table class="boss-spawn-table">
+          <thead>
+            <tr><th style="width:22%">時間</th><th style="width:38%">名稱</th><th style="width:40%">地點</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="bs-time">20:00</td><td class="bs-name">烽火死亡騎士</td><td class="bs-loc">▸ 烽火戰場</td></tr>
+            <tr><td class="bs-time">22:00</td><td class="bs-name">巨大食人花</td><td class="bs-loc">▸ 隱藏之谷</td></tr>
+            <tr><td class="bs-time">23:00</td><td class="bs-name">支配各樓層BOSS</td><td class="bs-loc bs-loc--special">▸ 支配之塔</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <hr class="boss-divider" data-label="BOSS COLLECTION">
+
+    <!-- ══ SECTION 0: BOSS 收藏 ══ -->
+    <div id="section-collection" style="scroll-margin-top:100px">
+      <p class="fp-heading">◆ BOSS 收藏系統圖鑑</p>
+      <div class="fp-intro">
+        擊殺 BOSS 並收藏其道具，即可解鎖<strong>永久能力加成</strong>！
+      </div>
+
+      <!-- 高級 BOSS 收藏 -->
+      <div class="accordion">
+        <div class="accordion-hd open">
+          <span class="accordion-label"><span style="color:#69f0ae">⚔ 高級 BOSS 收藏</span><span style="background:#0a1c10;color:#69f0ae;padding:2px 8px;border-radius:10px;font-size:.72rem;border:1px solid rgba(105,240,174,0.3);margin-left:8px">21 隻</span></span>
+          <span class="accordion-arrow">▼</span>
+        </div>
+        <div class="accordion-bd open">
+          <div style="overflow-x:auto"><table class="boss-col-table"><thead><tr><th style="color:#69f0ae">BOSS 名稱</th><th style="color:#69f0ae">收藏能力加成</th></tr></thead><tbody>
+            <tr><td>巨大鱷魚</td><td>HP +25</td></tr>
+            <tr><td>迪哥</td><td>HP +25</td></tr>
+            <tr><td>西瑪</td><td>回魔 +10</td></tr>
+            <tr><td>巴土瑟</td><td>魔法爆擊倍率 +0.1</td></tr>
+            <tr><td>卡士伯</td><td>魔法攻擊／命中 +1</td></tr>
+            <tr><td>馬庫爾</td><td>魔法爆擊倍率 +0.1</td></tr>
+            <tr><td>伊弗利特</td><td>近戰傷害 +1，HP +10</td></tr>
+            <tr><td>飛龍／豪勢</td><td>遠距攻擊 +1，HP +10</td></tr>
+            <tr><td>曼波兔／樹精</td><td>藥水恢復 +3%</td></tr>
+            <tr><td>賽尼斯</td><td>魔攻 +1，MP +5</td></tr>
+            <tr><td>反王肯恩</td><td>近戰傷害 +1，HP +10</td></tr>
+            <tr><td>鑽石高崙</td><td>傷害減免 +1</td></tr>
+            <tr><td>瑪依奴夏門</td><td>精神 +1</td></tr>
+            <tr><td>巴貝多</td><td>狩獵經驗 +5%</td></tr>
+            <tr><td>卡普</td><td>MP +10</td></tr>
+            <tr><td>巨大蜈蚣</td><td>PVP 傷害 +1</td></tr>
+            <tr><td>浮士德</td><td>防禦 -2</td></tr>
+            <tr><td>艾爾摩大將軍</td><td>近距命中 +1，MP +5</td></tr>
+            <tr><td>疾風的夏斯奇</td><td>遠距命中 +1，MP +5</td></tr>
+            <tr><td>狂風的夏斯奇</td><td>魔攻 +1，MP +5</td></tr>
+            <tr><td>須曼</td><td>抗魔 +2</td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <!-- 稀有 BOSS 收藏 -->
+      <div class="accordion">
+        <div class="accordion-hd">
+          <span class="accordion-label"><span style="color:#64b5f6">◈ 稀有 BOSS 收藏</span><span style="background:#0a0e1c;color:#64b5f6;padding:2px 8px;border-radius:10px;font-size:.72rem;border:1px solid rgba(100,181,246,0.3);margin-left:8px">18 隻</span></span>
+          <span class="accordion-arrow">▼</span>
+        </div>
+        <div class="accordion-bd">
+          <div style="overflow-x:auto"><table class="boss-col-table"><thead><tr><th style="color:#64b5f6">BOSS 名稱</th><th style="color:#64b5f6">收藏能力加成</th></tr></thead><tbody>
+            <tr><td>魔法師</td><td>MP +10</td></tr>
+            <tr><td>黑長者</td><td>魔法爆擊 +1%</td></tr>
+            <tr><td>德雷克</td><td>PVP 傷害 +2</td></tr>
+            <tr><td>庫曼</td><td>防禦 -3</td></tr>
+            <tr><td>變形怪首領</td><td>魔攻 +2</td></tr>
+            <tr><td>巴風特</td><td>近戰傷害 +2，近戰命中 +2</td></tr>
+            <tr><td>巴列斯</td><td>昏迷命中 +3</td></tr>
+            <tr><td>巨大牛人</td><td>傷害減免 +1，HP +50</td></tr>
+            <tr><td>巨蟻女皇</td><td>遠距傷害 +2，遠距命中 +2</td></tr>
+            <tr><td>四大精靈王</td><td>對應能力（力／敏／智／精）+1</td></tr>
+            <tr><td>深淵之主</td><td>HP 恢復 +3，MP 恢復 +3</td></tr>
+            <tr><td>阿利歐克</td><td>法術減傷 +2</td></tr>
+            <tr><td>半魚人首領</td><td>PVP 減傷 +1</td></tr>
+            <tr><td>大王烏賊</td><td>藥水恢復量 +5%</td></tr>
+            <tr><td>塔洛斯／曼孟／瑪雅</td><td>魔武傷害 +2%</td></tr>
+            <tr><td>冰之女王</td><td>魔法命中 +2</td></tr>
+            <tr><td>冰魔</td><td>遠距命中 +4</td></tr>
+            <tr><td>大腳瑪幽</td><td>近距命中 +4</td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <!-- 英雄 BOSS 收藏 -->
+      <div class="accordion">
+        <div class="accordion-hd">
+          <span class="accordion-label"><span style="color:#ff5252">⚔ 英雄 BOSS 收藏</span><span style="background:#1c0a0a;color:#ff5252;padding:2px 8px;border-radius:10px;font-size:.72rem;border:1px solid rgba(255,82,82,0.3);margin-left:8px">13 隻</span></span>
+          <span class="accordion-arrow">▼</span>
+        </div>
+        <div class="accordion-bd">
+          <div style="overflow-x:auto"><table class="boss-col-table"><thead><tr><th style="color:#ff5252">BOSS 名稱</th><th style="color:#ff5252">收藏能力加成</th></tr></thead><tbody>
+            <tr><td>潔尼斯女王</td><td>精神 +1，魔攻 +2</td></tr>
+            <tr><td>幻象眼魔</td><td>智力 +1，法術命中 +2</td></tr>
+            <tr><td>吸血鬼</td><td>抗魔 +5，HP +50</td></tr>
+            <tr><td>騎士范德</td><td>昏迷命中 +6</td></tr>
+            <tr><td>殭屍王</td><td>防禦 -1，傷害減免 +2</td></tr>
+            <tr><td>黑豹</td><td>近距攻擊 +3，遠距攻擊 +3</td></tr>
+            <tr><td>木乃伊王</td><td>魔攻 +2，MP +30</td></tr>
+            <tr><td>艾莉絲</td><td>近距命中 +3，遠距命中 +3</td></tr>
+            <tr><td>巫妖</td><td>魔法命中 +3</td></tr>
+            <tr><td>死亡騎士</td><td>力量 +1，HP 恢復 +3</td></tr>
+            <tr><td>不死鳥</td><td>敏捷 +1，MP 恢復 +3</td></tr>
+            <tr><td>惡魔</td><td>敏捷 +1，智力 +1</td></tr>
+            <tr><td>古代巨人／克特</td><td>魔防 +10</td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <!-- 傳說 BOSS 收藏 -->
+      <div class="accordion">
+        <div class="accordion-hd">
+          <span class="accordion-label"><span style="color:#ce93d8">◆ 傳說 BOSS 收藏</span><span style="background:#1e0c0f;color:#ce93d8;padding:2px 8px;border-radius:10px;font-size:.72rem;border:1px solid rgba(206,147,216,0.3);margin-left:8px">12 隻</span></span>
+          <span class="accordion-arrow">▼</span>
+        </div>
+        <div class="accordion-bd">
+          <div style="overflow-x:auto"><table class="boss-col-table"><thead><tr><th style="color:#ce93d8">BOSS 名稱</th><th style="color:#ce93d8">收藏能力加成</th></tr></thead><tbody>
+            <tr><td>暗殺軍王．史雷佛</td><td>經驗 +3%，HP +50，無視閃避 +1</td></tr>
+            <tr><td>冥法軍王．海露拜</td><td>經驗 +3%，HP +50，無視迴避 +1</td></tr>
+            <tr><td>魔獸軍王．巴蘭卡</td><td>經驗 +3%，HP +50，昏迷抗性 +5</td></tr>
+            <tr><td>法令軍王．蕾雅</td><td>經驗 +3%，HP +50，魔法穿透 +1</td></tr>
+            <tr><td>長老．琪娜</td><td>經驗 +3%，MP +50，魔法爆擊 +1%</td></tr>
+            <tr><td>長老．巴塔斯</td><td>經驗 +3%，HP +50，近遠爆擊 +1%</td></tr>
+            <tr><td>長老．巴洛斯</td><td>經驗 +3%，HP +70，力量 +1</td></tr>
+            <tr><td>長老．安迪斯</td><td>經驗 +3%，HP +70，敏捷 +1</td></tr>
+            <tr><td>長老．艾迪爾</td><td>經驗 +3%，HP +70，智力 +1</td></tr>
+            <tr><td>長老．泰瑪斯</td><td>經驗 +3%，HP +50，魔法減免 +3</td></tr>
+            <tr><td>長老．拉曼斯</td><td>經驗 +3%，HP +50，傷害減免 +2</td></tr>
+            <tr><td>長老．巴陸德</td><td>經驗 +3%，MP +50，精神 +1</td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <!-- 神話 BOSS 收藏 -->
+      <div class="accordion">
+        <div class="accordion-hd">
+          <span class="accordion-label"><span style="color:#ffe600">◈ 神話 BOSS 收藏</span><span style="background:#1c1a08;color:#ffe600;padding:2px 8px;border-radius:10px;font-size:.72rem;border:1px solid rgba(255,230,0,0.3);margin-left:8px">18 隻</span></span>
+          <span class="accordion-arrow">▼</span>
+        </div>
+        <div class="accordion-bd">
+          <div style="overflow-x:auto"><table class="boss-col-table"><thead><tr><th style="color:#ffe600">BOSS 名稱</th><th style="color:#ffe600">收藏能力加成</th></tr></thead><tbody>
+            <tr><td>鐮刀死神</td><td>經驗 +6%，魔武發動 +1%，魔減 +8</td></tr>
+            <tr><td>林德拜爾</td><td>魔武發動 +1%，魔攻 +5，風抗 +10</td></tr>
+            <tr><td>安塔瑞斯</td><td>魔武發動 +1%，魔減 +4，敏 +2，地抗 +10</td></tr>
+            <tr><td>法利昂</td><td>魔武發動 +1%，傷減 +3，智 +2，水抗 +10</td></tr>
+            <tr><td>巴拉卡斯</td><td>魔武發動 +1%，法傷 +20，力 +2，火抗 +10</td></tr>
+            <tr><td>吉爾塔斯</td><td>經驗 +6%，魔武發動 +1%，PVP減傷 +2，抗魔 +10</td></tr>
+            <tr><td>獨角獸</td><td>魔武發動 +1%，魔武傷 +2%，魔爆 +1%</td></tr>
+            <tr><td>沙蟲</td><td>經驗 +12%，PvP 增傷 +3，抗魔 +10</td></tr>
+            <tr><td>白面金毛殺生石</td><td>經驗 +6%，魔武爆擊 +1%，遠攻 +5</td></tr>
+            <tr><td>混沌</td><td>近攻 +4，遠攻 +4，魔攻 +3</td></tr>
+            <tr><td>死亡</td><td>經驗 +6%，魔武爆擊 +1%，近攻 +5</td></tr>
+            <tr><td>墮落</td><td>經驗 +6%，魔武發動 +1%，魔命 +3</td></tr>
+            <tr><td>炎魔</td><td>經驗 +6%，魔法爆擊 +1%，近命 +6</td></tr>
+            <tr><td>火焰之影</td><td>經驗 +6%，魔法爆擊 +1%，遠命 +6</td></tr>
+            <tr><td>底比斯 賀洛斯／玉藻前</td><td>智力 +3，魔武傷害 +5%</td></tr>
+            <tr><td>底比斯 阿努比斯／巨型骷髏</td><td>力量 +3，魔武傷害 +5%</td></tr>
+            <tr><td>白面金毛九尾狐／杰弗雷庫（雄）</td><td>敏捷 +3，魔武傷害 +5%</td></tr>
+            <tr><td>杰弗雷庫（雌）</td><td>精神 +3，魔武傷害 +5%</td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="section-schedule" style="display:none;">
+    <hr class="boss-divider" data-label="BOSS SCHEDULE">
+    <div>
+      <p class="fp-heading">◈ 世界 BOSS 登場時刻表</p>
+      <div class="fp-intro">
+        各大世界 BOSS 將在固定時間於指定地點現身，<strong>擊殺可獲得豐厚獎勵</strong>。
+      </div>
+
+      <!-- [隱藏] 烽火死亡騎士 — 烽火戰場尚未開放 -->
+
+      <!-- 巨大食人花 -->
+      <div class="boss-card">
+        <div class="boss-card-header boss-green">
+          <div>
+            <div class="boss-name-text" style="color:#69f0ae">◆ 巨大食人花</div>
+            <div class="boss-loc">▸ 出沒地點：隱藏之谷</div>
+          </div>
+          <div class="boss-time-badge">◈ 每天 22:00</div>
+        </div>
+        <div class="boss-drop-title">◆ 完整掉落清單</div>
+        <div class="boss-drop-grid">
+          <div class="boss-drop-item boss-c-legendary">噬魂魔核</div>
+          <div class="boss-drop-item boss-c-hero">噬魂碎片</div>
+          <div class="boss-drop-item boss-c-legendary">傳說製作秘笈</div>
+          <div class="boss-drop-item boss-c-hero">英雄製作秘笈</div>
+          <div class="boss-drop-item boss-c-skill">魔法書 (王者之劍)</div>
+          <div class="boss-drop-item boss-c-skill">魔法書 (力場)</div>
+          <div class="boss-drop-item boss-c-skill">技術書 (狂襲)</div>
+          <div class="boss-drop-item boss-c-skill">黑暗精靈水晶 (復仇)</div>
+          <div class="boss-drop-item boss-c-skill">精靈水晶 (精靈之暈)</div>
+          <div class="boss-drop-item boss-c-rare">稀有製作秘笈</div>
+          <div class="boss-drop-item boss-c-rare">稀有武器箱</div>
+          <div class="boss-drop-item boss-c-rare">稀有防具箱</div>
+          <div class="boss-drop-item boss-c-rare">稀有飾品箱</div>
+          <div class="boss-drop-item boss-c-rare">稀有變身卡寶箱</div>
+          <div class="boss-drop-item boss-c-rare">稀有娃娃卡寶箱</div>
+          <div class="boss-drop-item boss-c-rare">召喚控制戒指</div>
+          <div class="boss-drop-item boss-c-scroll">受祝福的對武器施法的卷軸</div>
+          <div class="boss-drop-item boss-c-scroll">受祝福的對盔甲施法的卷軸</div>
+          <div class="boss-drop-item boss-c-scroll">祝福的防爆卷軸</div>
+          <div class="boss-drop-item boss-c-scroll">防爆卷箱子</div>
+          <div class="boss-drop-item boss-c-trash">受詛咒的對武器施法的卷軸</div>
+          <div class="boss-drop-item boss-c-trash">受詛咒的對盔甲施法的卷軸</div>
+          <div class="boss-drop-item boss-c-rare">藍鑽</div>
+          <div class="boss-drop-item boss-c-gold">金幣</div>
+          <div class="boss-drop-item boss-c-trash">少了刀刃的武器</div>
+        </div>
+      </div>
+
+      <!-- 時空裂痕 底比斯 -->
+      <div class="boss-card">
+        <div class="boss-card-header boss-purple">
+          <div>
+            <div class="boss-name-text" style="color:#ce93d8">◆ 時空裂痕 — 底比斯金字塔</div>
+            <div class="boss-loc">▸ 開放時間：11:00–14:00；20:00–23:00 <span class="boss-spawn-badge">⚔ BOSS 21:00 登場</span></div>
+          </div>
+          <div class="boss-time-badge">◈ 每週一</div>
+        </div>
+        <div class="boss-drop-title">◆ 完整掉落清單（底比斯 賀洛斯 / 阿努比斯）</div>
+        <div class="boss-drop-grid">
+          <div class="boss-drop-item boss-c-legendary">噬魂魔核</div>
+          <div class="boss-drop-item boss-c-hero">噬魂碎片</div>
+          <div class="boss-drop-item boss-c-legendary">傳說製作秘笈</div>
+          <div class="boss-drop-item boss-c-legendary">技術書 (反擊屏障)</div>
+          <div class="boss-drop-item boss-c-hero">英雄製作秘笈</div>
+          <div class="boss-drop-item boss-c-hero">英雄武器箱</div>
+          <div class="boss-drop-item boss-c-hero">英雄防具箱</div>
+          <div class="boss-drop-item boss-c-hero">英雄飾品箱</div>
+          <div class="boss-drop-item boss-c-skill">魔法書 (王者之劍)</div>
+          <div class="boss-drop-item boss-c-skill">魔法書 (力場)</div>
+          <div class="boss-drop-item boss-c-skill">技術書 (狂襲)</div>
+          <div class="boss-drop-item boss-c-skill">黑暗精靈水晶 (復仇)</div>
+          <div class="boss-drop-item boss-c-skill">精靈水晶 (精靈之暈)</div>
+          <div class="boss-drop-item boss-c-rare">稀有製作秘笈</div>
+          <div class="boss-drop-item boss-c-rare">稀有武器箱</div>
+          <div class="boss-drop-item boss-c-rare">稀有防具箱</div>
+          <div class="boss-drop-item boss-c-rare">稀有飾品箱</div>
+          <div class="boss-drop-item boss-c-rare">召喚控制戒指</div>
+          <div class="boss-drop-item boss-c-rare">藍鑽</div>
+          <div class="boss-drop-item boss-c-rare">高級製作秘笈</div>
+          <div class="boss-drop-item boss-c-scroll">受祝福的對武器施法的卷軸</div>
+          <div class="boss-drop-item boss-c-scroll">受祝福的對盔甲施法的卷軸</div>
+          <div class="boss-drop-item boss-c-scroll">祝福的防爆卷軸</div>
+          <div class="boss-drop-item boss-c-scroll">祝福的瞬間移動卷軸</div>
+          <div class="boss-drop-item boss-c-scroll">防爆卷箱子</div>
+          <div class="boss-drop-item boss-c-trash">對武器施法的卷軸</div>
+          <div class="boss-drop-item boss-c-trash">對盔甲施法的卷軸</div>
+          <div class="boss-drop-item boss-c-trash">受詛咒的對武器施法的卷軸</div>
+          <div class="boss-drop-item boss-c-trash">受詛咒的對盔甲施法的卷軸</div>
+          <div class="boss-drop-item boss-c-gold">金幣</div>
+          <div class="boss-drop-item boss-c-wanted">賀洛斯的通緝令 / 阿努比斯的通緝令</div>
+          <div class="boss-drop-item boss-c-trash">少了刀刃的武器</div>
+          <div class="boss-drop-item boss-c-trash">一般武器箱 / 防具箱 / 飾品箱</div>
+          <div class="boss-drop-item boss-c-trash">高級武器箱 / 防具箱 / 飾品箱</div>
+          <div class="boss-drop-item boss-c-trash">高技碎片箱 (自選)</div>
+          <div class="boss-drop-item boss-c-trash">職業之力箱 (自選)</div>
+        </div>
+      </div>
+
+      <!-- 時空裂痕 沙蟲 每週二 -->
+      <div class="boss-card">
+        <div class="boss-card-header boss-orange">
+          <div>
+            <div class="boss-name-text" style="color:#ffb74d">◆ 時空裂痕 — 沙蟲</div>
+            <div class="boss-loc">▸ 開放時間：20:30–21:30 <span class="boss-spawn-badge" style="background:#1c1408;color:#ffcc80;border:1px solid rgba(255,152,0,0.3)">▸ 沙蟲 21:00 出生，兩小時後自動死亡</span></div>
+          </div>
+          <div class="boss-time-badge">◈ 每週二</div>
+        </div>
+        <div class="boss-warning-box">
+          ▸ 每週二<strong style="margin:0 4px">僅開放晚上時段</strong>，請把握時間挑戰！
+        </div>
+        <div class="boss-drop-title">◆ 完整掉落清單</div>
+        <div class="boss-drop-grid">
+          <div class="boss-drop-item boss-c-legendary">噬魂魔核</div>
+          <div class="boss-drop-item boss-c-hero">噬魂碎片</div>
+          <div class="boss-drop-item boss-c-wanted">沙蟲的通緝令</div>
+          <div class="boss-drop-item boss-c-legendary">傳說製作秘笈</div>
+          <div class="boss-drop-item boss-c-hero">英雄製作秘笈</div>
+          <div class="boss-drop-item boss-c-hero">英雄武器箱</div>
+          <div class="boss-drop-item boss-c-hero">英雄防具箱</div>
+          <div class="boss-drop-item boss-c-hero">英雄飾品箱</div>
+          <div class="boss-drop-item boss-c-rare">稀有製作秘笈</div>
+          <div class="boss-drop-item boss-c-rare">稀有武器箱</div>
+          <div class="boss-drop-item boss-c-rare">稀有防具箱</div>
+          <div class="boss-drop-item boss-c-rare">稀有飾品箱</div>
+          <div class="boss-drop-item boss-c-rare">召喚控制戒指</div>
+          <div class="boss-drop-item boss-c-rare">藍鑽</div>
+          <div class="boss-drop-item boss-c-skill">魔法書 (王者之劍)</div>
+          <div class="boss-drop-item boss-c-skill">魔法書 (力場結界)</div>
+          <div class="boss-drop-item boss-c-skill">技術書 (狂襲)</div>
+          <div class="boss-drop-item boss-c-skill">精靈水晶 (地面障礙 / 鋼鐵防護 / 精靈之暈)</div>
+          <div class="boss-drop-item boss-c-skill">黑暗精靈水晶 (破壞盔甲 / 復仇)</div>
+          <div class="boss-drop-item boss-c-scroll">受祝福的對武器施法的卷軸</div>
+          <div class="boss-drop-item boss-c-scroll">受祝福的對盔甲施法的卷軸</div>
+          <div class="boss-drop-item boss-c-scroll">祝福的防爆卷軸</div>
+          <div class="boss-drop-item boss-c-scroll">防爆卷箱子</div>
+          <div class="boss-drop-item boss-c-trash">對武器施法的卷軸</div>
+          <div class="boss-drop-item boss-c-trash">對盔甲施法的卷軸</div>
+          <div class="boss-drop-item boss-c-trash">受詛咒的對武器施法的卷軸</div>
+          <div class="boss-drop-item boss-c-trash">受詛咒的對盔甲施法的卷軸</div>
+          <div class="boss-drop-item boss-c-trash">高品質鑽石 / 紅寶石 / 藍寶石 / 綠寶石</div>
+          <div class="boss-drop-item boss-c-trash">少了刀刃的武器</div>
+          <div class="boss-drop-item boss-c-trash">一般武器箱 / 防具箱 / 飾品箱</div>
+          <div class="boss-drop-item boss-c-trash">高級武器箱 / 防具箱 / 飾品箱</div>
+          <div class="boss-drop-item boss-c-trash">高技碎片箱 (自選)</div>
+          <div class="boss-drop-item boss-c-trash">職業之力箱 (自選)</div>
+          <div class="boss-drop-item boss-c-gold">金幣</div>
+        </div>
+      </div>
+
+      <!-- 時空裂痕 提卡爾 -->
+      <div class="boss-card">
+        <div class="boss-card-header boss-purple">
+          <div>
+            <div class="boss-name-text" style="color:#ce93d8">◆ 時空裂痕 — 提卡爾神廟</div>
+            <div class="boss-loc">▸ 開放時間：11:00–14:00；20:00–23:00 <span class="boss-spawn-badge">⚔ BOSS 21:00 登場</span></div>
+          </div>
+          <div class="boss-time-badge">◈ 每週三</div>
+        </div>
+        <div class="boss-drop-title">◆ 完整掉落清單（杰弗雷庫）</div>
+        <div class="boss-drop-grid">
+          <div class="boss-drop-item boss-c-legendary">噬魂魔核</div>
+          <div class="boss-drop-item boss-c-hero">噬魂碎片</div>
+          <div class="boss-drop-item boss-c-legendary">傳說製作秘笈</div>
+          <div class="boss-drop-item boss-c-legendary">魔法書 (究極光裂術)</div>
+          <div class="boss-drop-item boss-c-legendary">精靈水晶 (烈焰之魂)</div>
+          <div class="boss-drop-item boss-c-hero">英雄製作秘笈</div>
+          <div class="boss-drop-item boss-c-hero">英雄武器箱</div>
+          <div class="boss-drop-item boss-c-hero">英雄防具箱</div>
+          <div class="boss-drop-item boss-c-hero">英雄飾品箱</div>
+          <div class="boss-drop-item boss-c-skill">魔法書 (王者之劍)</div>
+          <div class="boss-drop-item boss-c-skill">魔法書 (力場)</div>
+          <div class="boss-drop-item boss-c-skill">技術書 (狂襲)</div>
+          <div class="boss-drop-item boss-c-skill">黑暗精靈水晶 (復仇)</div>
+          <div class="boss-drop-item boss-c-skill">精靈水晶 (精靈之暈)</div>
+          <div class="boss-drop-item boss-c-rare">稀有製作秘笈</div>
+          <div class="boss-drop-item boss-c-rare">稀有武器箱</div>
+          <div class="boss-drop-item boss-c-rare">稀有防具箱</div>
+          <div class="boss-drop-item boss-c-rare">稀有飾品箱</div>
+          <div class="boss-drop-item boss-c-rare">召喚控制戒指</div>
+          <div class="boss-drop-item boss-c-rare">藍鑽</div>
+          <div class="boss-drop-item boss-c-scroll">受祝福的對武器施法的卷軸</div>
+          <div class="boss-drop-item boss-c-scroll">受祝福的對盔甲施法的卷軸</div>
+          <div class="boss-drop-item boss-c-scroll">祝福的防爆卷軸</div>
+          <div class="boss-drop-item boss-c-scroll">祝福的瞬間移動卷軸</div>
+          <div class="boss-drop-item boss-c-scroll">防爆卷箱子</div>
+          <div class="boss-drop-item boss-c-trash">對武器施法的卷軸</div>
+          <div class="boss-drop-item boss-c-trash">對盔甲施法的卷軸</div>
+          <div class="boss-drop-item boss-c-trash">受詛咒的對武器施法的卷軸</div>
+          <div class="boss-drop-item boss-c-trash">受詛咒的對盔甲施法的卷軸</div>
+          <div class="boss-drop-item boss-c-gold">金幣</div>
+          <div class="boss-drop-item boss-c-trash">古代終極體力恢復劑</div>
+          <div class="boss-drop-item boss-c-wanted">雌/雄 — 杰弗雷庫的通緝令</div>
+          <div class="boss-drop-item boss-c-trash">少了刀刃的武器</div>
+          <div class="boss-drop-item boss-c-trash">一般武器箱 / 防具箱 / 飾品箱</div>
+          <div class="boss-drop-item boss-c-trash">高級武器箱 / 防具箱 / 飾品箱</div>
+          <div class="boss-drop-item boss-c-trash">高技碎片箱 (自選)</div>
+          <div class="boss-drop-item boss-c-trash">職業之力箱 (自選)</div>
+        </div>
+      </div>
+
+      <div class="boss-notice-box">◆ 更多強大 BOSS 即將覺醒，請屏息以待！ ◆</div>
+    </div>
+    </div>
+
+    <hr class="boss-divider" data-label="DROP TIERS">
+
+    <!-- ══ SECTION 2: 各等級掉落物 ══ -->
+    <div id="section-drops" style="scroll-margin-top:100px">
+      <p class="fp-heading">⚔ 各等級 BOSS 掉落物</p>
+      <div class="fp-intro">
+        不同等級的 BOSS 掉落物品各有不同，<strong>等級越高、獎勵越豐厚</strong>。
+      </div>
+
+      <!-- 等級標籤 -->
+      <div class="boss-tier-tags">
+        <span class="boss-tier-tag" style="color:#69f0ae;border:1px solid rgba(105,240,174,0.5)">◆ 高級 BOSS</span>
+        <span class="boss-tier-tag" style="color:#64b5f6;border:1px solid rgba(100,181,246,0.5)">◆ 稀有 BOSS</span>
+        <span class="boss-tier-tag" style="color:#ff5252;border:1px solid rgba(255,82,82,0.5)">◆ 英雄 BOSS</span>
+        <span class="boss-tier-tag" style="color:#fb405f;border:1px solid rgba(251,64,95,0.5)">◆ 傳說 BOSS</span>
+        <span class="boss-tier-tag" style="color:#ffe060;border:1px solid rgba(212,168,32,0.5)">◆ 神話 BOSS</span>
+      </div>
+      <div style="font-size:.82em;color:#a09080;margin-bottom:12px;background:#221013;border:1px solid rgba(212,168,32,0.12);border-radius:6px;padding:7px 14px;display:inline-block">▸ 表格可左右滑動查看完整內容。</div>
+
+      <div style="overflow-x:auto;border:1px solid #401f24;border-radius:8px;background:#1b0b0e">
+        <table class="boss-tier-table">
+          <thead>
+            <tr>
+              <th style="background:#0a1c10;color:#69f0ae;width:20%">高級 ◆</th>
+              <th style="background:#0a0e1c;color:#64b5f6;width:20%">稀有 ◆</th>
+              <th style="background:#1c0a0a;color:#ff5252;width:20%">英雄 ◆</th>
+              <th style="background:#1e0c0f;color:#fb405f;width:20%">傳說 ◆</th>
+              <th style="background:#1c1a08;color:#ffe060;width:20%">神話 ◆</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>金幣</td><td>金幣</td><td>金幣</td><td>金幣</td><td>金幣</td></tr>
+            <tr><td>藍鑽</td><td>藍鑽</td><td>藍鑽</td><td>藍鑽</td><td>藍鑽</td></tr>
+            <tr><td>防爆卷箱子</td><td>防爆卷箱子</td><td>防爆卷箱子</td><td>防爆卷箱子</td><td style="color:#ffb74d;font-weight:700">祝福防爆卷軸</td></tr>
+            <tr><td>BOSS 靈魂</td><td>BOSS 靈魂</td><td>BOSS 靈魂</td><td>BOSS 靈魂</td><td>防爆卷箱子</td></tr>
+            <tr><td>武卷 (白)</td><td>武卷 (白)</td><td>武卷 (白)</td><td>武卷 (白)</td><td>BOSS 靈魂</td></tr>
+            <tr><td>防卷 (白)</td><td>防卷 (白)</td><td>防卷 (白)</td><td>防卷 (白)</td><td>武卷 (祝福)</td></tr>
+            <tr><td>武卷 (祝福)</td><td>武卷 (祝福)</td><td>武卷 (祝福)</td><td>武卷 (祝福)</td><td>防卷 (祝福)</td></tr>
+            <tr><td>防卷 (祝福)</td><td>防卷 (祝福)</td><td>防卷 (祝福)</td><td>防卷 (祝福)</td><td>武卷 (詛咒)</td></tr>
+            <tr><td>武卷 (詛咒)</td><td>武卷 (詛咒)</td><td>武卷 (詛咒)</td><td>武卷 (詛咒)</td><td>防卷 (詛咒)</td></tr>
+            <tr><td>防卷 (詛咒)</td><td>防卷 (詛咒)</td><td>防卷 (詛咒)</td><td>防卷 (詛咒)</td><td>武卷 (詛咒)</td></tr>
+            <tr><td>一般武器箱</td><td>一般武器箱</td><td>一般武器箱</td><td>一般武器箱</td><td>防卷 (詛咒)</td></tr>
+            <tr><td>一般防具箱</td><td>一般防具箱</td><td>一般防具箱</td><td>一般防具箱</td><td>一般武器箱</td></tr>
+            <tr><td>一般飾品箱</td><td>一般飾品箱</td><td>一般飾品箱</td><td>一般飾品箱</td><td>一般防具箱</td></tr>
+            <tr><td>高級武器箱</td><td>高級武器箱</td><td>高級武器箱</td><td>高級武器箱</td><td>一般飾品箱</td></tr>
+            <tr><td>高級防具箱</td><td>高級防具箱</td><td>高級防具箱</td><td>高級防具箱</td><td>高級武器箱</td></tr>
+            <tr><td>高級飾品箱</td><td>高級飾品箱</td><td>高級飾品箱</td><td>高級飾品箱</td><td>高級防具箱</td></tr>
+            <tr><td style="color:#69f0ae;font-weight:700">高級製作秘笈</td><td>稀有武器箱</td><td>稀有武器箱</td><td>稀有武器箱</td><td>高級飾品箱</td></tr>
+            <tr><td style="opacity:.3">—</td><td>稀有防具箱</td><td>稀有防具箱</td><td>稀有防具箱</td><td>稀有武器箱</td></tr>
+            <tr><td style="opacity:.3">—</td><td>稀有飾品箱</td><td>稀有飾品箱</td><td>稀有飾品箱</td><td>稀有防具箱</td></tr>
+            <tr><td style="opacity:.3">—</td><td style="color:#69f0ae;font-weight:700">高級製作秘笈</td><td>英雄武器箱</td><td>英雄武器箱</td><td>稀有飾品箱</td></tr>
+            <tr><td style="opacity:.3">—</td><td style="color:#64b5f6;font-weight:700">稀有製作秘笈</td><td>英雄防具箱</td><td>英雄防具箱</td><td>英雄武器箱</td></tr>
+            <tr><td style="opacity:.3">—</td><td style="opacity:.3">—</td><td>英雄飾品箱</td><td>英雄飾品箱</td><td>英雄防具箱</td></tr>
+            <tr><td style="opacity:.3">—</td><td style="opacity:.3">—</td><td style="color:#64b5f6;font-weight:700">稀有製作秘笈</td><td style="color:#64b5f6;font-weight:700">稀有製作秘笈</td><td>英雄飾品箱</td></tr>
+            <tr><td style="opacity:.3">—</td><td style="opacity:.3">—</td><td style="color:#ff5252;font-weight:700">英雄製作秘笈</td><td style="color:#ff5252;font-weight:700">英雄製作秘笈</td><td style="color:#64b5f6;font-weight:700">稀有製作秘笈</td></tr>
+            <tr><td style="opacity:.3">—</td><td style="opacity:.3">—</td><td style="opacity:.3">—</td><td style="color:#fb405f;font-weight:700">傳說製作秘笈</td><td style="color:#ff5252;font-weight:700">英雄製作秘笈</td></tr>
+            <tr><td style="opacity:.3">—</td><td style="opacity:.3">—</td><td style="opacity:.3">—</td><td style="opacity:.3">—</td><td style="color:#fb405f;font-weight:700">傳說製作秘笈</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 上下頁導覽 -->
+    <div class="fp-pager" style="margin-top:56px">
+      <a href="features-overview.html" class="fp-pager__btn">
+        <span class="fp-pager__arrow">←</span>
+        <div><span class="fp-pager__dir">PREV</span><span class="fp-pager__name">遊戲特色總覽</span></div>
+      </a>
+      <div class="fp-pager__center"><a href="features-overview.html" class="fp-pager__back">▲ 返回系統列表</a></div>
+      <a href="feature-maps.html" class="fp-pager__btn fp-pager__btn--next">
+        <div><span class="fp-pager__dir">NEXT</span><span class="fp-pager__name">地圖介紹</span></div>
+        <span class="fp-pager__arrow">→</span>
+      </a>
+    </div>
+
+  </main>
+
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script><script>
+  // 錨點選單 active 狀態
+  (function(){
+    var btns = document.querySelectorAll('.boss-anchor-btn');
+    var sections = ['section-worldboss','section-collection','section-drops'].map(function(id){ return document.getElementById(id); });
+    function update(){
+      var scroll = window.scrollY + 120;
+      var active = 0;
+      sections.forEach(function(s,i){ if(s && s.offsetTop <= scroll) active = i; });
+      btns.forEach(function(b,i){ b.classList.toggle('active', i===active); });
+    }
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+  })();
+  </script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

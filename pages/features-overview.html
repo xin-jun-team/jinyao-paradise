@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>特色介紹 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    .page-hero {
+      background: linear-gradient(180deg, #130608 0%, #090405 100%);
+      border-bottom: 1px solid var(--gold-dim);
+      padding: 72px 0 48px;
+      text-align: center;
+    }
+    .page-hero__eyebrow { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.35em; color: var(--gold-dim); margin-bottom: 14px; }
+    .page-hero__title { font-family: 'Noto Serif TC', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: var(--text-bright); letter-spacing: 0.15em; margin-bottom: 10px; }
+    .page-hero__title span { color: var(--gold); }
+    .page-hero__sub { font-size: 0.85rem; color: var(--text-dim); letter-spacing: 0.1em; }
+
+    .feat-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .feat-section-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--gold); letter-spacing: 0.15em;
+      margin-bottom: 24px;
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px;
+      background: linear-gradient(90deg, rgba(212,168,32,0.09) 0%, transparent 100%);
+      border-left: 3px solid var(--gold-dim);
+    }
+    .feat-section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold-dim), transparent); }
+    .hs-note { background:#1b0b0e; border:1px solid #401f24; border-left:3px solid var(--gold); border-radius:4px; padding:16px 20px; margin-bottom:20px; }
+    .hs-note__title { font-family:'Noto Serif TC',serif; font-weight:900; color:var(--gold-bright,#ffe060); margin-bottom:8px; letter-spacing:0.06em; }
+    .hs-note ul { margin:0; padding-left:20px; }
+    .hs-note li { color:var(--text,#e8d090); font-size:0.9rem; line-height:1.95; }
+    .hs-note li strong { color:var(--gold-bright,#ffe060); }
+    .hs-tablewrap { overflow-x:auto; margin-bottom:44px; }
+    .hs-table { width:100%; border-collapse:collapse; font-size:0.88rem; }
+    .hs-table th { background:linear-gradient(90deg,rgba(212,168,32,0.18),rgba(212,168,32,0.05)); color:var(--gold-bright,#ffe060); font-family:'Cinzel',serif; letter-spacing:0.08em; padding:12px 16px; border:1px solid #401f24; text-align:left; }
+    .hs-table td { padding:12px 16px; border:1px solid #2f171b; color:var(--text,#e8d090); line-height:1.75; vertical-align:top; }
+    .hs-table td:first-child { color:var(--gold-bright,#ffe060); font-weight:700; white-space:nowrap; font-family:'Noto Serif TC',serif; }
+    .hs-table tr:nth-child(odd) td { background:#1b0b0e; }
+    .hs-table tr:nth-child(even) td { background:#1d0d10; }
+    @media(max-width:600px){ .hs-table td:first-child{white-space:normal} }
+
+    /* 系統卡片 */
+    .sys-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .sys-card {
+      background: linear-gradient(160deg, #221013 0%, #17090b 55%, #1e0a0d 100%);
+      border: 1px solid #2f171b;
+      border-radius: 2px;
+      padding: 28px 24px;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .sys-card:hover {
+      border-color: var(--gold-dim);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(204,0,34,0.18), 0 2px 8px rgba(204,0,0,0.12), 0 0 0 1px rgba(212,168,32,0.08);
+    }
+    .sys-card__head {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 14px;
+    }
+    .sys-card__icon {
+      font-size: 1.8rem;
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, #3c141a 0%, #261014 100%);
+      border: 1px solid #52282f;
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: inset 0 1px 0 rgba(212,168,32,0.08);
+    }
+    .sys-card__title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--text-bright); letter-spacing: 0.1em;
+    }
+    .sys-card__en {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem; color: var(--gold-dim);
+      letter-spacing: 0.15em; margin-top: 3px;
+    }
+    .sys-card__desc {
+      font-size: 0.82rem; color: var(--text-dim); line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .sys-card__desc strong { color: #ffe060; }
+    .sys-card__arrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem; color: var(--gold-dim);
+      letter-spacing: 0.12em;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .sys-card__arrow::after { content: '→'; color: var(--gold); }
+    .sys-card:hover .sys-card__arrow { color: var(--gold); }
+    .sys-card:hover .sys-card__arrow::after { color: var(--gold-bright); }
+
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <!-- ═══════════════════════ PAGE HERO ═══════════════════════ -->
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — FEATURES</p>
+    <h1 class="page-hero__title">伺服器<span>特色</span></h1>
+    <p class="page-hero__sub">黑暗帝國的規則由強者定義</p>
+  </div>
+
+  <!-- ═══════════════════════ FEATURES ═══════════════════════ -->
+  <main class="feat-wrap">
+
+    <p class="feat-section-title">◆ 系統介紹</p>
+
+    <div class="sys-grid">
+
+      <a href="feature-blessing.html" class="sys-card">
+        <div class="sys-card__head">
+          <div class="sys-card__icon"><img src="../assets/images/item-7673.png" alt="祝福" style="width:32px;height:32px;image-rendering:pixelated;" loading="lazy"></div>
+          <div>
+            <div class="sys-card__title">裝備祝福屬性</div>
+            <div class="sys-card__en">BLESSING</div>
+          </div>
+        </div>
+        <div class="sys-card__desc">使用祝福卷軸為武器、防具、飾品附加<strong>額外屬性加成</strong>，突破裝備極限。</div>
+        <div class="sys-card__arrow">查看詳細介紹</div>
+      </a>
+
+      <!-- [移至裝備道具] 職業之力
+      <a href="feature-job-power.html" class="sys-card">
+        <div class="sys-card__head">
+          <div class="sys-card__icon">⚗</div>
+          <div>
+            <div class="sys-card__title">職業之力</div>
+            <div class="sys-card__en">JOB POWER</div>
+          </div>
+        </div>
+        <div class="sys-card__desc">每個職業的專屬強化被動系統，前往主城 NPC 製作並逐階升級，<strong>滿級之力大幅提升核心戰力</strong>。</div>
+        <div class="sys-card__arrow">查看詳細介紹</div>
+      </a>
+      -->
+
+      <a href="feature-pet.html" class="sys-card">
+        <div class="sys-card__head">
+          <div class="sys-card__icon"><img src="../assets/images/item-1617.png" alt="寵物" style="width:32px;height:32px;image-rendering:pixelated;" loading="lazy"></div>
+          <div>
+            <div class="sys-card__title">寵物系統</div>
+            <div class="sys-card__en">PET SYSTEM</div>
+          </div>
+        </div>
+        <div class="sys-card__desc">前往寵物之島捕捉並培育寵物，透過進化果實升至三階，並可製作<strong>專屬裝備大幅強化寵物戰力</strong>。</div>
+        <div class="sys-card__arrow">查看詳細介紹</div>
+      </a>
+
+      <a href="feature-prestige.html" class="sys-card">
+        <div class="sys-card__head">
+          <div class="sys-card__icon" style="font-family:'Cinzel',serif;color:var(--gold);">♛</div>
+          <div>
+            <div class="sys-card__title">威望系統</div>
+            <div class="sys-card__en">PRESTIGE</div>
+          </div>
+        </div>
+        <div class="sys-card__desc">刷怪累積威望點數，解鎖 12 階威望稱號，<strong>每階均提供複合屬性加成</strong>，彰顯強者地位。</div>
+        <div class="sys-card__arrow">查看詳細介紹</div>
+      </a>
+
+      <a href="feature-online-reward.html" class="sys-card">
+        <div class="sys-card__head">
+          <div class="sys-card__icon"><img src="../assets/images/item-3562.png" alt="在線禮包" style="width:32px;height:32px;image-rendering:pixelated;" loading="lazy"></div>
+          <div>
+            <div class="sys-card__title">在線禮包</div>
+            <div class="sys-card__en">ONLINE REWARD</div>
+          </div>
+        </div>
+        <div class="sys-card__desc">LV 52 以上角色每在線 50 分鐘，系統<strong>自動派送禮包至背包</strong>，含藍鑽、藥水、變身卡等豐富獎勵。</div>
+        <div class="sys-card__arrow">查看詳細介紹</div>
+      </a>
+
+      <a href="feature-maps.html" class="sys-card">
+        <div class="sys-card__head">
+          <div class="sys-card__icon"><img src="../assets/images/item-20844.png" alt="地圖" style="width:32px;height:32px;image-rendering:pixelated;" loading="lazy"></div>
+          <div>
+            <div class="sys-card__title">地圖介紹</div>
+            <div class="sys-card__en">MAP GUIDE</div>
+          </div>
+        </div>
+        <div class="sys-card__desc">從新手一般地監到限時副本，各區域掉落分佈與建議等級一覽，<strong>掌握資源核心地圖</strong>。</div>
+        <div class="sys-card__arrow">查看詳細介紹</div>
+      </a>
+
+      <a href="feature-transform.html" class="sys-card">
+        <div class="sys-card__head">
+          <div class="sys-card__icon"><img src="../assets/images/item-20338.png" alt="變身" style="width:32px;height:32px;image-rendering:pixelated;" loading="lazy"></div>
+          <div>
+            <div class="sys-card__title">變身介紹</div>
+            <div class="sys-card__en">TRANSFORM</div>
+          </div>
+        </div>
+        <div class="sys-card__desc">7 種稀有度、100+ 種型態，使用變身石化身強大形態，<strong>攻速與詠速大幅提升</strong>，傳說以上另附屬性加成。</div>
+        <div class="sys-card__arrow">查看詳細介紹</div>
+      </a>
+
+      <a href="feature-dolls.html" class="sys-card">
+        <div class="sys-card__head">
+          <div class="sys-card__icon"><img src="../assets/images/item-20499.png" alt="娃娃" style="width:32px;height:32px;image-rendering:pixelated;" loading="lazy"></div>
+          <div>
+            <div class="sys-card__title">娃娃介紹</div>
+            <div class="sys-card__en">DOLL SYSTEM</div>
+          </div>
+        </div>
+        <div class="sys-card__desc">召喚娃娃陪同冒險，共 130+ 隻橫跨 7 種稀有度，<strong>收集特定組合可觸發收藏加成</strong>效果。</div>
+        <div class="sys-card__arrow">查看詳細介紹</div>
+      </a>
+
+      <a href="feature-royal-gear.html" class="sys-card">
+        <div class="sys-card__head">
+          <div class="sys-card__icon"><img src="../assets/images/item-17723.png" alt="王族裝備" style="width:32px;height:32px;image-rendering:pixelated;" loading="lazy"></div>
+          <div>
+            <div class="sys-card__title">王族專屬裝備</div>
+            <div class="sys-card__en">ROYAL EXCLUSIVE</div>
+          </div>
+        </div>
+        <div class="sys-card__desc">王族限定的專屬裝備，提供<strong>HP、近距離攻擊與魔法防禦</strong>加成，能力依伺服器進度動態調整。</div>
+        <div class="sys-card__arrow">查看詳細介紹</div>
+      </a>
+
+      <a href="feature-skills.html" class="sys-card">
+        <div class="sys-card__head">
+          <div class="sys-card__icon" style="font-family:'Cinzel',serif;color:var(--gold);">⚔</div>
+          <div>
+            <div class="sys-card__title">職業特殊技能</div>
+            <div class="sys-card__en">CLASS SKILLS</div>
+          </div>
+        </div>
+        <div class="sys-card__desc">各職業專屬強力技能，<strong>王者之劍、狂襲、精靈之暈、力場、復仇</strong>，透過每日任務獲取技能書。</div>
+        <div class="sys-card__arrow">查看詳細介紹</div>
+      </a>
+
+      <a href="feature-summon.html" class="sys-card">
+        <div class="sys-card__head">
+          <div class="sys-card__icon" style="font-family:'Cinzel',serif;color:var(--gold);">✦</div>
+          <div>
+            <div class="sys-card__title">法師召喚系統</div>
+            <div class="sys-card__en">SUMMON SYSTEM</div>
+          </div>
+        </div>
+        <div class="sys-card__desc">召喚獸特殊強化，<strong>變形怪、巨大牛人、黑豹</strong>三大終極召喚，需召喚控制戒指解鎖。</div>
+        <div class="sys-card__arrow">查看詳細介紹</div>
+      </a>
+
+      <a href="feature-soul-core.html" class="sys-card">
+        <div class="sys-card__head">
+          <div class="sys-card__icon"><img src="../assets/images/item-2700.png" alt="噬魂魔核" style="width:32px;height:32px;image-rendering:pixelated;" loading="lazy"></div>
+          <div>
+            <div class="sys-card__title">噬魂魔核</div>
+            <div class="sys-card__en">SOUL CORE</div>
+          </div>
+        </div>
+        <div class="sys-card__desc">製作裝備與道具的<strong>核心材料</strong>，全 BOSS 均會掉落，碎片可合成完整魔核。</div>
+        <div class="sys-card__arrow">查看詳細介紹</div>
+      </a>
+
+      <a href="feature-bonus-coin.html" class="sys-card">
+        <div class="sys-card__head">
+          <div class="sys-card__icon"><img src="../assets/images/item-20556.png" alt="紅利幣" style="width:32px;height:32px;image-rendering:pixelated;" loading="lazy"></div>
+          <div>
+            <div class="sys-card__title">紅利幣</div>
+            <div class="sys-card__en">BONUS COIN</div>
+          </div>
+        </div>
+        <div class="sys-card__desc">累積紅利幣至主城 NPC 馬德里兌換，<strong>升級 VIP 階級享受豐厚能力加成</strong>與商城道具。</div>
+        <div class="sys-card__arrow">查看詳細介紹</div>
+      </a>
+
+      <a href="feature-high-skill.html" class="sys-card" style="text-decoration:none;">
+        <div class="sys-card__head">
+          <div class="sys-card__icon" style="font-family:'Cinzel',serif;color:var(--gold);">⚡</div>
+          <div>
+            <div class="sys-card__title">高技獲取途徑</div>
+            <div class="sys-card__en">HIGH SKILL</div>
+          </div>
+        </div>
+        <div class="sys-card__desc">高技碎片箱與各式高技的取得來源一覽，掌握 <strong>BOSS 掉落與扭蛋</strong> 途徑，快速集齊強力技能。</div>
+        <div class="sys-card__arrow">查看詳細介紹</div>
+      </a>
+
+    </div>
+
+  </main>
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>更新歷程 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+.jn-wrap{max-width:1180px;margin:0 auto;padding:40px clamp(14px,3vw,28px) 80px}
+.jn-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.jn-chips{display:flex;gap:8px;flex-wrap:wrap}
+.jn-chip{font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;border:1px solid rgba(227,172,44,.35);background:#1c0a10;color:#e6d2b0;font-weight:700;font-size:.9rem;transition:.2s}
+.jn-chip em{font-style:normal;font-family:'Cinzel',serif;font-size:.78rem;color:#ffd35a;background:rgba(227,172,44,.14);border-radius:999px;padding:1px 8px}
+.jn-chip:hover{border-color:#ffd35a;color:#fff}
+.jn-chip.is-on{background:linear-gradient(180deg,#a3162f,#6a0f22);border-color:#e0334f;color:#fff3c8;box-shadow:0 8px 22px -10px rgba(224,51,79,.8)}
+.jn-hint{font-size:.8rem;color:#b29a74;letter-spacing:.06em}
+.jn-grid{display:grid;grid-template-columns:230px 1fr;gap:26px;align-items:start}
+.jn-rail{position:sticky;top:76px;max-height:calc(100vh - 100px);overflow:auto;padding:6px 6px 6px 2px;border-left:2px solid rgba(163,22,47,.55);scrollbar-width:thin;scrollbar-color:#a3162f #1a080d}
+.jn-rail::-webkit-scrollbar{width:6px}.jn-rail::-webkit-scrollbar-track{background:#1a080d}.jn-rail::-webkit-scrollbar-thumb{background:#a3162f;border-radius:6px}
+.jn-month{font-family:'Noto Serif TC',serif;font-weight:900;color:#ffd35a;font-size:.95rem;letter-spacing:.14em;margin:16px 0 6px 16px}
+.jn-month span{font-family:'Cinzel',serif;font-size:1.5rem;margin-right:2px}
+.jn-month:first-child{margin-top:2px}
+.jn-item{position:relative;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:10px;width:calc(100% - 14px);margin:0 0 6px 14px;padding:9px 12px;text-align:left;font-family:inherit;cursor:pointer;
+  border:1px solid rgba(227,172,44,.2);border-radius:8px;background:#1a080d;color:#e6d2b0;transition:.18s}
+.jn-item::before{content:"";position:absolute;left:-21px;top:50%;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:#430a16;border:2px solid #a3162f;transition:.18s}
+.jn-item:hover{border-color:#ffd35a;transform:translateX(3px)}
+.jn-item.is-on{background:linear-gradient(100deg,#6a0f22,#2c0d17);border-color:#ffd35a;box-shadow:0 10px 24px -14px rgba(224,51,79,.9)}
+.jn-item.is-on::before{background:#ffd35a;border-color:#fff3c8;box-shadow:0 0 0 4px rgba(255,211,90,.22)}
+.jn-d{grid-row:1/3;align-self:center;font-family:'Cinzel',serif;font-weight:700;font-size:1.05rem;color:#ffd35a;letter-spacing:.04em}
+.jn-s{font-size:.78rem;color:#c9b48e;line-height:1.3}
+.jn-dots{display:flex;gap:4px;margin-top:3px}
+.jn-dots i{width:7px;height:7px;border-radius:50%}
+.d-new{background:#ffd35a}.d-fix{background:#5fe39a}.d-balance{background:#7fb2ff}.d-skill{background:#ff9a4a}.d-note{background:#b29a74}
+.jn-item.is-new::after{content:"NEW";position:absolute;right:8px;top:8px;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.12em;color:#13060a;background:linear-gradient(180deg,#fff3c8,#e3ac2c);border-radius:3px;padding:1px 6px;font-weight:700}
+.jn-item.is-hide{display:none}
+
+.jn-view{min-height:320px}
+.jn-entry{display:block;border:1px solid rgba(227,172,44,.3);border-radius:14px;background:linear-gradient(170deg,#250b13,#170709);overflow:hidden;box-shadow:0 24px 50px -30px rgba(0,0,0,.9)}
+.jn.js .jn-entry{display:none}.jn.js .jn-entry.is-on{display:block;animation:jnIn .35s ease}
+@keyframes jnIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.jn-entry:not(:first-child){margin-top:16px}.jn.js .jn-entry:not(:first-child){margin-top:0}
+.jn-hd{position:relative;display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding:22px 26px;background:radial-gradient(ellipse 80% 160% at 0 0,#7a1026,#2c0d17 60%,#1c0a10);border-bottom:2px solid #e3ac2c}
+.jn-big{display:flex;align-items:baseline;gap:6px;font-family:'Cinzel',serif;font-weight:700;line-height:1;color:#ffd35a;text-shadow:0 4px 22px rgba(224,51,79,.55)}
+.jn-big .m{font-size:2.3rem;opacity:.75}.jn-big i{font-style:normal;font-size:2.3rem;color:#e0334f}.jn-big .d{font-size:4.2rem;background:linear-gradient(176deg,#fff5c8,#ffd766 40%,#e3ac2c 70%,#a8761a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.jn-meta{flex:1;min-width:160px}
+.jn-sub{font-family:'Noto Serif TC',serif;font-weight:900;font-size:1.15rem;color:#fcefd6;letter-spacing:.1em;margin-bottom:8px}
+.jn-tags{display:flex;gap:6px;flex-wrap:wrap}
+.jn-tag{font-size:.74rem;font-weight:800;letter-spacing:.1em;padding:3px 12px;border-radius:999px;border:1px solid}
+.jn-tag--new{color:#ffd35a;border-color:rgba(255,211,90,.6);background:rgba(255,211,90,.1)}
+.jn-tag--fix{color:#5fe39a;border-color:rgba(95,227,154,.55);background:rgba(95,227,154,.09)}
+.jn-tag--balance{color:#7fb2ff;border-color:rgba(127,178,255,.55);background:rgba(127,178,255,.09)}
+.jn-tag--note{color:#e6d2b0;border-color:rgba(230,210,176,.45);background:rgba(230,210,176,.07)}
+.jn-step{display:flex;gap:8px}
+.jn-step button{font-family:inherit;cursor:pointer;padding:8px 14px;border-radius:8px;border:1px solid rgba(227,172,44,.45);background:rgba(19,6,10,.55);color:#f7e6b0;font-weight:700;font-size:.84rem;transition:.18s}
+.jn-step button:hover:not(:disabled){background:#a3162f;border-color:#ffd35a;color:#fff}
+.jn-step button:disabled{opacity:.35;cursor:not-allowed}
+.jn-body{padding:22px 26px 26px;display:grid;gap:14px}
+.jn-sec{position:relative;padding:16px 20px 16px 24px;border-radius:10px;background:rgba(19,6,10,.6);border:1px solid rgba(227,172,44,.16)}
+.jn-sec::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:4px;border-radius:0 4px 4px 0;background:#b29a74}
+.jn-sec--new::before{background:#ffd35a}.jn-sec--fix::before{background:#5fe39a}.jn-sec--balance::before{background:#7fb2ff}.jn-sec--skill::before{background:#ff9a4a}
+.jn-sec-t{display:flex;align-items:center;gap:10px;font-family:'Noto Serif TC',serif;font-size:1.02rem;font-weight:900;color:#fcefd6;letter-spacing:.06em;margin:0 0 10px}
+.jn-sec-t b{font-family:'Noto Sans TC',sans-serif;font-size:.72rem;letter-spacing:.14em;padding:2px 10px;border-radius:4px;background:#b29a74;color:#13060a}
+.jn-sec--new .jn-sec-t b{background:#ffd35a}.jn-sec--fix .jn-sec-t b{background:#5fe39a}.jn-sec--balance .jn-sec-t b{background:#7fb2ff}.jn-sec--skill .jn-sec-t b{background:#ff9a4a}
+.jn-sec .nlog-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.jn-sec .nlog-list li{position:relative;padding-left:20px;color:#e6d2b0;font-size:.96rem;line-height:1.85}
+.jn-sec .nlog-list li::before{content:"◆";position:absolute;left:0;top:0;color:#e3ac2c;font-size:.62rem;line-height:2.9}
+.jn-sec .nlog-highlight{color:#ffd35a;font-weight:800}
+.jn-sec a{color:#ffd35a;text-decoration:underline}
+@media(max-width:860px){
+  .jn-grid{grid-template-columns:1fr;gap:16px}
+  .jn-rail{position:static;max-height:none;display:flex;gap:8px;overflow-x:auto;border-left:0;padding:4px 2px 10px;align-items:stretch}
+  .jn-month{flex:0 0 auto;align-self:center;margin:0 4px 0 0;font-size:.85rem}.jn-month span{font-size:1.1rem}
+  .jn-item{flex:0 0 auto;width:auto;margin:0;grid-template-columns:auto;grid-template-rows:auto auto auto;row-gap:2px;min-width:92px}
+  .jn-item::before{display:none}.jn-d{grid-row:auto}.jn-hint{display:none}
+  .jn-hd{padding:18px}.jn-big .d{font-size:3.2rem}.jn-big .m,.jn-big i{font-size:1.7rem}
+  .jn-body{padding:16px}
+}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+<div class="page-hero"><p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — WAR REPORT</p><h1 class="page-hero__title">更新<span>歷程</span></h1><p class="page-hero__sub">金耀天堂版本更新與維護戰報</p></div><main class="jn-wrap"><div class="jn" id="jn"><div class="jn-bar"><div class="jn-chips"><button class="jn-chip is-on" data-f="all">全部<em>33</em></button><button class="jn-chip" data-f="new">新增<em>19</em></button><button class="jn-chip" data-f="fix">修復<em>23</em></button><button class="jn-chip" data-f="balance">平衡<em>13</em></button><button class="jn-chip" data-f="skill">技能<em>2</em></button></div><div class="jn-hint">點選左側日期，或按 ← → 切換戰報</div></div><div class="jn-grid"><aside class="jn-rail" id="jnRail"><div class="jn-month"><span>10</span>月</div><button class="jn-item is-new" data-id="u-10-13" data-types="new"><span class="jn-d">10/13</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-new" title="新增"></i></span></button><button class="jn-item" data-id="u-10-09" data-types="fix"><span class="jn-d">10/09</span><span class="jn-s">夜間修復 · 維修後生效</span><span class="jn-dots"><i class="d-fix" title="修復"></i></span></button><button class="jn-item" data-id="u-10-07" data-types="fix balance"><span class="jn-d">10/07</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-fix" title="修復"></i><i class="d-balance" title="平衡"></i></span></button><div class="jn-month"><span>9</span>月</div><button class="jn-item" data-id="u-09-30" data-types="new note"><span class="jn-d">09/30</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-new" title="新增"></i><i class="d-note" title="叮嚀"></i></span></button><button class="jn-item" data-id="u-09-25" data-types="new note"><span class="jn-d">09/25</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-new" title="新增"></i><i class="d-note" title="叮嚀"></i></span></button><button class="jn-item" data-id="u-09-15" data-types="fix"><span class="jn-d">09/15</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-fix" title="修復"></i></span></button><button class="jn-item" data-id="u-09-14" data-types="balance new"><span class="jn-d">09/14</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-balance" title="平衡"></i><i class="d-new" title="新增"></i></span></button><button class="jn-item" data-id="u-09-13" data-types="fix"><span class="jn-d">09/13</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-fix" title="修復"></i></span></button><button class="jn-item" data-id="u-09-07" data-types="new"><span class="jn-d">09/07</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-new" title="新增"></i></span></button><button class="jn-item" data-id="u-09-06" data-types="new"><span class="jn-d">09/06</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-new" title="新增"></i></span></button><button class="jn-item" data-id="u-09-04" data-types="fix"><span class="jn-d">09/04</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-fix" title="修復"></i></span></button><button class="jn-item" data-id="u-09-02" data-types="fix new"><span class="jn-d">09/02</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-fix" title="修復"></i><i class="d-new" title="新增"></i></span></button><button class="jn-item" data-id="u-09-01" data-types="fix note"><span class="jn-d">09/01</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-fix" title="修復"></i><i class="d-note" title="叮嚀"></i></span></button><div class="jn-month"><span>8</span>月</div><button class="jn-item" data-id="u-08-31" data-types="fix balance new"><span class="jn-d">08/31</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-fix" title="修復"></i><i class="d-balance" title="平衡"></i><i class="d-new" title="新增"></i></span></button><button class="jn-item" data-id="u-08-29" data-types="fix note"><span class="jn-d">08/29</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-fix" title="修復"></i><i class="d-note" title="叮嚀"></i></span></button><button class="jn-item" data-id="u-08-28" data-types="balance fix new note"><span class="jn-d">08/28</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-balance" title="平衡"></i><i class="d-fix" title="修復"></i><i class="d-new" title="新增"></i><i class="d-note" title="叮嚀"></i></span></button><button class="jn-item" data-id="u-08-24" data-types="balance new fix"><span class="jn-d">08/24</span><span class="jn-s">七夕倒數 4 天</span><span class="jn-dots"><i class="d-balance" title="平衡"></i><i class="d-new" title="新增"></i><i class="d-fix" title="修復"></i></span></button><button class="jn-item" data-id="u-08-19" data-types="new balance fix"><span class="jn-d">08/19</span><span class="jn-s">七夕公告</span><span class="jn-dots"><i class="d-new" title="新增"></i><i class="d-balance" title="平衡"></i><i class="d-fix" title="修復"></i></span></button><button class="jn-item" data-id="u-08-18" data-types="balance fix"><span class="jn-d">08/18</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-balance" title="平衡"></i><i class="d-fix" title="修復"></i></span></button><button class="jn-item" data-id="u-08-17" data-types="fix"><span class="jn-d">08/17</span><span class="jn-s">夜間更新</span><span class="jn-dots"><i class="d-fix" title="修復"></i></span></button><button class="jn-item" data-id="u-08-17-20" data-types="new"><span class="jn-d">08/17</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-new" title="新增"></i></span></button><button class="jn-item" data-id="u-08-10" data-types="balance fix new"><span class="jn-d">08/10</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-balance" title="平衡"></i><i class="d-fix" title="修復"></i><i class="d-new" title="新增"></i></span></button><button class="jn-item" data-id="u-08-09" data-types="fix balance"><span class="jn-d">08/09</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-fix" title="修復"></i><i class="d-balance" title="平衡"></i></span></button><button class="jn-item" data-id="u-08-05" data-types="balance fix"><span class="jn-d">08/05</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-balance" title="平衡"></i><i class="d-fix" title="修復"></i></span></button><button class="jn-item" data-id="u-08-04" data-types="balance fix note"><span class="jn-d">08/04</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-balance" title="平衡"></i><i class="d-fix" title="修復"></i><i class="d-note" title="叮嚀"></i></span></button><button class="jn-item" data-id="u-08-03" data-types="fix note"><span class="jn-d">08/03</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-fix" title="修復"></i><i class="d-note" title="叮嚀"></i></span></button><button class="jn-item" data-id="u-08-02" data-types="balance new fix"><span class="jn-d">08/02</span><span class="jn-s">更新歷程</span><span class="jn-dots"><i class="d-balance" title="平衡"></i><i class="d-new" title="新增"></i><i class="d-fix" title="修復"></i></span></button><button class="jn-item" data-id="u-08-02-27" data-types="new"><span class="jn-d">08/02</span><span class="jn-s">夜間更新</span><span class="jn-dots"><i class="d-new" title="新增"></i></span></button><button class="jn-item" data-id="u-08-01" data-types="new note balance"><span class="jn-d">08/01</span><span class="jn-s">⚡ 下次更新預告</span><span class="jn-dots"><i class="d-new" title="新增"></i><i class="d-note" title="叮嚀"></i><i class="d-balance" title="平衡"></i></span></button><div class="jn-month"><span>7</span>月</div><button class="jn-item" data-id="u-07-29" data-types="new"><span class="jn-d">07/29</span><span class="jn-s">封測期間更新歷程</span><span class="jn-dots"><i class="d-new" title="新增"></i></span></button><button class="jn-item" data-id="u-07-27" data-types="fix new"><span class="jn-d">07/27</span><span class="jn-s">封測期間更新歷程</span><span class="jn-dots"><i class="d-fix" title="修復"></i><i class="d-new" title="新增"></i></span></button><button class="jn-item" data-id="u-07-22" data-types="skill fix"><span class="jn-d">07/22</span><span class="jn-s">封測期間更新歷程</span><span class="jn-dots"><i class="d-skill" title="技能"></i><i class="d-fix" title="修復"></i></span></button><button class="jn-item" data-id="u-07-21" data-types="skill fix new"><span class="jn-d">07/21</span><span class="jn-s">封測更新內容</span><span class="jn-dots"><i class="d-skill" title="技能"></i><i class="d-fix" title="修復"></i><i class="d-new" title="新增"></i></span></button></aside><div class="jn-view" id="jnView"><article class="jn-entry" id="u-10-13" data-types="new"><header class="jn-hd"><div class="jn-big"><span class="m">10</span><i>/</i><span class="d">13</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--new">新增</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>新增內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>新增 <span class="nlog-highlight">支配 2F / BOSS</span></li>
+                  <li>新增時空裂痕 <span class="nlog-highlight">杰弗雷庫（雄）／杰弗雷庫（雌）</span></li>
+                  <li>新增 <span class="nlog-highlight">光之肩甲</span></li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-10-09" data-types="fix"><header class="jn-hd"><div class="jn-big"><span class="m">10</span><i>/</i><span class="d">09</span></div><div class="jn-meta"><div class="jn-sub">夜間修復 · 維修後生效</div><div class="jn-tags"><span class="jn-tag jn-tag--fix">修復</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>問題修復</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li><span class="nlog-highlight">龍印石</span> 升階不退階</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-10-07" data-types="fix balance"><header class="jn-hd"><div class="jn-big"><span class="m">10</span><i>/</i><span class="d">07</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--fix">修復</span><span class="jn-tag jn-tag--balance">調整</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>問題修復</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修復 <span class="nlog-highlight">黑豹掛飾</span> 製作材料</li>
+                </ul></div></section><section class="jn-sec jn-sec--balance" data-type="balance"><h3 class="jn-sec-t"><b>平衡</b>數值調整</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>上調 <span class="nlog-highlight">席琳之力</span> 三重矢傷害</li>
+                  <li>上調 <span class="nlog-highlight">水之卷軸</span> 吸魔量</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-09-30" data-types="new note"><header class="jn-hd"><div class="jn-big"><span class="m">09</span><i>/</i><span class="d">30</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--new">更新</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>10 月更新內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>新增 <span class="nlog-highlight">國慶活動 / 累積贊助禮包</span></li>
+                  <li>新增 <span class="nlog-highlight">巴拉卡斯 / 法利昂 / 巨大食人花</span></li>
+                  <li>新增 <span class="nlog-highlight">龍印魔石</span> 製作與材料掉落</li>
+                  <li>新增 <span class="nlog-highlight">神話變身 + 娃娃</span> 合成</li>
+                  <li>新增 商城販售 <span class="nlog-highlight">神話製作秘笈</span></li>
+                  <li>等級開放 <span class="nlog-highlight">70</span></li>
+                </ul></div></section><section class="jn-sec jn-sec--note" data-type="note"><h3 class="jn-sec-t"><b>公告</b>貼心叮嚀</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>※ <span class="nlog-highlight">烤肉串</span> ＋ <span class="nlog-highlight">柚子酒</span> 將於本次維修回收，請把握時間使用</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-09-25" data-types="new note"><header class="jn-hd"><div class="jn-big"><span class="m">09</span><i>/</i><span class="d">25</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--new">預告</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>即將開放預告</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>開放 <span class="nlog-highlight">金變金娃</span></li>
+                  <li>開放 <span class="nlog-highlight">龍印製作</span> 獲取途徑</li>
+                  <li>開放 <span class="nlog-highlight">等級 70</span></li>
+                  <li>開放 <span class="nlog-highlight">巴拉卡斯 / 法利昂</span></li>
+                  <li>開放 活動 BOSS <span class="nlog-highlight">巨大食人花</span></li>
+                  <li><span class="nlog-highlight">10 月節慶活動</span></li>
+                </ul></div></section><section class="jn-sec jn-sec--note" data-type="note"><h3 class="jn-sec-t"><b>公告</b>貼心叮嚀</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>※ <span class="nlog-highlight">烤肉串</span> 將於 <span class="nlog-highlight">09/30 維修後回收</span>，請各位抓緊時間兌換</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-09-15" data-types="fix"><header class="jn-hd"><div class="jn-big"><span class="m">09</span><i>/</i><span class="d">15</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--fix">修復</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>修正</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修復 <span class="nlog-highlight">推廣大使</span> HP <span class="nlog-highlight">+150</span></li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-09-14" data-types="balance new"><header class="jn-hd"><div class="jn-big"><span class="m">09</span><i>/</i><span class="d">14</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span><span class="jn-tag jn-tag--new">新增</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--balance" data-type="balance"><h3 class="jn-sec-t"><b>平衡</b>內容改動</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>等級開放至 <span class="nlog-highlight">66 等</span></li>
+                </ul></div></section><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>新增內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>新增 <span class="nlog-highlight">傲慢之塔 BOSS</span> 掉落 <span class="nlog-highlight">魂魄</span></li>
+                  <li>新增 <span class="nlog-highlight">西方失敗</span> 製作 <span class="nlog-highlight">傲慢掛飾</span></li>
+                  <li>新增 <span class="nlog-highlight">林德拜爾 · 風龍</span> 登場</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-09-13" data-types="fix"><header class="jn-hd"><div class="jn-big"><span class="m">09</span><i>/</i><span class="d">13</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--fix">修復</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>修正</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修復 <span class="nlog-highlight">活動英雄製作秘笈兌換</span> 異常</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-09-07" data-types="new"><header class="jn-hd"><div class="jn-big"><span class="m">09</span><i>/</i><span class="d">07</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span><span class="jn-tag jn-tag--new">新增</span><span class="jn-tag jn-tag--fix">修復</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>更新內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>新增 <span class="nlog-highlight">中秋活動怪物</span>。</li>
+                  <li>修正 <span class="nlog-highlight">專屬BOSS地圖</span>。</li>
+                  <li>新增 <span class="nlog-highlight">烽火戰場</span> 地圖（可至 <a href="feature-maps.html" class="nlog-highlight" style="text-decoration:underline">地圖介紹</a> 查看）。</li>
+                </ul></div></section><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>BOSS 出生時間調整</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li><span class="nlog-highlight">哈們</span> 每日 20:30 出生。</li>
+                  <li><span class="nlog-highlight">龍王敖丙</span> 每日 21:30 出生。</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-09-06" data-types="new"><header class="jn-hd"><div class="jn-big"><span class="m">09</span><i>/</i><span class="d">06</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span><span class="jn-tag jn-tag--new">新增</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>更新內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>新增 <span class="nlog-highlight">中秋活動 · 月圓人團圓</span> 活動。</li>
+                  <li>新增 <span class="nlog-highlight">烽火戰場</span>（可至 <a href="feature-maps.html" class="nlog-highlight" style="text-decoration:underline">地圖介紹</a> 查看）。</li>
+                </ul></div></section><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>地龍 隆重登場</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>新增 <span class="nlog-highlight">安塔瑞斯</span> BOSS 出生。</li>
+                  <li>新增 <span class="nlog-highlight">烽火死亡騎士</span>（可至 <a href="boss-guide.html" class="nlog-highlight" style="text-decoration:underline">BOSS 介紹</a> 查看）。</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-09-04" data-types="fix"><header class="jn-hd"><div class="jn-big"><span class="m">09</span><i>/</i><span class="d">04</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--fix">修復</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>修正</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修復 <span class="nlog-highlight">專屬 BOSS 地圖</span> <span class="nlog-highlight">10:00／14:00</span> 出生異常問題。</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-09-02" data-types="fix new"><header class="jn-hd"><div class="jn-big"><span class="m">09</span><i>/</i><span class="d">02</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--fix">修復</span><span class="jn-tag jn-tag--balance">調整</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>修正</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修復 <span class="nlog-highlight">遊俠光輝</span> 能力異常。</li>
+                </ul></div></section><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>新增內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>依據 <span class="nlog-highlight">BOSS 階級</span>，新增掉落 <span class="nlog-highlight">噬魂棒棒糖</span> 機率。</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-09-01" data-types="fix note"><header class="jn-hd"><div class="jn-big"><span class="m">09</span><i>/</i><span class="d">01</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--fix">修復</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>修正</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修復 <span class="nlog-highlight">吉爾塔斯</span> 狀態異常。</li>
+                </ul></div></section><section class="jn-sec jn-sec--note" data-type="note"><h3 class="jn-sec-t"><b>公告</b></h3><div class="jn-sec-b"><div class="nlog-section-title" style="border-left-color:#ff6b6b; background:linear-gradient(90deg, rgba(255,107,107,0.08) 0%, transparent 100%);">📢 貼心叮嚀</div>
+                <ul class="nlog-list">
+                  <li>※ <span class="nlog-highlight">預購禮包</span> 於今日 <span class="nlog-highlight">18:00 維修前</span> 結束。</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-31" data-types="fix balance new"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">31</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--fix">修復</span><span class="jn-tag jn-tag--balance">調整</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>修正</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>移除 <span class="nlog-highlight">叛變亞丁之王</span>。</li>
+                  <li>修復 <span class="nlog-highlight">BOSS 重生顯示</span>異常。</li>
+                </ul></div></section><section class="jn-sec jn-sec--balance" data-type="balance"><h3 class="jn-sec-t"><b>平衡</b>調整</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li><span class="nlog-highlight">專屬 BOSS 地圖</span>修改為一般區域。</li>
+                </ul></div></section><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>進度開放預告</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li><span class="nlog-highlight">籌備中</span>｜世界 BOSS</li>
+                  <li><span class="nlog-highlight">籌備中</span>｜活動 BOSS</li>
+                  <li><span class="nlog-highlight">即將開放</span>｜烽火戰場</li>
+                </ul>
+                <p style="text-align:center;margin-top:14px;font-size:0.92rem;font-weight:600;color:#ffe060;letter-spacing:0.08em;">✦ 請各位玩家敬請期待 ✦</p></div></section></div></article><article class="jn-entry" id="u-08-29" data-types="fix note"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">29</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--fix">修復</span><span class="jn-tag jn-tag--note">公告</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>修正</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修復 <span class="nlog-highlight">60 級自動發放轉生證明</span>；若維修前已滿 60 級，將於維修後發放至 <span class="nlog-highlight">獎勵 NPC</span>。</li>
+                </ul></div></section><section class="jn-sec jn-sec--note" data-type="note"><h3 class="jn-sec-t"><b>公告</b></h3><div class="jn-sec-b"><div class="nlog-section-title" style="border-left-color:#ff6b6b; background:linear-gradient(90deg, rgba(255,107,107,0.08) 0%, transparent 100%);">📢 二服合併提醒</div>
+                <ul class="nlog-list">
+                  <li>請<span class="nlog-highlight">二服合併玩家</span>私訊官方，提供合併後的<span class="nlog-highlight">原名稱</span>與<span class="nlog-highlight">修改名稱</span>，以利下次<span class="nlog-highlight">週薪發放</span>。</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-28" data-types="balance fix new note"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">28</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span><span class="jn-tag jn-tag--fix">修復</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--balance" data-type="balance"><h3 class="jn-sec-t"><b>平衡</b>內容改動</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>等級開放至 <span class="nlog-highlight">62 等</span></li>
+                </ul></div></section><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>移除內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>移除 <span class="nlog-highlight">七夕</span> 相關活動怪物／道具／七夕防爆卷軸活動</li>
+                </ul></div></section><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>新增內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>新增 <span class="nlog-highlight">飛龍掉落</span></li>
+                  <li>新增 <span class="nlog-highlight">轉生系統</span>（轉生證明 → 點選可飛往轉生地圖狩獵）</li>
+                  <li>新增 <span class="nlog-highlight">異世界轉生 NPC</span></li>
+                  <li>新增 <span class="nlog-highlight">七龍珠系統</span></li>
+                  <li>新增 <span class="nlog-highlight">在線禮包</span> 內容物</li>
+                </ul></div></section><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>修正</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修復 <span class="nlog-highlight">亞丁皇冠</span> 期限問題</li>
+                </ul></div></section><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>贊助</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>新增 <span class="nlog-highlight">9 月累積贊助禮包</span>（開放預購加碼禮包至 <span class="nlog-highlight">09/01</span> 維修前）</li>
+                  <li>為減輕各位壓力～<span class="nlog-highlight">單筆贊助金額獎勵</span> 優化至 <span class="nlog-highlight">累積贊助獎勵</span></li>
+                </ul></div></section><section class="jn-sec jn-sec--note" data-type="note"><h3 class="jn-sec-t"><b>公告</b></h3><div class="jn-sec-b"><div class="nlog-section-title" style="border-left-color:#ff6b6b; background:linear-gradient(90deg, rgba(255,107,107,0.08) 0%, transparent 100%);">🛠 原機房核心 BUG 排除中</div>
+                <ul class="nlog-list">
+                  <li>近期 <span class="nlog-highlight">吉爾塔斯</span> 因不明天氣燥熱等不明緣故，血線低於百分比將強制開啟範圍內 <span class="nlog-highlight">物傷免疫</span></li>
+                  <li style="color:#ff8a80;font-weight:700;">避免各位浪費時間，請各位暫時不要挑戰，修復後會另行通知</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-24" data-types="balance new fix"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">24</span></div><div class="jn-meta"><div class="jn-sub">七夕倒數 4 天</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--balance" data-type="balance"><h3 class="jn-sec-t"><b>平衡</b>平衡調整</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>單身狗活動怪物的 <span class="nlog-highlight">防爆箱</span> 掉落機率再次幅度上調</li>
+                </ul></div></section><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>強化攻略提醒</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>定情物強化建議：先於 <span class="nlog-highlight">+5</span> 時掛上 <span style="color:#ef5350;font-weight:800;text-shadow:0 0 6px rgba(239,83,80,0.5)">紅</span><span style="color:#ffffff;font-weight:800;text-shadow:0 0 6px rgba(255,255,255,0.6)">白</span>防爆卷 防護，再使用 <span class="nlog-highlight">受祝福的對盔甲施法的卷軸</span> 順利衝上 <span class="nlog-highlight">+7</span>；接著 <span class="nlog-highlight">+7 → +8</span> 改掛 <span class="nlog-highlight">祝福防爆卷</span> 防護即可！</li>
+                  <li><span class="nlog-highlight">詛咒防爆卷</span> 與 <span class="nlog-highlight">一般防爆卷</span> 皆有其存在價值，請各位多多利用～</li>
+                  <li>英雄防具強化攻略亦同：<span class="nlog-highlight">+4</span> 時放 <span class="nlog-highlight">詛咒</span> 或 <span class="nlog-highlight">一般防爆卷</span> 即可衝上 <span class="nlog-highlight">+6</span>；<span class="nlog-highlight">祝福防爆卷</span> 珍貴，請各位珍惜運用～</li>
+                </ul></div></section><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>新增</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>官網新增 <span class="nlog-highlight">高技獲取途徑</span> 頁面</li>
+                </ul></div></section><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>修正</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修正 稀有娃娃 <span class="nlog-highlight">黑長者</span> 能力顯示文字</li>
+                  <li>修正 <span class="nlog-highlight">赫卡特</span> 裝備文字顯示</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-19" data-types="new balance fix"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">19</span></div><div class="jn-meta"><div class="jn-sub">七夕公告</div><div class="jn-tags"><span class="jn-tag jn-tag--note">公告</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>七夕同慶</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>祝各位勇者 <span class="nlog-highlight">七夕情人節快樂</span>！</li>
+                  <li>全服發放 <span class="nlog-highlight">職業變身（3日）</span>，每人 ×1</li>
+                </ul></div></section><section class="jn-sec jn-sec--balance" data-type="balance"><h3 class="jn-sec-t"><b>平衡</b>進度預告</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>預計 <span class="nlog-highlight">月底</span> 進行伺服器合併並開放更高等級</li>
+                  <li>開放 <span class="nlog-highlight">轉生系統</span></li>
+                  <li>其餘內容持續規劃中，敬請期待</li>
+                </ul></div></section><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>特別說明</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>本服進度約每 <span class="nlog-highlight">15～30 天</span> 視情況推進，內容豐富，歡迎細細品嘗</li>
+                  <li><span class="nlog-highlight">帝王服</span> 經驗／金幣／掉落倍率將於 <span class="nlog-highlight">08/20</span> 與本服同步</li>
+                  <li>經團隊觀察，分服成效不如預期；後續新開伺服器將採用不同名稱導流，<strong style="color:#ffe060">本服仍會持續加開</strong>，請各位放心遊玩</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-18" data-types="balance fix"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">18</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--balance" data-type="balance"><h3 class="jn-sec-t"><b>平衡</b>數值調整</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>幅度上調 <span class="nlog-highlight">愛情巧克力</span> 掉落機率</li>
+                  <li>幅度上調 <span class="nlog-highlight">BOSS／活動怪物</span> 防爆卷箱子掉落</li>
+                </ul></div></section><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>修正</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修正 <span class="nlog-highlight">龍之心</span> 價格</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-17" data-types="fix"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">17</span></div><div class="jn-meta"><div class="jn-sub">夜間更新</div><div class="jn-tags"><span class="jn-tag jn-tag--fix">修復</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>問題修復</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修復 <span class="nlog-highlight">活動怪物掉落</span> 問題</li>
+                  <li>修復 <span class="nlog-highlight">BOSS 重生表</span> 異常顯示</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-17-20" data-types="new"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">17</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--note">活動</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>新增活動</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>新增 <span class="nlog-highlight">浪漫七夕情人夜</span> 活動</li>
+                  <li>新增 <span class="nlog-highlight">七夕牛郎與織女 · 贊助加碼</span> 活動</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-10" data-types="balance fix new"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">10</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--balance" data-type="balance"><h3 class="jn-sec-t"><b>平衡</b>內容改動</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>調整 <span class="nlog-highlight">手動打寶時段</span> 為 18:30 至隔天 08:00</li>
+                  <li>修正 <span class="nlog-highlight">娃娃</span> 能力異常</li>
+                  <li>上調 <span class="nlog-highlight">噬魂魔核</span> 製作機率</li>
+                  <li>等級開放至 <span class="nlog-highlight">58 等</span></li>
+                  <li>開放 <span class="nlog-highlight">一般變身卡箱</span>、<span class="nlog-highlight">一般娃娃卡箱</span> 交易</li>
+                </ul></div></section><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>新增內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>新增 <span class="nlog-highlight">（活動 BOSS）叛變亞丁之父</span> → 請找傳送師</li>
+                  <li>新增 <span class="nlog-highlight">夢幻之島</span>、<span class="nlog-highlight">遺忘之島</span> 每日任務</li>
+                  <li>新增 <span class="nlog-highlight">赫卡特</span> 獲取方式與強化</li>
+                  <li>新增 <span class="nlog-highlight">傲慢之塔</span> 龍之心掉落</li>
+                  <li>新增 <span class="nlog-highlight">世界 BOSS 裝備</span> 合成 NPC</li>
+                  <li>發放 <span class="nlog-highlight">永久三水</span>（貨幣、蛋糕、綠水）</li>
+                  <li>新增贊助項目 <span class="nlog-highlight">赫卡特禮包</span> $499</li>
+                </ul></div></section><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>官網新增</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>更新 <span class="nlog-highlight">第三期打卡牆</span> 獎品</li>
+                  <li>新增 <span class="nlog-highlight">法師召喚物</span> 介紹頁面</li>
+                  <li>※ 官網右上角有<span class="nlog-highlight">搜尋引擎</span>，歡迎各位多多使用</li>
+                </ul></div></section><section class="jn-sec jn-sec--balance" data-type="balance"><h3 class="jn-sec-t"><b>平衡</b>預告</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li><span class="nlog-highlight">08/11（二）帝王服 20:00 即將開服</span>，歡迎各位多多介紹朋友加入</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-09" data-types="fix balance"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">09</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>新增內容（今日維修後上架）</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>商城新增販售 <span class="nlog-highlight">英雄製作秘笈</span></li>
+                </ul></div></section><section class="jn-sec jn-sec--balance" data-type="balance"><h3 class="jn-sec-t"><b>平衡</b>後續改動預告</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li><span class="nlog-highlight">永久三水</span> 普及化</li>
+                  <li><span class="nlog-highlight">夜間活動</span> 時間延長</li>
+                  <li>開放 <span class="nlog-highlight">一般變身卡箱結晶體</span>、<span class="nlog-highlight">一般娃娃卡箱結晶體</span> 交易</li>
+                  <li>以上將於下周改動後統一公告</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-05" data-types="balance fix"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">05</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--balance" data-type="balance"><h3 class="jn-sec-t"><b>平衡</b>數值調整</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>調整每日任務 <span class="nlog-highlight">名譽貨幣</span>、<span class="nlog-highlight">巧克力蛋糕</span> 兌換數量</li>
+                </ul></div></section><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>修正 / 新增</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修改 <span class="nlog-highlight">活動地圖</span> 破圖問題</li>
+                  <li><span class="nlog-highlight">英雄製作秘笈碎片</span> 於道具製作「西方失敗」製作合成</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-04" data-types="balance fix note"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">04</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span><span class="jn-tag jn-tag--fix">修復</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--balance" data-type="balance"><h3 class="jn-sec-t"><b>平衡</b>數值調整</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>上調 <span class="nlog-highlight">威力彩 / 獸魂升階石</span> 掉落機率</li>
+                  <li>上調 <span class="nlog-highlight">祝福強化卷軸</span> 掉落機率</li>
+                  <li>上調 <span class="nlog-highlight">夜間活動</span> 整體掉落</li>
+                </ul></div></section><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>問題修復</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修復 <span class="nlog-highlight">槍</span> 攻擊距離問題</li>
+                </ul></div></section><section class="jn-sec jn-sec--note" data-type="note"><h3 class="jn-sec-t"><b>公告</b></h3><div class="jn-sec-b"><div class="nlog-section-title" style="border-left-color:#ff6b6b; background:linear-gradient(90deg, rgba(255,107,107,0.08) 0%, transparent 100%);">📢 貼心叮嚀</div>
+                <ul class="nlog-list">
+                  <li>官方持續觀察後台數據，<span class="nlog-highlight">滾動式調整</span>各項數值，請放心遊玩！</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-03" data-types="fix note"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">03</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span><span class="jn-tag jn-tag--fix">修復</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>修正 / 修復</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修正 <span class="nlog-highlight">古魯丁地監</span> 證明掉落機率</li>
+                  <li>修復 <span class="nlog-highlight">夜間福利 NPC</span> 對話功能</li>
+                  <li>喝水檔使用 <span class="nlog-highlight">名譽貨幣</span> 優化</li>
+                  <li>體恤上班族，調整 <span class="nlog-highlight">夜間福利</span> 開放進場時間為 <span class="nlog-highlight">18:30 ~ 21:30</span></li>
+                </ul></div></section><section class="jn-sec jn-sec--note" data-type="note"><h3 class="jn-sec-t"><b>公告</b></h3><div class="jn-sec-b"><div class="nlog-section-title" style="border-left-color:#ff6b6b; background:linear-gradient(90deg, rgba(255,107,107,0.08) 0%, transparent 100%);">📢 貼心叮嚀</div>
+                <ul class="nlog-list">
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-02" data-types="balance new fix"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">02</span></div><div class="jn-meta"><div class="jn-sub">更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span><span class="jn-tag jn-tag--fix">修復</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--balance" data-type="balance"><h3 class="jn-sec-t"><b>平衡</b>數值調整</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>上調部分地圖 <span class="nlog-highlight">怪物數量</span></li>
+                </ul></div></section><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>新增內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>夜間福利怪物新增掉落 <span class="nlog-highlight">英雄製作秘笈</span> 及 <span class="nlog-highlight">英雄製作秘笈碎片</span></li>
+                </ul></div></section><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>問題修復</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修復喝水檔中 <span class="nlog-highlight">聖物</span> 及 <span class="nlog-highlight">經驗藥水</span> 無法自動施放的問題</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-02-27" data-types="new"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">02</span></div><div class="jn-meta"><div class="jn-sub">夜間更新</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>更新內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>喝水檔補釘包已放置於 <a href="download.html" style="color:#60e8a0;text-decoration:underline;">檔案下載</a></li>
+                  <li>上調推廣商人 <span class="nlog-highlight">名譽貨幣</span> 及 <span class="nlog-highlight">巧克力蛋糕</span> 數量</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-08-01" data-types="new note balance"><header class="jn-hd"><div class="jn-big"><span class="m">08</span><i>/</i><span class="d">01</span></div><div class="jn-meta"><div class="jn-sub">⚡ 下次更新預告</div><div class="jn-tags"><span class="jn-tag jn-tag--note">預告</span><span class="jn-tag jn-tag--balance">更新</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b></h3><div class="jn-sec-b"><div class="nlog-section-title" style="border-left-color:#d4a820; background:linear-gradient(90deg, rgba(212,168,32,0.1) 0%, transparent 100%);">⚔ 即將開放內容</div>
+                <ul class="nlog-list">
+                  <li>開放等級上限至 <span class="nlog-highlight">Lv.58</span></li>
+                  <li>新增 <span class="nlog-highlight">BOSS 王裝製作</span> 系統</li>
+                  <li>新增 BOSS <span class="nlog-highlight">赫卡特</span></li>
+                  <li>上調 <span class="nlog-highlight">神獸之卵（自選包）</span> 抽抽樂中獎機率至 <span style="color:#ffd700;font-weight:700;">8%</span></li>
+                  <li>上調 <span class="nlog-highlight">Lv.1 威力彩選號</span> 抽抽樂中獎機率至 <span style="color:#ffd700;font-weight:700;">8%</span></li>
+                </ul></div></section><section class="jn-sec jn-sec--note" data-type="note"><h3 class="jn-sec-t"><b>公告</b></h3><div class="jn-sec-b"><div class="nlog-section-title" style="border-left-color:#ff6b6b; background:linear-gradient(90deg, rgba(255,107,107,0.08) 0%, transparent 100%);">📢 貼心叮嚀</div>
+                <ul class="nlog-list">
+                  <li style="color:#ff8a80; font-weight:700; font-size:0.92rem;">尚未登記<span style="color:#ffd700;">「週薪 3,000」</span>的玩家，請盡速私訊官方提供 <span style="color:#fff; background:rgba(255,255,255,0.08); padding:2px 8px; border-radius:4px;">帳號 + ID</span>，以免錯過福利！</li>
+                </ul></div></section><section class="jn-sec jn-sec--balance" data-type="balance"><h3 class="jn-sec-t"><b>平衡</b>線上更新</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>調整 <span class="nlog-highlight">威力彩選號抽抽樂</span> 機率</li>
+                  <li>調整 <span class="nlog-highlight">神獸之卵抽抽樂</span> 機率</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-07-29" data-types="new"><header class="jn-hd"><div class="jn-big"><span class="m">07</span><i>/</i><span class="d">29</span></div><div class="jn-meta"><div class="jn-sub">封測期間更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span><span class="jn-tag jn-tag--note">活動</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>新增內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>新增 <span class="nlog-highlight">18:30~19:30 夜間福利 NPC</span>，詳情請見 <a href="feature-night-welfare.html" style="color:#60e8a0;text-decoration:underline;">活動資訊 — 夜間福利</a></li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-07-27" data-types="fix new"><header class="jn-hd"><div class="jn-big"><span class="m">07</span><i>/</i><span class="d">27</span></div><div class="jn-meta"><div class="jn-sub">封測期間更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span><span class="jn-tag jn-tag--note">系統</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>移除內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>移除 <span class="nlog-highlight">行動傳送</span> 底比斯提卡爾城郭傳送</li>
+                </ul></div></section><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>新增內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>新增 <span class="nlog-highlight">魔核批量製作</span></li>
+                  <li>新增 <span class="nlog-highlight">噬魂鑽 NPC 販售商品</span></li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-07-22" data-types="skill fix"><header class="jn-hd"><div class="jn-big"><span class="m">07</span><i>/</i><span class="d">22</span></div><div class="jn-meta"><div class="jn-sub">封測期間更新歷程</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span><span class="jn-tag jn-tag--fix">修復</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--skill" data-type="skill"><h3 class="jn-sec-t"><b>技能</b>掉率調整</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>上調 <span class="nlog-highlight">地圖證明</span> 掉落機率</li>
+                </ul></div></section><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>問題修復</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修復 <span class="nlog-highlight">名譽貨幣</span> / <span class="nlog-highlight">LH點</span> 即消失問題</li>
+                </ul></div></section></div></article><article class="jn-entry" id="u-07-21" data-types="skill fix new"><header class="jn-hd"><div class="jn-big"><span class="m">07</span><i>/</i><span class="d">21</span></div><div class="jn-meta"><div class="jn-sub">封測更新內容</div><div class="jn-tags"><span class="jn-tag jn-tag--balance">更新</span><span class="jn-tag jn-tag--note">系統</span><span class="jn-tag jn-tag--note">活動</span></div></div><div class="jn-step"><button class="jn-prev" aria-label="較舊">‹ 較舊</button><button class="jn-next" aria-label="較新">較新 ›</button></div></header><div class="jn-body"><section class="jn-sec jn-sec--skill" data-type="skill"><h3 class="jn-sec-t"><b>技能</b>技能書掉率調整</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>上調 <span class="nlog-em">三重矢</span>、<span class="nlog-em">衝擊之暈</span>、<span class="nlog-em">聖結界</span>、<span class="nlog-em">魂體轉換</span>、<span class="nlog-em">雙重破壞</span> 掉落機率</li>
+                </ul></div></section><section class="jn-sec jn-sec--fix" data-type="fix"><h3 class="jn-sec-t"><b>修復</b>系統修復</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>修復 <span class="nlog-highlight">神話變身</span> 合成機率</li>
+                  <li>修復 <span class="nlog-highlight">BOSS 裝備</span> 祝福效果</li>
+                </ul></div></section><section class="jn-sec jn-sec--new" data-type="new"><h3 class="jn-sec-t"><b>新增</b>新增內容</h3><div class="jn-sec-b"><ul class="nlog-list">
+                  <li>新增 <span class="nlog-highlight">福利大反饋</span> — 每人週週領 <span class="nlog-em">3,000 商城鑽</span></li>
+                  <li>新增 <span class="nlog-highlight">1,000~30,000 累計禮包</span></li>
+                </ul></div></section></div></article></div></div></div></main>
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script><script>
+(function(){
+  var jn=document.getElementById('jn'); if(!jn) return;
+  jn.classList.add('js');
+  var items=[].slice.call(jn.querySelectorAll('.jn-item')), ents=[].slice.call(jn.querySelectorAll('.jn-entry')),
+      chips=[].slice.call(jn.querySelectorAll('.jn-chip')), flt='all', cur=null;
+  function vis(){return items.filter(function(i){return !i.classList.contains('is-hide')});}
+  function show(id,push){
+    var e=document.getElementById(id); if(!e) return; cur=id;
+    ents.forEach(function(x){x.classList.toggle('is-on',x===e);});
+    items.forEach(function(i){i.classList.toggle('is-on',i.dataset.id===id);});
+    [].slice.call(e.querySelectorAll('.jn-sec')).forEach(function(s){s.style.display=(flt==='all'||s.dataset.type===flt)?'':'none';});
+    var v=vis(), k=v.map(function(i){return i.dataset.id}).indexOf(id);
+    e.querySelector('.jn-next').disabled=(k<=0); e.querySelector('.jn-prev').disabled=(k<0||k>=v.length-1);
+    var a=jn.querySelector('.jn-item.is-on'); if(a&&a.scrollIntoView&&window.innerWidth>860){var r=document.getElementById('jnRail'); r.scrollTop=a.offsetTop-r.clientHeight/3;}
+    if(push&&history.replaceState) history.replaceState(null,'','#'+id);
+  }
+  function step(d){var v=vis(),k=v.map(function(i){return i.dataset.id}).indexOf(cur); var n=v[k+d]; if(n) show(n.dataset.id,true);}
+  items.forEach(function(i){i.addEventListener('click',function(){show(i.dataset.id,true);});});
+  ents.forEach(function(e){e.querySelector('.jn-prev').addEventListener('click',function(){step(1);});e.querySelector('.jn-next').addEventListener('click',function(){step(-1);});});
+  chips.forEach(function(c){c.addEventListener('click',function(){
+    flt=c.dataset.f; chips.forEach(function(x){x.classList.toggle('is-on',x===c);});
+    items.forEach(function(i){i.classList.toggle('is-hide',flt!=='all'&&i.dataset.types.split(' ').indexOf(flt)<0);});
+    var v=vis(); if(!v.length) return;
+    var keep=v.filter(function(i){return i.dataset.id===cur})[0]; show((keep||v[0]).dataset.id,true);
+  });});
+  document.addEventListener('keydown',function(ev){if(ev.target&&/INPUT|TEXTAREA/.test(ev.target.tagName))return; if(ev.key==='ArrowRight')step(-1); else if(ev.key==='ArrowLeft')step(1);});
+  var h=location.hash.replace('#',''); show(document.getElementById(h)?h:ents[0].id,false);
+})();
+</script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>職業介紹與特殊技能 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    .skill-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; margin-bottom:16px; }
+    .skill-card {
+      background:linear-gradient(135deg,#1e0e10,#17090b 60%,#1c0b0e);
+      border:1px solid #2f171b; border-radius:2px; overflow:hidden;
+      transition:border-color 0.2s,transform 0.2s;
+    }
+    .skill-card:hover { border-color:var(--gold-dim); transform:translateY(-3px); }
+    .skill-card__head {
+      padding:16px 18px; border-bottom:1px solid #2f171b;
+      display:flex; align-items:center; gap:12px;
+    }
+    .skill-card__icons { display:flex; gap:4px; }
+    .skill-card__icons img { width:36px; height:36px; border-radius:2px; border:1px solid #401f24; }
+    .skill-card__name { font-family:'Noto Serif TC',serif; font-size:1rem; font-weight:700; color:var(--text-bright); }
+    .skill-card__class { font-size:0.7rem; color:var(--gold-dim); font-family:'Cinzel',serif; margin-top:2px; }
+    .skill-card__body { padding:14px 18px; }
+    .skill-stat { display:flex; justify-content:space-between; font-size:0.82rem; padding:5px 0; border-bottom:1px solid #271316; }
+    .skill-stat:last-of-type { border-bottom:none; }
+    .skill-stat__k { color:var(--text-dim); }
+    .skill-stat__v { font-weight:700; color:var(--text-bright); }
+    .skill-stat__v--red { color:#ff8080; }
+    .skill-stat__v--gold { color:#ffe060; }
+    .skill-stat__v--green { color:#80cbc4; }
+
+    .class-sec { margin-bottom:32px; }
+    .class-sec__head {
+      display:flex; align-items:center; gap:12px;
+      padding:12px 18px; margin-bottom:14px;
+      border-left:4px solid; border-radius:0 2px 2px 0;
+    }
+    .class-sec__head--royal { background:linear-gradient(90deg,rgba(212,168,32,0.1),transparent); border-color:var(--gold); }
+    .class-sec__head--knight { background:linear-gradient(90deg,rgba(200,0,0,0.1),transparent); border-color:#c62828; }
+    .class-sec__head--elf { background:linear-gradient(90deg,rgba(0,200,100,0.1),transparent); border-color:#2e7d32; }
+    .class-sec__head--wizard { background:linear-gradient(90deg,rgba(100,180,255,0.1),transparent); border-color:#1565c0; }
+    .class-sec__head--darkelf { background:linear-gradient(90deg,rgba(204,0,34,0.1),transparent); border-color:#cc0022; }
+    .class-sec__title { font-family:'Noto Serif TC',serif; font-size:1.05rem; font-weight:700; color:var(--text-bright); }
+    .class-sec__desc {
+      padding:0 18px 16px; font-size:0.88rem; line-height:1.7; color:#d4c8a0;
+    }
+    .class-sec__desc strong { color:#ffe060; }
+
+    /* ─── 職業優化銘牌（皇家詔令風格） ─── */
+    .class-decree {
+      margin:0 18px 18px; padding:16px 20px;
+      background:linear-gradient(135deg,#190b0d 0%,#210f12 50%,#190b0d 100%);
+      border:1px solid #411f25; border-radius:4px;
+      position:relative; overflow:hidden;
+    }
+    .class-decree::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg,transparent,#c9a96e 30%,#ffe89a 50%,#c9a96e 70%,transparent);
+    }
+    .class-decree::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg,transparent,#562931 50%,transparent);
+    }
+    .class-decree__crown {
+      display:flex; align-items:center; gap:8px; margin-bottom:10px;
+      font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:2px;
+      color:#c9a96e; text-transform:uppercase;
+    }
+    .class-decree__crown::before { content:'◆'; font-size:0.6rem; }
+    .class-decree__crown::after { content:'◆'; font-size:0.6rem; }
+    .class-decree__list { list-style:none; padding:0; margin:0; }
+    .class-decree__list li {
+      display:flex; align-items:baseline; gap:10px;
+      padding:7px 0; border-bottom:1px solid #291317;
+      font-size:0.84rem; line-height:1.5;
+    }
+    .class-decree__list li:last-child { border-bottom:none; }
+    .class-decree__icon {
+      flex-shrink:0; width:18px; text-align:center;
+      font-size:0.7rem; color:#c9a96e;
+    }
+    .class-decree__skill {
+      font-weight:700; color:#ffffff; margin-right:6px;
+      font-family:'Noto Serif TC',serif;
+    }
+    .class-decree__val { color:#80cbc4; }
+    .class-decree__val--red { color:#ff8080; }
+    .class-decree__val--gold { color:#ffe060; }
+    .class-decree__note {
+      display:block; margin-top:8px; padding-top:8px;
+      border-top:1px dashed #411f25; font-size:0.78rem; color:#a090c0;
+    }
+    .class-decree__note strong { color:#ffe060; font-weight:700; }
+
+    @media(max-width:600px) { .skill-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — CLASS SKILLS</p>
+    <h1 class="page-hero__title">職業介紹<span>與特殊技能</span></h1>
+    <p class="page-hero__sub">各職業定位解析與專屬強力技能，掌握戰場主導權</p>
+  </div>
+
+  <main class="fp-wrap">
+
+    <p class="fp-heading">◆ 系統說明</p>
+    <div class="fp-intro">
+      本伺服器針對各職業設計了專屬的強大技能，獲取對應技能書後即可學習。<br>
+      <strong style="color:#ff8080;">獲取管道：噬魂棒棒糖每日兌換站</strong>
+    </div>
+
+    <!-- ═══ 王族 ═══ -->
+    <div class="class-sec">
+      <div class="class-sec__head class-sec__head--royal">
+        <div class="class-sec__title">王族</div>
+      </div>
+      <div class="class-sec__desc">
+        各軍統領，凝結勢力的<strong>核心職業</strong>。王族是血盟的靈魂，帶領成員攻城掠地、號令三軍。
+      </div>
+      <div class="class-decree">
+        <div class="class-decree__crown">職業優化</div>
+        <ul class="class-decree__list">
+          <li><span class="class-decree__icon">⚔</span><span class="class-decree__skill">PVP 傷害</span><span class="class-decree__val--gold">優化 1.3 倍</span></li>
+          <li><span class="class-decree__icon">🐉</span><span class="class-decree__skill">對怪物傷害</span><span class="class-decree__val--red">優化 1.5 倍</span></li>
+          <li><span class="class-decree__icon">👑</span><span class="class-decree__skill">王族專用裝備</span><span class="class-decree__val">王族魅力（出生即贈送）</span></li>
+        </ul>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card">
+          <div class="skill-card__head">
+            <div class="skill-card__icons">
+              <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAICf2mFNbUGBxu5OoiC5yo1bLNCVGJJAAJIDWsbRXEwVPZif_LulbBpAQADAgADbQADOAQ.png" alt="" loading="lazy">
+              <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAICgGmFNdcULUp73HaXc3P5sD4kp366AAJJDWsbRXEwVBsiWcJkHtk9AQADAgADbQADOAQ.png" alt="" loading="lazy">
+            </div>
+            <div>
+              <div class="skill-card__name">王者之劍（衝暈）</div>
+              <div class="skill-card__class">ROYAL · LV.54</div>
+            </div>
+          </div>
+          <div class="skill-card__body">
+            <div class="skill-stat"><span class="skill-stat__k">技能效果</span><span class="skill-stat__v">五格距離衝暈，<span class="skill-stat__v--red">不限定武器</span></span></div>
+            <div class="skill-stat"><span class="skill-stat__k">持續時間</span><span class="skill-stat__v skill-stat__v--gold">2 ~ 5 秒</span></div>
+            <div class="skill-stat"><span class="skill-stat__k">消耗</span><span class="skill-stat__v">MP 45</span></div>
+            <div class="skill-stat"><span class="skill-stat__k">冷卻時間</span><span class="skill-stat__v skill-stat__v--green">10 秒</span></div>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card__head">
+            <div class="skill-card__icons">
+              <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAICf2mFNbUGBxu5OoiC5yo1bLNCVGJJAAJIDWsbRXEwVPZif_LulbBpAQADAgADbQADOAQ.png" alt="" loading="lazy">
+              <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAICemmFNWot2QnsbCefg9L0L5rcjmr5AAJCDWsbRXEwVFMln5UeZLcbAQADAgADbQADOAQ.png" alt="" loading="lazy">
+            </div>
+            <div>
+              <div class="skill-card__name">霸體</div>
+              <div class="skill-card__class">ROYAL · LV.58</div>
+            </div>
+          </div>
+          <div class="skill-card__body">
+            <div class="skill-stat"><span class="skill-stat__k">技能效果</span><span class="skill-stat__v">短時間內增加大量傷害減免</span></div>
+            <div class="skill-stat"><span class="skill-stat__k">持續時間</span><span class="skill-stat__v skill-stat__v--gold">63 秒</span></div>
+            <div class="skill-stat"><span class="skill-stat__k">冷卻時間</span><span class="skill-stat__v skill-stat__v--green">6 秒</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 騎士 ═══ -->
+    <div class="class-sec">
+      <div class="class-sec__head class-sec__head--knight">
+        <div class="class-sec__title">騎士</div>
+      </div>
+      <div class="class-sec__desc">
+        PVP 扛傷之王！承受傷害、控制戰場的<strong>團戰靈魂人物</strong>。前排扛線無人能替，隊伍少了騎士等於少了一面牆。
+      </div>
+      <div class="class-decree">
+        <div class="class-decree__crown">職業優化</div>
+        <ul class="class-decree__list">
+          <li><span class="class-decree__icon">🔥</span><span class="class-decree__skill">狂襲</span><span class="class-decree__val--gold">攻擊與傷害減免計算優化</span></li>
+          <li><span class="class-decree__icon">🛡</span><span class="class-decree__skill">基礎抗擊打</span><span class="class-decree__val">騎士基礎抗擊打能力優化</span></li>
+          <li><span class="class-decree__icon">⚡</span><span class="class-decree__skill">反擊屏障</span><span class="class-decree__val--red">限定雙手武器使用</span></li>
+        </ul>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card">
+          <div class="skill-card__head">
+            <div class="skill-card__icons">
+              <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAICe2mFNYHLi61SJsEwtWsX05_ONI5gAAJDDWsbRXEwVNARXjbpjxbrAQADAgADbQADOAQ.png" alt="" loading="lazy">
+              <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAICdmmFNS9pMbRIv103BunhWd2E0D6gAAI-DWsbRXEwVC_dNWAfG78zAQADAgADbQADOAQ.png" alt="" loading="lazy">
+            </div>
+            <div>
+              <div class="skill-card__name">狂襲</div>
+              <div class="skill-card__class">KNIGHT · LV.58</div>
+            </div>
+          </div>
+          <div class="skill-card__body">
+            <div class="skill-stat"><span class="skill-stat__k">技能效果</span><span class="skill-stat__v">釋放體內火焰，短時間傷害提升</span></div>
+            <div class="skill-stat"><span class="skill-stat__k">持續時間</span><span class="skill-stat__v skill-stat__v--gold">32 秒</span></div>
+            <div class="skill-stat"><span class="skill-stat__k">冷卻時間</span><span class="skill-stat__v skill-stat__v--green">10 秒</span></div>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card__head">
+            <div class="skill-card__icons">
+              <img src="../assets/images/skill-20809.png" alt="" loading="lazy">
+            </div>
+            <div>
+              <div class="skill-card__name">反擊屏障</div>
+              <div class="skill-card__class">KNIGHT · <span style="color:#ff8080;">限定雙手武器使用</span></div>
+            </div>
+          </div>
+          <div class="skill-card__body">
+            <div class="skill-stat"><span class="skill-stat__k">技能效果</span><span class="skill-stat__v">展開防禦屏障，反彈受到的傷害</span></div>
+            <div class="skill-stat"><span class="skill-stat__k">使用限制</span><span class="skill-stat__v skill-stat__v--red">限定雙手武器</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 妖精 ═══ -->
+    <div class="class-sec">
+      <div class="class-sec__head class-sec__head--elf">
+        <div class="class-sec__title">妖精</div>
+      </div>
+      <div class="class-sec__desc">
+        近遠傷害兩相宜，CC 控制也有一席之地。弓箭遠程輸出兼具控場能力，<strong>攻守轉換靈活</strong>。
+      </div>
+      <div class="class-decree">
+        <div class="class-decree__crown">職業優化</div>
+        <ul class="class-decree__list">
+          <li><span class="class-decree__icon">🌿</span><span class="class-decree__skill">職業之力</span><span class="class-decree__val--gold">技能與傷害皆於「職業之力」優化</span></li>
+        </ul>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card">
+          <div class="skill-card__head">
+            <div class="skill-card__icons">
+              <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAICfmmFNaiDh-XT2vyDwdyVT_uZFvgkAAJGDWsbRXEwVMNeZhfiHuq6AQADAgADbQADOAQ.png" alt="" loading="lazy">
+              <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAICeWmFNVnGFVI0ib6RzTWWNlOEWhwCAAJBDWsbRXEwVJ2dcX1QsdNHAQADAgADbQADOAQ.png" alt="" loading="lazy">
+            </div>
+            <div>
+              <div class="skill-card__name">精靈之暈</div>
+              <div class="skill-card__class">ELF · LV.58</div>
+            </div>
+          </div>
+          <div class="skill-card__body">
+            <div class="skill-stat"><span class="skill-stat__k">技能效果</span><span class="skill-stat__v">十格距離衝暈，<span class="skill-stat__v--red">限定弓箭</span></span></div>
+            <div class="skill-stat"><span class="skill-stat__k">持續時間</span><span class="skill-stat__v skill-stat__v--gold">1 ~ 2 秒</span></div>
+            <div class="skill-stat"><span class="skill-stat__k">消耗</span><span class="skill-stat__v">MP 50</span></div>
+            <div class="skill-stat"><span class="skill-stat__k">冷卻時間</span><span class="skill-stat__v skill-stat__v--green">5 秒</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 法師 ═══ -->
+    <div class="class-sec">
+      <div class="class-sec__head class-sec__head--wizard">
+        <div class="class-sec__title">法師</div>
+      </div>
+      <div class="class-sec__desc">
+        戰場法術專家，控制輔助兼備，<strong>傷害無人取代</strong>。範圍魔法清場、單體控制鎖人，團戰核心輸出。
+      </div>
+      <div class="class-decree">
+        <div class="class-decree__crown">職業優化</div>
+        <ul class="class-decree__list">
+          <li><span class="class-decree__icon">🐂</span><span class="class-decree__skill">巨大牛人</span><span class="class-decree__val--gold">召喚物優化</span></li>
+          <li><span class="class-decree__icon">👹</span><span class="class-decree__skill">變形怪首領</span><span class="class-decree__val--gold">召喚物優化</span></li>
+          <li><span class="class-decree__icon">🐆</span><span class="class-decree__skill">黑豹</span><span class="class-decree__val--gold">召喚物優化</span></li>
+        </ul>
+        <span class="class-decree__note"><strong>「職業之力」為核心重點！建議升級為第一首選</strong></span>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card">
+          <div class="skill-card__head">
+            <div class="skill-card__icons">
+              <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAICfGmFNYzK0JnJ00yR3vMr9NlKslsbAAJEDWsbRXEwVOLBBEgfbpUjAQADAgADbQADOAQ.png" alt="" loading="lazy">
+              <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAICd2mFNT5yiAuV1PmyKdZlHkfj-feZAAI_DWsbRXEwVB2C9tnCUV8WAQADAgADbQADOAQ.png" alt="" loading="lazy">
+            </div>
+            <div>
+              <div class="skill-card__name">力場</div>
+              <div class="skill-card__class">WIZARD · LV.58</div>
+            </div>
+          </div>
+          <div class="skill-card__body">
+            <div class="skill-stat"><span class="skill-stat__k">技能效果</span><span class="skill-stat__v">控制結界，目標<span class="skill-stat__v--red">無法瞬移</span></span></div>
+            <div class="skill-stat"><span class="skill-stat__k">持續時間</span><span class="skill-stat__v skill-stat__v--gold">2 ~ 5 秒</span></div>
+            <div class="skill-stat"><span class="skill-stat__k">冷卻時間</span><span class="skill-stat__v skill-stat__v--green">6 秒</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 黑暗妖精 ═══ -->
+    <div class="class-sec">
+      <div class="class-sec__head class-sec__head--darkelf">
+        <div class="class-sec__title">黑暗妖精</div>
+      </div>
+      <div class="class-sec__desc">
+        殺人於無形，<strong>暗殺瞬間爆發的刺客</strong>。隱身接近、一擊致命，PVP 最令人恐懼的存在。
+      </div>
+      <div class="class-decree">
+        <div class="class-decree__crown">職業優化</div>
+        <ul class="class-decree__list">
+          <li><span class="class-decree__icon">⚔</span><span class="class-decree__skill">雙重破壞</span><span class="class-decree__val--red">33% 機率造成 2.0 倍傷害</span></li>
+          <li><span class="class-decree__icon">💨</span><span class="class-decree__skill">暗影閃避</span><span class="class-decree__val--gold">增加 50% 閃避率</span></li>
+          <li><span class="class-decree__icon">💀</span><span class="class-decree__skill">破壞盔甲</span><span class="class-decree__val--red">目標受到額外 58% 傷害（僅對玩家有效）</span></li>
+        </ul>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card">
+          <div class="skill-card__head">
+            <div class="skill-card__icons">
+              <div style="display:inline-block;padding:18px 26px;border:1px dashed rgba(227,172,44,.6);border-radius:8px;color:#e6d2b0;font-size:.9rem">QR Code · 開服前公布</div>
+              <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAICeGmFNUqPQZXk3D2jHP-CS9GoZgABogACQA1rG0VxMFSf14PlhimosAEAAwIAA20AAzgE.png" alt="" loading="lazy">
+            </div>
+            <div>
+              <div class="skill-card__name">復仇</div>
+              <div class="skill-card__class">DARK ELF · LV.58</div>
+            </div>
+          </div>
+          <div class="skill-card__body">
+            <div class="skill-stat"><span class="skill-stat__k">技能效果</span><span class="skill-stat__v">給予對手致命一擊</span></div>
+            <div class="skill-stat"><span class="skill-stat__k">消耗</span><span class="skill-stat__v"><span class="skill-stat__v--red">HP 400</span> / MP 100</span></div>
+            <div class="skill-stat"><span class="skill-stat__k">冷卻時間</span><span class="skill-stat__v skill-stat__v--green">12 秒</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

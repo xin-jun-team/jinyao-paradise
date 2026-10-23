@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>威力彩選號 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    .reward-table { width:100%; border-collapse:collapse; font-size:0.82rem; }
+    .reward-table th { background:linear-gradient(90deg,rgba(212,168,32,0.2),rgba(212,168,32,0.08)); color:var(--gold-dim); font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.12em; padding:10px 16px; border:1px solid #401f24; text-align:left; }
+    .reward-table td { background:#1b0b0e; padding:10px 16px; border:1px solid #2f171b; color:var(--text-dim); }
+    .reward-table tr:nth-child(even) td { background:#1d0d10; }
+    .reward-table tr:hover td { background:#281216; }
+    .reward-table td:first-child { color:var(--text-bright); }
+
+    .info-grid { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:28px; }
+    .info-card { background:linear-gradient(135deg,#2e1217,#261014); border:1px solid rgba(212,168,32,0.25); border-radius:2px; padding:12px 20px; flex:1; min-width:160px; }
+    .info-card__label { font-size:0.7rem; color:#7a6030; display:block; margin-bottom:4px; letter-spacing:0.08em; }
+    .info-card__val { font-family:'Cinzel',serif; font-size:1rem; font-weight:700; color:#ffe060; }
+
+    .success-badge { display:inline-block; background:rgba(0,200,100,0.12); color:#00c864; padding:5px 16px; border-radius:20px; font-size:0.85em; font-weight:700; border:1px solid rgba(0,200,100,0.25); margin-top:4px; }
+
+    .tier-star { color:#9334e6; font-weight:700; }
+    .tier-max { color:#c9a96e; font-weight:700; }
+    .stat-purple { color:#b39ddb; }
+    .stat-gold { color:#c9a96e; font-weight:700; }
+    .rate-high { color:#66bb6a; font-family:'Cinzel',serif; font-weight:700; }
+    .rate-mid { color:#64b5f6; font-family:'Cinzel',serif; font-weight:700; }
+    .rate-low { color:#9334e6; font-family:'Cinzel',serif; font-weight:700; }
+    .rate-rare { color:#c9a96e; font-family:'Cinzel',serif; font-weight:700; }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — HEXAGRAM BADGE</p>
+    <h1 class="page-hero__title">威力彩<span>選號</span></h1>
+    <p class="page-hero__sub">強力徽章系統，多層屬性強化，提升全角色基礎戰力</p>
+  </div>
+
+  <main class="fp-wrap">
+
+    <p class="fp-heading">🔯 系統說明</p>
+    <div class="fp-intro">
+      <strong>威力彩選號</strong>是可裝備的強化道具，透過升階石逐步提升徽章等級，解鎖更多屬性加成。<br>
+      從 Lv.7 起將額外獲得力量、敏捷、智力屬性加成，是提升全角色基礎戰力的關鍵裝備。
+    </div>
+
+    <p class="fp-heading" style="margin-top:48px;">🎰 威力彩抽抽樂</p>
+    <div style="text-align:center;margin-bottom:20px;"><img src="../assets/images/item-9022.png" alt="威力彩抽抽樂" style="width:64px;height:64px;image-rendering:pixelated;filter:drop-shadow(0 0 12px rgba(212,168,32,0.4));"></div>
+    <table class="reward-table">
+      <thead>
+        <tr>
+          <th>物品</th>
+          <th>數量</th>
+          <th>機率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>威力彩中獎升階石</td>
+          <td>1 ~ 3</td>
+          <td><span class="rate-high">60%</span></td>
+        </tr>
+        <tr>
+          <td>防止噴物品（帶幾個防噴幾個）</td>
+          <td>1 ~ 5</td>
+          <td><span class="rate-mid">20%</span></td>
+        </tr>
+        <tr>
+          <td>防具粉末</td>
+          <td>50</td>
+          <td><span class="rate-mid">7.5%</span></td>
+        </tr>
+        <tr>
+          <td>飾品粉末</td>
+          <td>50</td>
+          <td><span class="rate-mid">7.5%</span></td>
+        </tr>
+        <tr>
+          <td>Lv.1 威力彩選號</td>
+          <td>1</td>
+          <td><span class="rate-low">8%</span></td>
+        </tr>
+        <tr>
+          <td><span class="tier-max">Lv.10 威力彩頭獎</span></td>
+          <td>1</td>
+          <td><span class="rate-rare">0.1%</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="fp-heading">🛠️ 升級資訊</p>
+    <div class="info-grid">
+      <div class="info-card"><span class="info-card__label">升級道具</span><span class="info-card__val">威力彩中獎升階石</span></div>
+      <div class="info-card"><span class="info-card__label">每次消耗</span><span class="info-card__val">30,000 天幣</span></div>
+      <div class="info-card"><span class="info-card__label">取得方式</span><span class="info-card__val">地底湖或藍鑽商城</span></div>
+      <div class="info-card"><span class="info-card__label">失敗機制</span><span class="info-card__val"><span class="success-badge">✔ 失敗不退階</span></span></div>
+    </div>
+
+    <p class="fp-heading">📊 徽章等級能力表</p>
+    <table class="reward-table">
+      <thead>
+        <tr>
+          <th>等級</th>
+          <th>能力加成（完整累加數值）</th>
+          <th>升階機率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lv.1</td>
+          <td>防禦-1, 近/遠命中+1, HP+30, MP+10</td>
+          <td><span class="rate-high">30%</span></td>
+        </tr>
+        <tr>
+          <td>Lv.2</td>
+          <td>防禦-2, 魔防+1, 近/遠命中+1, 近/遠傷+1, HP+70, MP+15</td>
+          <td><span class="rate-high">20%</span></td>
+        </tr>
+        <tr>
+          <td>Lv.3</td>
+          <td>防禦-2, 魔防+2, 近/遠命中+2, 近/遠傷+2, HP+90, MP+20</td>
+          <td><span class="rate-high">20%</span></td>
+        </tr>
+        <tr>
+          <td>Lv.4</td>
+          <td>防禦-2, 魔防+3, 近/遠命中+3, 近/遠傷+3, HP+110, MP+25</td>
+          <td><span class="rate-mid">10%</span></td>
+        </tr>
+        <tr>
+          <td>Lv.5</td>
+          <td>防禦-2, 魔防+4, 近/遠命中+4, 近/遠傷+4, 魔攻+1, HP+130, MP+30</td>
+          <td><span class="rate-mid">8%</span></td>
+        </tr>
+        <tr>
+          <td>Lv.6</td>
+          <td>防禦-2, 魔防+5, 近/遠命中+5, 近/遠傷+5, 魔攻+2, HP+150, MP+35</td>
+          <td><span class="rate-mid">5%</span></td>
+        </tr>
+        <tr>
+          <td><span class="tier-star">★ Lv.7</span></td>
+          <td><span class="stat-purple">力敏智+1,</span> 防禦-2, 魔防+6, 近/遠命中+5, 近/遠傷+5, 魔攻+2, HP+170, MP+40</td>
+          <td><span class="rate-low">3%</span></td>
+        </tr>
+        <tr>
+          <td><span class="tier-star">★ Lv.8</span></td>
+          <td><span class="stat-purple">力敏智+2,</span> 防禦-3, 魔防+7, 近/遠命中+5, 近/遠傷+5, 魔攻+3, HP+200, MP+50</td>
+          <td><span class="rate-low">2%</span></td>
+        </tr>
+        <tr>
+          <td><span class="tier-star">★ Lv.9</span></td>
+          <td><span class="stat-purple">力敏智+3,</span> 防禦-4, 魔防+8, 近/遠命中+6, 近/遠傷+6, 魔攻+3, HP+250, MP+80</td>
+          <td><span class="rate-low">1%</span></td>
+        </tr>
+        <tr>
+          <td><span class="tier-max">★ 威力彩頭獎</span></td>
+          <td><span class="stat-gold">力敏智+4, 防禦-5, 魔防+10, 近/遠命中+8, 近/遠傷+8, 魔攻+4, HP+300, MP+100</span></td>
+          <td><span class="rate-rare">0.5%</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="color:#5a4a70;font-size:0.78rem;margin-top:10px;text-align:center">★ Lv.7 起獲得力敏智屬性加成，可見顯著戰力提升</p>
+
+    <!-- 上下頁導覽 -->
+    <div class="fp-pager">
+      <a href="items-armor.html" class="fp-pager__btn">
+        <span class="fp-pager__arrow">←</span>
+        <div><span class="fp-pager__dir">PREV</span><span class="fp-pager__name">防具介紹</span></div>
+      </a>
+      <div class="fp-pager__center"><a href="items-overview.html" class="fp-pager__back">▲ 返回裝備道具列表</a></div>
+      <a href="items-horse.html" class="fp-pager__btn fp-pager__btn--next">
+        <div><span class="fp-pager__dir">NEXT</span><span class="fp-pager__name">神獸之卵</span></div>
+        <span class="fp-pager__arrow">→</span>
+      </a>
+    </div>
+
+  </main>
+
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

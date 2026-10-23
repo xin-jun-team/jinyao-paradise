@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>防具介紹 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    /* ── Tab System ── */
+    .page-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; position:sticky; top:60px; z-index:100; background:var(--bg-base,#090405); padding:10px 0; border-bottom:1px solid #2f171b; }
+    .page-tab { padding:8px 18px; cursor:pointer; color:var(--text-dim,#a07840); border:1px solid #2f171b; border-radius:2px; font-size:0.82rem; font-family:'Cinzel',serif; letter-spacing:0.08em; background:#17090b; transition:all 0.2s; white-space:nowrap; }
+    .page-tab:hover { color:var(--gold-dim,#7a6018); border-color:var(--gold-dim,#7a6018); }
+    .page-tab.active { color:#ffe060; background:linear-gradient(135deg,#3c141a,#261014); border-color:var(--gold-dim,#7a6018); font-weight:700; }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
+
+    /* ── Armor Table ── */
+    .atbl { width:100%; border-collapse:collapse; font-size:0.82rem; }
+    .atbl th { background:linear-gradient(90deg,rgba(212,168,32,0.15),rgba(212,168,32,0.05)); color:var(--gold-dim); font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.12em; padding:10px 14px; border:1px solid #401f24; text-align:left; }
+    .atbl td { padding:10px 14px; border:1px solid #2f171b; color:var(--text-dim); }
+    .atbl tr:nth-child(odd) td { background:#1b0b0e; }
+    .atbl tr:nth-child(even) td { background:#1d0d10; }
+    .atbl tr:hover td { background:#281216; }
+    .atbl td:first-child { color:var(--text-bright); }
+    .a-icon { width:24px;height:24px;image-rendering:pixelated;vertical-align:middle;margin-right:8px; }
+    .r-gen { color:#8a8a8a; }
+    .r-adv { color:#4caf50; font-weight:700; }
+    .r-rare { color:#64b5f6; font-weight:700; }
+    .r-hero { color:#ef5350; font-weight:700; }
+    .r-leg  { color:#ce93d8; font-weight:700; }
+    .r-myth { color:#ffb74d; font-weight:700; }
+    .section-bar { font-family:'Noto Serif TC',serif; font-size:0.95rem; font-weight:700; color:var(--gold); letter-spacing:0.12em; margin:24px 0 12px; display:flex; align-items:center; gap:10px; border-left:3px solid var(--gold-dim); padding-left:12px; }
+
+    /* ── Craft Tables ── */
+    .craft-tbl { width:100%; border-collapse:collapse; font-size:0.82rem; min-width:520px; }
+    .craft-tbl th { background:linear-gradient(90deg,rgba(212,168,32,0.15),rgba(212,168,32,0.05)); color:var(--gold-dim); font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.12em; padding:10px 14px; border:1px solid #401f24; text-align:left; }
+    .craft-tbl td { padding:10px 14px; border:1px solid #2f171b; color:var(--text-dim); vertical-align:middle; }
+    .craft-tbl tr:nth-child(odd) td { background:#1b0b0e; }
+    .craft-tbl tr:nth-child(even) td { background:#1d0d10; }
+    .craft-tbl tr:hover td { background:#281216; }
+    .craft-tbl td:first-child { font-weight:700; white-space:nowrap; }
+    .c-adv { color:#4caf50; }
+    .c-rare { color:#64b5f6; }
+    .c-hero { color:#ef5350; }
+    .c-leg  { color:#ce93d8; }
+    .c-myth { color:#ffb74d; }
+    .c-cost { color:#ef5350; font-weight:700; }
+    .c-req { display:inline-block; background:#281216; border:1px solid #401f24; border-radius:2px; padding:2px 8px; font-size:0.78rem; }
+    .c-req.adv  { background:rgba(76,175,80,0.12);  border-color:rgba(76,175,80,0.3);  color:#4caf50; }
+    .c-req.rare { background:rgba(100,181,246,0.12); border-color:rgba(100,181,246,0.3); color:#64b5f6; }
+    .c-req.hero { background:rgba(239,83,80,0.12);  border-color:rgba(239,83,80,0.3);  color:#ef5350; }
+    .c-req.leg  { background:rgba(206,147,216,0.12); border-color:rgba(206,147,216,0.3); color:#ce93d8; }
+    .decompose-box { background:#1b0b0e; border:1px solid #401f24; border-radius:2px; padding:20px 24px; margin-top:8px; }
+    .decompose-box h3 { font-family:'Cinzel',serif; font-size:0.85rem; color:var(--gold); letter-spacing:0.12em; margin:0 0 12px; border-bottom:1px solid #2f171b; padding-bottom:10px; }
+    .decompose-tbl { width:100%; border-collapse:collapse; font-size:0.82rem; text-align:center; }
+    .decompose-tbl th { background:linear-gradient(90deg,rgba(212,168,32,0.15),rgba(212,168,32,0.05)); color:var(--gold-dim); font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.1em; padding:9px 12px; border:1px solid #401f24; }
+    .decompose-tbl td { padding:9px 12px; border:1px solid #2f171b; color:var(--text-dim); }
+    .decompose-tbl tr:nth-child(odd)  td { background:#1b0b0e; }
+    .decompose-tbl tr:nth-child(even) td { background:#1d0d10; }
+    .decompose-tbl tr:hover td { background:#281216; }
+    .decompose-tbl td:first-child { font-weight:700; }
+
+    /* ── Hellring Tab ── */
+    .hellring-hero { background:linear-gradient(135deg,#2a0808,#1a0404); border:2px solid #ef5350; border-radius:2px; padding:24px; text-align:center; margin-bottom:24px; }
+    .hellring-hero h2 { color:#fff; font-family:'Cinzel',serif; font-size:1.3rem; margin:0 0 10px; letter-spacing:0.08em; }
+    .hellring-hero .sub-badge { display:inline-block; background:rgba(255,183,77,0.12); color:#ffb74d; border:1px solid rgba(255,183,77,0.35); padding:4px 16px; border-radius:20px; font-size:0.85rem; }
+    .stat-chips { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:12px 0; }
+    .stat-chip { padding:5px 12px; border-radius:2px; font-size:0.8rem; border:1px solid; }
+    .chip-neg  { background:rgba(239,83,80,0.1);   border-color:rgba(239,83,80,0.3);   color:#ef5350; }
+    .chip-pos  { background:rgba(76,175,80,0.1);   border-color:rgba(76,175,80,0.3);   color:#66bb6a; }
+    .chip-mp   { background:rgba(100,181,246,0.1); border-color:rgba(100,181,246,0.3); color:#64b5f6; }
+    .chip-gold { background:rgba(212,168,32,0.1);  border-color:rgba(212,168,32,0.3);  color:#ffe060; }
+    .chip-pur  { background:rgba(206,147,216,0.1); border-color:rgba(206,147,216,0.3); color:#ce93d8; }
+    .blessed-note { display:inline-block; background:rgba(249,168,37,0.1); border:2px solid #f9a825; color:#ffb74d; font-weight:700; padding:4px 16px; border-radius:20px; font-size:0.85rem; margin-top:10px; }
+    .hellring-mat-tbl { width:100%; border-collapse:collapse; font-size:0.82rem; }
+    .hellring-mat-tbl th { background:rgba(76,175,80,0.18); color:#66bb6a; font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.1em; padding:11px 14px; border:1px solid rgba(76,175,80,0.25); text-align:left; }
+    .hellring-mat-tbl td { padding:9px 14px; border:1px solid #2f171b; color:var(--text-dim); }
+    .hellring-mat-tbl tr:nth-child(odd)  td { background:#1b0b0e; }
+    .hellring-mat-tbl tr:nth-child(even) td { background:#1d0d10; }
+    .hellring-mat-tbl tr:hover td { background:#281216; }
+    .hellring-mat-tbl td:last-child { text-align:center; font-weight:700; color:#64b5f6; }
+    .hellring-mat-tbl tr:first-child td { color:#ef5350; font-weight:700; }
+    .hellring-mat-tbl tr:first-child td:last-child { color:#ef5350; font-size:1.1rem; }
+
+    /* ── Light Shoulder Tab ── */
+    .ls-obtain { background:#1b0b0e; border:1px solid #1a5560; border-left:4px solid #4dd0e1; border-radius:2px; padding:11px 20px; font-size:0.85rem; color:#80deea; display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+    .ls-ob-lbl { white-space:nowrap; font-size:0.72rem; letter-spacing:3px; color:#4dd0e1; font-weight:700; font-family:'Cinzel',serif; }
+    .ls-stable { background:#1b0b0e; border:1px solid rgba(212,168,32,0.25); border-radius:2px; padding:9px 20px; font-size:0.82rem; color:var(--gold); text-align:center; letter-spacing:2px; margin-bottom:20px; }
+    .ls-tabs { display:flex; gap:0; margin-bottom:20px; }
+    .ls-tab { flex:1; padding:10px 0; text-align:center; font-size:0.82rem; font-weight:700; letter-spacing:2px; cursor:pointer; border:1px solid #2f171b; background:#17090b; color:var(--text-dim,#a07840); transition:all 0.2s; font-family:'Cinzel',serif; }
+    .ls-tab:first-child { border-radius:2px 0 0 2px; }
+    .ls-tab:last-child  { border-radius:0 2px 2px 0; }
+    .ls-tab.ls-str.active { background:rgba(239,83,80,0.15);  border-color:#ef5350; color:#ef9a9a; }
+    .ls-tab.ls-dex.active { background:rgba(102,187,106,0.12); border-color:#66bb6a; color:#a5d6a7; }
+    .ls-tab.ls-int.active { background:rgba(149,117,205,0.15); border-color:#9575cd; color:#b39ddb; }
+    .ls-panel { display:none; }
+    .ls-panel.active { display:block; }
+    .ls-ph { padding:13px 20px 12px; border-radius:2px 2px 0 0; border:1px solid; border-bottom:none; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+    .ls-ph.ls-str { background:rgba(239,83,80,0.12);  border-color:#ef5350; }
+    .ls-ph.ls-dex { background:rgba(102,187,106,0.1); border-color:#66bb6a; }
+    .ls-ph.ls-int { background:rgba(149,117,205,0.12); border-color:#9575cd; }
+    .ls-pname { font-family:'Cinzel',serif; font-size:1rem; font-weight:900; color:#ffe88a; }
+    .ls-psub  { font-size:0.72rem; letter-spacing:3px; opacity:0.7; }
+    .ls-ph.ls-str .ls-psub { color:#ef9a9a; }
+    .ls-ph.ls-dex .ls-psub { color:#a5d6a7; }
+    .ls-ph.ls-int .ls-psub { color:#b39ddb; }
+    .ls-tw { border:1px solid; border-top:none; border-radius:0 0 2px 2px; overflow:hidden; overflow-x:auto; }
+    .ls-panel.ls-str .ls-tw { border-color:#ef5350; }
+    .ls-panel.ls-dex .ls-tw { border-color:#66bb6a; }
+    .ls-panel.ls-int .ls-tw { border-color:#9575cd; }
+    .ls-tbl { width:100%; border-collapse:collapse; min-width:480px; font-size:0.82rem; background:#1d0d10; }
+    .ls-tbl thead tr { background:rgba(255,255,255,0.03); }
+    .ls-tbl thead th { padding:10px 12px; font-size:0.68rem; letter-spacing:2px; color:var(--gold-dim); font-family:'Cinzel',serif; border-bottom:1px solid #401f24; text-align:center; white-space:nowrap; }
+    .ls-tbl tbody tr { border-bottom:1px solid rgba(120,80,0,0.15); transition:background 0.15s; }
+    .ls-tbl tbody tr:last-child { border-bottom:none; }
+    .ls-tbl tbody tr:hover { background:rgba(212,168,32,0.04); }
+    .ls-tbl tbody tr:nth-child(even) { background:rgba(255,255,255,0.015); }
+    .ls-tbl tr.ls-max { background:linear-gradient(90deg,rgba(212,168,32,0.08),rgba(212,168,32,0.03)) !important; border-left:3px solid var(--gold-dim,#7a6018); }
+    .ls-tbl tr.ls-max td { color:#ffe88a !important; }
+    .ls-tbl tr.ls-max td:first-child { color:var(--gold) !important; }
+    .ls-tbl tbody td { padding:9px 12px; text-align:center; color:var(--text-dim); white-space:nowrap; }
+    .ls-tbl tbody td:first-child { font-weight:900; font-size:0.95rem; color:var(--gold-dim,#7a6018); }
+    .ls-neg   { color:#ef9a9a !important; }
+    .ls-pos   { color:#80cbc4 !important; }
+    .ls-str-c { color:#ef9a9a !important; }
+    .ls-dex-c { color:#a5d6a7 !important; }
+    .ls-int-c { color:#b39ddb !important; }
+    .ls-empty { color:#4c242b !important; }
+    .ls-note  { font-size:0.75rem; color:var(--text-dim,#a07840); text-align:right; margin-top:10px; }
+
+    /* ── Intro note boxes ── */
+    .info-box { background:#1b0b0e; border:1px solid #401f24; border-left:3px solid var(--gold-dim,#7a6018); border-radius:2px; padding:12px 18px; font-size:0.85rem; color:var(--text-dim); margin-bottom:18px; line-height:1.7; }
+    .table-wrap { overflow-x:auto; margin-bottom:24px; }
+    .jump-table { width:100%; border-collapse:collapse; font-size:0.82rem; }
+    .jump-table th { background:linear-gradient(90deg,rgba(212,168,32,0.15),rgba(212,168,32,0.05)); color:var(--gold-dim,#a07840); font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.1em; padding:10px 14px; border:1px solid #401f24; text-align:left; }
+    .jump-table td { padding:10px 14px; border:1px solid #2f171b; color:var(--text-dim,#a07840); }
+    .jump-table tr:nth-child(odd) td { background:#1b0b0e; }
+    .jump-table tr:nth-child(even) td { background:#1d0d10; }
+    .warn-box  { background:#1b0b0e; border:1px solid rgba(239,83,80,0.3); border-left:4px solid #ef5350; border-radius:2px; padding:12px 16px; font-size:0.85rem; color:var(--text-dim); margin-bottom:14px; line-height:1.6; }
+    .warn-box strong { color:#ef5350; }
+    .sub-header { font-size:0.85rem; font-weight:700; margin:0 0 8px; }
+    .sub-header.atk  { color:#ef5350; }
+    .sub-header.def  { color:#64b5f6; }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — ARMOR</p>
+    <h1 class="page-hero__title">防具<span>介紹</span></h1>
+    <p class="page-hero__sub">強力防具套裝，堅不可摧的守護</p>
+  </div>
+
+  <main class="fp-wrap">
+
+    <!-- ── Tab Navigation ── -->
+    <div class="page-tabs">
+      <button class="page-tab active" data-tab="overview" onclick="switchTab('overview')">防具總覽</button>
+      <button class="page-tab" data-tab="craft" onclick="switchTab('craft')">製作系統</button>
+      <button class="page-tab" data-tab="enhance" onclick="switchTab('enhance')">防具強化系統說明</button>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         TAB 1 — 防具總覽
+    ══════════════════════════════════════ -->
+    <div id="tab-overview" class="tab-content active">
+
+      <div class="info-box">獲取方式：透過怪物掉落及合成製作。</div>
+      <div class="warn-box"><strong>重要備註：</strong>本服設定「雙手武器」皆可穿戴副手裝備，請安心搭配！</div>
+
+      <!-- 頭盔 -->
+      <div class="section-bar">頭盔系列</div>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="atbl">
+          <thead><tr><th width="35%">裝備名稱</th><th width="18%">階級</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-445.png" class="a-icon" loading="lazy">修練者頭盔</td><td><span class="r-gen">一般</span></td><td>防禦-1</td></tr>
+            <tr><td><img src="../assets/images/item-2625.png" class="a-icon" loading="lazy">旅人頭盔</td><td><span class="r-adv">高級</span></td><td>防禦-2, 魔防+5</td></tr>
+            <tr><td><img src="../assets/images/item-507.png" class="a-icon" loading="lazy">鋼鐵頭盔</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 力+1, 魔防+8</td></tr>
+            <tr><td><img src="../assets/images/item-53.png" class="a-icon" loading="lazy">精靈頭盔</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 敏+1, 魔防+8</td></tr>
+            <tr><td><img src="../assets/images/item-526.png" class="a-icon" loading="lazy">法師之帽</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 智+1, 魔防+8</td></tr>
+            <tr><td><img src="../assets/images/item-1896.png" class="a-icon" loading="lazy">武官頭盔</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 力+1, 魔防+15</td></tr>
+            <tr><td><img src="../assets/images/item-1764.png" class="a-icon" loading="lazy">迅捷頭盔</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 敏+1, 魔防+15</td></tr>
+            <tr><td><img src="../assets/images/item-1903.png" class="a-icon" loading="lazy">神官頭盔</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 智+1, 魔防+15</td></tr>
+            <tr><td><img src="../assets/images/item-7876.png" class="a-icon" loading="lazy">死亡騎士頭盔</td><td><span class="r-leg">傳說</span></td><td>防禦-3, 力+2, 魔防+20</td></tr>
+            <tr><td><img src="../assets/images/item-1245.png" class="a-icon" loading="lazy">守護者頭盔</td><td><span class="r-leg">傳說</span></td><td>防禦-3, 敏+2, 魔防+20</td></tr>
+            <tr><td><img src="../assets/images/item-714.png" class="a-icon" loading="lazy">惡魔頭盔</td><td><span class="r-leg">傳說</span></td><td>防禦-3, 智+2, 魔防+20</td></tr>
+            <tr><td><img src="../assets/images/item-2163.png" class="a-icon" loading="lazy">真冥皇頭盔</td><td><span class="r-myth">神話</span></td><td>防禦-5, 力+3, 魔防+30</td></tr>
+            <tr><td><img src="../assets/images/item-1994.png" class="a-icon" loading="lazy">火焰之影頭盔</td><td><span class="r-myth">神話</span></td><td>防禦-5, 敏+3, 魔防+30</td></tr>
+            <tr><td><img src="../assets/images/item-5236.png" class="a-icon" loading="lazy">艾歐丁頭盔</td><td><span class="r-myth">神話</span></td><td>防禦-5, 智+3, 魔防+30</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 盔甲 -->
+      <div class="section-bar">盔甲系列</div>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="atbl">
+          <thead><tr><th width="35%">裝備名稱</th><th width="18%">階級</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-299.png" class="a-icon" loading="lazy">修練者盔甲</td><td><span class="r-gen">一般</span></td><td>防禦-5</td></tr>
+            <tr><td><img src="../assets/images/item-2620.png" class="a-icon" loading="lazy">旅人盔甲</td><td><span class="r-adv">高級</span></td><td>防禦-7</td></tr>
+            <tr><td><img src="../assets/images/item-510.png" class="a-icon" loading="lazy">鋼鐵金屬盔甲</td><td><span class="r-rare">稀有</span></td><td>防禦-9, 回血+6</td></tr>
+            <tr><td><img src="../assets/images/item-275.png" class="a-icon" loading="lazy">精靈金屬盔甲</td><td><span class="r-rare">稀有</span></td><td>防禦-9, 回血+3, 回魔+3</td></tr>
+            <tr><td><img src="../assets/images/item-527.png" class="a-icon" loading="lazy">法師長袍</td><td><span class="r-rare">稀有</span></td><td>防禦-9, 回魔+6</td></tr>
+            <tr><td><img src="../assets/images/item-1895.png" class="a-icon" loading="lazy">武官護鎧</td><td><span class="r-hero">英雄</span></td><td>防禦-12, 回血+8</td></tr>
+            <tr><td><img src="../assets/images/item-1768.png" class="a-icon" loading="lazy">迅捷盔甲</td><td><span class="r-hero">英雄</span></td><td>防禦-12, 回血+4, 回魔+4</td></tr>
+            <tr><td><img src="../assets/images/item-1902.png" class="a-icon" loading="lazy">神官法袍</td><td><span class="r-hero">英雄</span></td><td>防禦-12, 回魔+8</td></tr>
+            <tr><td><img src="../assets/images/item-7873.png" class="a-icon" loading="lazy">死亡騎士盔甲</td><td><span class="r-leg">傳說</span></td><td>防禦-15, 回血+12</td></tr>
+            <tr><td><img src="../assets/images/item-1246.png" class="a-icon" loading="lazy">守護者盔甲</td><td><span class="r-leg">傳說</span></td><td>防禦-15, 回血+6, 回魔+6</td></tr>
+            <tr><td><img src="../assets/images/item-696.png" class="a-icon" loading="lazy">惡魔盔甲</td><td><span class="r-leg">傳說</span></td><td>防禦-15, 回魔+12</td></tr>
+            <tr><td><img src="../assets/images/item-2162.png" class="a-icon" loading="lazy">真冥皇盔甲</td><td><span class="r-myth">神話</span></td><td>防禦-18, 回血魔+20, 機率增傷</td></tr>
+            <tr><td><img src="../assets/images/item-1976.png" class="a-icon" loading="lazy">火焰之影盔甲</td><td><span class="r-myth">神話</span></td><td>防禦-18, 回血魔+10, 機率反傷</td></tr>
+            <tr><td><img src="../assets/images/item-5237.png" class="a-icon" loading="lazy">艾歐丁盔甲</td><td><span class="r-myth">神話</span></td><td>防禦-18, 回血魔+20, 受擊回血</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 手套 -->
+      <div class="section-bar">手套系列</div>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="atbl">
+          <thead><tr><th width="35%">裝備名稱</th><th width="18%">階級</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-710.png" class="a-icon" loading="lazy">修練者手套</td><td><span class="r-gen">一般</span></td><td>防禦-1</td></tr>
+            <tr><td><img src="../assets/images/item-2624.png" class="a-icon" loading="lazy">旅人手套</td><td><span class="r-adv">高級</span></td><td>防禦-2</td></tr>
+            <tr><td><img src="../assets/images/item-506.png" class="a-icon" loading="lazy">鋼鐵手套</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 近傷+1, 近命+1</td></tr>
+            <tr><td><img src="../assets/images/item-327.png" class="a-icon" loading="lazy">精靈腕甲</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 遠傷+1, 遠命+1</td></tr>
+            <tr><td><img src="../assets/images/item-707.png" class="a-icon" loading="lazy">法師手套</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 魔攻+1</td></tr>
+            <tr><td><img src="../assets/images/item-1898.png" class="a-icon" loading="lazy">武官手套</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 近傷+2, 近命+2</td></tr>
+            <tr><td><img src="../assets/images/item-1765.png" class="a-icon" loading="lazy">迅捷手套</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 遠傷+2, 遠命+2</td></tr>
+            <tr><td><img src="../assets/images/item-1905.png" class="a-icon" loading="lazy">神官手套</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 魔攻+1, 魔命+1</td></tr>
+            <tr><td><img src="../assets/images/item-7875.png" class="a-icon" loading="lazy">死亡騎士手套</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 近傷+3, 近命+3</td></tr>
+            <tr><td><img src="../assets/images/item-1244.png" class="a-icon" loading="lazy">守護者手套</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 遠傷+3, 遠命+3</td></tr>
+            <tr><td><img src="../assets/images/item-709.png" class="a-icon" loading="lazy">惡魔手套</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 魔攻+2, 魔命+2</td></tr>
+            <tr><td><img src="../assets/images/item-2165.png" class="a-icon" loading="lazy">真冥皇手套</td><td><span class="r-myth">神話</span></td><td>防禦-5, 近傷+5, 近命+5</td></tr>
+            <tr><td><img src="../assets/images/item-2008.png" class="a-icon" loading="lazy">火焰之影手套</td><td><span class="r-myth">神話</span></td><td>防禦-5, 遠傷+5, 遠命+5</td></tr>
+            <tr><td><img src="../assets/images/item-5238.png" class="a-icon" loading="lazy">艾歐丁手套</td><td><span class="r-myth">神話</span></td><td>防禦-5, 魔攻+4, 魔命+2</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 鞋子 -->
+      <div class="section-bar">鞋子系列</div>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="atbl">
+          <thead><tr><th width="35%">裝備名稱</th><th width="18%">階級</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-447.png" class="a-icon" loading="lazy">修練者長靴</td><td><span class="r-gen">一般</span></td><td>防禦-2</td></tr>
+            <tr><td><img src="../assets/images/item-2623.png" class="a-icon" loading="lazy">旅人長靴</td><td><span class="r-adv">高級</span></td><td>防禦-2, 傷害減免+1</td></tr>
+            <tr><td><img src="../assets/images/item-509.png" class="a-icon" loading="lazy">鋼鐵長靴</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 力+1, 傷減+1</td></tr>
+            <tr><td><img src="../assets/images/item-1489.png" class="a-icon" loading="lazy">精靈長靴</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 敏+1, 傷減+1</td></tr>
+            <tr><td><img src="../assets/images/item-461.png" class="a-icon" loading="lazy">法師長靴</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 智+1, 傷減+1</td></tr>
+            <tr><td><img src="../assets/images/item-1899.png" class="a-icon" loading="lazy">武官長靴</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 力+1, 傷減+2</td></tr>
+            <tr><td><img src="../assets/images/item-1766.png" class="a-icon" loading="lazy">迅捷長靴</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 敏+1, 傷減+2</td></tr>
+            <tr><td><img src="../assets/images/item-1906.png" class="a-icon" loading="lazy">神官長靴</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 智+1, 傷減+2</td></tr>
+            <tr><td><img src="../assets/images/item-7874.png" class="a-icon" loading="lazy">死亡騎士長靴</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 力+2, 傷減+3</td></tr>
+            <tr><td><img src="../assets/images/item-1247.png" class="a-icon" loading="lazy">守護者長靴</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 敏+2, 傷減+3</td></tr>
+            <tr><td><img src="../assets/images/item-702.png" class="a-icon" loading="lazy">惡魔長靴</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 智+2, 傷減+3</td></tr>
+            <tr><td><img src="../assets/images/item-2166.png" class="a-icon" loading="lazy">真冥皇長靴</td><td><span class="r-myth">神話</span></td><td>防禦-5, 力+3, 傷減+5</td></tr>
+            <tr><td><img src="../assets/images/item-2004.png" class="a-icon" loading="lazy">火焰之影長靴</td><td><span class="r-myth">神話</span></td><td>防禦-5, 敏+3, 傷減+5</td></tr>
+            <tr><td><img src="../assets/images/item-5239.png" class="a-icon" loading="lazy">艾歐丁長靴</td><td><span class="r-myth">神話</span></td><td>防禦-5, 智+3, 傷減+5</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 脛甲 -->
+      <div class="section-bar">脛甲系列</div>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="atbl">
+          <thead><tr><th width="35%">裝備名稱</th><th width="18%">階級</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-6770.png" class="a-icon" loading="lazy">修練者脛甲</td><td><span class="r-gen">一般</span></td><td>防禦-2</td></tr>
+            <tr><td><img src="../assets/images/item-6975.png" class="a-icon" loading="lazy">旅人脛甲</td><td><span class="r-adv">高級</span></td><td>防禦-2, 傷害減免+1</td></tr>
+            <tr><td><img src="../assets/images/item-7331.png" class="a-icon" loading="lazy">鋼鐵脛甲</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 力+1, 傷減+1</td></tr>
+            <tr><td><img src="../assets/images/item-7337.png" class="a-icon" loading="lazy">精靈脛甲</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 敏+1, 傷減+1</td></tr>
+            <tr><td><img src="../assets/images/item-6981.png" class="a-icon" loading="lazy">法師脛甲</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 智+1, 傷減+1</td></tr>
+            <tr><td><img src="../assets/images/item-22546.png" class="a-icon" loading="lazy">武官脛甲</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 力+1, 傷減+2</td></tr>
+            <tr><td><img src="../assets/images/item-22547.png" class="a-icon" loading="lazy">迅捷脛甲</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 敏+1, 傷減+2</td></tr>
+            <tr><td><img src="../assets/images/item-22548.png" class="a-icon" loading="lazy">神官脛甲</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 智+1, 傷減+2</td></tr>
+            <tr><td><img src="../assets/images/item-17685.png" class="a-icon" loading="lazy">死亡騎士脛甲</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 力+2, 傷減+3</td></tr>
+            <tr><td><img src="../assets/images/item-8732.png" class="a-icon" loading="lazy">守護者脛甲</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 敏+2, 傷減+3</td></tr>
+            <tr><td><img src="../assets/images/item-17687.png" class="a-icon" loading="lazy">惡魔脛甲</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 智+2, 傷減+3</td></tr>
+            <tr><td><img src="../assets/images/item-17682.png" class="a-icon" loading="lazy">真冥皇脛甲</td><td><span class="r-myth">神話</span></td><td>防禦-5, 力+3, 傷減+5</td></tr>
+            <tr><td><img src="../assets/images/item-17683.png" class="a-icon" loading="lazy">火焰之影脛甲</td><td><span class="r-myth">神話</span></td><td>防禦-5, 敏+3, 傷減+5</td></tr>
+            <tr><td><img src="../assets/images/item-17684.png" class="a-icon" loading="lazy">艾歐丁脛甲</td><td><span class="r-myth">神話</span></td><td>防禦-5, 智+3, 傷減+5</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 副手 -->
+      <div class="section-bar">副手系列 (盾牌 / 臂甲 / 水晶球)</div>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="atbl">
+          <thead><tr><th width="35%">裝備名稱</th><th width="18%">階級</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-450.png" class="a-icon" loading="lazy">修練者盾牌</td><td><span class="r-gen">一般</span></td><td>防禦-2</td></tr>
+            <tr><td><img src="../assets/images/item-2622.png" class="a-icon" loading="lazy">旅人盾牌</td><td><span class="r-adv">高級</span></td><td>防禦-2, 傷害減免+1</td></tr>
+            <tr><td><img src="../assets/images/item-508.png" class="a-icon" loading="lazy">鋼鐵盾牌</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 力+1, 傷減+1</td></tr>
+            <tr><td><img src="../assets/images/item-1202.png" class="a-icon" loading="lazy">精靈盾牌</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 敏+1, 傷減+1</td></tr>
+            <tr><td><img src="../assets/images/item-1017.png" class="a-icon" loading="lazy">法師水晶球</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 智+1, 傷減+1</td></tr>
+            <tr><td><img src="../assets/images/item-1900.png" class="a-icon" loading="lazy">武官盾牌</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 力+1, 傷減+2</td></tr>
+            <tr><td><img src="../assets/images/item-3230.png" class="a-icon" loading="lazy">迅捷臂甲</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 敏+1, 傷減+2</td></tr>
+            <tr><td><img src="../assets/images/item-1907.png" class="a-icon" loading="lazy">神官魔法書</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 智+1, 傷減+2</td></tr>
+            <tr><td><img src="../assets/images/item-1798.png" class="a-icon" loading="lazy">死亡騎士盾牌</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 力+2, 傷減+3</td></tr>
+            <tr><td><img src="../assets/images/item-3024.png" class="a-icon" loading="lazy">守護者臂甲</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 敏+2, 傷減+3</td></tr>
+            <tr><td><img src="../assets/images/item-938.png" class="a-icon" loading="lazy">惡魔水晶球</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 智+2, 傷減+3</td></tr>
+            <tr><td><img src="../assets/images/item-17725.png" class="a-icon" loading="lazy">真冥皇盾牌</td><td><span class="r-myth">神話</span></td><td>防禦-5, 力+3, 傷減+5</td></tr>
+            <tr><td><img src="../assets/images/item-5756.png" class="a-icon" loading="lazy">火焰之影臂甲</td><td><span class="r-myth">神話</span></td><td>防禦-5, 敏+3, 傷減+5</td></tr>
+            <tr><td><img src="../assets/images/item-4187.png" class="a-icon" loading="lazy">艾歐丁臂甲</td><td><span class="r-myth">神話</span></td><td>防禦-5, 智+3, 傷減+5</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 斗篷 -->
+      <div class="section-bar">斗篷系列</div>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="atbl">
+          <thead><tr><th width="35%">裝備名稱</th><th width="18%">階級</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-69.png" class="a-icon" loading="lazy">修練者斗篷</td><td><span class="r-gen">一般</span></td><td>防禦-1</td></tr>
+            <tr><td><img src="../assets/images/item-2621.png" class="a-icon" loading="lazy">旅人斗篷</td><td><span class="r-adv">高級</span></td><td>防禦-2, 魔防+5</td></tr>
+            <tr><td><img src="../assets/images/item-1339.png" class="a-icon" loading="lazy">鋼鐵斗篷</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 力+1, 魔防+8</td></tr>
+            <tr><td><img src="../assets/images/item-28.png" class="a-icon" loading="lazy">精靈斗篷</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 敏+1, 魔防+8</td></tr>
+            <tr><td><img src="../assets/images/item-1007.png" class="a-icon" loading="lazy">法師斗篷</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 智+1, 魔防+8</td></tr>
+            <tr><td><img src="../assets/images/item-1897.png" class="a-icon" loading="lazy">武官斗篷</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 力+1, 魔防+15</td></tr>
+            <tr><td><img src="../assets/images/item-1767.png" class="a-icon" loading="lazy">迅捷斗篷</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 敏+1, 魔防+15</td></tr>
+            <tr><td><img src="../assets/images/item-1904.png" class="a-icon" loading="lazy">神官斗篷</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 智+1, 魔防+15</td></tr>
+            <tr><td><img src="../assets/images/item-5967.png" class="a-icon" loading="lazy">死亡騎士斗篷</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 力+2, 魔防+20</td></tr>
+            <tr><td><img src="../assets/images/item-1966.png" class="a-icon" loading="lazy">守護者斗篷</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 敏+2, 魔防+20</td></tr>
+            <tr><td><img src="../assets/images/item-1908.png" class="a-icon" loading="lazy">惡魔斗篷</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 智+2, 魔防+20</td></tr>
+            <tr><td><img src="../assets/images/item-2164.png" class="a-icon" loading="lazy">真冥皇斗篷</td><td><span class="r-myth">神話</span></td><td>防禦-5, 力+3, 魔防+30</td></tr>
+            <tr><td><img src="../assets/images/item-2006.png" class="a-icon" loading="lazy">火焰之影斗篷</td><td><span class="r-myth">神話</span></td><td>防禦-5, 敏+3, 魔防+30</td></tr>
+            <tr><td><img src="../assets/images/item-5235.png" class="a-icon" loading="lazy">艾歐丁斗篷</td><td><span class="r-myth">神話</span></td><td>防禦-5, 智+3, 魔防+30</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 內衣 -->
+      <div class="section-bar">內衣系列</div>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="atbl">
+          <thead><tr><th width="35%">裝備名稱</th><th width="18%">階級</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-110.png" class="a-icon" loading="lazy">修練者內衣</td><td><span class="r-gen">一般</span></td><td>防禦-1</td></tr>
+            <tr><td><img src="../assets/images/item-2663.png" class="a-icon" loading="lazy">旅人內衣</td><td><span class="r-adv">高級</span></td><td>防禦-2, 魔防+5</td></tr>
+            <tr><td><img src="../assets/images/item-1829.png" class="a-icon" loading="lazy">鋼鐵內衣</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 力+1, 魔防+8</td></tr>
+            <tr><td><img src="../assets/images/item-956.png" class="a-icon" loading="lazy">精靈內衣</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 敏+1, 魔防+8</td></tr>
+            <tr><td><img src="../assets/images/item-1829.png" class="a-icon" loading="lazy">法師內衣</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 智+1, 魔防+8</td></tr>
+            <tr><td><img src="../assets/images/item-5892.png" class="a-icon" loading="lazy">武官內衣</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 力+1, 魔防+15</td></tr>
+            <tr><td><img src="../assets/images/item-5886.png" class="a-icon" loading="lazy">迅捷內衣</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 敏+1, 魔防+15</td></tr>
+            <tr><td><img src="../assets/images/item-5890.png" class="a-icon" loading="lazy">神官內衣</td><td><span class="r-hero">英雄</span></td><td>防禦-3, 智+1, 魔防+15</td></tr>
+            <tr><td><img src="../assets/images/item-20880.png" class="a-icon" loading="lazy">死亡騎士內衣</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 力+2, 魔防+20</td></tr>
+            <tr><td><img src="../assets/images/item-20881.png" class="a-icon" loading="lazy">守護者內衣</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 敏+2, 魔防+20</td></tr>
+            <tr><td><img src="../assets/images/item-20882.png" class="a-icon" loading="lazy">惡魔內衣</td><td><span class="r-leg">傳說</span></td><td>防禦-4, 智+2, 魔防+20</td></tr>
+            <tr><td><img src="../assets/images/item-5618.png" class="a-icon" loading="lazy">真冥皇內衣</td><td><span class="r-myth">神話</span></td><td>防禦-5, 力+3, 魔防+30</td></tr>
+            <tr><td><img src="../assets/images/item-2000.png" class="a-icon" loading="lazy">火焰之影內衣</td><td><span class="r-myth">神話</span></td><td>防禦-5, 敏+3, 魔防+30</td></tr>
+            <tr><td><img src="../assets/images/item-5620.png" class="a-icon" loading="lazy">艾歐丁內衣</td><td><span class="r-myth">神話</span></td><td>防禦-5, 智+3, 魔防+30</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 項鍊 -->
+      <div class="section-bar">項鍊系列</div>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="atbl">
+          <thead><tr><th width="35%">裝備名稱</th><th width="18%">階級</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-665.png" class="a-icon" loading="lazy">修練者項鍊</td><td><span class="r-gen">一般</span></td><td>防禦-1</td></tr>
+            <tr><td><img src="../assets/images/item-2666.png" class="a-icon" loading="lazy">旅人項鍊</td><td><span class="r-adv">高級</span></td><td>防禦-2, HP+20</td></tr>
+            <tr><td><img src="../assets/images/item-642.png" class="a-icon" loading="lazy">鋼鐵項鍊</td><td><span class="r-rare">稀有</span></td><td>防禦-3, HP+100</td></tr>
+            <tr><td><img src="../assets/images/item-638.png" class="a-icon" loading="lazy">精靈項鍊</td><td><span class="r-rare">稀有</span></td><td>防禦-3, HP+50, MP+50</td></tr>
+            <tr><td><img src="../assets/images/item-1485.png" class="a-icon" loading="lazy">法師項鍊</td><td><span class="r-rare">稀有</span></td><td>防禦-3, MP+100</td></tr>
+            <tr><td><img src="../assets/images/item-1187.png" class="a-icon" loading="lazy">武官項鍊</td><td><span class="r-hero">英雄</span></td><td>防禦-4, HP+250</td></tr>
+            <tr><td><img src="../assets/images/item-1188.png" class="a-icon" loading="lazy">迅捷項鍊</td><td><span class="r-hero">英雄</span></td><td>防禦-4, HP+125, MP+125</td></tr>
+            <tr><td><img src="../assets/images/item-1190.png" class="a-icon" loading="lazy">神官項鍊</td><td><span class="r-hero">英雄</span></td><td>防禦-4, MP+250</td></tr>
+            <tr><td><img src="../assets/images/item-2808.png" class="a-icon" loading="lazy">死亡騎士項鍊</td><td><span class="r-leg">傳說</span></td><td>防禦-5, HP+500</td></tr>
+            <tr><td><img src="../assets/images/item-612.png" class="a-icon" loading="lazy">守護者項鍊</td><td><span class="r-leg">傳說</span></td><td>防禦-5, HP+250, MP+250</td></tr>
+            <tr><td><img src="../assets/images/item-1769.png" class="a-icon" loading="lazy">惡魔項鍊</td><td><span class="r-leg">傳說</span></td><td>防禦-5, MP+500</td></tr>
+            <tr><td><img src="../assets/images/item-2809.png" class="a-icon" loading="lazy">真冥皇項鍊</td><td><span class="r-myth">神話</span></td><td>防禦-7, HP+1200</td></tr>
+            <tr><td><img src="../assets/images/item-2002.png" class="a-icon" loading="lazy">火焰之影項鍊</td><td><span class="r-myth">神話</span></td><td>防禦-7, HP+600, MP+600</td></tr>
+            <tr><td><img src="../assets/images/item-2234.png" class="a-icon" loading="lazy">艾歐丁項鍊</td><td><span class="r-myth">神話</span></td><td>防禦-7, MP+1200</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 腰帶 -->
+      <div class="section-bar">腰帶系列</div>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="atbl">
+          <thead><tr><th width="35%">裝備名稱</th><th width="18%">階級</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td><img src="../assets/images/item-631.png" class="a-icon" loading="lazy">修練者腰帶</td><td><span class="r-gen">一般</span></td><td>防禦-1, 負重+200, 回血魔+2</td></tr>
+            <tr><td><img src="../assets/images/item-633.png" class="a-icon" loading="lazy">旅人腰帶</td><td><span class="r-adv">高級</span></td><td>防禦-2, 負重+500, 回血魔+4</td></tr>
+            <tr><td><img src="../assets/images/item-1168.png" class="a-icon" loading="lazy">鋼鐵腰帶</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 負重+1000, 回血魔+6, 力+1</td></tr>
+            <tr><td><img src="../assets/images/item-1170.png" class="a-icon" loading="lazy">精靈腰帶</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 負重+1000, 回血魔+6, 敏+1</td></tr>
+            <tr><td><img src="../assets/images/item-1169.png" class="a-icon" loading="lazy">法師腰帶</td><td><span class="r-rare">稀有</span></td><td>防禦-2, 負重+1000, 回血魔+6, 智+1</td></tr>
+            <tr><td><img src="../assets/images/item-6078.png" class="a-icon" loading="lazy">武官腰帶</td><td><span class="r-hero">英雄</span></td><td>防禦-2, 負重+2000, 回血魔+8, 力+2</td></tr>
+            <tr><td><img src="../assets/images/item-6080.png" class="a-icon" loading="lazy">迅捷腰帶</td><td><span class="r-hero">英雄</span></td><td>防禦-2, 負重+2000, 回血魔+8, 敏+2</td></tr>
+            <tr><td><img src="../assets/images/item-6076.png" class="a-icon" loading="lazy">神官腰帶</td><td><span class="r-hero">英雄</span></td><td>防禦-2, 負重+2000, 回血魔+8, 智+2</td></tr>
+            <tr><td><img src="../assets/images/item-17774.png" class="a-icon" loading="lazy">死亡騎士腰帶</td><td><span class="r-leg">傳說</span></td><td>防禦-3, 負重+3000, 回血魔+10, 力+3</td></tr>
+            <tr><td><img src="../assets/images/item-17775.png" class="a-icon" loading="lazy">守護者腰帶</td><td><span class="r-leg">傳說</span></td><td>防禦-3, 負重+3000, 回血魔+10, 敏+3</td></tr>
+            <tr><td><img src="../assets/images/item-17776.png" class="a-icon" loading="lazy">惡魔腰帶</td><td><span class="r-leg">傳說</span></td><td>防禦-3, 負重+3000, 回血魔+10, 智+3</td></tr>
+            <tr><td><img src="../assets/images/item-2812.png" class="a-icon" loading="lazy">真冥皇腰帶</td><td><span class="r-myth">神話</span></td><td>防禦-5, 負重+5000, 回血魔+15, 力+5</td></tr>
+            <tr><td><img src="../assets/images/item-2813.png" class="a-icon" loading="lazy">火焰之影腰帶</td><td><span class="r-myth">神話</span></td><td>防禦-5, 負重+5000, 回血魔+15, 敏+5</td></tr>
+            <tr><td><img src="../assets/images/item-2810.png" class="a-icon" loading="lazy">艾歐丁腰帶</td><td><span class="r-myth">神話</span></td><td>防禦-5, 負重+5000, 回血魔+15, 智+5</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 戒指 -->
+      <div class="section-bar">戒指系列 (攻擊 + 防禦)</div>
+      <p class="sub-header atk">攻擊戒指</p>
+      <div style="overflow-x:auto;margin-bottom:16px">
+        <table class="atbl">
+          <thead><tr><th width="35%">裝備名稱</th><th width="18%">階級</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td>修練者攻擊戒指</td><td><span class="r-gen">一般</span></td><td>防禦-1</td></tr>
+            <tr><td>旅人攻擊戒指</td><td><span class="r-adv">高級</span></td><td>防-1, 近/遠命+1</td></tr>
+            <tr><td><img src="../assets/images/item-1770.png" class="a-icon" loading="lazy">鋼鐵戒指(攻)</td><td><span class="r-rare">稀有</span></td><td>防-1, 額外攻擊+2, HP+20</td></tr>
+            <tr><td><img src="../assets/images/item-1776.png" class="a-icon" loading="lazy">精靈戒指(攻)</td><td><span class="r-rare">稀有</span></td><td>防-1, 遠距攻擊+2, HP/MP+10</td></tr>
+            <tr><td><img src="../assets/images/item-1772.png" class="a-icon" loading="lazy">法師戒指(攻)</td><td><span class="r-rare">稀有</span></td><td>防-1, 魔法攻擊+1, MP+20</td></tr>
+            <tr><td><img src="../assets/images/item-628.png" class="a-icon" loading="lazy">武官戒指(攻)</td><td><span class="r-hero">英雄</span></td><td>防-1, 額外攻擊+4, HP+30</td></tr>
+            <tr><td><img src="../assets/images/item-630.png" class="a-icon" loading="lazy">迅捷戒指(攻)</td><td><span class="r-hero">英雄</span></td><td>防-1, 遠距攻擊+4, HP/MP+15</td></tr>
+            <tr><td><img src="../assets/images/item-629.png" class="a-icon" loading="lazy">神官戒指(攻)</td><td><span class="r-hero">英雄</span></td><td>防-1, 魔法攻擊+4, MP+30</td></tr>
+            <tr><td><img src="../assets/images/item-2304.png" class="a-icon" loading="lazy">死亡騎士戒指(攻)</td><td><span class="r-leg">傳說</span></td><td>防-1, 額外攻擊+6, HP+40</td></tr>
+            <tr><td><img src="../assets/images/item-2302.png" class="a-icon" loading="lazy">守護者戒指(攻)</td><td><span class="r-leg">傳說</span></td><td>防-1, 遠距攻擊+6, HP/MP+20</td></tr>
+            <tr><td><img src="../assets/images/item-2298.png" class="a-icon" loading="lazy">惡魔戒指(攻)</td><td><span class="r-leg">傳說</span></td><td>防-1, 魔法攻擊+6, MP+40</td></tr>
+            <tr><td><img src="../assets/images/item-2066.png" class="a-icon" loading="lazy">真冥皇戒指(攻)</td><td><span class="r-myth">神話</span></td><td>防-1, 額外攻擊+8, HP+50</td></tr>
+            <tr><td><img src="../assets/images/item-2010.png" class="a-icon" loading="lazy">火焰之影戒指(攻)</td><td><span class="r-myth">神話</span></td><td>防-1, 遠距攻擊+8, HP/MP+25</td></tr>
+            <tr><td><img src="../assets/images/item-1518.png" class="a-icon" loading="lazy">艾歐丁戒指(攻)</td><td><span class="r-myth">神話</span></td><td>防-1, 魔法攻擊+8, MP+50</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="sub-header def">防禦戒指</p>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="atbl">
+          <thead><tr><th width="35%">裝備名稱</th><th width="18%">階級</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td>修練者戒指</td><td><span class="r-gen">一般</span></td><td>防禦-1</td></tr>
+            <tr><td>旅人防禦戒指</td><td><span class="r-adv">高級</span></td><td>防禦-1, 回血+2, 回魔+3</td></tr>
+            <tr><td><img src="../assets/images/item-1770.png" class="a-icon" loading="lazy">鋼鐵戒指(防)</td><td><span class="r-rare">稀有</span></td><td>防-1, 傷減+2, HP/MP+10</td></tr>
+            <tr><td><img src="../assets/images/item-1776.png" class="a-icon" loading="lazy">精靈戒指(防)</td><td><span class="r-rare">稀有</span></td><td>防-1, 昏迷耐性+1, HP/MP+10</td></tr>
+            <tr><td><img src="../assets/images/item-1772.png" class="a-icon" loading="lazy">法師戒指(防)</td><td><span class="r-rare">稀有</span></td><td>防-1, PVP減免+2, HP/MP+10</td></tr>
+            <tr><td><img src="../assets/images/item-628.png" class="a-icon" loading="lazy">武官戒指(防)</td><td><span class="r-hero">英雄</span></td><td>防-1, 傷減+3, HP/MP+15</td></tr>
+            <tr><td><img src="../assets/images/item-630.png" class="a-icon" loading="lazy">迅捷戒指(防)</td><td><span class="r-hero">英雄</span></td><td>防-1, 昏迷耐性+2, HP/MP+15</td></tr>
+            <tr><td><img src="../assets/images/item-629.png" class="a-icon" loading="lazy">神官戒指(防)</td><td><span class="r-hero">英雄</span></td><td>防-1, 傷減+3, HP/MP+15</td></tr>
+            <tr><td><img src="../assets/images/item-2304.png" class="a-icon" loading="lazy">死亡騎士戒指(防)</td><td><span class="r-leg">傳說</span></td><td>防-1, 傷減+4, HP/MP+20</td></tr>
+            <tr><td><img src="../assets/images/item-2302.png" class="a-icon" loading="lazy">守護者戒指(防)</td><td><span class="r-leg">傳說</span></td><td>防-1, 昏迷耐性+3, HP/MP+20</td></tr>
+            <tr><td><img src="../assets/images/item-2298.png" class="a-icon" loading="lazy">惡魔戒指(防)</td><td><span class="r-leg">傳說</span></td><td>防-1, PVP減免+4, HP/MP+20</td></tr>
+            <tr><td><img src="../assets/images/item-2066.png" class="a-icon" loading="lazy">真冥皇戒指(防)</td><td><span class="r-myth">神話</span></td><td>防-1, 傷減+5, HP/MP+25</td></tr>
+            <tr><td><img src="../assets/images/item-2010.png" class="a-icon" loading="lazy">火焰之影戒指(防)</td><td><span class="r-myth">神話</span></td><td>防-1, 昏迷耐性+4, HP/MP+25</td></tr>
+            <tr><td><img src="../assets/images/item-1518.png" class="a-icon" loading="lazy">艾歐丁戒指(防)</td><td><span class="r-myth">神話</span></td><td>防-1, PVP減免+5, HP/MP+25</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 耳環 -->
+      <div class="section-bar">耳環系列 (攻擊 + 防禦，僅可帶一個)</div>
+      <p class="sub-header atk">攻擊耳環</p>
+      <div style="overflow-x:auto;margin-bottom:16px">
+        <table class="atbl">
+          <thead><tr><th width="35%">裝備名稱</th><th width="18%">階級</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td>修練者攻擊耳環</td><td><span class="r-gen">一般</span></td><td>防禦-1</td></tr>
+            <tr><td>旅人攻擊耳環</td><td><span class="r-adv">高級</span></td><td>防禦-1, 藥水恢復率+2</td></tr>
+            <tr><td><img src="../assets/images/item-2146.png" class="a-icon" loading="lazy">鋼鐵耳環(攻)</td><td><span class="r-rare">稀有</span></td><td>防禦-1, 近距命中+1, 額外攻擊+1, 藥水恢復率+4</td></tr>
+            <tr><td><img src="../assets/images/item-2446.png" class="a-icon" loading="lazy">精靈耳環(攻)</td><td><span class="r-rare">稀有</span></td><td>防禦-1, 遠距命中+1, 額外攻擊+1, 藥水恢復率+4</td></tr>
+            <tr><td><img src="../assets/images/item-2131.png" class="a-icon" loading="lazy">法師耳環(攻)</td><td><span class="r-rare">稀有</span></td><td>防禦-1, 魔法攻擊+1, 藥水恢復率+4</td></tr>
+            <tr><td><img src="../assets/images/item-3250.png" class="a-icon" loading="lazy">武官耳環(攻)</td><td><span class="r-hero">英雄</span></td><td>防禦-1, 近距命中+2, 額外攻擊+2, 藥水恢復率+6</td></tr>
+            <tr><td><img src="../assets/images/item-3248.png" class="a-icon" loading="lazy">迅捷耳環(攻)</td><td><span class="r-hero">英雄</span></td><td>防禦-1, 遠距命中+2, 額外攻擊+2, 藥水恢復率+6</td></tr>
+            <tr><td><img src="../assets/images/item-3246.png" class="a-icon" loading="lazy">神官耳環(攻)</td><td><span class="r-hero">英雄</span></td><td>防禦-1, 魔法攻擊+2, 藥水恢復率+6</td></tr>
+            <tr><td><img src="../assets/images/item-2176.png" class="a-icon" loading="lazy">死亡騎士耳環(攻)</td><td><span class="r-leg">傳說</span></td><td>防禦-1, 近距命中+4, 額外攻擊+4, 藥水恢復率+8</td></tr>
+            <tr><td><img src="../assets/images/item-2317.png" class="a-icon" loading="lazy">守護者耳環(攻)</td><td><span class="r-leg">傳說</span></td><td>防禦-1, 遠距命中+4, 額外攻擊+4, 藥水恢復率+8</td></tr>
+            <tr><td><img src="../assets/images/item-2175.png" class="a-icon" loading="lazy">惡魔耳環(攻)</td><td><span class="r-leg">傳說</span></td><td>防禦-1, 魔法攻擊+4, 藥水恢復率+8</td></tr>
+            <tr><td><img src="../assets/images/item-17728.png" class="a-icon" loading="lazy">真冥皇耳環(攻)</td><td><span class="r-myth">神話</span></td><td>防禦-1, 近距命中+6, 額外攻擊+6, 藥水恢復率+10</td></tr>
+            <tr><td><img src="../assets/images/item-17729.png" class="a-icon" loading="lazy">火焰之影耳環(攻)</td><td><span class="r-myth">神話</span></td><td>防禦-1, 遠距命中+6, 額外攻擊+6, 藥水恢復率+10</td></tr>
+            <tr><td><img src="../assets/images/item-17730.png" class="a-icon" loading="lazy">艾歐丁耳環(攻)</td><td><span class="r-myth">神話</span></td><td>防禦-1, 魔法攻擊+6, 藥水恢復率+10</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="sub-header def">防禦耳環</p>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="atbl">
+          <thead><tr><th width="35%">裝備名稱</th><th width="18%">階級</th><th>裝備能力</th></tr></thead>
+          <tbody>
+            <tr><td>修練者防禦耳環</td><td><span class="r-gen">一般</span></td><td>防禦-1</td></tr>
+            <tr><td>旅人防禦耳環</td><td><span class="r-adv">高級</span></td><td>防禦-2, HP+50, 魔防+2, 藥水恢復率+2</td></tr>
+            <tr><td><img src="../assets/images/item-2146.png" class="a-icon" loading="lazy">鋼鐵耳環(防)</td><td><span class="r-rare">稀有</span></td><td>防禦-1, 傷減+1, 藥水恢復率+4</td></tr>
+            <tr><td><img src="../assets/images/item-2446.png" class="a-icon" loading="lazy">精靈耳環(防)</td><td><span class="r-rare">稀有</span></td><td>防禦-1, 各屬防+5, 藥水恢復率+4</td></tr>
+            <tr><td><img src="../assets/images/item-2131.png" class="a-icon" loading="lazy">法師耳環(防)</td><td><span class="r-rare">稀有</span></td><td>防禦-1, PVP減傷+1, 藥水恢復率+4</td></tr>
+            <tr><td><img src="../assets/images/item-3250.png" class="a-icon" loading="lazy">武官耳環(防)</td><td><span class="r-hero">英雄</span></td><td>防禦-1, 傷減+2, 藥水恢復率+6</td></tr>
+            <tr><td><img src="../assets/images/item-3248.png" class="a-icon" loading="lazy">迅捷耳環(防)</td><td><span class="r-hero">英雄</span></td><td>防禦-1, 各屬防+8, 藥水恢復率+6</td></tr>
+            <tr><td><img src="../assets/images/item-3246.png" class="a-icon" loading="lazy">神官耳環(防)</td><td><span class="r-hero">英雄</span></td><td>防禦-1, PVP減傷+2, 藥水恢復率+6</td></tr>
+            <tr><td><img src="../assets/images/item-2176.png" class="a-icon" loading="lazy">死亡騎士耳環(防)</td><td><span class="r-leg">傳說</span></td><td>防禦-1, 傷減+3, 藥水恢復率+8</td></tr>
+            <tr><td><img src="../assets/images/item-2317.png" class="a-icon" loading="lazy">守護者耳環(防)</td><td><span class="r-leg">傳說</span></td><td>防禦-1, 各屬防+15, 藥水恢復率+8</td></tr>
+            <tr><td><img src="../assets/images/item-2175.png" class="a-icon" loading="lazy">惡魔耳環(防)</td><td><span class="r-leg">傳說</span></td><td>防禦-1, PVP減傷+3, 藥水恢復率+8</td></tr>
+            <tr><td><img src="../assets/images/item-17728.png" class="a-icon" loading="lazy">真冥皇耳環(防)</td><td><span class="r-myth">神話</span></td><td>防禦-1, 傷減+5, 藥水恢復率+10</td></tr>
+            <tr><td><img src="../assets/images/item-17729.png" class="a-icon" loading="lazy">火焰之影耳環(防)</td><td><span class="r-myth">神話</span></td><td>防禦-1, 各屬防+25, 藥水恢復率+10</td></tr>
+            <tr><td><img src="../assets/images/item-17730.png" class="a-icon" loading="lazy">艾歐丁耳環(防)</td><td><span class="r-myth">神話</span></td><td>防禦-1, PVP減傷+5, 藥水恢復率+10</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div><!-- end tab-overview -->
+
+    <!-- ══════════════════════════════════════
+         TAB 2 — 製作系統
+    ══════════════════════════════════════ -->
+    <div id="tab-craft" class="tab-content">
+
+      <!-- 武器製作 -->
+      <div class="section-bar" style="margin-top:8px">武器製作</div>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="craft-tbl">
+          <thead><tr><th width="16%">武器種類</th><th>所需材料</th></tr></thead>
+          <tbody>
+            <tr><td class="c-adv">高級武器</td><td>高級秘笈×2 + <span class="c-cost">100萬天幣</span> + 武器粉末×20 + <span class="c-req">+7 一般武器</span></td></tr>
+            <tr><td class="c-rare">稀有武器</td><td>稀有秘笈×2 + 高級秘笈×4 + <span class="c-cost">600萬天幣</span> + 武器粉末×300 + <span class="c-req adv">+8 高級武器</span></td></tr>
+            <tr><td class="c-hero">英雄武器</td><td>英雄秘笈×2 + 稀有秘笈×4 + 高級秘笈×8 + <span class="c-cost">3000萬天幣</span> + 武器粉末×2000 + <span style="color:#ce93d8;font-weight:700;">噬魂魔核×5</span> + <span class="c-req rare">+8 稀有武器</span></td></tr>
+            <tr><td class="c-leg">傳說武器</td><td>傳說秘笈×2 + 英雄秘笈×4 + 稀有秘笈×8 + <span class="c-cost">1億天幣</span> + 武器粉末×8000 + <span style="color:#ce93d8;font-weight:700;">噬魂魔核×20</span> + <span class="c-req hero">+9 英雄武器</span></td></tr>
+            <tr><td class="c-myth">神話武器</td><td>神話秘笈×2 + 傳說秘笈×4 + 英雄秘笈×8 + <span class="c-cost">3億天幣</span> + 武器粉末×25000 + <span style="color:#ffb74d;font-weight:700;">噬魂魔核×50</span> + <span class="c-req leg">+9 傳說武器</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 防具製作 -->
+      <div class="section-bar">防具製作</div>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="craft-tbl">
+          <thead><tr><th width="16%">防具種類</th><th>所需材料</th></tr></thead>
+          <tbody>
+            <tr><td class="c-adv">高級防具</td><td>高級秘笈×2 + <span class="c-cost">10萬天幣</span> + 防具粉末×10 + <span class="c-req">+5 一般防具</span></td></tr>
+            <tr><td class="c-rare">稀有防具</td><td>稀有秘笈×1 + 高級秘笈×2 + <span class="c-cost">60萬天幣</span> + 防具粉末×100 + <span class="c-req adv">+5 高級防具</span></td></tr>
+            <tr><td class="c-hero">英雄防具</td><td>英雄秘笈×1 + 稀有秘笈×2 + 高級秘笈×4 + <span class="c-cost">300萬天幣</span> + 防具粉末×500 + <span style="color:#ce93d8;font-weight:700;">噬魂魔核×3</span> + <span class="c-req rare">+5 稀有防具</span></td></tr>
+            <tr><td class="c-leg">傳說防具</td><td>傳說秘笈×1 + 英雄秘笈×2 + 稀有秘笈×4 + <span class="c-cost">1000萬天幣</span> + 防具粉末×2500 + <span style="color:#ce93d8;font-weight:700;">噬魂魔核×10</span> + <span class="c-req hero">+6 英雄防具</span></td></tr>
+            <tr><td class="c-myth">神話防具</td><td>神話秘笈×1 + 傳說秘笈×2 + 英雄秘笈×4 + <span class="c-cost">3000萬天幣</span> + 防具粉末×7500 + <span style="color:#ffb74d;font-weight:700;">噬魂魔核×20</span> + <span class="c-req leg">+7 傳說防具</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 飾品製作 -->
+      <div class="section-bar">飾品製作</div>
+      <div style="overflow-x:auto;margin-bottom:24px">
+        <table class="craft-tbl">
+          <thead><tr><th width="16%">飾品種類</th><th>所需材料</th></tr></thead>
+          <tbody>
+            <tr><td class="c-adv">高級飾品</td><td>高級秘笈×2 + <span class="c-cost">10萬天幣</span> + 飾品粉末×20 + <span class="c-req">一般飾品</span></td></tr>
+            <tr><td class="c-rare">稀有飾品</td><td>稀有秘笈×1 + 高級飾品×2 + <span class="c-cost">60萬天幣</span> + 飾品粉末×200 + <span class="c-req adv">高級飾品</span></td></tr>
+            <tr><td class="c-hero">英雄飾品</td><td>英雄秘笈×1 + 稀有秘笈×2 + 高級秘笈×4 + <span class="c-cost">300萬天幣</span> + 飾品粉末×1000 + <span style="color:#ce93d8;font-weight:700;">噬魂魔核×3</span> + <span class="c-req rare">稀有飾品</span></td></tr>
+            <tr><td class="c-leg">傳說飾品</td><td>傳說秘笈×1 + 英雄秘笈×2 + 稀有秘笈×4 + <span class="c-cost">1000萬天幣</span> + 飾品粉末×5000 + <span style="color:#ce93d8;font-weight:700;">噬魂魔核×10</span> + <span class="c-req hero">英雄飾品</span></td></tr>
+            <tr><td class="c-myth">神話飾品</td><td>神話秘笈×1 + 傳說秘笈×2 + 英雄飾品×4 + <span class="c-cost">3000萬天幣</span> + 飾品粉末×15000 + <span style="color:#ffb74d;font-weight:700;">噬魂魔核×20</span> + <span class="c-req leg">傳說飾品</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 分解系統 -->
+      <div class="decompose-box">
+        <h3>裝備分解系統</h3>
+        <p style="color:var(--text-dim);font-size:0.82rem;margin:0 0 16px;line-height:1.7">請尋找主城 NPC <strong style="color:var(--text-bright,#e8d8b0)">「裝備分解師」</strong>，可分解所有武器、裝備、飾品並獲取對應粉末。</p>
+        <div style="overflow-x:auto">
+          <table class="decompose-tbl">
+            <thead>
+              <tr><th>階級</th><th>武器粉末</th><th>防具粉末</th><th>飾品粉末</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="r-gen">一般</td><td>5 個</td><td>5 個</td><td>5 個</td></tr>
+              <tr><td class="r-adv">高級</td><td>20 個</td><td>20 個</td><td>20 個</td></tr>
+              <tr><td class="r-rare">稀有</td><td>100 個</td><td>100 個</td><td>100 個</td></tr>
+              <tr><td class="r-hero">英雄</td><td>500 個</td><td>500 個</td><td>500 個</td></tr>
+              <tr><td class="r-leg">傳說</td><td>2,500 個</td><td>2,500 個</td><td>2,500 個</td></tr>
+              <tr><td class="r-myth">神話</td><td>7,500 個</td><td>7,500 個</td><td>7,500 個</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="text-align:center;font-size:0.75rem;color:var(--text-dim);margin:10px 0 0">(※ 各部位分解獲得之數量皆相同)</p>
+      </div>
+
+    </div><!-- end tab-craft -->
+
+    <div id="tab-enhance" class="tab-content">
+      <div class="section-bar">✨ 祝福捲軸強化跳階說明</div>
+      <div class="info-box" style="margin-bottom:16px;">
+        <p>💡 使用<strong>祝福的強化卷軸</strong>強化防具時，成功後可能一次跳升多個等級。各區間跳升範圍如下：</p>
+      </div>
+      <div class="table-wrap">
+        <table class="jump-table">
+          <thead><tr><th>目前強化區間</th><th>可能跳升階數</th></tr></thead>
+          <tbody>
+            <tr><td>+0 ~ +2</td><td style="color:#ffe060">跳升 +1 ~ +3 階</td></tr>
+            <tr><td>+3 ~ +5</td><td style="color:#ffe060">跳升 +1 ~ +2 階</td></tr>
+            <tr><td>+6 以上（含 +6）</td><td style="color:#ffe060">只跳升 +1 階</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.78rem;color:var(--text-dim);text-align:right;margin-top:8px;">※ 強化數值以遊戲內實際顯示為準</p>
+    </div><!-- end tab-enhance -->
+
+    <!-- ── Pager ── -->
+    <div class="fp-pager">
+      <a href="items-weapons.html" class="fp-pager__btn">
+        <span class="fp-pager__arrow">←</span>
+        <div><span class="fp-pager__dir">PREV</span><span class="fp-pager__name">武器介紹</span></div>
+      </a>
+      <div class="fp-pager__center"><a href="items-overview.html" class="fp-pager__back">▲ 返回裝備道具列表</a></div>
+      <a href="items-hexagram.html" class="fp-pager__btn fp-pager__btn--next">
+        <div><span class="fp-pager__dir">NEXT</span><span class="fp-pager__name">威力彩選號</span></div>
+        <span class="fp-pager__arrow">→</span>
+      </a>
+    </div>
+
+  </main>
+
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script><script>
+    function switchTab(name) {
+      document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelector('[data-tab="' + name + '"]').classList.add('active');
+      document.getElementById('tab-' + name).classList.add('active');
+    }
+    function lsSwitch(type) {
+      document.querySelectorAll('.ls-tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.ls-panel').forEach(p => p.classList.remove('active'));
+      document.querySelector('.ls-tab.ls-' + type).classList.add('active');
+      document.querySelector('.ls-panel.ls-' + type).classList.add('active');
+    }
+  </script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

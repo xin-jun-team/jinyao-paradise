@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>職業之力 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    /* 職業卡片 */
+    .job-card {
+      background: linear-gradient(135deg, #280c11 0%, #17090b 55%, #270b0f 100%);
+      border:1px solid #2f171b; border-radius:2px;
+      overflow:hidden; margin-bottom:20px;
+    }
+    .job-card__head {
+      background: linear-gradient(90deg, rgba(200,0,33,0.14) 0%, rgba(200,0,33,0.05) 45%, transparent 100%);
+      border-bottom: 1px solid rgba(200,0,33,0.2);
+      padding:16px 22px; display:flex; align-items:center; gap:16px;
+    }
+    .job-card__icon { flex-shrink:0; width:64px; height:64px; background:#261014; border:1px solid #52282f; border-radius:2px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .job-card__icon img { width:100%; height:100%; object-fit:contain; image-rendering:pixelated; }
+    .job-card__meta { flex:1; }
+    .job-card__name { font-family:'Noto Serif TC',serif; font-size:1rem; font-weight:900; color:var(--text-bright); letter-spacing:0.12em; margin-bottom:3px; }
+    .job-card__power { font-family:'Cinzel',serif; font-size:0.72rem; color:var(--gold); letter-spacing:0.15em; }
+    .job-card__desc { font-size:0.82rem; color:var(--text-dim); margin-left:auto; max-width:360px; line-height:1.6; text-align:right; }
+    .job-card__desc strong { color:#ffe060; }
+
+    /* 數值表 */
+    .job-table { width:100%; border-collapse:collapse; font-size:0.82rem; }
+    .job-table th { background: linear-gradient(90deg, rgba(212,168,32,0.16) 0%, rgba(212,168,32,0.06) 100%); color:var(--gold-dim); font-family:'Cinzel',serif; font-size:0.66rem; letter-spacing:0.1em; padding:9px 14px; border:1px solid #401f24; text-align:center; }
+    .job-table th:first-child { text-align:left; }
+    .job-table td { background:#1b0b0e; padding:8px 14px; border:1px solid #2f171b; color:var(--text-dim); text-align:center; }
+    .job-table td:first-child { color:var(--text-bright); font-weight:700; font-family:'Cinzel',serif; font-size:0.78rem; text-align:left; }
+    .job-table tr:nth-child(even) td { background:#1d0d10; }
+    .job-table tr:hover td { background:#281216; }
+    .job-table tr:last-child td { background:#2c1216; }
+    .job-table tr:last-child td:first-child { color:var(--gold); }
+    .val { color:#ffe060; font-weight:700; font-family:'Cinzel',serif; }
+    .rate { font-family:'Cinzel',serif; font-weight:700; font-size:0.82rem; }
+    .rate--100 { color:#4cff7c; }
+    .rate--90  { color:#7cff60; }
+    .rate--80  { color:#b0e040; }
+    .rate--70  { color:#e0c040; }
+    .rate--60  { color:#ff8040; }
+    .rate-bar { display:inline-block; height:4px; border-radius:2px; vertical-align:middle; margin-left:6px; }
+    .rate-bar--100 { width:48px; background:linear-gradient(90deg,#4cff7c,#2ecc71); }
+    .rate-bar--90  { width:43px; background:linear-gradient(90deg,#7cff60,#5cb85c); }
+    .rate-bar--80  { width:38px; background:linear-gradient(90deg,#b0e040,#9acd32); }
+    .rate-bar--70  { width:33px; background:linear-gradient(90deg,#e0c040,#d4a820); }
+    .rate-bar--60  { width:29px; background:linear-gradient(90deg,#ff8040,#e06030); }
+    .rate--50  { color:#ff5a3c; }
+    .rate--40  { color:#ff4040; }
+    .rate-bar--50 { width:24px; background:linear-gradient(90deg,#ff5a3c,#d04020); }
+    .rate-bar--40 { width:19px; background:linear-gradient(90deg,#ff4040,#c03030); }
+
+    @media (max-width:600px) { .job-card__desc { display:none; } }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — JOB POWER</p>
+    <h1 class="page-hero__title">職業<span>之力</span></h1>
+    <p class="page-hero__sub">賦予職業專屬力量，決定後期勝負關鍵</p>
+  </div>
+
+  <main class="fp-wrap">
+
+    <p class="fp-heading">⚗ 職業之力介紹</p>
+
+    <div class="fp-intro">
+      每個職業都有專屬自己強大的職業之力，<strong>賦予大量的屬性與能力</strong>。<br>
+      滿級的職業之力更是後期重要的勝負關鍵——前往主城 NPC <strong>【西方失敗】</strong> 製作並逐步升階，不可忽視。
+    </div>
+
+    <!-- 王族 -->
+    <div class="job-card">
+      <div class="job-card__head">
+        <div class="job-card__icon"><img src="../assets/images/job-royal.png" alt="王族" loading="lazy"></div>
+        <div class="job-card__meta">
+          <div class="job-card__name">王族</div>
+          <div class="job-card__power">殷海薩之力</div>
+        </div>
+        <div class="job-card__desc">遭受傷害時觸發治癒，並提供 PVP 減傷與近距攻擊加成。<strong>滿級回復 350–400</strong>，生存力大幅強化。</div>
+      </div>
+      <table class="job-table">
+        <thead><tr><th>階段</th><th>升級成功率</th><th>治癒機率</th><th>治癒量</th><th>PVP 減傷</th><th>近距攻擊</th></tr></thead>
+        <tbody>
+          <tr><td>初始</td><td><span class="rate rate--100">100%</span><span class="rate-bar rate-bar--100"></span></td><td><span class="val">4%</span></td><td>50–100</td><td>+1</td><td>+1</td></tr>
+          <tr><td>LV.1</td><td><span class="rate rate--90">90%</span><span class="rate-bar rate-bar--90"></span></td><td><span class="val">5%</span></td><td>100–150</td><td>+1</td><td>+1</td></tr>
+          <tr><td>LV.2</td><td><span class="rate rate--80">80%</span><span class="rate-bar rate-bar--80"></span></td><td><span class="val">6%</span></td><td>150–200</td><td>+2</td><td>+3</td></tr>
+          <tr><td>LV.3</td><td><span class="rate rate--70">70%</span><span class="rate-bar rate-bar--70"></span></td><td><span class="val">7%</span></td><td>200–250</td><td>+2</td><td>+3</td></tr>
+          <tr><td>LV.4</td><td><span class="rate rate--50">50%</span><span class="rate-bar rate-bar--50"></span></td><td><span class="val">8%</span></td><td>250–300</td><td>+3</td><td>+5</td></tr>
+          <tr><td>LV.5</td><td><span class="rate rate--50">50%</span><span class="rate-bar rate-bar--50"></span></td><td><span class="val">9%</span></td><td>300–350</td><td>+3</td><td>+5</td></tr>
+          <tr><td>MAX</td><td><span class="rate rate--40">40%</span><span class="rate-bar rate-bar--40"></span></td><td><span class="val">10%</span></td><td>350–400</td><td>+5</td><td>+8</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 騎士 -->
+    <div class="job-card">
+      <div class="job-card__head">
+        <div class="job-card__icon"><img src="../assets/images/job-knight.png" alt="騎士" loading="lazy"></div>
+        <div class="job-card__meta">
+          <div class="job-card__name">騎士</div>
+          <div class="job-card__power">屠龍者之力</div>
+        </div>
+        <div class="job-card__desc">強化暈眩命中、魔法抵抗、最大 HP 與傷害免疫。<strong>滿級 HP +1,000、魔抵 +15</strong>，成為難以撼動的鐵壁。</div>
+      </div>
+      <table class="job-table">
+        <thead><tr><th>階段</th><th>升級成功率</th><th>暈眩命中</th><th>魔法抵抗</th><th>最大 HP</th><th>傷害免疫</th></tr></thead>
+        <tbody>
+          <tr><td>初始</td><td><span class="rate rate--100">100%</span><span class="rate-bar rate-bar--100"></span></td><td><span class="val">+1%</span></td><td>+2</td><td>+100</td><td>+1</td></tr>
+          <tr><td>LV.1</td><td><span class="rate rate--90">90%</span><span class="rate-bar rate-bar--90"></span></td><td><span class="val">+2%</span></td><td>+4</td><td>+200</td><td>+2</td></tr>
+          <tr><td>LV.2</td><td><span class="rate rate--80">80%</span><span class="rate-bar rate-bar--80"></span></td><td><span class="val">+3%</span></td><td>+6</td><td>+300</td><td>+3</td></tr>
+          <tr><td>LV.3</td><td><span class="rate rate--70">70%</span><span class="rate-bar rate-bar--70"></span></td><td><span class="val">+5%</span></td><td>+8</td><td>+400</td><td>+4</td></tr>
+          <tr><td>LV.4</td><td><span class="rate rate--50">50%</span><span class="rate-bar rate-bar--50"></span></td><td><span class="val">+7%</span></td><td>+10</td><td>+500</td><td>+5</td></tr>
+          <tr><td>LV.5</td><td><span class="rate rate--50">50%</span><span class="rate-bar rate-bar--50"></span></td><td><span class="val">+9%</span></td><td>+12</td><td>+800</td><td>+6</td></tr>
+          <tr><td>MAX</td><td><span class="rate rate--40">40%</span><span class="rate-bar rate-bar--40"></span></td><td><span class="val">+12%</span></td><td>+15</td><td>+1,000</td><td>+8</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 妖精 -->
+    <div class="job-card">
+      <div class="job-card__head">
+        <div class="job-card__icon"><img src="../assets/images/job-elf.png" alt="妖精" loading="lazy"></div>
+        <div class="job-card__meta">
+          <div class="job-card__name">妖精</div>
+          <div class="job-card__power">席琳之力</div>
+        </div>
+        <div class="job-card__desc">強化三重矢傷害與近距攻擊，並降低對手迴避率。<strong>滿級三重矢 +50、近距 +15</strong>，全面提升輸出效率。</div>
+      </div>
+      <table class="job-table">
+        <thead><tr><th>階段</th><th>升級成功率</th><th>三重矢傷害</th><th>迴避降低</th><th>近距攻擊</th></tr></thead>
+        <tbody>
+          <tr><td>初始</td><td><span class="rate rate--100">100%</span><span class="rate-bar rate-bar--100"></span></td><td><span class="val">+10</span></td><td>+1</td><td>+1</td></tr>
+          <tr><td>LV.1</td><td><span class="rate rate--90">90%</span><span class="rate-bar rate-bar--90"></span></td><td><span class="val">+16</span></td><td>+2</td><td>+2</td></tr>
+          <tr><td>LV.2</td><td><span class="rate rate--80">80%</span><span class="rate-bar rate-bar--80"></span></td><td><span class="val">+20</span></td><td>+3</td><td>+2</td></tr>
+          <tr><td>LV.3</td><td><span class="rate rate--70">70%</span><span class="rate-bar rate-bar--70"></span></td><td><span class="val">+24</span></td><td>+4</td><td>+2</td></tr>
+          <tr><td>LV.4</td><td><span class="rate rate--50">50%</span><span class="rate-bar rate-bar--50"></span></td><td><span class="val">+28</span></td><td>+5</td><td>+10</td></tr>
+          <tr><td>LV.5</td><td><span class="rate rate--50">50%</span><span class="rate-bar rate-bar--50"></span></td><td><span class="val">+35</span></td><td>+6</td><td>+10</td></tr>
+          <tr><td>MAX</td><td><span class="rate rate--40">40%</span><span class="rate-bar rate-bar--40"></span></td><td><span class="val">+50</span></td><td>+7</td><td>+15</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 法師 -->
+    <div class="job-card">
+      <div class="job-card__head">
+        <div class="job-card__icon"><img src="../assets/images/job-mage.png" alt="法師" loading="lazy"></div>
+        <div class="job-card__meta">
+          <div class="job-card__name">法師</div>
+          <div class="job-card__power">艾歐丁之力</div>
+        </div>
+        <div class="job-card__desc">大幅提升魅力、火焰魔法傷害及 MP 回復。<strong>滿級魅力 +36、火焰傷害 +100</strong>，打造毀滅級魔法輸出。</div>
+      </div>
+      <table class="job-table">
+        <thead><tr><th>階段</th><th>升級成功率</th><th>魅力加成</th><th>火焰魔法傷害</th><th>MP 回復</th></tr></thead>
+        <tbody>
+          <tr><td>初始</td><td><span class="rate rate--100">100%</span><span class="rate-bar rate-bar--100"></span></td><td><span class="val">+9</span></td><td>+8</td><td>+2</td></tr>
+          <tr><td>LV.1</td><td><span class="rate rate--90">90%</span><span class="rate-bar rate-bar--90"></span></td><td><span class="val">+12</span></td><td>+15</td><td>+2</td></tr>
+          <tr><td>LV.2</td><td><span class="rate rate--80">80%</span><span class="rate-bar rate-bar--80"></span></td><td><span class="val">+12</span></td><td>+30</td><td>+4</td></tr>
+          <tr><td>LV.3</td><td><span class="rate rate--70">70%</span><span class="rate-bar rate-bar--70"></span></td><td><span class="val">+18</span></td><td>+45</td><td>+4</td></tr>
+          <tr><td>LV.4</td><td><span class="rate rate--50">50%</span><span class="rate-bar rate-bar--50"></span></td><td><span class="val">+21</span></td><td>+60</td><td>+6</td></tr>
+          <tr><td>LV.5</td><td><span class="rate rate--50">50%</span><span class="rate-bar rate-bar--50"></span></td><td><span class="val">+25</span></td><td>+75</td><td>+6</td></tr>
+          <tr><td>MAX</td><td><span class="rate rate--40">40%</span><span class="rate-bar rate-bar--40"></span></td><td><span class="val">+36</span></td><td>+100</td><td>+10</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 黑暗妖精 -->
+    <div class="job-card">
+      <div class="job-card__head">
+        <div class="job-card__icon"><img src="../assets/images/job-darkelf.png" alt="黑暗妖精" loading="lazy"></div>
+        <div class="job-card__meta">
+          <div class="job-card__name">黑暗妖精</div>
+          <div class="job-card__power">格蘭肯之力</div>
+        </div>
+        <div class="job-card__desc">提升近戰爆擊率、爆擊倍率與攻擊命中。<strong>滿級爆擊率 +8%、倍率 1.15×</strong>，每次暴擊都是致命打擊。</div>
+      </div>
+      <table class="job-table">
+        <thead><tr><th>階段</th><th>升級成功率</th><th>爆擊率</th><th>爆擊倍率</th><th>攻擊命中</th></tr></thead>
+        <tbody>
+          <tr><td>初始</td><td><span class="rate rate--100">100%</span><span class="rate-bar rate-bar--100"></span></td><td><span class="val">+1%</span></td><td>1.02×</td><td>+1</td></tr>
+          <tr><td>LV.1</td><td><span class="rate rate--90">90%</span><span class="rate-bar rate-bar--90"></span></td><td><span class="val">+2%</span></td><td>1.04×</td><td>+1</td></tr>
+          <tr><td>LV.2</td><td><span class="rate rate--80">80%</span><span class="rate-bar rate-bar--80"></span></td><td><span class="val">+3%</span></td><td>1.06×</td><td>+2</td></tr>
+          <tr><td>LV.3</td><td><span class="rate rate--70">70%</span><span class="rate-bar rate-bar--70"></span></td><td><span class="val">+4%</span></td><td>1.08×</td><td>+2</td></tr>
+          <tr><td>LV.4</td><td><span class="rate rate--50">50%</span><span class="rate-bar rate-bar--50"></span></td><td><span class="val">+5%</span></td><td>1.10×</td><td>+3</td></tr>
+          <tr><td>LV.5</td><td><span class="rate rate--50">50%</span><span class="rate-bar rate-bar--50"></span></td><td><span class="val">+6%</span></td><td>1.12×</td><td>+3</td></tr>
+          <tr><td>MAX</td><td><span class="rate rate--40">40%</span><span class="rate-bar rate-bar--40"></span></td><td><span class="val">+8%</span></td><td>1.15×</td><td>+5</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 上下頁導覽 -->
+    <div class="fp-pager">
+      <a href="features-overview.html" class="fp-pager__btn">
+        <span class="fp-pager__arrow">←</span>
+        <div><span class="fp-pager__dir">BACK</span><span class="fp-pager__name">特色介紹</span></div>
+      </a>
+      <div class="fp-pager__center"><a href="features-overview.html" class="fp-pager__back">▲ 返回系統列表</a></div>
+      <a href="feature-pet.html" class="fp-pager__btn fp-pager__btn--next">
+        <div><span class="fp-pager__dir">NEXT</span><span class="fp-pager__name">寵物系統</span></div>
+        <span class="fp-pager__arrow">→</span>
+      </a>
+    </div>
+
+  </main>
+
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

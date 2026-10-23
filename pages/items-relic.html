@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>聖物系統 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    .reward-table { width:100%; border-collapse:collapse; font-size:0.82rem; }
+    .reward-table th { background: linear-gradient(90deg, rgba(212,168,32,0.2) 0%, rgba(212,168,32,0.08) 100%); color:var(--gold-dim); font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.12em; padding:10px 16px; border:1px solid #401f24; text-align:left; }
+    .reward-table td { background:#1b0b0e; padding:10px 16px; border:1px solid #2f171b; color:var(--text-dim); }
+    .reward-table tr:nth-child(even) td { background:#1d0d10; }
+    .reward-table tr:hover td { background:#281216; }
+    .reward-table td:first-child { color:var(--text-bright); font-family:'Cinzel',serif; }
+
+    .relic-info-box { background:#1b0b0e; border:1px solid rgba(212,168,32,0.25); border-radius:4px; padding:20px 24px; margin-bottom:32px; }
+    .relic-info-box h3 { margin-top:0; color:var(--gold-dim); font-family:'Cinzel',serif; font-size:0.9rem; letter-spacing:0.1em; border-left:3px solid var(--gold-dim); padding-left:12px; margin-bottom:16px; }
+    .relic-info-box ul { margin:0; padding-left:20px; }
+    .relic-info-box li { color:var(--text-dim); margin-bottom:10px; font-size:0.88rem; line-height:1.7; }
+    .relic-info-box li strong { color:var(--text-bright); }
+    .relic-info-box .badge-success { background:rgba(0,200,100,0.12); color:#00c864; padding:2px 10px; border-radius:10px; font-weight:bold; }
+    .relic-info-box .text-cost { color:#ff6b6b; font-weight:bold; }
+
+    .relic-grid { display:grid; grid-template-columns:1fr; gap:32px; margin-bottom:32px; }
+
+    .relic-series { }
+    .relic-series__heading { font-family:'Cinzel',serif; font-size:0.78rem; letter-spacing:0.1em; padding:10px 16px; margin:0 0 0 0; border-radius:2px 2px 0 0; font-weight:700; }
+    .relic-series--melee .relic-series__heading { background:rgba(255,107,107,0.15); color:#ff8a80; border:1px solid rgba(255,107,107,0.3); border-bottom:none; }
+    .relic-series--range .relic-series__heading { background:rgba(105,240,174,0.1); color:#69f0ae; border:1px solid rgba(105,240,174,0.25); border-bottom:none; }
+    .relic-series--mage  .relic-series__heading { background:rgba(130,177,255,0.1); color:#82b1ff; border:1px solid rgba(130,177,255,0.25); border-bottom:none; }
+
+    .relic-series--melee .reward-table th { background:linear-gradient(90deg, rgba(255,107,107,0.18) 0%, rgba(255,107,107,0.05) 100%); color:#ff8a80; border-color:#2a1a1a; }
+    .relic-series--melee .reward-table td { border-color:#1e1010; }
+    .relic-series--melee .reward-table tr:hover td { background:#1e0e0e; }
+
+    .relic-series--range .reward-table th { background:linear-gradient(90deg, rgba(105,240,174,0.15) 0%, rgba(105,240,174,0.04) 100%); color:#69f0ae; border-color:#1a2a1a; }
+    .relic-series--range .reward-table td { border-color:#101e10; }
+    .relic-series--range .reward-table tr:hover td { background:#0e1e0e; }
+
+    .relic-series--mage .reward-table th { background:linear-gradient(90deg, rgba(130,177,255,0.15) 0%, rgba(130,177,255,0.04) 100%); color:#82b1ff; border-color:#2e161a; }
+    .relic-series--mage .reward-table td { border-color:#1f0f12; }
+    .relic-series--mage .reward-table tr:hover td { background:#1e0e11; }
+
+    .relic-series .reward-table td:first-child { font-family:inherit; font-size:0.8rem; }
+    .td-special { color:#ce93d8; font-size:0.78rem; }
+    .td-rate-high { color:#ff6b6b; font-weight:700; font-family:'Cinzel',serif; }
+    .td-rate-low  { color:#ff4444; font-weight:700; font-family:'Cinzel',serif; }
+    .td-rate-mid  { color:var(--text-dim); }
+    .td-name-max  { color:#ffcc80; font-weight:bold; }
+    .td-name-special { color:#ff9800; font-weight:bold; }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — RELIC SYSTEM</p>
+    <h1 class="page-hero__title">聖物<span>系統</span></h1>
+    <p class="page-hero__sub">收集並升階聖物，召喚即生效</p>
+  </div>
+
+  <main class="fp-wrap">
+
+    <p class="fp-heading">系統說明</p>
+    <div class="fp-intro">
+      <strong>聖物系統</strong>為召喚後能力生效，升階後的屬性召喚即生效。<br>
+      依職業取向分為三大系列：近戰、遠程、法師，每系列共七個升階階段，逐步強化核心數值。
+    </div>
+
+    <div class="relic-info-box">
+      <h3>強化說明</h3>
+      <ul>
+        <li><strong>強化道具：</strong>聖物成長藥劑（掉落於<strong>傲慢之塔 1–10F</strong>）</li>
+        <li><strong>強化費用：</strong>每次嘗試消耗 <span class="text-cost">10,000 天幣</span></li>
+        <li><strong>失敗懲罰：</strong><span class="badge-success">失敗不退階</span>，僅消耗道具與天幣，等級不下降</li>
+        <li><strong>擴充說明：</strong>需使用<strong>聖物擴充石</strong>，才可讓聖物與魔法娃娃共存於裝備欄</li>
+      </ul>
+    </div>
+
+    <p class="fp-heading">三大系列升階表</p>
+
+    <div class="relic-grid">
+
+      <!-- 近戰系聖物 -->
+      <div class="relic-series relic-series--melee">
+        <p class="relic-series__heading"><img src="../assets/images/item-16906.png" alt="甘地的圖騰" style="width:32px;height:32px;vertical-align:middle;image-rendering:pixelated;margin-right:8px;">近戰系聖物</p>
+        <table class="reward-table">
+          <thead>
+            <tr>
+              <th>聖物名稱</th>
+              <th>屬性加成</th>
+              <th>特殊效果</th>
+              <th style="text-align:center">成功率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>甘地的圖騰</td>
+              <td>HP+10、經驗+5%</td>
+              <td>—</td>
+              <td style="text-align:center" class="td-rate-mid">—</td>
+            </tr>
+            <tr>
+              <td>平凡的聖物：食人妖精的棍棒</td>
+              <td>HP+20、經驗+10%</td>
+              <td>—</td>
+              <td style="text-align:center" class="td-rate-mid">25%</td>
+            </tr>
+            <tr>
+              <td>努力的聖物：暗黑騎士的單手劍</td>
+              <td>HP+40、經驗+15%</td>
+              <td>—</td>
+              <td style="text-align:center" class="td-rate-mid">15%</td>
+            </tr>
+            <tr>
+              <td class="td-name-special">聰明的聖物：歐吉王的斧頭</td>
+              <td>HP+60、經驗+20%</td>
+              <td>額外攻擊+1</td>
+              <td style="text-align:center" class="td-rate-mid">10%</td>
+            </tr>
+            <tr>
+              <td class="td-name-special">聰穎的聖物：史雷佛雙刀</td>
+              <td>HP+80、經驗+25%</td>
+              <td>額外攻擊+2、額外命中+1<br><span class="td-special">自動施放通暢與體魄</span></td>
+              <td style="text-align:center" class="td-rate-high">6%</td>
+            </tr>
+            <tr>
+              <td class="td-name-max">發光的聖物：勞待碼依之劍</td>
+              <td>HP+120、經驗+35%</td>
+              <td>額外攻擊+3、額外命中+2<br><span class="td-special">自動施放通暢與體魄</span></td>
+              <td style="text-align:center" class="td-rate-high">3%</td>
+            </tr>
+            <tr>
+              <td class="td-name-max">光彩照人的聖物：格蘭肯的現身</td>
+              <td style="color:var(--text-bright);font-weight:bold">HP+150、經驗+50%</td>
+              <td>額外攻擊+5、額外命中+3<br><span class="td-special">自動施放通暢與體魄</span></td>
+              <td style="text-align:center" class="td-rate-low">1%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 遠程系聖物 -->
+      <div class="relic-series relic-series--range">
+        <p class="relic-series__heading"><img src="../assets/images/item-16907.png" alt="阿吐巴的圖騰" style="width:32px;height:32px;vertical-align:middle;image-rendering:pixelated;margin-right:8px;">遠程系聖物</p>
+        <table class="reward-table">
+          <thead>
+            <tr>
+              <th>聖物名稱</th>
+              <th>屬性加成</th>
+              <th>特殊效果</th>
+              <th style="text-align:center">成功率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>阿吐巴的圖騰</td>
+              <td>HP+10、經驗+5%</td>
+              <td>—</td>
+              <td style="text-align:center" class="td-rate-mid">—</td>
+            </tr>
+            <tr>
+              <td>平凡的聖物：黑暗妖精的弓</td>
+              <td>HP+20、經驗+10%</td>
+              <td>—</td>
+              <td style="text-align:center" class="td-rate-mid">25%</td>
+            </tr>
+            <tr>
+              <td>努力的聖物：達伊思諾手套</td>
+              <td>HP+40、經驗+15%</td>
+              <td>—</td>
+              <td style="text-align:center" class="td-rate-mid">15%</td>
+            </tr>
+            <tr>
+              <td style="color:#69f0ae;font-weight:bold">聰明的聖物：安迪斯弩弓</td>
+              <td>HP+60、經驗+20%</td>
+              <td style="color:#69f0ae">遠距離額外攻擊+1</td>
+              <td style="text-align:center" class="td-rate-mid">10%</td>
+            </tr>
+            <tr>
+              <td style="color:#69f0ae;font-weight:bold">聰穎的聖物：海露拜之弓</td>
+              <td>HP+80、經驗+25%</td>
+              <td>遠距攻擊+2、遠距命中+1<br><span class="td-special">自動施放通暢與體魄</span></td>
+              <td style="text-align:center" class="td-rate-high">6%</td>
+            </tr>
+            <tr>
+              <td style="color:#b9f6ca;font-weight:bold">發光的聖物：赫發斯特斯</td>
+              <td>HP+120、經驗+35%</td>
+              <td>遠距攻擊+3、遠距命中+2<br><span class="td-special">自動施放通暢與體魄</span></td>
+              <td style="text-align:center" class="td-rate-high">3%</td>
+            </tr>
+            <tr>
+              <td style="color:#b9f6ca;font-weight:bold">光彩照人的聖物：殷海薩的現身</td>
+              <td style="color:var(--text-bright);font-weight:bold">HP+150、經驗+50%</td>
+              <td>遠距攻擊+5、遠距命中+3<br><span class="td-special">自動施放通暢與體魄</span></td>
+              <td style="text-align:center" class="td-rate-low">1%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 法師系聖物 -->
+      <div class="relic-series relic-series--mage">
+        <p class="relic-series__heading"><img src="../assets/images/item-16908.png" alt="那魯加的圖騰" style="width:32px;height:32px;vertical-align:middle;image-rendering:pixelated;margin-right:8px;">法師系聖物</p>
+        <table class="reward-table">
+          <thead>
+            <tr>
+              <th>聖物名稱</th>
+              <th>屬性加成</th>
+              <th>特殊效果</th>
+              <th style="text-align:center">成功率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>那魯加的圖騰</td>
+              <td>HP+10、經驗+5%</td>
+              <td>—</td>
+              <td style="text-align:center" class="td-rate-mid">—</td>
+            </tr>
+            <tr>
+              <td>平凡的聖物：長者的魔杖</td>
+              <td>HP+20、經驗+10%</td>
+              <td>—</td>
+              <td style="text-align:center" class="td-rate-mid">25%</td>
+            </tr>
+            <tr>
+              <td>努力的聖物：巫婆的掃帚</td>
+              <td>HP+40、經驗+15%</td>
+              <td>—</td>
+              <td style="text-align:center" class="td-rate-mid">15%</td>
+            </tr>
+            <tr>
+              <td style="color:#82b1ff;font-weight:bold">聰明的聖物：巴風特魔杖</td>
+              <td>HP+60、經驗+20%</td>
+              <td style="color:#82b1ff">魔攻+1</td>
+              <td style="text-align:center" class="td-rate-mid">10%</td>
+            </tr>
+            <tr>
+              <td style="color:#82b1ff;font-weight:bold">聰穎的聖物：冰之女王頭飾</td>
+              <td>HP+80、經驗+25%</td>
+              <td>魔攻+1、額外命中+1<br><span class="td-special">自動施放通暢與體魄</span></td>
+              <td style="text-align:center" class="td-rate-high">6%</td>
+            </tr>
+            <tr>
+              <td style="color:#b3c8ff;font-weight:bold">發光的聖物：吉倫的魔杖</td>
+              <td>HP+120、經驗+35%</td>
+              <td>魔攻+2、額外命中+2<br><span class="td-special">自動施放通暢與體魄</span></td>
+              <td style="text-align:center" class="td-rate-high">3%</td>
+            </tr>
+            <tr>
+              <td style="color:#b3c8ff;font-weight:bold">光彩照人的聖物：法老王的現身</td>
+              <td style="color:var(--text-bright);font-weight:bold">HP+150、經驗+50%</td>
+              <td>魔攻+3、額外命中+3<br><span class="td-special">自動施放通暢與體魄</span></td>
+              <td style="text-align:center" class="td-rate-low">1%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div><!-- /.relic-grid -->
+
+    <!-- 上下頁導覽 -->
+    <div class="fp-pager">
+      <a href="items-dragon-eye.html" class="fp-pager__btn">
+        <span class="fp-pager__arrow">←</span>
+        <div><span class="fp-pager__dir">PREV</span><span class="fp-pager__name">四龍之魔眼</span></div>
+      </a>
+      <div class="fp-pager__center"><a href="items-overview.html" class="fp-pager__back">▲ 返回裝備道具列表</a></div>
+      <a href="items-vip.html" class="fp-pager__btn fp-pager__btn--next">
+        <div><span class="fp-pager__dir">NEXT</span><span class="fp-pager__name">貴賓通行證</span></div>
+        <span class="fp-pager__arrow">→</span>
+      </a>
+    </div>
+
+  </main>
+
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

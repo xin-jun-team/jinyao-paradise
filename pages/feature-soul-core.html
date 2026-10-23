@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>噬魂魔核 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    .sc-showcase {
+      background:linear-gradient(160deg,#281216,#17090b 40%,#280c11);
+      border:1px solid rgba(204,0,34,0.3); border-radius:2px;
+      padding:32px; display:flex; gap:28px; align-items:center; flex-wrap:wrap; margin-bottom:32px;
+    }
+    .sc-showcase__img-wrap { position:relative; flex-shrink:0; }
+    .sc-showcase__img { width:64px; height:64px; image-rendering:pixelated; filter:drop-shadow(0 0 12px rgba(204,0,34,0.5)); position:relative; z-index:2; }
+    .sc-showcase__glow { position:absolute; inset:-20px; background:radial-gradient(circle,rgba(204,0,34,0.3) 0%,transparent 70%); z-index:1; animation:scPulse 2.5s ease-in-out infinite; }
+    @keyframes scPulse { 0%,100%{opacity:0.5;transform:scale(1);} 50%{opacity:1;transform:scale(1.1);} }
+    .sc-showcase__name { font-family:'Noto Serif TC',serif; font-size:1.2rem; font-weight:700; color:var(--text-bright); letter-spacing:0.12em; margin-bottom:6px; }
+    .sc-showcase__sub { font-size:0.8rem; color:var(--text-dim); }
+
+    .sc-usage-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; margin-bottom:32px; }
+    .sc-usage-card {
+      background:linear-gradient(135deg,#1e0e10,#17090b 60%,#1c0b0e);
+      border:1px solid #2f171b; border-radius:2px; padding:18px 20px;
+      transition:border-color 0.2s;
+    }
+    .sc-usage-card:hover { border-color:var(--gold-dim); }
+    .sc-usage-card__head { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+    .sc-usage-card__icon { width:28px; height:28px; image-rendering:pixelated; }
+    .sc-usage-card__title { font-family:'Noto Serif TC',serif; font-size:0.92rem; font-weight:700; color:var(--text-bright); }
+    .sc-usage-card__qty { font-family:'Cinzel',serif; font-size:0.75rem; color:var(--gold); margin-top:2px; }
+    .sc-usage-card__items { font-size:0.78rem; color:var(--text-dim); line-height:1.8; }
+
+    .sc-craft-box {
+      background:linear-gradient(160deg,#281216,#17090b 50%,#1c0a0d);
+      border:1px solid #401f24; border-radius:2px; padding:24px; margin-bottom:32px;
+      display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    }
+    .sc-craft-box__arrow { color:var(--gold-dim); font-size:1.4rem; }
+
+    @media(max-width:600px) {
+      .sc-showcase { flex-direction:column; text-align:center; }
+      .sc-craft-box { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — SOUL CORE</p>
+    <h1 class="page-hero__title">噬魂<span>魔核</span></h1>
+    <p class="page-hero__sub">一切強化的核心，裝備與道具製作的必要材料</p>
+  </div>
+
+  <main class="fp-wrap">
+
+    <p class="fp-heading">◆ 系統說明</p>
+    <div class="fp-intro">
+      噬魂魔核是金耀天堂中<strong>最重要的核心材料</strong>，從武器、防具、飾品到轉生裝備，所有高階製作都需要消耗噬魂魔核。<br>
+      全世界 BOSS 均會掉落噬魂魔核與碎片，碎片可合成為完整魔核。
+    </div>
+
+    <!-- 魔核展示 -->
+    <div class="sc-showcase">
+      <div class="sc-showcase__img-wrap">
+        <img src="../assets/images/item-2700.png" alt="噬魂魔核" class="sc-showcase__img" loading="lazy">
+        <div class="sc-showcase__glow"></div>
+      </div>
+      <div>
+        <div class="sc-showcase__name">噬魂魔核</div>
+        <div class="sc-showcase__sub">全 BOSS 掉落 ｜ 碎片 15 顆可合成（35% 成功率）</div>
+      </div>
+    </div>
+
+    <!-- 獲取方式 -->
+    <p class="fp-heading">⚔ 獲取方式</p>
+
+    <div class="sc-craft-box">
+      <div style="text-align:center;">
+        <img src="../assets/images/item-4104.png" alt="噬魂魔核碎片" style="width:48px;height:48px;image-rendering:pixelated;margin:0 auto 6px;display:block;" loading="lazy">
+        <div style="font-size:0.85rem;color:var(--text-bright);font-weight:700;">噬魂魔核碎片 ×15</div>
+        <div style="font-size:0.72rem;color:var(--text-dim);">全 BOSS 掉落</div>
+      </div>
+      <div class="sc-craft-box__arrow">→</div>
+      <div style="text-align:center;">
+        <div style="font-size:0.75rem;color:var(--gold-dim);font-family:'Cinzel',serif;margin-bottom:6px;">NPC 西方失敗</div>
+        <div style="font-size:0.85rem;color:#ff8080;">合成成功率 35%</div>
+      </div>
+      <div class="sc-craft-box__arrow">→</div>
+      <div style="text-align:center;">
+        <img src="../assets/images/item-2700.png" alt="噬魂魔核" style="width:48px;height:48px;image-rendering:pixelated;margin:0 auto 6px;display:block;filter:drop-shadow(0 0 8px rgba(204,0,34,0.5));" loading="lazy">
+        <div style="font-size:0.85rem;color:var(--text-bright);font-weight:700;">噬魂魔核 ×1</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(212,168,32,0.05);border-left:3px solid var(--gold-dim);padding:12px 16px;font-size:0.8rem;color:var(--text-bright);line-height:1.7;margin-bottom:32px;">
+      ◆ 噬魂魔核與碎片也可直接從 BOSS 掉落獲得，不一定需要合成。
+    </div>
+
+    <!-- 完整獲取途徑 -->
+    <p class="fp-heading">📋 完整獲取途徑</p>
+
+    <div class="fp-intro" style="margin-bottom:32px;">
+      <strong>BOSS 掉落</strong> — 全地圖 BOSS 均會掉落噬魂魔核與碎片<br>
+      <strong>全地圖怪物掉落</strong> — 大陸地圖一般怪物掉落噬魂魔核碎片<br>
+      <strong>活動獲取</strong> — 依官方活動內容不定期發放
+    </div>
+
+    <!-- 製作需求一覽 -->
+    <p class="fp-heading">📊 各階級裝備製作需求</p>
+
+    <div style="overflow-x:auto;margin-bottom:32px;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;min-width:500px;">
+        <thead>
+          <tr>
+            <th style="background:linear-gradient(90deg,rgba(212,168,32,0.15),rgba(212,168,32,0.05));color:var(--gold-dim);font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.12em;padding:10px 14px;border:1px solid #401f24;text-align:left;">階級</th>
+            <th style="background:linear-gradient(90deg,rgba(212,168,32,0.15),rgba(212,168,32,0.05));color:var(--gold-dim);font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.12em;padding:10px 14px;border:1px solid #401f24;text-align:center;">武器</th>
+            <th style="background:linear-gradient(90deg,rgba(212,168,32,0.15),rgba(212,168,32,0.05));color:var(--gold-dim);font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.12em;padding:10px 14px;border:1px solid #401f24;text-align:center;">防具</th>
+            <th style="background:linear-gradient(90deg,rgba(212,168,32,0.15),rgba(212,168,32,0.05));color:var(--gold-dim);font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.12em;padding:10px 14px;border:1px solid #401f24;text-align:center;">飾品</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:10px 14px;border:1px solid #2f171b;color:#ef5350;font-weight:700;background:#1b0b0e;">英雄</td><td style="padding:10px 14px;border:1px solid #2f171b;text-align:center;color:var(--text-bright);background:#1b0b0e;">×5</td><td style="padding:10px 14px;border:1px solid #2f171b;text-align:center;color:var(--text-bright);background:#1b0b0e;">×3</td><td style="padding:10px 14px;border:1px solid #2f171b;text-align:center;color:var(--text-bright);background:#1b0b0e;">×3</td></tr>
+          <tr><td style="padding:10px 14px;border:1px solid #2f171b;color:#ce93d8;font-weight:700;background:#1d0d10;">傳說</td><td style="padding:10px 14px;border:1px solid #2f171b;text-align:center;color:var(--text-bright);background:#1d0d10;">×20</td><td style="padding:10px 14px;border:1px solid #2f171b;text-align:center;color:var(--text-bright);background:#1d0d10;">×10</td><td style="padding:10px 14px;border:1px solid #2f171b;text-align:center;color:var(--text-bright);background:#1d0d10;">×10</td></tr>
+          <tr><td style="padding:10px 14px;border:1px solid #2f171b;color:#ffb74d;font-weight:700;background:#1b0b0e;">神話</td><td style="padding:10px 14px;border:1px solid #2f171b;text-align:center;color:var(--text-bright);background:#1b0b0e;">×50</td><td style="padding:10px 14px;border:1px solid #2f171b;text-align:center;color:var(--text-bright);background:#1b0b0e;">×20</td><td style="padding:10px 14px;border:1px solid #2f171b;text-align:center;color:var(--text-bright);background:#1b0b0e;">×20</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 用途一覽 -->
+    <p class="fp-heading">◈ 用途一覽</p>
+
+    <div class="sc-usage-grid">
+
+      <div class="sc-usage-card">
+        <div class="sc-usage-card__head">
+          <img src="../assets/images/item-6924.png" class="sc-usage-card__icon" alt="" loading="lazy">
+          <div>
+            <div class="sc-usage-card__title">BOSS 裝備合成材料</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-usage-card">
+        <div class="sc-usage-card__head">
+          <img src="../assets/images/item-2700.png" class="sc-usage-card__icon" alt="" loading="lazy">
+          <div>
+            <div class="sc-usage-card__title">轉生裝備合成材料</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-usage-card">
+        <div class="sc-usage-card__head">
+          <img src="../assets/images/item-12362.png" class="sc-usage-card__icon" alt="" loading="lazy">
+          <div>
+            <div class="sc-usage-card__title">武器合成材料</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-usage-card">
+        <div class="sc-usage-card__head">
+          <img src="../assets/images/item-1896.png" class="sc-usage-card__icon" alt="" loading="lazy">
+          <div>
+            <div class="sc-usage-card__title">防具合成材料</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-usage-card">
+        <div class="sc-usage-card__head">
+          <img src="../assets/images/item-665.png" class="sc-usage-card__icon" alt="" loading="lazy">
+          <div>
+            <div class="sc-usage-card__title">飾品合成材料</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="background:rgba(200,0,0,0.05);border-left:3px solid rgba(200,0,0,0.4);padding:12px 16px;font-size:0.8rem;color:var(--text-dim);line-height:1.7;">
+      ⚠️ 噬魂魔核為<strong style="color:#ff8080;">不可交易</strong>道具，請妥善規劃使用。建議優先投入最需要的裝備升級方向。
+    </div>
+
+  </main>
+
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八八節感恩回饋 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    /* ══════════════════════════════
+       八八節活動 — 金色威嚴主題
+       ══════════════════════════════ */
+
+    /* ── 主視覺 Hero ── */
+    .fd-hero {
+      position: relative;
+      text-align: center;
+      padding: 72px 32px 56px;
+      margin-bottom: 56px;
+      overflow: hidden;
+    }
+    .fd-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 50% 20%, rgba(212,168,32,0.12) 0%, transparent 100%),
+        radial-gradient(ellipse 300px 300px at 20% 80%, rgba(204,0,34,0.06) 0%, transparent 100%),
+        radial-gradient(ellipse 300px 300px at 80% 80%, rgba(204,0,34,0.06) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    /* 頂部金色裝飾線 */
+    .fd-hero__ornament {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin-bottom: 28px; position: relative;
+    }
+    .fd-hero__ornament-line {
+      width: 80px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,168,32,0.6));
+    }
+    .fd-hero__ornament-line:last-child {
+      background: linear-gradient(90deg, rgba(212,168,32,0.6), transparent);
+    }
+    .fd-hero__ornament-diamond {
+      color: #d4a820; font-size: 0.6rem; opacity: 0.8;
+      animation: fd-diamond-pulse 4s ease-in-out infinite;
+    }
+    @keyframes fd-diamond-pulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+    .fd-hero__icon {
+      font-size: 4rem; margin-bottom: 20px;
+      filter: drop-shadow(0 0 24px rgba(212,168,32,0.5));
+      position: relative;
+      animation: fd-float 6s ease-in-out infinite;
+    }
+    @keyframes fd-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .fd-hero__title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 2.2rem; font-weight: 900;
+      color: #ffe060;
+      letter-spacing: 0.25em;
+      text-shadow: 0 0 30px rgba(255,224,96,0.5), 0 4px 16px rgba(0,0,0,0.8);
+      margin-bottom: 16px; position: relative;
+    }
+    .fd-hero__subtitle {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.05rem; font-weight: 500;
+      color: #e8d090;
+      letter-spacing: 0.15em;
+      line-height: 1.9;
+      margin-bottom: 32px; position: relative;
+    }
+    .fd-hero__date-wrap {
+      display: inline-flex; align-items: center; gap: 20px;
+      padding: 14px 36px;
+      background: linear-gradient(135deg, rgba(212,168,32,0.12) 0%, rgba(204,0,34,0.06) 100%);
+      border: 1px solid rgba(212,168,32,0.35);
+      border-radius: 2px;
+      position: relative;
+    }
+    .fd-hero__date {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: #ffe060;
+      letter-spacing: 0.2em;
+    }
+    .fd-hero__date-sep {
+      color: rgba(212,168,32,0.4); font-size: 1.2rem;
+    }
+    .fd-hero__date-label {
+      font-size: 0.72rem; color: #b0a060;
+      letter-spacing: 0.1em; margin-top: 6px;
+    }
+
+    /* ── 核心獎勵區 ── */
+    .fd-reward-stage {
+      position: relative;
+      max-width: 820px; margin: 0 auto 48px;
+      background: linear-gradient(160deg, #1a1408 0%, #0e0a04 40%, #14080a 100%);
+      border: 2px solid rgba(212,168,32,0.45);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: box-shadow 0.4s;
+    }
+    .fd-reward-stage:hover {
+      box-shadow: 0 0 60px rgba(212,168,32,0.15), 0 16px 48px rgba(0,0,0,0.5);
+    }
+    /* 頂部金條 */
+    .fd-reward-stage::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent 5%, #c8a020, #ffe060, #ffe888, #ffe060, #c8a020, transparent 95%);
+    }
+    /* 背景光暈 */
+    .fd-reward-stage::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 180px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,168,32,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .fd-reward__header {
+      text-align: center;
+      padding: 44px 32px 24px;
+      position: relative; z-index: 1;
+    }
+    .fd-reward__condition-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem; font-weight: 700;
+      color: #a09060;
+      letter-spacing: 0.2em;
+      margin-bottom: 10px;
+    }
+    .fd-reward__amount {
+      font-family: 'Cinzel', serif;
+      font-size: 3.6rem; font-weight: 700;
+      color: #ffe060;
+      text-shadow: 0 0 28px rgba(255,224,96,0.5), 0 4px 12px rgba(0,0,0,0.8);
+      line-height: 1; margin-bottom: 6px;
+      letter-spacing: 0.05em;
+    }
+    .fd-reward__amount-sub {
+      font-size: 0.88rem;
+      color: #c8b070;
+      letter-spacing: 0.1em;
+    }
+
+    .fd-reward__divider {
+      height: 1px; margin: 0 40px;
+      background: linear-gradient(90deg, transparent, rgba(212,168,32,0.35), transparent);
+    }
+
+    .fd-reward__body {
+      display: flex; align-items: center; gap: 28px;
+      padding: 36px 44px 44px;
+      position: relative; z-index: 1;
+    }
+
+    .fd-reward__item-frame {
+      position: relative;
+      width: 100px; height: 100px;
+      flex-shrink: 0;
+    }
+    /* 外圈旋轉光環 */
+    .fd-reward__item-ring {
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 1px solid rgba(212,168,32,0.2);
+      animation: fd-ring-spin 20s linear infinite;
+    }
+    .fd-reward__item-ring::before {
+      content: ''; position: absolute;
+      top: -2px; left: 50%; width: 4px; height: 4px;
+      background: #ffe060; border-radius: 50%;
+      box-shadow: 0 0 8px #ffe060;
+      transform: translateX(-50%);
+    }
+    @keyframes fd-ring-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    /* 內圈光暈 */
+    .fd-reward__item-glow {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,168,32,0.3) 0%, transparent 70%);
+      animation: fd-glow-pulse 3s ease-in-out infinite;
+    }
+    @keyframes fd-glow-pulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.12); }
+    }
+    .fd-reward__item-frame img {
+      position: relative;
+      width: 100px; height: 100px;
+      image-rendering: pixelated;
+      filter: drop-shadow(0 0 12px rgba(212,168,32,0.5));
+      z-index: 1;
+    }
+
+    .fd-reward__item-info { flex: 1; }
+    .fd-reward__item-tag {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem; font-weight: 700;
+      color: #ffe060;
+      letter-spacing: 0.15em;
+      padding: 3px 12px;
+      background: rgba(212,168,32,0.15);
+      border: 1px solid rgba(212,168,32,0.35);
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+    .fd-reward__item-name {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.4rem; font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 16px rgba(255,255,255,0.15);
+      margin-bottom: 10px;
+    }
+    .fd-reward__item-desc {
+      font-size: 0.88rem;
+      color: #c8b890;
+      line-height: 1.9;
+    }
+    .fd-reward__item-desc strong { color: #ffe060; }
+    .fd-reward__item-qty-inline {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem; font-weight: 700;
+      color: #ff8a80;
+      text-shadow: 0 0 12px rgba(255,138,128,0.4);
+      margin-left: 6px;
+    }
+
+    /* ── 三重獎勵區 ── */
+    .fd-triple {
+      max-width: 820px; margin: 0 auto 48px;
+      position: relative;
+    }
+    .fd-triple__title-wrap {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .fd-triple__title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.15rem; font-weight: 900;
+      color: #ffe060;
+      letter-spacing: 0.2em;
+      text-shadow: 0 0 16px rgba(255,224,96,0.3);
+    }
+    .fd-triple__subtitle {
+      font-size: 0.82rem;
+      color: #a09060;
+      margin-top: 6px;
+      letter-spacing: 0.08em;
+    }
+
+    .fd-triple__cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .fd-triple__card {
+      position: relative;
+      background: linear-gradient(160deg, #281216 0%, #17090b 100%);
+      border: 1px solid #401f24;
+      border-radius: 4px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .fd-triple__card:hover {
+      border-color: rgba(212,168,32,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(204,0,34,0.1);
+    }
+    .fd-triple__card-num {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem; font-weight: 700;
+      line-height: 1; margin-bottom: 8px;
+    }
+    .fd-triple__card:nth-child(1) .fd-triple__card-num { color: #ff8a80; }
+    .fd-triple__card:nth-child(2) .fd-triple__card-num { color: #ffe060; }
+    .fd-triple__card:nth-child(3) .fd-triple__card-num { color: #80cbc4; }
+    .fd-triple__card-label {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 0.95rem; font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .fd-triple__card-desc {
+      font-size: 0.78rem;
+      color: #a098b0;
+      line-height: 1.7;
+    }
+    .fd-triple__card-desc strong { color: #e0d8c8; }
+
+    /* 卡片間的 + 號 */
+    .fd-triple__plus {
+      display: none;
+    }
+
+    /* 連接箭頭 */
+    .fd-triple__arrow {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 1.2rem;
+      color: rgba(212,168,32,0.4);
+      letter-spacing: 0.3em;
+    }
+
+    /* ── 範例計算 ── */
+    .fd-example {
+      max-width: 820px; margin: 0 auto 48px;
+      background: linear-gradient(160deg, #261014 0%, #17090b 100%);
+      border: 1px solid rgba(204,0,34,0.25);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .fd-example__header {
+      padding: 16px 28px;
+      background: rgba(204,0,34,0.08);
+      border-bottom: 1px solid rgba(204,0,34,0.15);
+    }
+    .fd-example__header-text {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 0.88rem; font-weight: 700;
+      color: #ff8095;
+      letter-spacing: 0.1em;
+    }
+    .fd-example__body { padding: 24px 28px; }
+    .fd-example__scenario {
+      font-size: 0.95rem; font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .fd-example__scenario em {
+      font-style: normal; color: #ffe060;
+    }
+    .fd-example__list {
+      list-style: none; padding: 0; margin: 0;
+    }
+    .fd-example__list li {
+      display: flex; align-items: center; gap: 12px;
+      padding: 8px 0;
+      font-size: 0.88rem; color: #c8b890;
+    }
+    .fd-example__list li::before {
+      content: '→';
+      color: #d4a820;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .fd-example__list li strong { color: #fff; }
+    .fd-example__list li span { color: #ff8a80; font-weight: 700; }
+
+    /* ── 注意事項 ── */
+    .fd-notes {
+      max-width: 820px; margin: 0 auto 40px;
+      background: #210f12;
+      border: 1px solid rgba(212,168,32,0.15);
+      border-radius: 2px;
+      padding: 28px 32px;
+    }
+    .fd-notes__title {
+      font-family: 'Cinzel', serif;
+      color: #ffe060;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 14px;
+    }
+    .fd-notes ul { list-style: none; padding: 0; margin: 0; }
+    .fd-notes li {
+      color: #b0a890;
+      font-size: 0.85rem;
+      padding: 5px 0;
+      line-height: 1.7;
+    }
+    .fd-notes li::before { content: "· "; color: #7a6030; }
+    .fd-notes li strong { color: #e0d8c8; }
+    .fd-notes li em { color: #ff8a80; font-style: normal; font-weight: 700; }
+
+    .fd-line-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-top: 24px; padding: 14px 36px;
+      background: #06C755; color: #fff;
+      font-size: 0.95rem; font-weight: 700;
+      border-radius: 4px; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 16px rgba(6,199,85,0.2);
+    }
+    .fd-line-btn:hover { background: #05b34c; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(6,199,85,0.3); }
+
+    .fd-back {
+      display: block;
+      max-width: 820px; margin: 0 auto;
+      text-align: center;
+      padding: 14px;
+      color: #ffe060; font-size: 0.9rem; text-decoration: none;
+      border: 1px solid rgba(212,168,32,0.2); border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .fd-back:hover { background: rgba(212,168,32,0.08); }
+
+    /* ── RWD ── */
+    @media (max-width: 720px) {
+      .fd-hero { padding: 48px 20px 40px; }
+      .fd-hero__title { font-size: 1.6rem; letter-spacing: 0.15em; }
+      .fd-hero__subtitle { font-size: 0.92rem; }
+      .fd-reward__header { padding: 32px 20px 20px; }
+      .fd-reward__amount { font-size: 2.6rem; }
+      .fd-reward__body { flex-direction: column; text-align: center; padding: 28px 24px 32px; }
+      .fd-triple__cards { grid-template-columns: 1fr; gap: 12px; }
+      .fd-example__body { padding: 20px; }
+      .fd-notes { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — FATHER'S DAY 2026</p>
+    <h1 class="page-hero__title">八八節<span>感恩回饋</span></h1>
+    <p class="page-hero__sub">爸氣十足，強化不手軟</p>
+  </div>
+
+  <main class="fp-wrap">
+
+    <!-- ══════ 主視覺 ══════ -->
+    <div class="fd-hero">
+      <div class="fd-hero__ornament">
+        <span class="fd-hero__ornament-line"></span>
+        <span class="fd-hero__ornament-diamond">◆</span>
+        <span class="fd-hero__ornament-line" style="transform:scaleX(-1)"></span>
+      </div>
+      <div class="fd-hero__icon">👨‍👧‍👦</div>
+      <div class="fd-hero__title">八八佳節 · 爸氣加碼</div>
+      <div class="fd-hero__subtitle">
+        每一位在金耀世界裡扛傷搶王、熬夜練等的勇者<br>
+        都值得一份來自官方的敬意 —— 這次，換我們罩你
+      </div>
+      <div class="fd-hero__date-wrap">
+        <div>
+          <div class="fd-hero__date">08.08</div>
+          <div class="fd-hero__date-label">START</div>
+        </div>
+        <span class="fd-hero__date-sep">—</span>
+        <div>
+          <div class="fd-hero__date">08.16</div>
+          <div class="fd-hero__date-label">END</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ 核心獎勵 ══════ -->
+    <p class="fp-heading">◆ 活動內容</p>
+
+    <div class="fd-reward-stage">
+      <div class="fd-reward__header">
+        <div class="fd-reward__condition-label">SINGLE PURCHASE REQUIRED</div>
+        <div class="fd-reward__amount">$8,888</div>
+        <div class="fd-reward__amount-sub">活動期間 · 單筆贊助滿額即贈 · 不限次數</div>
+      </div>
+      <div class="fd-reward__divider"></div>
+      <div class="fd-reward__body">
+        <div class="fd-reward__item-frame">
+          <div class="fd-reward__item-ring"></div>
+          <div class="fd-reward__item-glow"></div>
+          <img src="../assets/images/item-6058.png" alt="祝福強化卷軸" loading="lazy">
+        </div>
+        <div class="fd-reward__item-info">
+          <span class="fd-reward__item-tag">BLESSED SCROLL</span>
+          <div class="fd-reward__item-name">祝福強化卷軸 <span class="fd-reward__item-qty-inline">×8</span></div>
+          <div class="fd-reward__item-desc">
+            受神聖祝福的強化卷軸，大幅提升武器與防具的強化成功率。<br>
+            失敗不爆裝、成功率拉滿 —— <strong>八八節限定，一次給你 8 張</strong>，讓你的裝備直接起飛。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ 三重獎勵 ══════ -->
+    <div class="fd-triple">
+      <div class="fd-triple__title-wrap">
+        <div class="fd-triple__title">✦ 一筆贊助 · 三重收穫 ✦</div>
+        <div class="fd-triple__subtitle">本活動贊助金額可與以下活動同時計算，獎勵全部疊加</div>
+      </div>
+
+      <div class="fd-triple__cards">
+        <div class="fd-triple__card">
+          <div class="fd-triple__card-num">01</div>
+          <div class="fd-triple__card-label">八八節限定</div>
+          <div class="fd-triple__card-desc">
+            單筆滿 $8,888<br>
+            <strong>祝福強化卷軸 ×8</strong>
+          </div>
+        </div>
+        <div class="fd-triple__card">
+          <div class="fd-triple__card-num">02</div>
+          <div class="fd-triple__card-label">單筆滿額贈禮</div>
+          <div class="fd-triple__card-desc">
+            同筆金額觸發<br>
+            <strong>傳說寶箱 · 秘笈 · 變形箱</strong>
+          </div>
+        </div>
+        <div class="fd-triple__card">
+          <div class="fd-triple__card-num">03</div>
+          <div class="fd-triple__card-label">累計贊助禮包</div>
+          <div class="fd-triple__card-desc">
+            金額同步累計<br>
+            <strong>推進下一階段里程碑</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ 範例 ══════ -->
+    <div class="fd-example">
+      <div class="fd-example__header">
+        <span class="fd-example__header-text">◈ 實際範例</span>
+      </div>
+      <div class="fd-example__body">
+        <div class="fd-example__scenario">
+          活動期間單筆贊助 <em>$10,000</em>，你將一次獲得：
+        </div>
+        <ul class="fd-example__list">
+          <li><strong>八八節加碼</strong>：祝福強化卷軸 <span>×8</span></li>
+          <li><strong>單筆滿額 $10,000</strong>：傳說變身卡寶箱 <span>×1</span></li>
+          <li><strong>累計贊助</strong>：同步累積至對應階段，達標再領禮包</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ══════ 注意事項 ══════ -->
+    <div class="fd-notes">
+      <p class="fd-notes__title">NOTICE</p>
+      <ul>
+        <li><strong>活動期間：</strong>2026/08/08 ~ 2026/08/16，逾期不補發</li>
+        <li><strong>單筆計算：</strong>以單次贊助金額為準，不與其他筆合併</li>
+        <li><strong>不限次數：</strong>活動期間每次單筆達標皆可領取，多次贊助多次贈送</li>
+        <li>贊助後請透過 <strong>官方 LINE</strong> 提供截圖申請，經確認後發放至遊戲信箱</li>
+        <li>本活動獎勵與<em>「單筆滿額贈禮」</em>、<em>「累計贊助禮包」</em>可同時計算</li>
+        <li>本活動最終解釋權歸金耀天堂官方所有</li>
+      </ul>
+      <span class="fd-line-btn" aria-disabled="true" title="開服前公布" style="opacity:.62;cursor:not-allowed;pointer-events:none">
+        <span>LINE</span> 聯繫客服領取
+      <small style="font-size:.72em;opacity:.9;margin-left:6px">（開服前公布）</small></span>
+    </div>
+
+    <a href="events.html" class="fd-back">▲ 返回活動列表</a>
+
+  </main>
+
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

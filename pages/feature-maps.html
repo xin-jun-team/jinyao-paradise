@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地圖介紹 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    /* 地圖區塊標題 */
+    .map-sec { margin-bottom: 36px; }
+    .map-sec-head {
+      display: flex; align-items: center; gap: 10px;
+      padding: 13px 18px; font-family: 'Noto Serif TC', serif;
+      font-size: 0.95rem; font-weight: 900; letter-spacing: 0.12em;
+      color: var(--text-bright); border-radius: 2px 2px 0 0;
+    }
+    .map-sec-head--blue   { background: linear-gradient(135deg, #160407 0%, #0a1050 100%); border-bottom: 1px solid #1a2060; }
+    .map-sec-head--purple { background: linear-gradient(135deg, #160407 0%, #480d17 100%); border-bottom: 1px solid #5a1621; }
+    .map-sec-head--teal   { background: linear-gradient(135deg, #001a1a 0%, #003040 100%); border-bottom: 1px solid #004858; }
+    .map-sec-head--red    { background: linear-gradient(135deg, #1a0008 0%, #3a0010 100%); border-bottom: 1px solid #500018; }
+    .map-sec-head--orange { background: linear-gradient(135deg, #1a0a00 0%, #3a1800 100%); border-bottom: 1px solid #502800; }
+    .map-sec-head--yellow { background: linear-gradient(135deg, #1a0e00 0%, #3a2400 100%); border-bottom: 1px solid #503200; }
+    .map-sec-head--green  { background: linear-gradient(135deg, #001a08 0%, #003a15 100%); border-bottom: 1px solid #005020; }
+    .map-sec-head--indigo { background: linear-gradient(135deg, #0f0305 0%, #22060b 100%); border-bottom: 1px solid #360a11; }
+    .map-sec-head__sub { font-size: 0.72rem; font-weight: 400; opacity: 0.7; margin-left: 6px; font-family: 'Cinzel', serif; letter-spacing: 0.1em; }
+
+    .map-sec-body {
+      background: linear-gradient(135deg, #1c0b0e 0%, #17090b 100%);
+      border: 1px solid #2f171b; border-top: none;
+      border-radius: 0 0 2px 2px; padding: 18px;
+    }
+
+    /* 卡片格 */
+    .map-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .map-card {
+      background: linear-gradient(135deg, #221013 0%, #1b0b0e 100%);
+      border: 1px solid #2f171b; border-radius: 2px; padding: 14px 16px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .map-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+    .map-card__title {
+      font-family: 'Noto Serif TC', serif; font-size: 0.88rem; font-weight: 700;
+      color: var(--text-bright); margin-bottom: 10px; padding-bottom: 8px;
+      border-bottom: 1px solid #2f171b; display: flex; align-items: center; gap: 6px;
+    }
+    .map-card ul { list-style: none; padding: 0; margin: 0; }
+    .map-card ul li { font-size: 0.78rem; color: var(--text-dim); padding: 3px 0; display: flex; align-items: center; gap: 6px; }
+    .map-card ul li::before { content: '›'; color: var(--gold-dim); font-size: 1rem; flex-shrink: 0; }
+
+    /* 顏色語意 */
+    .c-proof  { color: #64b5f6; font-weight: 600; font-style: italic; }
+    .c-green  { color: #81c784; font-weight: 600; }
+    .c-orange { color: #ffa726; font-weight: 600; }
+    .c-red    { color: #ef5350; font-weight: 600; }
+    .c-purple { color: #ce93d8; font-weight: 600; }
+    .c-gold   { color: var(--gold); font-weight: 900; }
+    .c-teal   { color: #4dd0e1; font-weight: 600; }
+    .c-blue   { color: #64b5f6; font-weight: 600; }
+    .c-blessed { color: #ef5350; font-weight: 600; }
+
+    /* 標籤 */
+    .mtag { display: inline-block; padding: 1px 8px; border-radius: 2px; font-size: 0.68rem; font-weight: 700; margin-left: 4px; }
+    .mtag--blue   { background: rgba(26,115,232,.15); color: #64b5f6; border: 1px solid rgba(26,115,232,.3); }
+    .mtag--red    { background: rgba(198,40,40,.15);  color: #ef9a9a; border: 1px solid rgba(198,40,40,.3); }
+    .mtag--orange { background: rgba(230,81,0,.15);   color: #ffa726; border: 1px solid rgba(230,81,0,.3); }
+
+    /* 提示條 */
+    .tip-bar { padding: 10px 14px; border-radius: 2px; font-size: 0.8rem; margin-bottom: 14px; display: flex; align-items: flex-start; gap: 8px; }
+    .tip-bar--blue   { background: rgba(26,115,232,.1); border-left: 3px solid #1565c0; color: #90caf9; }
+    .tip-bar--red    { background: rgba(198,40,40,.1);  border-left: 3px solid #c62828; color: #ef9a9a; }
+    .tip-bar--green  { background: rgba(46,125,50,.1);  border-left: 3px solid #2e7d32; color: #a5d6a7; }
+    .tip-bar--teal   { background: rgba(0,131,143,.1);  border-left: 3px solid #00838f; color: #80cbc4; }
+    .tip-bar--yellow { background: rgba(249,168,37,.08); border-left: 3px solid #f9a825; color: #ffe082; }
+
+    /* 時間徽章 */
+    .time-badge { display: inline-flex; align-items: center; gap: 6px; background: #0a1a1e; border: 1px solid #4dd0e1; border-radius: 20px; padding: 4px 14px; font-size: 0.75rem; color: #4dd0e1; font-weight: 700; margin-bottom: 14px; }
+
+    /* 掉落清單 */
+    .loot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 6px; }
+    .loot-item { font-size: 0.78rem; padding: 5px 10px; background: #221013; border: 1px solid #2f171b; border-radius: 2px; color: var(--text-dim); }
+
+    /* 表格 */
+    .styled-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .styled-table thead tr { background: #221013; }
+    .styled-table th { padding: 10px 12px; text-align: left; font-weight: 700; color: var(--gold-dim); border-bottom: 2px solid #401f24; font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.1em; }
+    .styled-table td { padding: 10px 12px; border-bottom: 1px solid #2f171b; vertical-align: top; color: var(--text-dim); }
+    .styled-table tr:last-child td { border-bottom: none; }
+    .styled-table tr.hl { background: rgba(212,168,32,.07); }
+    .styled-table tr:hover td { background: rgba(255,255,255,.02); }
+
+    /* 雙欄 */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media(max-width:600px){ .two-col { grid-template-columns: 1fr; } }
+
+    /* 掉落面板 */
+    .drop-panel { border: 1px solid #2f171b; border-radius: 2px; overflow: hidden; }
+    .drop-panel__head { padding: 9px 14px; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; }
+    .drop-panel__head--normal { background: rgba(46,125,50,.15); color: #a5d6a7; border-bottom: 1px solid rgba(46,125,50,.3); }
+    .drop-panel__head--boss   { background: rgba(136,14,79,.18); color: #f48fb1; border-bottom: 1px solid rgba(136,14,79,.35); }
+    .drop-panel ul { list-style: none; padding: 10px 14px; margin: 0; background: #1b0b0e; }
+    .drop-panel ul li { font-size: 0.78rem; color: var(--text-dim); padding: 3px 0; display: flex; align-items: center; gap: 6px; }
+    .drop-panel ul li::before { content: '›'; color: var(--gold-dim); font-size: 1rem; flex-shrink: 0; }
+
+    /* VIP 區塊 */
+    .vip-sub { border: 1px solid rgba(212,168,32,.25); border-radius: 2px; padding: 16px; background: rgba(212,168,32,.04); margin-bottom: 14px; }
+    .vip-sub h4 { color: var(--gold); margin-bottom: 10px; font-size: 0.92rem; font-family: 'Noto Serif TC', serif; display: flex; align-items: center; gap: 8px; }
+    .vip-sub ul { list-style: none; padding: 0; margin: 0; }
+    .vip-sub ul li { font-size: 0.78rem; color: var(--text-dim); padding: 3px 0; display: flex; align-items: center; gap: 6px; }
+    .vip-sub ul li::before { content: '›'; color: var(--gold-dim); font-size: 1rem; flex-shrink: 0; }
+
+    .vip-badge { display: inline-block; background: #221013; border: 1px solid rgba(212,168,32,.4); color: #ffa726; padding: 2px 10px; border-radius: 2px; font-size: 0.72rem; font-weight: 700; margin: 2px 4px 2px 0; }
+
+    /* PVP 盒子 */
+    .pvp-box { background: #1b0b0e; border: 1px solid #1e3060; padding: 8px 14px; border-radius: 2px; font-size: 0.8rem; color: #64b5f6; font-weight: 700; margin-top: 8px; }
+
+    @media(max-width:680px){ .map-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — MAPS</p>
+    <h1 class="page-hero__title">地圖<span>介紹</span></h1>
+    <p class="page-hero__sub">各地圖掉落資訊與建議等級</p>
+  </div>
+
+  <main class="fp-wrap">
+
+    <!-- ══ 一般地監 ══ -->
+    <div class="map-sec" id="general">
+      <div class="map-sec-head map-sec-head--blue">⚔ 一般地監（初 / 中階）</div>
+      <div class="map-sec-body">
+        <div class="map-grid">
+          <div class="map-card">
+            <div class="map-card__title">🦇 騎士洞穴</div>
+            <ul><li>一般武器箱</li><li><span class="c-proof">騎士洞窟證明</span></li><li>魔法書（聖結界）</li><li>一般娃娃卡寶箱</li></ul>
+          </div>
+          <div class="map-card">
+            <div class="map-card__title">⛓ 奇岩地監</div>
+            <ul><li>一般武器箱</li><li><span class="c-proof">奇岩地監證明</span></li><li>技術書（衝擊之暈）</li><li>一般娃娃卡寶箱</li></ul>
+          </div>
+          <div class="map-card">
+            <div class="map-card__title">💧 海音地監</div>
+            <ul><li>一般飾品箱</li><li><span class="c-proof">海音地監證明</span></li><li>精靈水晶（三重矢）</li><li>一般娃娃卡寶箱</li></ul>
+          </div>
+          <div class="map-card">
+            <div class="map-card__title">💀 古魯丁地監</div>
+            <ul><li>一般飾品箱</li><li><span class="c-proof">古魯丁地監證明</span></li><li>一般變身卡寶箱</li><li><span class="c-green">高級製作秘笈</span></li></ul>
+          </div>
+          <div class="map-card">
+            <div class="map-card__title">🏰 象牙塔</div>
+            <ul><li>一般武器箱</li><li><span class="c-proof">象牙塔證明</span></li><li>一般變身卡寶箱</li><li><span class="c-green">高級製作秘笈</span></li></ul>
+          </div>
+          <div class="map-card">
+            <div class="map-card__title">💎 水晶洞窟</div>
+            <ul><li>一般防具箱</li><li><span class="c-proof">水晶洞窟證明</span></li><li><span class="c-green">高級製作秘笈</span></li><li>一般變身卡寶箱</li></ul>
+          </div>
+          <div class="map-card">
+            <div class="map-card__title">⚔ 拉斯塔巴德</div>
+            <ul><li><span class="c-green">高級飾品箱</span></li><li><span class="c-proof">拉斯塔巴德證明</span></li><li>黑精水晶（雙重破壞）</li><li>一般變身/娃娃寶箱</li></ul>
+          </div>
+          <div class="map-card">
+            <div class="map-card__title">🏴‍☠️ 海賊島地監</div>
+            <ul><li><span class="c-green">高級防具箱</span></li><li><span class="c-proof">海賊島地監證明</span></li><li>一般變身/娃娃寶箱</li></ul>
+          </div>
+          <div class="map-card">
+            <div class="map-card__title">🐉 龍之谷地監</div>
+            <ul><li><span class="c-green">高級武器箱</span></li><li><span class="c-proof">龍谷地監證明</span></li><li>一般變身/娃娃寶箱</li></ul>
+          </div>
+          <div class="map-card">
+            <div class="map-card__title">🌊 地底湖</div>
+            <ul><li><span class="c-proof">地底湖證明</span></li><li><span class="c-green">高級變身/娃娃寶箱</span></li><li><span class="c-red">威力彩中獎升階石</span></li><li>Lv.1 威力彩選號</li></ul>
+          </div>
+          <div class="map-card">
+            <div class="map-card__title">🍃 精靈墓穴 <span class="mtag mtag--blue">LV.54</span></div>
+            <ul><li><span class="c-proof">精靈墓穴證明</span></li><li><span class="c-green">高級變身/娃娃寶箱</span></li><li><span class="c-red">獸魂升階石</span></li><li>四大神獸之卵</li></ul>
+          </div>
+          <div class="map-card">
+            <div class="map-card__title">🏝 遺忘之島</div>
+            <ul><li><span class="c-proof">遺忘之島證明</span></li><li>金幣</li><li>一般變身/娃娃卡寶箱</li><li><span class="c-green">高級武器箱</span></li><li><span class="c-green">高級防具箱</span></li><li><span class="c-green">高級製作秘笈</span></li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 夢幻之島 ══ -->
+    <div class="map-sec" id="fantasy">
+      <div class="map-sec-head map-sec-head--purple">🦄 夢幻之島（特殊掉落）<span class="map-sec-head__sub">建議等級 LV.54</span></div>
+      <div class="map-sec-body">
+        <div class="loot-grid">
+          <div class="loot-item"><span class="c-proof">夢幻之島證明</span></div>
+          <div class="loot-item"><strong style="color:var(--text-bright)">純白的萬能藥</strong></div>
+          <div class="loot-item"><span class="c-blessed">受祝福</span>的武 / 防卷軸</div>
+          <div class="loot-item">受詛咒的武 / 防卷軸</div>
+        </div>
+        <div class="tip-bar tip-bar--yellow" style="margin-top:14px;"><span>💡</span><span><strong>萬能藥獲取</strong>：火 / 水 / 風 / 土 精靈王機率掉落，或每日兌換取得。</span></div>
+      </div>
+    </div>
+
+    <!-- ══ 傲慢之塔 ══ -->
+    <div class="map-sec" id="tower">
+      <div class="map-sec-head map-sec-head--red">🗼 傲慢之塔（1F ~ 10F）<span class="map-sec-head__sub">建議等級 LV.54</span></div>
+      <div class="map-sec-body">
+        <div class="tip-bar tip-bar--red"><span>💡</span><span>全樓層皆會掉落 <strong>聖物召喚擴充卷</strong>，樓層越高機率越高。</span></div>
+        <div style="overflow-x:auto">
+        <table class="styled-table">
+          <thead><tr><th style="width:14%">樓層</th><th>共同掉落</th><th>專屬聖物 / 重點</th></tr></thead>
+          <tbody>
+            <tr><td><strong style="color:var(--text-bright)">1F ~ 3F</strong></td><td><span class="c-proof">各樓層證明</span>、金幣、四屬性武卷、稀有秘笈、聖物藥劑、<span style="color:#ff6b6b;font-weight:700;">龍之心</span></td><td style="color:#ef5350;">阿吐巴圖騰、那魯加圖騰</td></tr>
+            <tr><td><strong style="color:var(--text-bright)">4F ~ 6F</strong></td><td><span class="c-proof">各樓層證明</span>、金幣、四屬性武卷、稀有秘笈、聖物藥劑、<span style="color:#ff6b6b;font-weight:700;">龍之心</span></td><td style="color:#ef5350;">甘地的圖騰</td></tr>
+            <tr><td><strong style="color:var(--text-bright)">7F ~ 9F</strong></td><td><span class="c-proof">各樓層證明</span>、金幣、四屬性武卷、稀有秘笈、聖物藥劑、<span style="color:#ff6b6b;font-weight:700;">龍之心</span></td><td style="color:#ef5350;">阿吐巴、甘地、那魯加（三種皆掉）</td></tr>
+            <tr class="hl"><td><strong style="color:#ffa726;">10F（頂樓）</strong></td><td><span class="c-green">高級武/防/飾箱</span>、高級變身/娃娃箱、<span class="c-proof">10F 證明</span>、金幣、四屬性武卷、稀有秘笈、<span style="color:#ff6b6b;font-weight:700;">龍之心</span></td><td style="color:#ffa726;font-weight:700;">三種聖物圖騰皆掉落<br>聖物成長藥劑</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 高階地圖 ══ -->
+    <div class="map-sec" id="advanced">
+      <div class="map-sec-head map-sec-head--orange">🔥 高階地圖（古代島 / 高崙）<span class="map-sec-head__sub">建議等級 LV.58</span></div>
+      <div class="map-sec-body">
+        <div class="two-col">
+          <div class="map-card">
+            <div class="map-card__title">🏝 古代遺忘之島</div>
+            <ul>
+              <li><span class="c-proof">古代遺忘之島證明</span></li>
+              <li>金幣</li>
+              <li><span class="c-blue">稀有 變身/娃娃 寶箱</span></li>
+              <li><span class="c-blessed">祝福</span>武 / 防 / 飾卷軸</li>
+            </ul>
+          </div>
+          <div class="map-card">
+            <div class="map-card__title">🗿 高崙研究所</div>
+            <ul>
+              <li><span class="c-proof">古代高崙研究所證明</span></li>
+              <li>金幣</li>
+              <li><span class="c-blue">稀有 變身/娃娃 寶箱</span></li>
+              <li><span class="c-blessed">祝福</span>武 / 防 / 飾卷軸</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ VIP 專屬地圖 ══ -->
+    <div class="map-sec" id="vip">
+      <div class="map-sec-head map-sec-head--yellow">👑 VIP 專屬地圖</div>
+      <div class="map-sec-body">
+
+        <div class="vip-sub">
+          <h4>🌲 隱藏之谷 <span class="mtag mtag--blue">LV.50</span> <span class="mtag mtag--red">手動、禁內掛</span></h4>
+          <ul>
+            <li><span class="c-proof">隱藏之谷證明</span></li>
+            <li>大量經驗</li>
+            <li>金幣</li>
+            <li>200% 經驗藥水（刻印）</li>
+            <li><span class="c-red">（二階）150% 經驗藥水</span></li>
+          </ul>
+        </div>
+
+        <div class="vip-sub">
+          <h4>🏰 支配之塔 <span class="mtag" style="background:rgba(100,181,246,.15);color:#64b5f6;border:1px solid rgba(100,181,246,.3);">LV.58</span> <span class="mtag mtag--red">手動、禁內掛</span></h4>
+          <div style="margin-top:12px;">
+            <p style="font-weight:700;color:var(--gold);margin-bottom:8px;font-size:0.82rem;">1F</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
+              <span class="mtag" style="background:#280c11;color:var(--text-bright);border:1px solid #401f24;">一般/高級/稀有 裝備箱</span>
+              <span class="mtag" style="background:#280c11;color:var(--text-bright);border:1px solid #401f24;">一般/高級/稀有 卡片箱</span>
+              <span class="mtag" style="background:#1a0a10;color:#ff8080;border:1px solid rgba(198,40,40,.5);">職業之力箱（自選）</span>
+              <span class="mtag" style="background:#0a1a2a;color:#64b5f6;border:1px solid rgba(100,181,246,.5);font-style:italic;">支配1F證明</span>
+            </div>
+            <p style="font-size:0.78rem;color:var(--text-dim);margin:0;">▸ 2F 以上樓層尚未開放，請持續關注官方公告。</p>
+          </div>
+        </div>
+
+        <div class="vip-sub">
+          <h4>⚔ 烽火戰場 <span class="mtag" style="background:rgba(100,181,246,.15);color:#64b5f6;border:1px solid rgba(100,181,246,.3);">LV.62</span> <span class="mtag mtag--red">手動、禁內掛</span></h4>
+          <ul>
+            <li>金幣</li>
+            <li>空的魔法卷軸（等級4）</li>
+            <li>空的魔法卷軸（等級5）</li>
+            <li>兔子的肝</li>
+            <li>PVP 幣</li>
+            <li>受祝福的對武器施法的卷軸</li>
+            <li>受詛咒的對武器施法的卷軸</li>
+            <li>受祝福的對盔甲施法的卷軸</li>
+            <li>受詛咒的對盔甲施法的卷軸</li>
+            <li>對武器施法的卷軸</li>
+            <li>對盔甲施法的卷軸</li>
+            <li>高級製作秘笈</li>
+            <li>稀有製作秘笈</li>
+            <li>英雄製作秘笈</li>
+            <li>少了刀刃的武器</li>
+            <li>烽火戰場證明</li>
+            <li>噬魂魔核碎片</li>
+            <li>英雄製作秘笈碎片</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 上下頁導覽 -->
+    <div class="fp-pager">
+      <a href="feature-online-reward.html" class="fp-pager__btn">
+        <span class="fp-pager__arrow">←</span>
+        <div><span class="fp-pager__dir">PREV</span><span class="fp-pager__name">在線禮包</span></div>
+      </a>
+      <div class="fp-pager__center"><a href="features-overview.html" class="fp-pager__back">▲ 返回系統列表</a></div>
+      <a href="feature-transform.html" class="fp-pager__btn fp-pager__btn--next">
+        <div><span class="fp-pager__dir">NEXT</span><span class="fp-pager__name">變身介紹</span></div>
+        <span class="fp-pager__arrow">→</span>
+      </a>
+    </div>
+
+  </main>
+
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

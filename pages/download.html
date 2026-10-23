@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>遊戲下載 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(180deg, #130608 0%, #090405 100%);
+      border-bottom: 1px solid var(--gold-dim);
+      padding: 72px 0 48px;
+      text-align: center;
+    }
+    .page-hero__eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.35em;
+      color: var(--gold-dim);
+      margin-bottom: 14px;
+    }
+    .page-hero__title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      color: var(--text-bright);
+      letter-spacing: 0.15em;
+      margin-bottom: 10px;
+    }
+    .page-hero__title span { color: var(--gold); }
+    .page-hero__sub {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── WRAP ── */
+    .dl-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    /* ── SERVER INFO BANNER ── */
+    .dl-banner {
+      background: linear-gradient(135deg, #1c0b0e 0%, #0e0607 100%);
+      border: 1px solid var(--gold-dim);
+      border-left: 4px solid var(--gold);
+      border-radius: 2px;
+      padding: 22px 26px;
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .dl-banner__icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .dl-banner__body { flex: 1; min-width: 200px; }
+    .dl-banner__title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .dl-banner__desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .dl-banner__desc strong { color: var(--text-bright); }
+    .dl-banner__ver {
+      background: #2f161a;
+      border: 1px solid var(--gold-dim);
+      border-radius: 2px;
+      padding: 10px 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .dl-banner__ver-label {
+      font-size: 0.72rem;
+      color: var(--gold-dim);
+      letter-spacing: 0.2em;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .dl-banner__ver-num {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ── SERVER STATS ── */
+    .server-stats {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1px;
+      background: #401f24;
+      border: 1px solid #401f24;
+      margin-bottom: 48px;
+    }
+    .stat-cell {
+      background: #17090b;
+      padding: 22px 12px;
+      text-align: center;
+    }
+    .stat-cell__value {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-cell__value span { font-size: 0.95rem; color: var(--gold-dim); }
+    .stat-cell__label {
+      font-size: 0.72rem;
+      color: #a08848;
+      letter-spacing: 0.08em;
+    }
+    @media (max-width: 720px) {
+      .server-stats { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 440px) {
+      .server-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── RATE TABLE ── */
+    .rate-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-bottom: 48px;
+    }
+    .rate-table th {
+      background: #261014;
+      color: var(--gold-dim);
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      padding: 11px 16px;
+      text-align: left;
+      border: 1px solid #401f24;
+    }
+    .rate-table td {
+      background: #17090b;
+      color: var(--text-dim);
+      padding: 11px 16px;
+      border: 1px solid #2f171b;
+    }
+    .rate-table tr:hover td { background: #1f0f12; }
+    .rate-table td:first-child { color: var(--text-bright); font-weight: 600; }
+    .rate-val { color: #ffe060; font-family: 'Cinzel', serif; font-weight: 700; }
+    .rate-note { color: var(--text-dim); font-size: 0.78rem; }
+
+    /* ── STEP GUIDE ── */
+    .dl-section-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dl-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--gold-dim), transparent);
+    }
+
+    .dl-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .dl-step {
+      background: #17090b;
+      border: 1px solid #2f171b;
+      border-radius: 2px;
+      padding: 18px 20px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .dl-step__num {
+      width: 36px;
+      height: 36px;
+      background: #2e1418;
+      border: 1px solid var(--gold-dim);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .dl-step__body { flex: 1; }
+    .dl-step__title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 6px;
+    }
+    .dl-step__desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.75;
+    }
+    .dl-step__desc code {
+      background: #2e1418;
+      border: 1px solid #4c242a;
+      padding: 2px 7px;
+      border-radius: 2px;
+      font-size: 0.82rem;
+      color: #ffe060;
+      font-family: 'Courier New', monospace;
+    }
+    .dl-step__desc a {
+      color: var(--gold);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .dl-step__desc a:hover { color: var(--gold-bright); }
+
+    /* ── DOWNLOAD CARDS ── */
+    .dl-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .dl-card {
+      background: #17090b;
+      border: 1px solid #2f171b;
+      border-radius: 2px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .dl-card--main { border-color: var(--gold-dim); }
+    .dl-card__head {
+      background: #1f0e11;
+      border-bottom: 1px solid #2f171b;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dl-card--main .dl-card__head { background: #2c1216; border-bottom-color: var(--gold-dim); }
+    .dl-card__icon { font-size: 1.3rem; flex-shrink: 0; }
+    .dl-card__name {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-bright);
+    }
+    .dl-card--main .dl-card__name { color: var(--gold); }
+    .dl-card__badge {
+      margin-left: auto;
+      background: var(--gold);
+      color: #130608;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 2px 7px;
+      border-radius: 2px;
+    }
+    .dl-card__body {
+      padding: 16px 18px;
+      flex: 1;
+    }
+    .dl-card__info {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+    .dl-card__info dt {
+      display: inline;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+    .dl-card__meta {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 16px;
+    }
+    .dl-meta-row {
+      display: flex;
+      gap: 8px;
+      font-size: 0.8rem;
+    }
+    .dl-meta-row__label {
+      color: #6a5a30;
+      min-width: 54px;
+      flex-shrink: 0;
+    }
+    .dl-meta-row__val { color: var(--text-dim); }
+    .dl-card__btn {
+      display: block;
+      width: 100%;
+      padding: 11px;
+      text-align: center;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .dl-card__btn--gold {
+      background: linear-gradient(135deg, #b8860b 0%, #d4a017 50%, #b8860b 100%);
+      color: #130608;
+      border: 1px solid #d4a017;
+    }
+    .dl-card__btn--gold:hover { opacity: 0.85; }
+    .dl-card__btn--outline {
+      background: transparent;
+      color: var(--gold-dim);
+      border: 1px solid #4c242a;
+    }
+    .dl-card__btn--outline:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+    /* ── SPEC TABLE ── */
+    .spec-block {
+      background: #17090b;
+      border: 1px solid #2f171b;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+    .spec-block__head {
+      background: #1f0e11;
+      border-bottom: 1px solid #2f171b;
+      padding: 14px 20px;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .spec-table tr { border-bottom: 1px solid #271316; }
+    .spec-table tr:last-child { border-bottom: none; }
+    .spec-table td {
+      padding: 11px 18px;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    .spec-table td:first-child {
+      color: #8a7040;
+      width: 110px;
+      white-space: nowrap;
+      font-size: 0.82rem;
+    }
+    .spec-table td:last-child { color: var(--text-dim); }
+    .spec-table td:last-child strong { color: var(--text-bright); }
+
+    /* ── NOTICE ── */
+    .dl-notice {
+      background: #190b0d;
+      border: 1px solid #401f24;
+      border-top: 3px solid var(--gold-dim);
+      border-radius: 2px;
+      padding: 20px 24px;
+      font-size: 0.84rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+    .dl-notice strong { color: var(--gold); }
+    .dl-notice ul { margin: 10px 0 0 18px; padding: 0; }
+    .dl-notice li { margin-bottom: 6px; }
+
+    /* ── SERVICE BANNER ── */
+    .dl-service-banner {
+      background: linear-gradient(135deg, #0a1210 0%, #080d14 100%);
+      border: 1px solid rgba(6,199,85,.35);
+      border-left: 4px solid #06c755;
+      border-radius: 2px;
+      padding: 24px 26px;
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .dl-service-banner__body { flex: 1; min-width: 220px; }
+    .dl-service-banner__title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #4ade80;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .dl-service-banner__desc {
+      font-size: 0.85rem;
+      color: #a0aab8;
+      line-height: 1.7;
+    }
+    .dl-service-banner__btns { display: flex; flex-wrap: wrap; gap: 10px; }
+    .dl-service-btn--line {
+      background: #06c755; color: #fff; padding: 12px 24px; border-radius: 2px;
+      text-decoration: none; font-weight: 700; font-size: 0.9rem;
+      box-shadow: 0 4px 14px rgba(6,199,85,.25); transition: box-shadow 0.2s, filter 0.2s;
+    }
+    .dl-service-btn--line:hover { box-shadow: 0 0 22px rgba(6,199,85,.45); filter: brightness(1.08); }
+    .dl-service-btn--anydesk {
+      background: transparent; color: #67e8f9; padding: 11px 20px; border-radius: 2px;
+      border: 1px solid rgba(0,229,255,.4); text-decoration: none; font-size: 0.85rem;
+      font-weight: 700; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .dl-service-btn--anydesk:hover { border-color: rgba(0,229,255,.8); box-shadow: 0 0 16px rgba(0,229,255,.15); }
+
+    /* ── ANTIVIRUS STEPS ── */
+    .dl-av-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .dl-av-card {
+      position: relative;
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid rgba(255,82,82,.2);
+      background: #17090b;
+      transition: transform 0.22s, box-shadow 0.22s;
+    }
+    .dl-av-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(255,82,82,.12); }
+    .dl-av-num {
+      position: absolute; top: 8px; left: 10px;
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem; font-weight: 900; color: rgba(255,82,82,.15);
+      line-height: 1; pointer-events: none;
+    }
+    .dl-av-label {
+      padding: 12px 16px 12px 52px;
+      background: rgba(255,82,82,.08);
+      font-size: 0.85rem; font-weight: 700; color: #ffcdd2;
+      border-bottom: 1px solid rgba(255,82,82,.15);
+    }
+    .dl-av-card img { width: 100%; display: block; }
+
+    /* ── DPI FIX ── */
+    .dl-dpi-wrap {
+      display: flex; flex-wrap: wrap;
+      border-radius: 2px; overflow: hidden;
+      border: 1px solid #401f24;
+      margin-bottom: 20px;
+    }
+    .dl-dpi-steps {
+      flex: 1; min-width: 260px;
+      padding: 28px 24px;
+      background: #17090b;
+    }
+    .dl-dpi-item {
+      display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;
+    }
+    .dl-dpi-dot {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: #2e1418; border: 1px solid var(--gold-dim);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      font-family: 'Cinzel', serif; font-size: 0.68rem; font-weight: 700; color: var(--gold);
+      margin-top: 2px;
+    }
+    .dl-dpi-text { color: #a0aab8; font-size: 0.88rem; line-height: 1.6; }
+    .dl-dpi-text strong { color: var(--gold); }
+    .dl-dpi-text.dl-dpi-done { color: #67e8f9; font-weight: 700; }
+    .dl-dpi-img { flex: 1; min-width: 260px; }
+    .dl-dpi-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.9); }
+
+    @media (max-width: 600px) {
+      .dl-banner { flex-direction: column; gap: 14px; }
+      .dl-banner__ver { align-self: flex-start; }
+      .dl-service-banner { flex-direction: column; gap: 14px; }
+      .dl-dpi-wrap { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <!-- ═══════════════════════ FLOATING SIDEBAR ═══════════════════════ -->
+    <div class="float-sidebar float-sidebar--left">
+    <a href="sponsor.html" class="float-btn float-btn--sponsor">
+      <span class="float-btn-bg" style="background-image:url('../assets/images/float-sponsor.jpg')"></span>
+      <span class="float-icon"><svg viewBox="0 0 24 24"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61z"/></svg></span>
+      <span class="float-label">贊助</span>
+    </a>
+    <a href="download.html" class="float-btn float-btn--download">
+      <span class="float-btn-bg" style="background-image:url('../assets/images/float-download.jpg')"></span>
+      <span class="float-icon"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></span>
+      <span class="float-label">下載</span>
+    </a>
+  </div>
+  <div class="float-sidebar float-sidebar--right">
+    <span class="float-btn float-btn--line" aria-disabled="true" title="開服前公布" style="opacity:.62;cursor:not-allowed;pointer-events:none">
+      <span class="float-btn-bg" style="background-image:url('../assets/images/float-community.jpg')"></span>
+      <span class="float-icon"><svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></span>
+      <span class="float-label">社群</span>
+    <small style="font-size:.72em;opacity:.9;margin-left:6px">（開服前公布）</small></span>
+    <span class="float-btn float-btn--line-cs" aria-disabled="true" title="開服前公布" style="opacity:.62;cursor:not-allowed;pointer-events:none">
+      <span class="float-btn-bg" style="background-image:url('../assets/images/float-service.jpg')"></span>
+      <span class="float-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.49 3.53 1.34 5L2 22l5.08-1.31A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm-1 14h-2v-2h2v2zm2.07-5.75l-.9.92C11.45 11.9 11 12.5 11 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H6c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg></span>
+      <span class="float-label">客服</span>
+    <small style="font-size:.72em;opacity:.9;margin-left:6px">（開服前公布）</small></span>
+  </div>
+
+  <!-- ═══════════════════════ PAGE HERO ═══════════════════════ -->
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — DOWNLOAD</p>
+    <h1 class="page-hero__title">遊戲<span>下載</span></h1>
+    <p class="page-hero__sub">版本 3.81 · 免費遊玩 · Windows 桌面端</p>
+  </div>
+
+  <!-- ═══════════════════════ MAIN ═══════════════════════ -->
+  <main class="dl-wrap">
+
+    <!-- 代客安裝服務 -->
+    <div class="dl-service-banner">
+      <div class="dl-service-banner__body">
+        <div class="dl-service-banner__title">💎 官方代客遠端安裝服務</div>
+        <div class="dl-service-banner__desc">不熟悉安裝流程？加入金耀天堂官方 LINE，讓管理員透過 AnyDesk 遠端協助您完成安裝，全程免費。</div>
+      </div>
+      <div class="dl-service-banner__btns">
+        <span class="dl-service-btn--line" aria-disabled="true" title="開服前公布" style="opacity:.62;cursor:not-allowed;pointer-events:none">👉 聯絡金耀官方 LINE<small style="font-size:.72em;opacity:.9;margin-left:6px">（開服前公布）</small></span>
+        <a href="https://anydesk.com/zh-tw/downloads/windows" target="_blank" class="dl-service-btn--anydesk">📥 下載 AnyDesk</a>
+      </div>
+    </div>
+
+    <!-- 伺服器資訊 -->
+    <div class="dl-banner">
+      <span class="dl-banner__icon">⚔</span>
+      <div class="dl-banner__body">
+        <div class="dl-banner__title">金耀天堂 · 開放中</div>
+        <div class="dl-banner__desc">
+          伺服器 <strong>24 小時不間斷運行</strong>，版本 3.81，<br>
+          手動 EXP ×3、自動 EXP ×1，歡迎新人加入。
+        </div>
+      </div>
+      <div class="dl-banner__ver">
+        <span class="dl-banner__ver-label">VERSION</span>
+        <span class="dl-banner__ver-num">3.81</span>
+      </div>
+    </div>
+
+    <!-- 下載按鈕區 -->
+    <p class="dl-section-title">📦 客戶端下載</p>
+    <div class="dl-cards">
+
+      <!-- 完整客戶端 -->
+      <div class="dl-card dl-card--main">
+        <div class="dl-card__head">
+          <span class="dl-card__icon">💾</span>
+          <span class="dl-card__name">完整客戶端</span>
+          <span class="dl-card__badge">推薦</span>
+        </div>
+        <div class="dl-card__body">
+          <div class="dl-card__meta">
+            <div class="dl-meta-row">
+              <span class="dl-meta-row__label">版本</span>
+              <span class="dl-meta-row__val">3.81</span>
+            </div>
+            <div class="dl-meta-row">
+              <span class="dl-meta-row__label">大小</span>
+              <span class="dl-meta-row__val">約 11 GB</span>
+            </div>
+            <div class="dl-meta-row">
+              <span class="dl-meta-row__label">包含</span>
+              <span class="dl-meta-row__val">完整遊戲檔案 + 啟動器</span>
+            </div>
+            <div class="dl-meta-row">
+              <span class="dl-meta-row__label">適合</span>
+              <span class="dl-meta-row__val">全新安裝、無天堂客戶端</span>
+            </div>
+          </div>
+          <span class="dl-card__btn dl-card__btn--gold" aria-disabled="true" title="開服前公布" style="opacity:.62;cursor:not-allowed;pointer-events:none">⬇ 立即下載<small style="font-size:.72em;opacity:.9;margin-left:6px">（開服前公布）</small></span>
+        </div>
+      </div>
+
+      <!-- 補丁包 -->
+      <div class="dl-card">
+        <div class="dl-card__header">
+          <div class="dl-card__icon">🎨</div>
+          <div>
+            <span class="dl-card__name">道具彩圖補丁</span>
+            <span class="dl-card__badge" style="background:rgba(204,0,34,0.15);border-color:rgba(255,64,96,0.4);color:#ff889c;">選裝</span>
+          </div>
+        </div>
+        <div class="dl-card__body">
+          <div class="dl-card__meta">
+            <div class="dl-meta-row">
+              <span class="dl-meta-row__label">內容</span>
+              <span class="dl-meta-row__val">道具圖示 + 狀態欄彩色化</span>
+            </div>
+            <div class="dl-meta-row">
+              <span class="dl-meta-row__label">效果</span>
+              <span class="dl-meta-row__val">圖示更鮮豔、一眼辨識道具</span>
+            </div>
+            <div class="dl-meta-row">
+              <span class="dl-meta-row__label">安裝</span>
+              <span class="dl-meta-row__val">解壓後覆蓋至遊戲目錄即可</span>
+            </div>
+          </div>
+          <span class="dl-card__btn" aria-disabled="true" title="開服前公布" style="opacity:.62;cursor:not-allowed;pointer-events:none">⬇ 下載補丁包<small style="font-size:.72em;opacity:.9;margin-left:6px">（開服前公布）</small></span>
+        </div>
+      </div>
+
+      <!-- 喝水檔 -->
+      <div class="dl-card">
+        <div class="dl-card__head">
+          <span class="dl-card__icon">💧</span>
+          <span class="dl-card__name">喝水檔</span>
+          <span class="dl-card__badge" style="background:rgba(0,122,204,0.15);border-color:rgba(64,160,255,0.4);color:#88bbff;">選裝</span>
+        </div>
+        <div class="dl-card__body">
+          <div class="dl-card__meta">
+            <div class="dl-meta-row">
+              <span class="dl-meta-row__label">內容</span>
+              <span class="dl-meta-row__val">自動喝水輔助檔案</span>
+            </div>
+            <div class="dl-meta-row">
+              <span class="dl-meta-row__label">安裝</span>
+              <span class="dl-meta-row__val">解壓後放入遊戲目錄即可</span>
+            </div>
+          </div>
+          <span class="dl-card__btn dl-card__btn--outline" aria-disabled="true" title="開服前公布" style="opacity:.62;cursor:not-allowed;pointer-events:none">⬇ 下載喝水檔<small style="font-size:.72em;opacity:.9;margin-left:6px">（開服前公布）</small></span>
+        </div>
+      </div>
+
+      <!-- 抗字閃補丁 -->
+      <div class="dl-card">
+        <div class="dl-card__head">
+          <span class="dl-card__icon">✨</span>
+          <span class="dl-card__name">抗字閃補丁</span>
+          <span class="dl-card__badge" style="background:rgba(255,183,77,0.15);border-color:rgba(255,183,77,0.4);color:#ffcc80;">選裝</span>
+        </div>
+        <div class="dl-card__body">
+          <div class="dl-card__meta">
+            <div class="dl-meta-row">
+              <span class="dl-meta-row__label">內容</span>
+              <span class="dl-meta-row__val">修復文字閃爍問題</span>
+            </div>
+            <div class="dl-meta-row">
+              <span class="dl-meta-row__label">安裝</span>
+              <span class="dl-meta-row__val">解壓後覆蓋至遊戲目錄即可</span>
+            </div>
+          </div>
+          <span class="dl-card__btn dl-card__btn--outline" aria-disabled="true" title="開服前公布" style="opacity:.62;cursor:not-allowed;pointer-events:none">⬇ 下載抗字閃補丁<small style="font-size:.72em;opacity:.9;margin-left:6px">（開服前公布）</small></span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 防毒排錯步驟 -->
+    <p class="dl-section-title">🛡 下載後請先排除防毒 — 防止防毒軟體誤刪</p>
+    <div class="dl-av-steps">
+      <div class="dl-av-card">
+        <div class="dl-av-num">01</div>
+        <div class="dl-av-label">開啟病毒與威脅防護</div>
+        <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAICammDZg5khRUafp4yxFaiUeT_tXOAAALWD2sbTP4YVBh66GyGDN5hAQADAgADdwADOAQ.png" loading="lazy" alt="步驟1">
+      </div>
+      <div class="dl-av-card">
+        <div class="dl-av-num">02</div>
+        <div class="dl-av-label">進入管理設定</div>
+        <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAICa2mDZkS5jLHwMviaplc_LvSZ5myGAALXD2sbTP4YVBripGgTiMf2AQADAgADeAADOAQ.png" loading="lazy" alt="步驟2">
+      </div>
+      <div class="dl-av-card">
+        <div class="dl-av-num">03</div>
+        <div class="dl-av-label">新增排除項目</div>
+        <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAICbGmDZnoFi6UH_5WoVnkO9UJPr5y-AALYD2sbTP4YVEiR1cqXZWZlAQADAgADeQADOAQ.png" loading="lazy" alt="步驟3">
+      </div>
+      <div class="dl-av-card">
+        <div class="dl-av-num">04</div>
+        <div class="dl-av-label">選擇遊戲資料夾</div>
+        <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDHGnofor_kXBCORZeErMU0G3JmCOpAAI5EWsbxZlIV6TW_thAp9_xAQADAgADeQADOwQ.jpg" loading="lazy" alt="步驟4">
+      </div>
+    </div>
+
+    <!-- 安裝步驟 -->
+    <p class="dl-section-title">⬇ 排除完成後，依序安裝</p>
+    <div class="dl-steps">
+      <div class="dl-step">
+        <div class="dl-step__num">1</div>
+        <div class="dl-step__body">
+          <div class="dl-step__title">解壓縮</div>
+          <div class="dl-step__desc">
+            使用 <a href="https://www.7-zip.org/" target="_blank" rel="noopener">7-Zip</a> 或 WinRAR 解壓縮，
+            請勿解壓縮至 <code>C:\Program Files</code> 或桌面，建議放置 <code>D:\Games\金耀天堂</code>。
+          </div>
+        </div>
+      </div>
+      <div class="dl-step">
+        <div class="dl-step__num">2</div>
+        <div class="dl-step__body">
+          <div class="dl-step__title">執行啟動器</div>
+          <div class="dl-step__desc">
+            進入解壓縮後的資料夾，以<strong>「系統管理員身分」</strong>執行
+            <code>LineageStart.exe</code>。
+          </div>
+        </div>
+      </div>
+      <div class="dl-step">
+        <div class="dl-step__num">3</div>
+        <div class="dl-step__body">
+          <div class="dl-step__title">帳號註冊</div>
+          <div class="dl-step__desc">
+            首次登入請輸入您想要的帳號密碼，系統將自動完成註冊，無需事先申請。
+          </div>
+        </div>
+      </div>
+      <div class="dl-step">
+        <div class="dl-step__num">4</div>
+        <div class="dl-step__body">
+          <div class="dl-step__title">開始冒險</div>
+          <div class="dl-step__desc">
+            選擇職業，進入世界，即可開始遊玩。如有任何問題，請聯絡
+            <a href="contact.html">官方 LINE</a>。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 高DPI / 閃退設定 -->
+    <p class="dl-section-title">⚡ 遊戲閃退 / 高 DPI 相容性設定</p>
+    <div class="dl-dpi-wrap">
+      <div class="dl-dpi-steps">
+        <div class="dl-dpi-item"><div class="dl-dpi-dot">1</div><div class="dl-dpi-text">對 <strong>遊戲主程式</strong> 點擊右鍵 → 內容</div></div>
+        <div class="dl-dpi-item"><div class="dl-dpi-dot">2</div><div class="dl-dpi-text">進入 <strong>「相容性」</strong> 標籤頁</div></div>
+        <div class="dl-dpi-item"><div class="dl-dpi-dot">3</div><div class="dl-dpi-text">點擊「變更高 DPI 設定」</div></div>
+        <div class="dl-dpi-item"><div class="dl-dpi-dot">4</div><div class="dl-dpi-text">勾選「覆寫高 DPI 縮放比例行為」</div></div>
+        <div class="dl-dpi-item"><div class="dl-dpi-dot">5</div><div class="dl-dpi-text">勾選「以系統管理員身分執行」</div></div>
+        <div class="dl-dpi-item"><div class="dl-dpi-dot">✓</div><div class="dl-dpi-text dl-dpi-done">重新啟動遊戲即可完成！</div></div>
+      </div>
+      <div class="dl-dpi-img">
+        <img src="https://telegraph-image-1n0.pages.dev/file/AgACAgUAAyEGAAS3SV8sAAIDHWnofpZHCnAUQqWjwS-f38boIoIkAAI6EWsbxZlIV0dBMJMQxhpLAQADAgADeQADOwQ.jpg" loading="lazy" alt="DPI設定示意圖">
+      </div>
+    </div>
+    <p style="text-align:center;color:#a0aab8;font-size:0.84rem;margin-top:16px;background:#17090b;border:1px solid #2f171b;border-radius:2px;padding:14px 20px;">如遇其他問題，請加入 <span style="color:var(--gold);text-decoration:none;font-weight:700;border-bottom:1px solid var(--gold-dim);" aria-disabled="true" title="開服前公布" style="opacity:.62;cursor:not-allowed;pointer-events:none">金耀天堂官方 LINE<small style="font-size:.72em;opacity:.9;margin-left:6px">（開服前公布）</small></span> 聯絡管理員</p>
+
+    <!-- 私服123 -->
+    </main>
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>娃娃介紹 — 金耀天堂</title>
+<link rel="icon" href="../assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/jinyao.css">
+<style>
+    /* 稀有度卡片 */
+    .doll-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:10px; margin-bottom:24px; }
+    .doll-card2 { background:linear-gradient(135deg,#221013 0%,#1b0b0e 100%); border:1px solid #2f171b; border-radius:2px; padding:12px 14px; border-top:2px solid; }
+    .doll-card2__name { font-family:'Noto Serif TC',serif; font-size:0.85rem; font-weight:700; margin-bottom:4px; }
+    .doll-card2__stat { font-size:0.72rem; color:#6a6080; line-height:1.6; }
+    /* 各稀有度頂邊線及名稱色 */
+    .doll-card2--gen    { border-top-color:#9e9e9e; } .doll-card2--gen .doll-card2__name    { color:#bdbdbd; }
+    .doll-card2--adv    { border-top-color:#43a047; } .doll-card2--adv .doll-card2__name    { color:#69f0ae; }
+    .doll-card2--rare   { border-top-color:#1e88e5; } .doll-card2--rare .doll-card2__name   { color:#82b1ff; }
+    .doll-card2--hero   { border-top-color:#e53935; } .doll-card2--hero .doll-card2__name   { color:#ff8a80; }
+    .doll-card2--legend { border-top-color:#8e24aa; } .doll-card2--legend .doll-card2__name { color:#ce93d8; }
+    .doll-card2--myth   { border-top-color:#fdd835; } .doll-card2--myth .doll-card2__name   { color:var(--gold); }
+    .doll-card2--unique { border-top-color:#26c6da; opacity:0.4; } .doll-card2--unique .doll-card2__name { color:#80deea; }
+    /* 稀有度標題 */
+    .d-sec { font-family:'Noto Serif TC',serif; font-size:0.92rem; font-weight:700; padding:10px 16px; border-radius:2px; margin:20px 0 12px; display:flex; align-items:center; justify-content:space-between; }
+    .d-badge { font-family:'Cinzel',serif; font-size:0.65rem; color:var(--gold-dim); letter-spacing:0.1em; font-weight:400; }
+    /* 稀有度標題背景 */
+    .d-sec--gen    { background:rgba(158,158,158,0.08); color:#bdbdbd; border-left:3px solid #9e9e9e; }
+    .d-sec--adv    { background:rgba(67,160,71,0.10); color:#69f0ae; border-left:3px solid #43a047; }
+    .d-sec--rare   { background:rgba(30,136,229,0.10); color:#82b1ff; border-left:3px solid #1e88e5; }
+    .d-sec--hero   { background:rgba(229,57,53,0.10); color:#ff8a80; border-left:3px solid #e53935; }
+    .d-sec--legend { background:rgba(142,36,170,0.12); color:#ce93d8; border-left:3px solid #8e24aa; }
+    .d-sec--myth   { background:rgba(253,216,53,0.08); color:var(--gold); border-left:3px solid #fdd835; }
+    .d-sec--unique { background:rgba(38,198,218,0.06); color:#80deea; border-left:3px solid #26c6da; }
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav__in"><a href="../index.html" class="nav__logo"><img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a><div class="nav__menu"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a></div></div><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a></div></div><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a class="cta" href="download.html">遊戲下載</a></div><button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button></div><div class="nav__m" id="mnav"><a href="../index.html#about">關於</a><a href="news.html">更新歷程</a><a href="events.html">活動資訊</a><span class="grp">▸ 遊戲特色</span><a href="features-overview.html">特色介紹總覽</a><a href="feature-soul-core.html">噬魂魔核</a><a href="feature-skills.html">職業介紹與特殊技能</a><a href="feature-job-power.html">職業之力</a><a href="feature-high-skill.html">高技獲取途徑</a><a href="feature-prestige.html">威望系統</a><a href="feature-summon.html">法師召喚系統</a><a href="feature-pet.html">寵物系統</a><a href="feature-transform.html">變身介紹</a><a href="feature-dolls.html">娃娃介紹</a><a href="feature-royal-gear.html">王族專屬裝備</a><a href="feature-blessing.html">裝備祝福屬性</a><a href="feature-maps.html">地圖介紹</a><a href="feature-online-reward.html">在線禮包</a><a href="feature-night-welfare.html">夜間福利</a><a href="feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="items-overview.html">裝備與道具總覽</a><a href="items-weapons.html">武器介紹</a><a href="items-armor.html">防具介紹</a><a href="items-hexagram.html">威力彩選號</a><a href="items-horse.html">神獸之卵</a><a href="items-quest-medal.html">主線指南書</a><a href="items-relic.html">聖物系統</a><a href="items-gacha.html">神奇扭蛋</a><a href="items-battle-badge.html">戰場徽章系統</a><a href="items-candle.html">回憶蠟燭與洗血</a><a href="items-dragon-eye.html">四龍之魔眼</a><a href="items-vip.html">貴賓通行證介紹</a><a href="boss-guide.html">BOSS介紹</a><a href="version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="disclaimer.html">免責聲明</a><a href="rules.html">遊戲規章</a><a href="class-change.html">轉職服務</a><a href="contact.html">聯絡我們</a><a href="promote.html">推文推廣</a><a href="sponsor.html">贊助說明</a><a href="download.html">遊戲下載</a></div></nav>
+
+
+  <div class="page-hero">
+    <p class="page-hero__eyebrow">GOLDEN RADIANCE · LINEAGE — DOLLS</p>
+    <h1 class="page-hero__title">娃娃<span>介紹</span></h1>
+    <p class="page-hero__sub">召喚娃娃陪同冒險，獲得被動屬性加成</p>
+  </div>
+
+  <main class="fp-wrap">
+
+    <!-- 系統說明 -->
+    <h2 class="fp-heading">娃娃系統</h2>
+    <p class="fp-intro">使用<strong>娃娃石</strong>召喚娃娃，提供持續性被動屬性加成。收集並組合特定娃娃可觸發<strong>收藏加成效果</strong>，進一步強化角色能力。娃娃共分為一般、高級、稀有、英雄、傳說、神話、唯一七個稀有度等級。</p>
+
+    <!-- ── 合成升階機率 ── -->
+    <h2 class="fp-heading">◈ 合成升階機率</h2>
+    <div style="overflow-x:auto;margin-bottom:32px;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+        <thead><tr><th style="background:linear-gradient(90deg,rgba(212,168,32,0.2),rgba(212,168,32,0.08));color:var(--gold-dim);font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.1em;padding:10px 12px;border:1px solid #401f24;">升階方向</th><th style="background:linear-gradient(90deg,rgba(212,168,32,0.2),rgba(212,168,32,0.08));color:var(--gold-dim);font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.1em;padding:10px 12px;border:1px solid #401f24;">成功機率</th></tr></thead>
+        <tbody>
+          <tr><td style="background:#1b0b0e;padding:8px 12px;border:1px solid #2f171b;color:var(--text-bright);font-weight:700;">⚪ 一般 → 🟢 高級</td><td style="background:#1b0b0e;padding:8px 12px;border:1px solid #2f171b;color:#69f0ae;font-family:'Cinzel',serif;font-weight:700;">80%</td></tr>
+          <tr><td style="background:#1d0d10;padding:8px 12px;border:1px solid #2f171b;color:var(--text-bright);font-weight:700;">🟢 高級 → 🔵 稀有</td><td style="background:#1d0d10;padding:8px 12px;border:1px solid #2f171b;color:#82b1ff;font-family:'Cinzel',serif;font-weight:700;">50%</td></tr>
+          <tr><td style="background:#1b0b0e;padding:8px 12px;border:1px solid #2f171b;color:var(--text-bright);font-weight:700;">🔵 稀有 → 🔴 英雄</td><td style="background:#1b0b0e;padding:8px 12px;border:1px solid #2f171b;color:#ff8a80;font-family:'Cinzel',serif;font-weight:700;">35%</td></tr>
+          <tr><td style="background:#1d0d10;padding:8px 12px;border:1px solid #2f171b;color:var(--text-bright);font-weight:700;">🔴 英雄 → 🟣 傳說</td><td style="background:#1d0d10;padding:8px 12px;border:1px solid #2f171b;color:#ffa0b0;font-family:'Cinzel',serif;font-weight:700;">18%</td></tr>
+          <tr><td style="background:#1b0b0e;padding:8px 12px;border:1px solid #2f171b;color:var(--text-bright);font-weight:700;">🟣 傳說 → 👑 神話</td><td style="background:#1b0b0e;padding:8px 12px;border:1px solid #2f171b;color:#ffd54f;font-family:'Cinzel',serif;font-weight:700;">3%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ⚪ 一般娃娃 -->
+    <div class="d-sec d-sec--gen">
+      <span>⚪ 一般娃娃</span>
+      <span class="d-badge">一般 · 13 種</span>
+    </div>
+    <div class="doll-grid">
+      <div class="doll-card2 doll-card2--gen"><div class="doll-card2__name">肥肥</div><div class="doll-card2__stat">負重+100</div></div>
+      <div class="doll-card2 doll-card2--gen"><div class="doll-card2__name">雪怪</div><div class="doll-card2__stat">防禦-2</div></div>
+      <div class="doll-card2 doll-card2--gen"><div class="doll-card2__name">蛇女</div><div class="doll-card2__stat">每64秒魔力恢復25</div></div>
+      <div class="doll-card2 doll-card2--gen"><div class="doll-card2__name">石頭高崙</div><div class="doll-card2__stat">傷害減免+1</div></div>
+      <div class="doll-card2 doll-card2--gen"><div class="doll-card2__name">野狼寶寶</div><div class="doll-card2__stat">近距離攻擊+1</div></div>
+      <div class="doll-card2 doll-card2--gen"><div class="doll-card2__name">木刻人偶</div><div class="doll-card2__stat">體力上限+50</div></div>
+      <div class="doll-card2 doll-card2--gen"><div class="doll-card2__name">希爾黛絲</div><div class="doll-card2__stat">遠距離攻擊+1</div></div>
+      <div class="doll-card2 doll-card2--gen"><div class="doll-card2__name">奎斯坦修</div><div class="doll-card2__stat">體力上限+50</div></div>
+      <div class="doll-card2 doll-card2--gen"><div class="doll-card2__name">火焰娃娃</div><div class="doll-card2__stat">防禦-2</div></div>
+      <div class="doll-card2 doll-card2--gen"><div class="doll-card2__name">橘炙娃娃(紅)</div><div class="doll-card2__stat">每64秒魔力恢復25</div></div>
+      <div class="doll-card2 doll-card2--gen"><div class="doll-card2__name">橘炙娃娃(綠)</div><div class="doll-card2__stat">近距離攻擊+1</div></div>
+      <div class="doll-card2 doll-card2--gen"><div class="doll-card2__name">橘炙娃娃(橘)</div><div class="doll-card2__stat">傷害減免+1</div></div>
+      <div class="doll-card2 doll-card2--gen"><div class="doll-card2__name">橘炙娃娃(藍)</div><div class="doll-card2__stat">遠距離攻擊+1</div></div>
+    </div>
+
+    <!-- 🟢 高級娃娃 -->
+    <div class="d-sec d-sec--adv">
+      <span>🟢 高級娃娃</span>
+      <span class="d-badge">高級 · 30 種</span>
+    </div>
+    <div class="doll-grid">
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">雪人</div><div class="doll-card2__stat">每64秒魔力恢復25<br>魔力上限+50</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">長者</div><div class="doll-card2__stat">智力+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">美人魚</div><div class="doll-card2__stat">每64秒魔力恢復25<br>魔力上限+50</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">稻草人</div><div class="doll-card2__stat">遠距離攻擊+1<br>遠距離命中+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">熔岩高崙</div><div class="doll-card2__stat">防禦-2<br>傷害減免+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">思克巴</div><div class="doll-card2__stat">每64秒魔力恢復25<br>魔力上限+50</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">史巴托</div><div class="doll-card2__stat">近距離攻擊+1<br>近距離命中+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">亞力安</div><div class="doll-card2__stat">遠距離攻擊+1<br>遠距離命中+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">王族(男)</div><div class="doll-card2__stat">近距離攻擊+1<br>近距離命中+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">王族(女)</div><div class="doll-card2__stat">近距離攻擊+1<br>近距離命中+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">騎士(男)</div><div class="doll-card2__stat">防禦-2<br>傷害減免+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">騎士(女)</div><div class="doll-card2__stat">防禦-2<br>傷害減免+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">法師(男)</div><div class="doll-card2__stat">智力+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">法師(女)</div><div class="doll-card2__stat">智力+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">妖精(男)</div><div class="doll-card2__stat">遠距離攻擊+1<br>遠距離命中+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">妖精(女)</div><div class="doll-card2__stat">遠距離攻擊+1<br>遠距離命中+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">黑妖(男)</div><div class="doll-card2__stat">智力+1<br>魔力上限+70</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">黑妖(女)</div><div class="doll-card2__stat">近距離攻擊+1<br>近距離命中+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">暗黑騎士(男)</div><div class="doll-card2__stat">防禦-2<br>傷害減免+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">暗黑騎士(女)</div><div class="doll-card2__stat">防禦-2<br>傷害減免+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">神聖劍士(男)</div><div class="doll-card2__stat">智力+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">神聖劍士(女)</div><div class="doll-card2__stat">智力+1</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">槍手(男)</div><div class="doll-card2__stat">每64秒魔力恢復25<br>魔力上限+50</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">槍手(女)</div><div class="doll-card2__stat">每64秒魔力恢復25<br>魔力上限+50</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">龍騎士(男)</div><div class="doll-card2__stat">每64秒體力恢復25<br>體力上限+50</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">龍騎士(女)</div><div class="doll-card2__stat">每64秒體力恢復25<br>體力上限+50</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">少年帕克</div><div class="doll-card2__stat">每64秒體力恢復25<br>體力上限+50</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">少女帕歐</div><div class="doll-card2__stat">每64秒體力恢復25<br>體力上限+50</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">狂戰士</div><div class="doll-card2__stat">每64秒體力恢復25<br>體力上限+50</div></div>
+      <div class="doll-card2 doll-card2--adv"><div class="doll-card2__name">紅色妖魔</div><div class="doll-card2__stat">遠距離攻擊+1<br>遠距離命中+1</div></div>
+    </div>
+
+    <!-- 🔵 稀有娃娃 -->
+    <div class="d-sec d-sec--rare">
+      <span>🔵 稀有娃娃</span>
+      <span class="d-badge">稀有 · 33 種</span>
+    </div>
+    <div class="doll-grid">
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">黑長者</div><div class="doll-card2__stat">近距離攻擊+3<br>近距離命中+3</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">食人妖精王</div><div class="doll-card2__stat">防禦-3<br>傷害減免+2</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">飛龍</div><div class="doll-card2__stat">遠距離攻擊+3<br>遠距離命中+3</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">阿魯巴</div><div class="doll-card2__stat">防禦-3<br>傷害減免+2</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">鑽石高崙</div><div class="doll-card2__stat">防禦-3<br>傷害減免+2</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">思克巴女皇</div><div class="doll-card2__stat">每64秒魔力恢復35<br>魔力上限+70</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">巨人</div><div class="doll-card2__stat">防禦-3<br>傷害減免+2</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">巨大守護螞蟻</div><div class="doll-card2__stat">每64秒體力恢復35<br>體力上限+100</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">黃金騎士</div><div class="doll-card2__stat">近距離攻擊+3<br>近距離命中+3</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">樹精</div><div class="doll-card2__stat">每64秒魔力恢復35<br>魔力上限+70</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">曼波兔</div><div class="doll-card2__stat">每64秒體力恢復35<br>體力上限+100</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">力卡溫</div><div class="doll-card2__stat">近距離攻擊+3<br>近距離命中+3</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">哈維(藍)</div><div class="doll-card2__stat">智力+1<br>魔力上限+70</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">黃金安迪斯</div><div class="doll-card2__stat">每64秒體力恢復35<br>體力上限+100</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">騎士帕克</div><div class="doll-card2__stat">近距離攻擊+3<br>近距離命中+3</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">拉拉</div><div class="doll-card2__stat">智力+1<br>魔力上限+70</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">丹迪</div><div class="doll-card2__stat">遠距離攻擊+3<br>遠距離命中+3</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">達伊諾思投手</div><div class="doll-card2__stat">遠距離攻擊+3<br>遠距離命中+3</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">榭莉</div><div class="doll-card2__stat">遠距離攻擊+3<br>遠距離命中+3</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">達伊諾思打者</div><div class="doll-card2__stat">近距離攻擊+3<br>近距離命中+3</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">黃金巡守</div><div class="doll-card2__stat">遠距離攻擊+3<br>遠距離命中+3</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">蕾雅</div><div class="doll-card2__stat">智力+1<br>魔力上限+70</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">孫悟空</div><div class="doll-card2__stat">負重增加+1000</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">沙悟淨</div><div class="doll-card2__stat">負重增加+1000</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">豬八戒</div><div class="doll-card2__stat">負重增加+1000</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">老虎</div><div class="doll-card2__stat">近距離攻擊+3<br>近距離命中+3</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">阿勒尼亞</div><div class="doll-card2__stat">每64秒體力恢復35<br>體力上限+100</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">哈維</div><div class="doll-card2__stat">智力+1<br>魔力上限+70</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">秩序的死亡之劍</div><div class="doll-card2__stat">每64秒魔力恢復35<br>魔力上限+70</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">渾沌的活鎧甲</div><div class="doll-card2__stat">每64秒魔力恢復35<br>魔力上限+70</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">葛林</div><div class="doll-card2__stat">每64秒體力恢復35<br>體力上限+100</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">聖誕妖精</div><div class="doll-card2__stat">每64秒魔力恢復35<br>魔力上限+70</div></div>
+      <div class="doll-card2 doll-card2--rare"><div class="doll-card2__name">阿魯巴(藍)</div><div class="doll-card2__stat">防禦-3<br>傷害減免+2</div></div>
+    </div>
+
+    <!-- 🔴 英雄娃娃 -->
+    <div class="d-sec d-sec--hero">
+      <span>🔴 英雄娃娃</span>
+      <span class="d-badge">英雄 · 33 種</span>
+    </div>
+    <div class="doll-grid">
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">巴風特</div><div class="doll-card2__stat">智力+1, 魔攻+2<br>防禦-3, 魔力上限+100<br>每64秒魔力恢復30</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">騎士范德</div><div class="doll-card2__stat">防禦-3, 力量+1<br>近距離攻擊+5<br>近距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">艾莉絲</div><div class="doll-card2__stat">智力+1, 魔攻+2<br>防禦-3, 魔力上限+100<br>每64秒魔力恢復30</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">獨眼巨人</div><div class="doll-card2__stat">傷害減免+3, 負重+1000<br>防禦-4<br>每64秒體力恢復35</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">木乃伊王</div><div class="doll-card2__stat">智力+1, 魔攻+2<br>防禦-3, 魔力上限+100<br>每64秒魔力恢復30</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">幻象眼魔</div><div class="doll-card2__stat">防禦-3, 敏捷+1<br>遠距離攻擊+5<br>遠距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">巫妖</div><div class="doll-card2__stat">智力+1, 魔攻+2<br>防禦-3, 魔力上限+100<br>每64秒魔力恢復30</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">吸血鬼</div><div class="doll-card2__stat">智力+1, 魔攻+2<br>防禦-3, 魔力上限+100<br>每64秒魔力恢復30</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">伊弗利特</div><div class="doll-card2__stat">防禦-3, 力量+1<br>近距離攻擊+5<br>近距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">克特</div><div class="doll-card2__stat">防禦-3, 力量+1<br>近距離攻擊+5<br>近距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">巴克休</div><div class="doll-card2__stat">傷害減免+3, 負重+1000<br>防禦-4<br>每64秒體力恢復35</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">浮士德</div><div class="doll-card2__stat">傷害減免+3, 負重+1000<br>防禦-4<br>每64秒體力恢復35</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">狂風的夏斯奇</div><div class="doll-card2__stat">防禦-3, 力量+1<br>近距離攻擊+5<br>近距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">疾風的夏斯奇</div><div class="doll-card2__stat">防禦-3, 敏捷+1<br>遠距離攻擊+5<br>遠距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">大腳瑪幽</div><div class="doll-card2__stat">防禦-3, 力量+1<br>近距離攻擊+5<br>近距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">賽尼斯</div><div class="doll-card2__stat">智力+1, 魔攻+2<br>防禦-3, 魔力上限+100<br>每64秒魔力恢復30</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">阿努比斯</div><div class="doll-card2__stat">防禦-3, 力量+1<br>近距離攻擊+5<br>近距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">傑克吳燈籠</div><div class="doll-card2__stat">傷害減免+3, 負重+1000<br>防禦-4<br>每64秒體力恢復35</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">艾依爾</div><div class="doll-card2__stat">防禦-3, 敏捷+1<br>遠距離攻擊+5<br>遠距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">暗黑騎士團莉爾利</div><div class="doll-card2__stat">防禦-3, 力量+1<br>近距離攻擊+5<br>近距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">伊詩蒂</div><div class="doll-card2__stat">智力+1, 魔攻+2<br>防禦-3, 魔力上限+100<br>每64秒魔力恢復30</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">千年九尾狐</div><div class="doll-card2__stat">防禦-3, 敏捷+1<br>遠距離攻擊+5<br>遠距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">淘氣龍</div><div class="doll-card2__stat">防禦-3, 敏捷+1<br>遠距離攻擊+5<br>遠距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">天上騎士</div><div class="doll-card2__stat">防禦-3, 敏捷+1<br>遠距離攻擊+5<br>遠距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">炎魔</div><div class="doll-card2__stat">防禦-3, 力量+1<br>近距離攻擊+5<br>近距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">潔尼斯女王</div><div class="doll-card2__stat">智力+1, 魔攻+2<br>防禦-3, 魔力上限+100<br>每64秒魔力恢復30</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">殭屍王</div><div class="doll-card2__stat">傷害減免+3, 負重+1000<br>防禦-4<br>每64秒體力恢復35</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">黑豹</div><div class="doll-card2__stat">智力+1, 魔攻+2<br>防禦-3, 魔力上限+100<br>每64秒魔力恢復30</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">烏格奴斯</div><div class="doll-card2__stat">防禦-3, 敏捷+1<br>遠距離攻擊+5<br>遠距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">狸貓</div><div class="doll-card2__stat">防禦-3, 敏捷+1<br>遠距離攻擊+5<br>遠距離命中+5</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">高崙守護者</div><div class="doll-card2__stat">傷害減免+3, 負重+1000<br>防禦-4<br>每64秒體力恢復35</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">黑色曼波兔</div><div class="doll-card2__stat">近距離攻擊+1<br>近距離命中+1</div></div>
+      <div class="doll-card2 doll-card2--hero"><div class="doll-card2__name">覺醒孫悟空</div><div class="doll-card2__stat">傷害減免+3, 負重+1000<br>防禦-4<br>每64秒體力恢復35</div></div>
+    </div>
+
+    <!-- 🟣 傳說娃娃 -->
+    <div class="d-sec d-sec--legend">
+      <span>🟣 傳說娃娃</span>
+      <span class="d-badge">傳說 · 19 種</span>
+    </div>
+    <div class="doll-grid">
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">死亡騎士</div><div class="doll-card2__stat">防禦-5, 力量+3<br>近距離攻擊+9<br>近距離命中+9</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">巴蘭卡</div><div class="doll-card2__stat">防禦-8, 負重+1000<br>傷害減免+6<br>每64秒體力恢復50</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">墮落</div><div class="doll-card2__stat">防禦-5, 力量+3<br>近距離攻擊+9<br>近距離命中+9</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">惡魔</div><div class="doll-card2__stat">防禦-5, 敏捷+3<br>遠距離攻擊+9<br>遠距離命中+9</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">冰之女王</div><div class="doll-card2__stat">防禦-5, 智力+3, 魔攻+3<br>魔力上限+150<br>每64秒魔力恢復50</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">獨角獸</div><div class="doll-card2__stat">防禦-5, 敏捷+3<br>遠距離攻擊+9<br>遠距離命中+9</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">帕拉丁</div><div class="doll-card2__stat">防禦-8, 負重+1000<br>傷害減免+6<br>每64秒體力恢復50</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">甘特</div><div class="doll-card2__stat">防禦-8, 負重+1000<br>傷害減免+6<br>每64秒體力恢復50</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">歐吉王</div><div class="doll-card2__stat">防禦-8, 負重+1000<br>傷害減免+6<br>每64秒體力恢復50</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">不死鳥</div><div class="doll-card2__stat">防禦-5, 敏捷+3<br>遠距離攻擊+9<br>遠距離命中+9</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">黑暗長者</div><div class="doll-card2__stat">防禦-5, 智力+3, 魔攻+3<br>魔力上限+150<br>每64秒魔力恢復50</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">黑暗之星宙斯</div><div class="doll-card2__stat">防禦-5, 智力+3, 魔攻+3<br>魔力上限+150<br>每64秒魔力恢復50</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">鐮刀死神</div><div class="doll-card2__stat">防禦-5, 智力+3, 魔攻+3<br>魔力上限+150<br>每64秒魔力恢復50</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">唐三藏</div><div class="doll-card2__stat">防禦-5, 力量+3<br>近距離攻擊+9<br>近距離命中+9</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">屠龍者</div><div class="doll-card2__stat">防禦-5, 力量+3<br>近距離攻擊+9<br>近距離命中+9</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">黑暗哈汀</div><div class="doll-card2__stat">防禦-5, 智力+3, 魔攻+3<br>魔力上限+150<br>每64秒魔力恢復50</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">艾比諾不死鳥</div><div class="doll-card2__stat">防禦-5, 敏捷+3<br>遠距離攻擊+9<br>遠距離命中+9</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">艾比諾惡魔</div><div class="doll-card2__stat">防禦-5, 力量+3<br>近距離攻擊+9<br>近距離命中+9</div></div>
+      <div class="doll-card2 doll-card2--legend"><div class="doll-card2__name">艾比諾獨角獸</div><div class="doll-card2__stat">防禦-5, 敏捷+3<br>遠距離攻擊+9<br>遠距離命中+9</div></div>
+    </div>
+
+    <!-- 👑 神話娃娃 -->
+    <div class="d-sec d-sec--myth">
+      <span>👑 神話娃娃</span>
+      <span class="d-badge">神話 · 4 種</span>
+    </div>
+    <div class="fp-warn" style="margin-bottom:12px;border-color:rgba(212,168,32,0.3);background:rgba(212,168,32,0.06);">
+      🔓 神話娃娃已開放合成，合成成功機率 <strong style="color:#ffd54f;">3%</strong>。
+    </div>
+    <div class="doll-grid">
+      <div class="doll-card2 doll-card2--myth"><div class="doll-card2__name">安塔瑞斯</div><div class="doll-card2__stat">防禦-11, 傷害減免+10<br>負重+2500, 體力上限+400<br>每64秒體力恢復60</div></div>
+      <div class="doll-card2 doll-card2--myth"><div class="doll-card2__name">巴拉卡斯</div><div class="doll-card2__stat">防禦-8, 力量+5<br>近距離攻擊+12<br>近距離命中+12</div></div>
+      <div class="doll-card2 doll-card2--myth"><div class="doll-card2__name">林德拜爾</div><div class="doll-card2__stat">防禦-8, 敏捷+5<br>遠距離攻擊+12<br>遠距離命中+12</div></div>
+      <div class="doll-card2 doll-card2--myth"><div class="doll-card2__name">法利昂</div><div class="doll-card2__stat">防禦-8, 智力+5, 魔攻+5<br>魔力上限+250<br>每64秒魔力恢復60</div></div>
+    </div>
+
+    <!-- 🌌 唯一娃娃 -->
+    <div class="d-sec d-sec--unique">
+      <span>🌌 唯一娃娃</span>
+      <span class="d-badge">UNIQUE · 尚未開放</span>
+    </div>
+    <div class="doll-grid">
+      <div class="doll-card2 doll-card2--unique">
+        <div class="doll-card2__name">???</div>
+        <div class="doll-card2__stat">尚未開放<br>敬請期待</div>
+      </div>
+    </div>
+
+    <!-- 分頁導覽 -->
+    <div class="fp-pager">
+      <a href="feature-maps.html" class="fp-pager__btn">
+        <span class="fp-pager__arrow">←</span>
+        <div><span class="fp-pager__dir">PREV</span><span class="fp-pager__name">地圖介紹</span></div>
+      </a>
+      <div class="fp-pager__center"><a href="features-overview.html" class="fp-pager__back">▲ 返回系統列表</a></div>
+      <a href="feature-transform.html" class="fp-pager__btn fp-pager__btn--next">
+        <div><span class="fp-pager__dir">NEXT</span><span class="fp-pager__name">變身介紹</span></div>
+        <span class="fp-pager__arrow">→</span>
+      </a>
+    </div>
+
+  </main>
+
+  
+<footer class="foot">
+  <div class="wrap">
+    <img src="../assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))">
+    <div class="foot__n">金耀天堂</div>
+    <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="../assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
+    <nav class="foot__links"><a href="../index.html#about">關於</a><a href="rules.html">遊戲規章</a><a href="sponsor.html">贊助須知</a><a href="disclaimer.html">免責聲明</a><a href="contact.html">聯絡我們</a></nav>
+    <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
+  </div>
+</footer>
+<aside class="side side-r"><a class="side-card" href="sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script>
+<script src="../assets/js/search.js" defer></script>
+</body>
+</html>
