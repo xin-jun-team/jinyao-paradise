@@ -47,6 +47,7 @@
   .foot__links a{font-size:.86rem;color:var(--tx);padding:6px 12px;border-radius:6px}
   .foot__links a:hover{color:var(--gold-hi)}
   .foot__c{font-size:.78rem;line-height:1.8}
+  .foot__note{display:inline-block;margin:0 auto 14px;padding:9px 22px;border:1px solid rgba(227,172,44,.55);border-left:5px solid #e0334f;border-radius:6px;background:rgba(122,16,38,.35);color:#ffd35a;font-weight:800;letter-spacing:.06em;font-size:.92rem}
 
   /* ── 懸浮 ── */
   .side{position:fixed;top:50%;transform:translateY(-50%);z-index:30;display:none}
