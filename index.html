@@ -123,6 +123,22 @@
     .heroimg__cta{position:static;width:auto;padding:16px 16px 22px;background:#13060a}
   }
 
+
+  /* ── 開服倒數帶（簡約）── */
+  .open{position:relative;background:#13060a;border-bottom:1px solid var(--line)}
+  .open::before{content:"";position:absolute;left:50%;top:0;width:min(560px,70%);height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,#e3ac2c,transparent)}
+  .open__in{max-width:900px;margin:0 auto;padding:clamp(54px,7vw,88px) 20px clamp(54px,7vw,84px);text-align:center}
+  .open__k{font-family:'Cinzel',serif;letter-spacing:.5em;font-size:.76rem;color:var(--wine-hi);margin-bottom:16px}
+  .open__t{font-family:var(--serif);font-weight:900;font-size:clamp(1.9rem,4.8vw,3.1rem);letter-spacing:.14em;line-height:1.25;background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:12px}
+  .open__s{color:var(--tx);letter-spacing:.14em;margin-bottom:34px;font-size:.98rem}
+  .cd2{display:inline-flex;align-items:stretch;gap:clamp(18px,3.4vw,40px);margin-bottom:38px}
+  .cd2 div{min-width:70px}
+  .cd2 b{display:block;font-family:'Cinzel',serif;font-weight:600;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;color:var(--gold-hi);font-variant-numeric:tabular-nums}
+  .cd2 span{display:block;margin-top:10px;font-size:.7rem;letter-spacing:.34em;color:var(--tx-mut)}
+  .cd2 i{width:1px;background:linear-gradient(180deg,transparent,rgba(227,172,44,.55),transparent)}
+  .btn--ghost2{background:transparent;color:var(--gold-hi);border:1px solid rgba(227,172,44,.65)}
+  .btn--ghost2:hover{background:rgba(227,172,44,.1);transform:translateY(-3px)}
+
   /* ── 伺服狀態列 ── */
   .rates{background:linear-gradient(180deg,var(--bg3),var(--bg));border-top:2px solid var(--wine-hi);border-bottom:1px solid var(--line)}
   .rates__in{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;padding:26px clamp(18px,4vw,44px)}
@@ -212,6 +228,7 @@
   .float a{width:54px;height:54px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:.58rem;font-weight:800;background:linear-gradient(180deg,var(--wine2),var(--wine-deep));border:1px solid var(--gold);color:var(--gold-pale);transition:.2s;box-shadow:0 8px 22px -8px rgba(0,0,0,.8)}
   .float a:hover{transform:translateY(-3px);color:#fff}
   .float svg{width:21px;height:21px;fill:currentColor}
+  .float a.line:hover{border-color:#06c755;color:#3ee27f}
 </style>
 </head>
 <body>
@@ -219,10 +236,10 @@
   <nav class="nav">
     <div class="nav__in">
       <a href="index.html" class="nav__logo"><img src="assets/images/logo-jinyao.png" alt="金耀天堂" width="44" height="44"><span>金耀天堂</span></a>
-      <div class="nav__menu"><a href="index.html#about">關於</a><a href="pages/news.html">更新歷程</a><a href="pages/events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="pages/features-overview.html">特色介紹總覽</a><a href="pages/feature-soul-core.html">噬魂魔核</a><a href="pages/feature-skills.html">職業介紹與特殊技能</a><a href="pages/feature-job-power.html">職業之力</a><a href="pages/feature-high-skill.html">高技獲取途徑</a><a href="pages/feature-prestige.html">威望系統</a><a href="pages/feature-summon.html">法師召喚系統</a><a href="pages/feature-pet.html">寵物系統</a><a href="pages/feature-transform.html">變身介紹</a><a href="pages/feature-dolls.html">娃娃介紹</a><a href="pages/feature-royal-gear.html">王族專屬裝備</a><a href="pages/feature-blessing.html">裝備祝福屬性</a><a href="pages/feature-online-reward.html">在線禮包</a><a href="pages/feature-bonus-coin.html">紅利幣</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="pages/items-overview.html">裝備與道具總覽</a><a href="pages/items-weapons.html">武器介紹</a><a href="pages/items-armor.html">防具介紹</a><a href="pages/items-hexagram.html">威力彩選號</a><a href="pages/items-horse.html">神獸之卵</a><a href="pages/items-quest-medal.html">主線指南書</a><a href="pages/items-relic.html">聖物系統</a><a href="pages/items-gacha.html">神奇扭蛋</a><a href="pages/items-battle-badge.html">戰場徽章系統</a><a href="pages/items-candle.html">回憶蠟燭與洗血</a><a href="pages/items-dragon-eye.html">四龍之魔眼</a><a href="pages/items-vip.html">貴賓通行證介紹</a></div></div><a href="pages/feature-maps.html">地圖介紹</a><a href="pages/boss-guide.html">BOSS介紹</a><a href="pages/version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="pages/disclaimer.html">免責聲明</a><a href="pages/rules.html">遊戲規章</a><a href="pages/class-change.html">轉職服務</a><a href="pages/contact.html">聯絡我們</a></div></div><a href="pages/promote.html">推文推廣</a><a href="pages/sponsor.html">贊助說明</a><a class="cta" href="pages/download.html">遊戲下載</a></div>
+      <div class="nav__menu"><a href="index.html#about">關於</a><a href="pages/news.html">更新歷程</a><a href="pages/events.html">活動資訊</a><div class="nav__dd"><button>遊戲特色 ▾</button><div class="nav__dd__menu"><a href="pages/features-overview.html">特色介紹總覽</a><a href="pages/feature-skills.html">職業介紹與特殊技能</a><a href="pages/feature-job-power.html">職業之力</a><a href="pages/feature-prestige.html">威望系統</a><a href="pages/feature-summon.html">法師召喚系統</a><a href="pages/feature-pet.html">寵物系統</a><a href="pages/feature-transform.html">變身介紹</a><a href="pages/feature-dolls.html">娃娃介紹</a><a href="pages/feature-royal-gear.html">王族專屬裝備</a><a href="pages/feature-blessing.html">裝備祝福屬性</a><a href="pages/feature-online-reward.html">在線禮包</a></div></div><div class="nav__dd"><button>裝備道具 ▾</button><div class="nav__dd__menu"><a href="pages/items-overview.html">裝備與道具總覽</a><a href="pages/items-weapons.html">武器介紹</a><a href="pages/items-armor.html">防具介紹</a><a href="pages/items-hexagram.html">威力彩選號</a><a href="pages/items-horse.html">神獸之卵</a><a href="pages/items-quest-medal.html">主線指南書</a><a href="pages/items-relic.html">聖物系統</a><a href="pages/items-gacha.html">神奇扭蛋</a><a href="pages/items-candle.html">回憶蠟燭與洗血</a><a href="pages/items-dragon-eye.html">四龍之魔眼</a><a href="pages/items-vip.html">貴賓通行證介紹</a></div></div><a href="pages/feature-maps.html">地圖介紹</a><a href="pages/boss-guide.html">BOSS介紹</a><a href="pages/version.html">版本設定</a><div class="nav__dd"><button>服務專區 ▾</button><div class="nav__dd__menu"><a href="pages/disclaimer.html">免責聲明</a><a href="pages/rules.html">遊戲規章</a><a href="pages/class-change.html">轉職服務</a><a href="pages/contact.html">聯絡我們</a></div></div><a href="pages/promote.html">推文推廣</a><a href="pages/sponsor.html">贊助說明</a><a class="cta" href="pages/download.html">遊戲下載</a></div>
       <button class="nav__burger" id="burger" aria-label="選單"><span></span><span></span><span></span></button>
     </div>
-    <div class="nav__m" id="mnav"><a href="index.html#about">關於</a><a href="pages/news.html">更新歷程</a><a href="pages/events.html">活動資訊</a><a href="pages/feature-maps.html">地圖介紹</a><span class="grp">▸ 遊戲特色</span><a href="pages/features-overview.html">特色介紹總覽</a><a href="pages/feature-soul-core.html">噬魂魔核</a><a href="pages/feature-skills.html">職業介紹與特殊技能</a><a href="pages/feature-job-power.html">職業之力</a><a href="pages/feature-high-skill.html">高技獲取途徑</a><a href="pages/feature-prestige.html">威望系統</a><a href="pages/feature-summon.html">法師召喚系統</a><a href="pages/feature-pet.html">寵物系統</a><a href="pages/feature-transform.html">變身介紹</a><a href="pages/feature-dolls.html">娃娃介紹</a><a href="pages/feature-royal-gear.html">王族專屬裝備</a><a href="pages/feature-blessing.html">裝備祝福屬性</a><a href="pages/feature-online-reward.html">在線禮包</a><a href="pages/feature-bonus-coin.html">紅利幣</a><span class="grp">▸ 裝備道具</span><a href="pages/items-overview.html">裝備與道具總覽</a><a href="pages/items-weapons.html">武器介紹</a><a href="pages/items-armor.html">防具介紹</a><a href="pages/items-hexagram.html">威力彩選號</a><a href="pages/items-horse.html">神獸之卵</a><a href="pages/items-quest-medal.html">主線指南書</a><a href="pages/items-relic.html">聖物系統</a><a href="pages/items-gacha.html">神奇扭蛋</a><a href="pages/items-battle-badge.html">戰場徽章系統</a><a href="pages/items-candle.html">回憶蠟燭與洗血</a><a href="pages/items-dragon-eye.html">四龍之魔眼</a><a href="pages/items-vip.html">貴賓通行證介紹</a><a href="pages/boss-guide.html">BOSS介紹</a><a href="pages/version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="pages/disclaimer.html">免責聲明</a><a href="pages/rules.html">遊戲規章</a><a href="pages/class-change.html">轉職服務</a><a href="pages/contact.html">聯絡我們</a><a href="pages/promote.html">推文推廣</a><a href="pages/sponsor.html">贊助說明</a><a href="pages/download.html">遊戲下載</a></div>
+    <div class="nav__m" id="mnav"><a href="index.html#about">關於</a><a href="pages/news.html">更新歷程</a><a href="pages/events.html">活動資訊</a><a href="pages/feature-maps.html">地圖介紹</a><span class="grp">▸ 遊戲特色</span><a href="pages/features-overview.html">特色介紹總覽</a><a href="pages/feature-skills.html">職業介紹與特殊技能</a><a href="pages/feature-job-power.html">職業之力</a><a href="pages/feature-prestige.html">威望系統</a><a href="pages/feature-summon.html">法師召喚系統</a><a href="pages/feature-pet.html">寵物系統</a><a href="pages/feature-transform.html">變身介紹</a><a href="pages/feature-dolls.html">娃娃介紹</a><a href="pages/feature-royal-gear.html">王族專屬裝備</a><a href="pages/feature-blessing.html">裝備祝福屬性</a><a href="pages/feature-online-reward.html">在線禮包</a><span class="grp">▸ 裝備道具</span><a href="pages/items-overview.html">裝備與道具總覽</a><a href="pages/items-weapons.html">武器介紹</a><a href="pages/items-armor.html">防具介紹</a><a href="pages/items-hexagram.html">威力彩選號</a><a href="pages/items-horse.html">神獸之卵</a><a href="pages/items-quest-medal.html">主線指南書</a><a href="pages/items-relic.html">聖物系統</a><a href="pages/items-gacha.html">神奇扭蛋</a><a href="pages/items-candle.html">回憶蠟燭與洗血</a><a href="pages/items-dragon-eye.html">四龍之魔眼</a><a href="pages/items-vip.html">貴賓通行證介紹</a><a href="pages/boss-guide.html">BOSS介紹</a><a href="pages/version.html">版本設定</a><span class="grp">▸ 服務專區</span><a href="pages/disclaimer.html">免責聲明</a><a href="pages/rules.html">遊戲規章</a><a href="pages/class-change.html">轉職服務</a><a href="pages/contact.html">聯絡我們</a><a href="pages/promote.html">推文推廣</a><a href="pages/sponsor.html">贊助說明</a><a href="pages/download.html">遊戲下載</a></div>
   </nav>
 
   <div class="marquee" aria-label="公告">
@@ -242,16 +259,16 @@
     </div>
   </header>
 
-  <section class="rates" id="rates">
-    <div class="rates__in">
-      <div class="rate rate--on"><div class="rate__k">伺服狀態</div><div class="rate__v" style="font-size:1.25rem">籌備中</div></div>
-      <div class="rate"><div class="rate__k">開服時間</div><div class="rate__v" style="font-size:1.25rem">11/06 20:00</div></div>
-      <div class="rate"><div class="rate__k">遊戲版本</div><div class="rate__v">3.81</div></div>
-      <div class="rate"><div class="rate__k">經驗倍率</div><div class="rate__v">×3<small>手動</small> / ×1<small>內掛</small></div></div>
-      <div class="rate"><div class="rate__k">掉落倍率</div><div class="rate__v">×1</div></div>
-      <div class="rate"><div class="rate__k">金幣倍率</div><div class="rate__v">×1</div></div>
-      <div class="rate"><div class="rate__k">多開限制</div><div class="rate__v" style="font-size:1.25rem">IP 限 3</div></div>
-      <div class="rate"><div class="rate__k">開放時間</div><div class="rate__v" style="font-size:1.25rem">24H 全天</div></div>
+    <section class="open" id="join">
+    <div class="open__in">
+      <p class="open__k">GRAND OPENING</p>
+      <h2 class="open__t">11 / 06　20:00 榮光開服</h2>
+      <p class="open__s">3.81 版本 · 24H 全天開放 · 拔劍集結</p>
+      <div class="cd2" id="cd"><div><b id="cdD">--</b><span>DAYS</span></div><i></i><div><b id="cdH">--</b><span>HOURS</span></div><i></i><div><b id="cdM">--</b><span>MINUTES</span></div></div>
+      <div class="cta-row" style="justify-content:center">
+        <a href="pages/download.html" class="btn btn--gold">⚔ 立即下載</a>
+        <a href="pages/sponsor.html" class="btn btn--ghost2">贊助說明</a>
+      </div>
     </div>
   </section>
 
@@ -288,7 +305,6 @@
           <div class="gd__b">
             <a class="gl" href="pages/items-relic.html"><img src="assets/images/item-17404.png" alt=""><div><b>聖物系統</b><span>收集聖物碎片，合成強力聖物</span></div></a>
             <a class="gl" href="pages/items-gacha.html"><img src="assets/images/item-7775.png" alt=""><div><b>威力彩系統</b><span>試試手氣，開出稀有道具與強化素材</span></div></a>
-            <a class="gl" href="pages/feature-soul-core.html"><img src="assets/images/item-9138.png" alt=""><div><b>獸魂系統</b><span>注入獸魂之力，解鎖隱藏潛能</span></div></a>
           </div>
         </div>
         <div class="gd__g">
@@ -316,31 +332,18 @@
     </div>
   </section>
 
-  <section class="join" id="join">
-    <p class="join__k">GRAND OPENING</p>
-    <h2 class="join__t">11 / 06　20:00 榮光開服</h2>
-    <p class="join__s">3.81 版本 · 24H 全天開放 · 拔劍集結</p>
-    <div class="cd" id="cd"><div><b id="cdD">--</b><span>DAYS</span></div><div><b id="cdH">--</b><span>HOURS</span></div><div><b id="cdM">--</b><span>MINUTES</span></div></div>
-    <div class="cta-row" style="justify-content:center">
-      <a href="pages/download.html" class="btn btn--gold">⚔ 立即下載</a>
-      <a href="pages/sponsor.html" class="btn btn--wine">贊助說明</a>
-    </div>
-  </section>
-
   <footer class="foot">
     <div class="wrap">
       <img src="assets/images/logo-jinyao.png" alt="金耀天堂" width="84" height="84" style="margin:0 auto 10px;filter:drop-shadow(0 0 14px rgba(227,172,44,.45))"><div class="foot__n">金耀天堂</div>
       <a href="https://www.gamex123.com/lineage.html" target="_blank" rel="noopener" style="display:inline-block;margin:2px 0 12px"><img src="assets/images/private-server-123.gif" alt="私服123" style="height:40px;border-radius:4px;display:block" loading="lazy"></a>
-      <nav class="foot__links"><a href="#about">關於</a><a href="pages/rules.html">遊戲規章</a><a href="pages/sponsor.html">贊助須知</a><a href="pages/disclaimer.html">免責聲明</a><a href="pages/contact.html">聯絡我們</a></nav>
+      <nav class="foot__links"><a href="#about">關於</a><a href="pages/rules.html">遊戲規章</a><a href="pages/sponsor.html">贊助須知</a><a href="pages/disclaimer.html">免責聲明</a><a href="pages/contact.html">聯絡我們</a><a href="https://line.me/R/ti/p/%40492qdfga" target="_blank" rel="noopener" style="color:#3ee27f">官方 LINE：@492qdfga</a><a href="https://line.me/ti/g2/gI1gXr8_RijLCYJN0oan3X4RbvdtpFL6NcPQMg?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener" style="color:#3ee27f">加入社群</a></nav>
       <p class="foot__note">本官方平均14-30天視情況更新進度!!!請各位放心</p>
       <p class="foot__c">© 2026 金耀天堂 · 本遊戲限 18 歲以上玩家參與 · 遊戲有成癮性，請節制遊玩 · 本站與 NC Soft 官方無任何關聯</p>
     </div>
   </footer>
 
   <aside class="side side-r"><a class="side-card" href="pages/sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
-  <div class="float">
-    <a href="pages/download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a>
-  </div>
+  <div class="float"><a href="pages/download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a><a href="https://line.me/ti/g2/gI1gXr8_RijLCYJN0oan3X4RbvdtpFL6NcPQMg?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener" class="line" title="加入社群"><svg viewBox="0 0 24 24"><path d="M24 10.3C24 4.94 18.62.57 12 .57S0 4.94 0 10.3c0 4.81 4.27 8.84 10.04 9.61.39.08.92.26 1.06.59.12.3.08.77.04 1.08l-.17 1.02c-.04.3-.24 1.19 1.05.64 1.29-.54 6.92-4.08 9.44-6.97C23.18 14.4 24 12.46 24 10.3M7.75 13.5H5.36a.63.63 0 01-.63-.63V8.11c0-.35.28-.63.63-.63.35 0 .63.28.63.63v4.13h1.76c.35 0 .63.28.63.63 0 .34-.28.63-.63.63m2.47-.63c0 .34-.28.63-.63.63a.63.63 0 01-.63-.63V8.11c0-.35.28-.63.63-.63.34 0 .63.28.63.63v4.76m5.74 0c0 .27-.17.51-.43.6a.65.65 0 01-.71-.22l-2.44-3.32v2.94c0 .34-.28.63-.63.63a.63.63 0 01-.63-.63V8.11c0-.27.17-.51.43-.6a.62.62 0 01.7.22l2.46 3.33V8.11c0-.35.28-.63.63-.63.34 0 .63.28.63.63v4.76m3.86-2.38c.35 0 .63.28.63.63 0 .34-.28.63-.63.63h-1.76v1.12h1.76c.35 0 .63.28.63.63 0 .34-.28.63-.63.63h-2.39a.63.63 0 01-.63-.63V8.11c0-.35.28-.63.63-.63h2.39c.35 0 .63.28.63.63 0 .35-.28.63-.63.63h-1.76v1.13h1.76"/></svg>社群</a><a href="https://line.me/R/ti/p/%40492qdfga" target="_blank" rel="noopener" class="line" title="官方 LINE 客服"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.49 3.53 1.34 5L2 22l5.08-1.31A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm-1 14h-2v-2h2v2zm2.07-5.75l-.9.92C11.45 11.9 11 12.5 11 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H6c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>客服</a></div>
 
   <script>
   (function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();

@@ -62,5 +62,6 @@
   .float a{width:54px;height:54px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:.58rem;font-weight:800;background:linear-gradient(180deg,var(--wine2),var(--wine-deep));border:1px solid var(--gold);color:var(--gold-pale);transition:.2s;box-shadow:0 8px 22px -8px rgba(0,0,0,.8)}
   .float a:hover{transform:translateY(-3px);color:#fff}
   .float svg{width:21px;height:21px;fill:currentColor}
+  .float a.line:hover{border-color:#06c755;color:#3ee27f}
 
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
