@@ -124,18 +124,21 @@
   }
 
 
-  /* ── 開服倒數帶（簡約）── */
+  /* ── 開服倒數帶（簡約・橫向）── */
   .open{position:relative;background:#13060a;border-bottom:1px solid var(--line)}
   .open::before{content:"";position:absolute;left:50%;top:0;width:min(560px,70%);height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,#e3ac2c,transparent)}
-  .open__in{max-width:900px;margin:0 auto;padding:clamp(54px,7vw,88px) 20px clamp(54px,7vw,84px);text-align:center}
-  .open__k{font-family:'Cinzel',serif;letter-spacing:.5em;font-size:.76rem;color:var(--wine-hi);margin-bottom:16px}
-  .open__t{font-family:var(--serif);font-weight:900;font-size:clamp(1.9rem,4.8vw,3.1rem);letter-spacing:.14em;line-height:1.25;background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:12px}
-  .open__s{color:var(--tx);letter-spacing:.14em;margin-bottom:34px;font-size:.98rem}
-  .cd2{display:inline-flex;align-items:stretch;gap:clamp(18px,3.4vw,40px);margin-bottom:38px}
-  .cd2 div{min-width:70px}
-  .cd2 b{display:block;font-family:'Cinzel',serif;font-weight:600;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;color:var(--gold-hi);font-variant-numeric:tabular-nums}
-  .cd2 span{display:block;margin-top:10px;font-size:.7rem;letter-spacing:.34em;color:var(--tx-mut)}
+  .open__row{max-width:1240px;margin:0 auto;padding:clamp(28px,4vw,44px) clamp(20px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:clamp(22px,3.4vw,52px);flex-wrap:wrap}
+  .open__txt{flex:1 1 380px;text-align:left}
+  .open__k{font-family:'Cinzel',serif;letter-spacing:.5em;font-size:.72rem;color:var(--wine-hi);margin-bottom:8px}
+  .open__t{font-family:var(--serif);font-weight:900;font-size:clamp(1.6rem,3.2vw,2.4rem);letter-spacing:.12em;line-height:1.25;background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:6px}
+  .open__s{color:var(--tx);letter-spacing:.12em;font-size:.95rem}
+  .cd2{display:inline-flex;align-items:stretch;gap:clamp(16px,2.6vw,34px)}
+  .cd2 div{min-width:64px;text-align:center}
+  .cd2 b{display:block;font-family:'Cinzel',serif;font-weight:600;font-size:clamp(2rem,3.6vw,2.9rem);line-height:1;color:var(--gold-hi);font-variant-numeric:tabular-nums}
+  .cd2 span{display:block;margin-top:8px;font-size:.66rem;letter-spacing:.3em;color:var(--tx-mut)}
   .cd2 i{width:1px;background:linear-gradient(180deg,transparent,rgba(227,172,44,.55),transparent)}
+  .open__btn{flex-shrink:0}
+  @media(max-width:900px){.open__row{flex-direction:column;text-align:center}.open__txt{text-align:center;flex:none}}
   .btn--ghost2{background:transparent;color:var(--gold-hi);border:1px solid rgba(227,172,44,.65)}
   .btn--ghost2:hover{background:rgba(227,172,44,.1);transform:translateY(-3px)}
 
@@ -260,15 +263,14 @@
   </header>
 
     <section class="open" id="join">
-    <div class="open__in">
-      <p class="open__k">GRAND OPENING</p>
-      <h2 class="open__t">11 / 06　20:00 榮光開服</h2>
-      <p class="open__s">3.81 版本 · 24H 全天開放 · 拔劍集結</p>
-      <div class="cd2" id="cd"><div><b id="cdD">--</b><span>DAYS</span></div><i></i><div><b id="cdH">--</b><span>HOURS</span></div><i></i><div><b id="cdM">--</b><span>MINUTES</span></div></div>
-      <div class="cta-row" style="justify-content:center">
-        <a href="pages/download.html" class="btn btn--gold">⚔ 立即下載</a>
-        <a href="pages/sponsor.html" class="btn btn--ghost2">贊助說明</a>
+    <div class="open__row">
+      <div class="open__txt">
+        <p class="open__k">GRAND OPENING</p>
+        <h2 class="open__t">11 / 06　20:00 榮光開服</h2>
+        <p class="open__s">3.81 版本 · 24H 全天開放 · 拔劍集結</p>
       </div>
+      <div class="cd2" id="cd"><div><b id="cdD">--</b><span>DAYS</span></div><i></i><div><b id="cdH">--</b><span>HOURS</span></div><i></i><div><b id="cdM">--</b><span>MINUTES</span></div></div>
+      <a href="pages/sponsor.html" class="btn btn--gold open__btn">贊助說明</a>
     </div>
   </section>
 
