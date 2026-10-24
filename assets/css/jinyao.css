@@ -52,6 +52,7 @@
   /* ── 懸浮 ── */
   .side{position:fixed;top:50%;transform:translateY(-50%);z-index:30;display:none}
   .side-r{right:12px;width:230px}
+  .side-l{left:12px;width:230px}
   .side-card{display:block;padding:18px 16px;text-align:center;border-radius:12px;border:1px solid var(--gold);background:linear-gradient(170deg,var(--wine),var(--wine-deep));box-shadow:0 14px 34px -10px rgba(0,0,0,.8)}
   .side-card .k{font-family:'Cinzel',serif;letter-spacing:.3em;font-size:.68rem;color:var(--gold-hi)}
   .side-card .t{font-family:var(--serif);font-weight:900;font-size:1.5rem;margin:6px 0 4px;background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent}

@@ -142,6 +142,9 @@
   .btn--ghost2{background:transparent;color:var(--gold-hi);border:1px solid rgba(227,172,44,.65)}
   .btn--ghost2:hover{background:rgba(227,172,44,.1);transform:translateY(-3px)}
 
+  /* 首頁：左側下載卡移到左下，避開 hero 圖上的 LOGO 字標 */
+  .home .side-l{top:auto;bottom:22px;transform:none;width:190px}
+  .home .side-l .side-card{padding:12px 12px}
   /* ── 伺服狀態列 ── */
   .rates{background:linear-gradient(180deg,var(--bg3),var(--bg));border-top:2px solid var(--wine-hi);border-bottom:1px solid var(--line)}
   .rates__in{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;padding:26px clamp(18px,4vw,44px)}
@@ -221,6 +224,7 @@
   /* ── 懸浮 ── */
   .side{position:fixed;top:50%;transform:translateY(-50%);z-index:30;display:none}
   .side-r{right:12px;width:230px}
+  .side-l{left:12px;width:230px}
   .side-card{display:block;padding:18px 16px;text-align:center;border-radius:12px;border:1px solid var(--gold);background:linear-gradient(170deg,var(--wine),var(--wine-deep));box-shadow:0 14px 34px -10px rgba(0,0,0,.8)}
   .side-card .k{font-family:'Cinzel',serif;letter-spacing:.3em;font-size:.68rem;color:var(--gold-hi)}
   .side-card .t{font-family:var(--serif);font-weight:900;font-size:1.5rem;margin:6px 0 4px;background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -234,7 +238,7 @@
   .float a.line:hover{border-color:#06c755;color:#3ee27f}
 </style>
 </head>
-<body>
+<body class="home">
 
   <nav class="nav">
     <div class="nav__in">
@@ -344,7 +348,8 @@
     </div>
   </footer>
 
-  <aside class="side side-r"><a class="side-card" href="pages/sponsor.html"><div class="k">AUTO SPONSOR</div><div class="t">24H 自動贊助</div><div class="s">全天候自助 · 即時到帳</div></a></aside>
+  <aside class="side side-l"><a class="side-card" href="pages/download.html"><div class="k">DOWNLOAD</div><div class="t">遊戲下載</div><div class="s">立即下載・加入戰場</div></a></aside>
+<aside class="side side-r"><a class="side-card" href="https://line.me/R/ti/p/%40492qdfga" target="_blank" rel="noopener"><div class="k">SPONSOR</div><div class="t">贊助請聯繫客服</div><div class="s">享受尊榮開單服務</div></a></aside>
   <div class="float"><a href="pages/download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a><a href="https://line.me/ti/g2/gI1gXr8_RijLCYJN0oan3X4RbvdtpFL6NcPQMg?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener" class="line" title="加入社群"><svg viewBox="0 0 24 24"><path d="M24 10.3C24 4.94 18.62.57 12 .57S0 4.94 0 10.3c0 4.81 4.27 8.84 10.04 9.61.39.08.92.26 1.06.59.12.3.08.77.04 1.08l-.17 1.02c-.04.3-.24 1.19 1.05.64 1.29-.54 6.92-4.08 9.44-6.97C23.18 14.4 24 12.46 24 10.3M7.75 13.5H5.36a.63.63 0 01-.63-.63V8.11c0-.35.28-.63.63-.63.35 0 .63.28.63.63v4.13h1.76c.35 0 .63.28.63.63 0 .34-.28.63-.63.63m2.47-.63c0 .34-.28.63-.63.63a.63.63 0 01-.63-.63V8.11c0-.35.28-.63.63-.63.34 0 .63.28.63.63v4.76m5.74 0c0 .27-.17.51-.43.6a.65.65 0 01-.71-.22l-2.44-3.32v2.94c0 .34-.28.63-.63.63a.63.63 0 01-.63-.63V8.11c0-.27.17-.51.43-.6a.62.62 0 01.7.22l2.46 3.33V8.11c0-.35.28-.63.63-.63.34 0 .63.28.63.63v4.76m3.86-2.38c.35 0 .63.28.63.63 0 .34-.28.63-.63.63h-1.76v1.12h1.76c.35 0 .63.28.63.63 0 .34-.28.63-.63.63h-2.39a.63.63 0 01-.63-.63V8.11c0-.35.28-.63.63-.63h2.39c.35 0 .63.28.63.63 0 .35-.28.63-.63.63h-1.76v1.13h1.76"/></svg>社群</a><a href="https://line.me/R/ti/p/%40492qdfga" target="_blank" rel="noopener" class="line" title="官方 LINE 客服"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.49 3.53 1.34 5L2 22l5.08-1.31A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm-1 14h-2v-2h2v2zm2.07-5.75l-.9.92C11.45 11.9 11 12.5 11 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H6c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>客服</a></div>
 
   <script>
