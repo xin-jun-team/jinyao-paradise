@@ -1,6 +1,24 @@
 {
   "active": [
     {
+      "title": "開服累積贊助禮包",
+      "desc": "開服累積贊助好禮規劃中，詳細內容敬請期待。",
+      "date_label": "內容籌備中",
+      "link": "event-open-sponsor.html",
+      "tag": "開服活動",
+      "tag_style": "active",
+      "link_text": "查看詳情"
+    },
+    {
+      "title": "單筆滿額贊助禮包 🎁",
+      "desc": "單筆贊助可累計！每消費滿 1,500 即可獲得「金耀入股禮包」，另有每月單筆滿額好禮（滿 3,000／6,000）。",
+      "date_label": "即日起 ~ 11/30 18:00 維修前",
+      "link": "event-gift-single.html",
+      "tag": "限時活動",
+      "tag_style": "active",
+      "link_text": "查看詳情"
+    },
+    {
       "title": "首儲贈送",
       "desc": "首次贊助即贈送噬魂魔核、稀有變身卡寶箱、名譽貨幣等豐厚好禮！",
       "date_label": "即日起 · 每人限領一次",
