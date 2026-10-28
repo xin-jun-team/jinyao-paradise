@@ -84,7 +84,36 @@
 
   <main class="fp-wrap">
 
-    <!-- 進行中活動（JSON 驅動） -->
+    <style>
+.ev-vip{position:relative;margin:0 0 54px;padding:40px clamp(16px,3vw,36px) 14px;border:1px solid rgba(227,172,44,.65);border-radius:16px;background:radial-gradient(ellipse 80% 60% at 50% 0,rgba(163,22,47,.5),rgba(26,8,13,.97) 70%),#1a080d;box-shadow:0 0 0 4px #13060a,0 0 0 5px rgba(227,172,44,.3),0 30px 70px -30px rgba(163,22,47,.75)}
+.ev-vip::before,.ev-vip::after{content:"❖";position:absolute;top:14px;color:#e3ac2c;font-size:1.3rem;text-shadow:0 0 10px rgba(227,172,44,.6)}
+.ev-vip::before{left:20px}.ev-vip::after{right:20px}
+.ev-vip__hd{text-align:center;margin-bottom:28px}
+.ev-vip__crown{font-size:2.1rem;color:#ffd35a;filter:drop-shadow(0 0 12px rgba(255,211,90,.65));line-height:1}
+.ev-vip__en{font-family:'Cinzel',serif;letter-spacing:.5em;font-size:.72rem;color:#e0334f;margin:8px 0 4px;font-weight:700}
+.ev-vip__t{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:.22em;background:linear-gradient(176deg,#fff5c8,#ffd766 40%,#e3ac2c 70%,#a8761a);-webkit-background-clip:text;background-clip:text;color:transparent;margin:0;filter:drop-shadow(0 3px 14px rgba(224,51,79,.45))}
+.ev-vip__s{color:#e6d2b0;letter-spacing:.14em;font-size:.9rem;margin:8px 0 14px}
+.ev-vip__orn{display:flex;align-items:center;gap:12px;justify-content:center}
+.ev-vip__orn i{display:block;height:1px;width:min(170px,22vw);background:linear-gradient(90deg,transparent,#e3ac2c)}
+.ev-vip__orn i:last-child{transform:scaleX(-1)}.ev-vip__orn b{color:#e3ac2c;font-size:.7rem}
+.ev-grid--vip{margin-bottom:26px}
+.ev-link--vip{border:1px solid rgba(227,172,44,.65)!important;background:linear-gradient(160deg,#3a0f1c,#1d0a10 60%,#150709)!important;box-shadow:0 14px 30px -18px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,211,90,.35)}
+.ev-link--vip:hover{box-shadow:0 18px 38px -14px rgba(227,172,44,.5)!important}
+.ev-link--vip .ev-link__head{border-bottom:1px solid rgba(227,172,44,.35)!important;background:linear-gradient(90deg,rgba(163,22,47,.6),transparent)}
+.ev-link--vip .ev-link__title{font-size:1.08rem!important;color:#fff3c8!important}
+.ev-vip-badge{margin-left:auto;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.2em;color:#2a0d16;background:linear-gradient(180deg,#fff5c8,#e3ac2c);border-radius:3px;padding:2px 8px;font-weight:700;flex-shrink:0}
+</style>
+<section class="ev-vip" id="evVip" aria-label="專屬贊助活動">
+  <div class="ev-vip__hd">
+    <div class="ev-vip__crown">♛</div>
+    <p class="ev-vip__en">SPONSOR EXCLUSIVE</p>
+    <h2 class="ev-vip__t">專屬贊助活動</h2>
+    <p class="ev-vip__s">贊助專屬好禮 · 開服限定與常駐回饋</p>
+    <div class="ev-vip__orn"><i></i><b>◆</b><i></i></div>
+  </div>
+  <div class="ev-grid ev-grid--vip" id="evSponsor"></div>
+</section>
+<!-- 進行中活動（JSON 驅動） -->
     <p class="ev-cat-title">◆ 進行中活動</p>
     <div class="ev-grid" id="evActive"></div>
 
@@ -107,60 +136,25 @@
 </footer>
 <aside class="side side-l"><a class="side-card" href="download.html"><div class="k">DOWNLOAD</div><div class="t">遊戲下載</div><div class="s">立即下載・加入戰場</div></a></aside>
 <aside class="side side-r"><a class="side-card" href="https://line.me/R/ti/p/%40492qdfga" target="_blank" rel="noopener"><div class="k">SPONSOR</div><div class="t">贊助請聯繫客服</div><div class="s">享受尊榮開單服務</div></a></aside>
-<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a><a href="https://line.me/ti/g2/gI1gXr8_RijLCYJN0oan3X4RbvdtpFL6NcPQMg?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener" class="line" title="加入社群"><svg viewBox="0 0 24 24"><path d="M24 10.3C24 4.94 18.62.57 12 .57S0 4.94 0 10.3c0 4.81 4.27 8.84 10.04 9.61.39.08.92.26 1.06.59.12.3.08.77.04 1.08l-.17 1.02c-.04.3-.24 1.19 1.05.64 1.29-.54 6.92-4.08 9.44-6.97C23.18 14.4 24 12.46 24 10.3M7.75 13.5H5.36a.63.63 0 01-.63-.63V8.11c0-.35.28-.63.63-.63.35 0 .63.28.63.63v4.13h1.76c.35 0 .63.28.63.63 0 .34-.28.63-.63.63m2.47-.63c0 .34-.28.63-.63.63a.63.63 0 01-.63-.63V8.11c0-.35.28-.63.63-.63.34 0 .63.28.63.63v4.76m5.74 0c0 .27-.17.51-.43.6a.65.65 0 01-.71-.22l-2.44-3.32v2.94c0 .34-.28.63-.63.63a.63.63 0 01-.63-.63V8.11c0-.27.17-.51.43-.6a.62.62 0 01.7.22l2.46 3.33V8.11c0-.35.28-.63.63-.63.34 0 .63.28.63.63v4.76m3.86-2.38c.35 0 .63.28.63.63 0 .34-.28.63-.63.63h-1.76v1.12h1.76c.35 0 .63.28.63.63 0 .34-.28.63-.63.63h-2.39a.63.63 0 01-.63-.63V8.11c0-.35.28-.63.63-.63h2.39c.35 0 .63.28.63.63 0 .35-.28.63-.63.63h-1.76v1.13h1.76"/></svg>社群</a><a href="https://line.me/R/ti/p/%40492qdfga" target="_blank" rel="noopener" class="line" title="官方 LINE 客服"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.49 3.53 1.34 5L2 22l5.08-1.31A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm-1 14h-2v-2h2v2zm2.07-5.75l-.9.92C11.45 11.9 11 12.5 11 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H6c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>客服</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script><script>
-    (async function() {
-      try {
-        var res = await fetch('../data/events.json');
-        var data = await res.json();
-
-        // 進行中活動
-        var activeEl = document.getElementById('evActive');
-        var activeItems = data.active || [];
-        if (activeItems.length) {
-          activeEl.innerHTML = activeItems.map(function(ev) {
-            var tag = ev.tag || '長期活動';
-            var style = ev.tag_style || 'permanent';
-            var linkText = ev.link_text || '查看詳情';
-            var cardCls = ev.ended ? 'ev-link ev-link--ended' : 'ev-link';
-            var inner =
-              '<div class="ev-link__head">' +
-                '<span class="ev-link__tag ev-link__tag--' + style + '">' + tag + '</span>' +
-                '<div class="ev-link__title">' + ev.title + '</div>' +
-              '</div>' +
-              '<div class="ev-link__body">' +
-                '<div class="ev-link__desc">' + ev.desc + '</div>' +
-                '<div class="ev-link__date">' + (ev.date_label || '') + '</div>' +
-                (ev.link ? '<div class="ev-link__arrow">' + linkText + '</div>' : '') +
-              '</div>';
-            if (ev.link) {
-              return '<a href="' + ev.link + '" class="' + cardCls + '">' + inner + '</a>';
-            } else {
-              return '<div class="' + cardCls + '" style="cursor:default;">' + inner + '</div>';
-            }
-          }).join('');
-        }
-
-        // 即將推出
-        var upEl = document.getElementById('evUpcoming');
-        var upItems = data.upcoming || [];
-        if (upItems.length) {
-          upEl.innerHTML = upItems.map(function(ev) {
-            return '<div class="ev-link" style="opacity:0.6;cursor:default;">' +
-              '<div class="ev-link__head">' +
-                '<span class="ev-link__tag ev-link__tag--coming">敬請期待</span>' +
-                '<div class="ev-link__title">' + ev.title + '</div>' +
-              '</div>' +
-              '<div class="ev-link__body">' +
-                '<div class="ev-link__desc">' + (ev.desc || '') + '</div>' +
-              '</div>' +
-            '</div>';
-          }).join('');
-        }
-      } catch(e) {
-        document.getElementById('evActive').innerHTML = '<p style="color:#6a6080;padding:20px;">活動載入失敗，請重新整理頁面。</p>';
-      }
-    })();
-  </script>
+<div class="float"><a href="download.html" title="下載"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>下載</a><a href="https://line.me/ti/g2/gI1gXr8_RijLCYJN0oan3X4RbvdtpFL6NcPQMg?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener" class="line" title="加入社群"><svg viewBox="0 0 24 24"><path d="M24 10.3C24 4.94 18.62.57 12 .57S0 4.94 0 10.3c0 4.81 4.27 8.84 10.04 9.61.39.08.92.26 1.06.59.12.3.08.77.04 1.08l-.17 1.02c-.04.3-.24 1.19 1.05.64 1.29-.54 6.92-4.08 9.44-6.97C23.18 14.4 24 12.46 24 10.3M7.75 13.5H5.36a.63.63 0 01-.63-.63V8.11c0-.35.28-.63.63-.63.35 0 .63.28.63.63v4.13h1.76c.35 0 .63.28.63.63 0 .34-.28.63-.63.63m2.47-.63c0 .34-.28.63-.63.63a.63.63 0 01-.63-.63V8.11c0-.35.28-.63.63-.63.34 0 .63.28.63.63v4.76m5.74 0c0 .27-.17.51-.43.6a.65.65 0 01-.71-.22l-2.44-3.32v2.94c0 .34-.28.63-.63.63a.63.63 0 01-.63-.63V8.11c0-.27.17-.51.43-.6a.62.62 0 01.7.22l2.46 3.33V8.11c0-.35.28-.63.63-.63.34 0 .63.28.63.63v4.76m3.86-2.38c.35 0 .63.28.63.63 0 .34-.28.63-.63.63h-1.76v1.12h1.76c.35 0 .63.28.63.63 0 .34-.28.63-.63.63h-2.39a.63.63 0 01-.63-.63V8.11c0-.35.28-.63.63-.63h2.39c.35 0 .63.28.63.63 0 .35-.28.63-.63.63h-1.76v1.13h1.76"/></svg>社群</a><a href="https://line.me/R/ti/p/%40492qdfga" target="_blank" rel="noopener" class="line" title="官方 LINE 客服"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.49 3.53 1.34 5L2 22l5.08-1.31A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm-1 14h-2v-2h2v2zm2.07-5.75l-.9.92C11.45 11.9 11 12.5 11 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H6c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>客服</a></div><script>(function(){var b=document.getElementById('burger'),m=document.getElementById('mnav');if(b&&m)b.addEventListener('click',function(){m.classList.toggle('open');});})();</script><script>(async function(){
+  try{
+    var res=await fetch('../data/events.json'); var data=await res.json();
+    function card(ev,vip){
+      var tag=ev.tag||'長期活動', style=ev.tag_style||'permanent', linkText=ev.link_text||'查看詳情';
+      var cls='ev-link'+(vip?' ev-link--vip':'')+(ev.ended?' ev-link--ended':'');
+      var inner='<div class="ev-link__head"><span class="ev-link__tag ev-link__tag--'+style+'">'+tag+'</span><div class="ev-link__title">'+ev.title+'</div>'+(vip?'<span class="ev-vip-badge">SPONSOR</span>':'')+'</div>'+
+        '<div class="ev-link__body"><div class="ev-link__desc">'+ev.desc+'</div><div class="ev-link__date">'+(ev.date_label||'')+'</div>'+(ev.link?'<div class="ev-link__arrow">'+linkText+'</div>':'')+'</div>';
+      return ev.link?('<a href="'+ev.link+'" class="'+cls+'">'+inner+'</a>'):('<div class="'+cls+'" style="cursor:default;">'+inner+'</div>');
+    }
+    var items=data.active||[];
+    var sp=items.filter(function(x){return x.group==='sponsor'}), ot=items.filter(function(x){return x.group!=='sponsor'});
+    var spEl=document.getElementById('evSponsor'); if(spEl) spEl.innerHTML=sp.map(function(e){return card(e,true)}).join('');
+    var spBox=document.getElementById('evVip'); if(spBox && !sp.length) spBox.style.display='none';
+    document.getElementById('evActive').innerHTML=ot.map(function(e){return card(e,false)}).join('');
+    var up=data.upcoming||[], upEl=document.getElementById('evUpcoming');
+    if(up.length) upEl.innerHTML=up.map(function(ev){return '<div class="ev-link" style="opacity:0.6;cursor:default;"><div class="ev-link__head"><span class="ev-link__tag ev-link__tag--coming">敬請期待</span><div class="ev-link__title">'+ev.title+'</div></div><div class="ev-link__body"><div class="ev-link__desc">'+(ev.desc||'')+'</div></div></div>';}).join('');
+  }catch(e){ document.getElementById('evActive').innerHTML='<p style="color:#e6d2b0;padding:20px;">活動載入失敗，請重新整理頁面。</p>'; }
+})();</script>
 <script src="../assets/js/search.js?v=20261024" defer></script>
 </body>
 </html>
